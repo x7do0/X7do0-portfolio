@@ -12,25 +12,26 @@ public sealed class PortfolioContentHealthCheck(PortfolioContentService contentS
         {
             var arabic = await contentService.LoadAsync("ar");
             var english = await contentService.LoadAsync("en");
+            var consistencyErrors = BilingualContentConsistencyValidator.Validate(arabic, english);
 
-            if (arabic.Projects.Count != english.Projects.Count)
+            if (consistencyErrors.Count > 0)
             {
                 return HealthCheckResult.Degraded(
-                    "Arabic and English project counts do not match.");
+                    "Arabic and English content structures do not match.",
+                    data: new Dictionary<string, object>
+                    {
+                        ["errors"] = consistencyErrors.ToArray()
+                    });
             }
 
-            var arabicSlugs = arabic.Projects.Select(project => project.Slug)
-                .OrderBy(slug => slug, StringComparer.OrdinalIgnoreCase);
-            var englishSlugs = english.Projects.Select(project => project.Slug)
-                .OrderBy(slug => slug, StringComparer.OrdinalIgnoreCase);
-
-            if (!arabicSlugs.SequenceEqual(englishSlugs, StringComparer.OrdinalIgnoreCase))
-            {
-                return HealthCheckResult.Degraded(
-                    "Arabic and English project slugs do not match.");
-            }
-
-            return HealthCheckResult.Healthy("Bilingual portfolio content loaded successfully.");
+            return HealthCheckResult.Healthy(
+                "Bilingual portfolio content loaded and matched successfully.",
+                new Dictionary<string, object>
+                {
+                    ["projects"] = arabic.Projects.Count,
+                    ["homeSections"] = arabic.HomeSections.Count,
+                    ["skills"] = arabic.SkillsSection.Items.Count
+                });
         }
         catch (Exception exception)
         {
