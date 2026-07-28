@@ -1,5 +1,6 @@
 {
   "brand": { "name": "حيدره مهند", "role": "مطور برمجيات وباك إند" },
+  "homeSections": ["projects", "skills", "technologies", "education", "knowledge", "contact"],
   "hero": {
     "eyebrow": "حيدره مهند · x7do0",
     "title": "أبني مشاريع برمجية متكاملة من الفكرة إلى الإنتاج",
