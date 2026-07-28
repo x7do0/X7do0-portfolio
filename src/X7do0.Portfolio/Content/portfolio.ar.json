@@ -66,15 +66,22 @@
     "title": "مشاركة المعرفة",
     "description": "أقدّم محتوى تعليميًا يشرح مواد هندسة تقنيات الحاسوب ويبسط المفاهيم للطلاب.",
     "action": "زيارة القناة",
-    "pendingLabel": "سيتم اختيار الفيديوهات وربطها لاحقًا"
+    "pendingLabel": "سيتم اختيار الفيديوهات وربطها لاحقًا",
+    "channelUrl": ""
   },
   "contact": {
     "eyebrow": "التعاون",
     "title": "لنبنِ شيئًا عمليًا",
     "description": "لديك فكرة مشروع أو فرصة للتعاون؟ يسعدني أن أسمع عنها وأناقش إمكانية تنفيذها.",
-    "emailAction": "راسلني عبر البريد",
-    "linkedInAction": "تواصل معي على LinkedIn",
-    "socialLinks": ["GitHub", "YouTube", "Instagram"]
+    "primaryLinks": [
+      { "label": "راسلني عبر البريد", "url": "", "kind": "primary" },
+      { "label": "تواصل معي على LinkedIn", "url": "", "kind": "secondary" }
+    ],
+    "socialLinks": [
+      { "label": "GitHub", "url": "https://github.com/x7do0", "kind": "secondary" },
+      { "label": "YouTube", "url": "", "kind": "secondary" },
+      { "label": "Instagram", "url": "", "kind": "secondary" }
+    ]
   },
   "projectPage": {
     "backAction": "العودة إلى المشاريع",
