@@ -75,5 +75,26 @@
     "emailAction": "Email me",
     "linkedInAction": "Connect on LinkedIn",
     "socialLinks": ["GitHub", "YouTube", "Instagram"]
+  },
+  "projectPage": {
+    "backAction": "Back to projects",
+    "overviewTitle": "Overview",
+    "previewTitle": "Project preview",
+    "detailsTitle": "Case study",
+    "detailsPending": "The complete case study will be added after the project details are accurately approved, without assumptions or exaggeration.",
+    "notFoundTitle": "Project not found",
+    "notFoundDescription": "No project matched this address."
+  },
+  "resume": {
+    "eyebrow": "Resume",
+    "title": "Haidera Muhannad",
+    "intro": "I build complete projects with AI assistance, focusing on backend development with C# and .NET from idea and planning through operation and production.",
+    "educationTitle": "Education",
+    "skillsTitle": "Skills",
+    "technologiesTitle": "Technologies",
+    "projectsTitle": "Selected projects",
+    "viewLabel": "View resume",
+    "downloadLabel": "Download PDF",
+    "downloadPending": "The PDF will be added after the final resume is approved."
   }
 }
