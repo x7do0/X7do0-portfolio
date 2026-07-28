@@ -19,10 +19,11 @@
                 <a href="/#technologies">@(LanguageState.IsArabic ? "التقنيات" : "Technologies")</a>
                 <a href="/#education">@(LanguageState.IsArabic ? "التعليم" : "Education")</a>
                 <a href="/#knowledge">@(LanguageState.IsArabic ? "مشاركة المعرفة" : "Knowledge")</a>
+                <a href="/resume">@(LanguageState.IsArabic ? "السيرة الذاتية" : "Resume")</a>
                 <a href="/#contact">@(LanguageState.IsArabic ? "التواصل" : "Contact")</a>
             </div>
 
-            <button class="language-toggle" type="button" @onclick="ToggleLanguageAsync">
+            <button class="language-toggle" type="button" @onclick="ToggleLanguageAsync" aria-label="@(LanguageState.IsArabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic")">
                 @(LanguageState.IsArabic ? "EN" : "ع")
             </button>
         </nav>
