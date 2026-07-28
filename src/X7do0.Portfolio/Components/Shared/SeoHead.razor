@@ -1,13 +1,19 @@
 @inject NavigationManager NavigationManager
+@inject LanguageState LanguageState
 
 <PageTitle>@Title</PageTitle>
 <HeadContent>
     <meta name="description" content="@Description" />
     <link rel="canonical" href="@CanonicalUrl" />
+    <link rel="alternate" hreflang="ar" href="@ArabicUrl" />
+    <link rel="alternate" hreflang="en" href="@EnglishUrl" />
+    <link rel="alternate" hreflang="x-default" href="@ArabicUrl" />
     <meta property="og:title" content="@Title" />
     <meta property="og:description" content="@Description" />
     <meta property="og:type" content="@Type" />
     <meta property="og:site_name" content="x7do0" />
+    <meta property="og:locale" content="@(LanguageState.IsArabic ? "ar_IQ" : "en_US")" />
+    <meta property="og:locale:alternate" content="@(LanguageState.IsArabic ? "en_US" : "ar_IQ")" />
     <meta property="og:url" content="@CanonicalUrl" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="@Title" />
@@ -24,6 +30,10 @@
     [Parameter]
     public string Type { get; set; } = "website";
 
-    private string CanonicalUrl =>
+    private string PageUrl =>
         new Uri(NavigationManager.Uri).GetLeftPart(UriPartial.Path);
+
+    private string ArabicUrl => PageUrl;
+    private string EnglishUrl => $"{PageUrl}?lang=en";
+    private string CanonicalUrl => LanguageState.IsArabic ? ArabicUrl : EnglishUrl;
 }
