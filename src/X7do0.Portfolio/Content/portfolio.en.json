@@ -66,15 +66,22 @@
     "title": "Knowledge sharing",
     "description": "I create educational content that explains Computer Engineering Technology subjects and makes concepts easier for students to understand.",
     "action": "Visit the channel",
-    "pendingLabel": "Selected videos will be linked later"
+    "pendingLabel": "Selected videos will be linked later",
+    "channelUrl": ""
   },
   "contact": {
     "eyebrow": "Collaboration",
     "title": "Let’s build something practical",
     "description": "Have a project idea or an opportunity to collaborate? I would be glad to hear about it and discuss how it could be built.",
-    "emailAction": "Email me",
-    "linkedInAction": "Connect on LinkedIn",
-    "socialLinks": ["GitHub", "YouTube", "Instagram"]
+    "primaryLinks": [
+      { "label": "Email me", "url": "", "kind": "primary" },
+      { "label": "Connect on LinkedIn", "url": "", "kind": "secondary" }
+    ],
+    "socialLinks": [
+      { "label": "GitHub", "url": "https://github.com/x7do0", "kind": "secondary" },
+      { "label": "YouTube", "url": "", "kind": "secondary" },
+      { "label": "Instagram", "url": "", "kind": "secondary" }
+    ]
   },
   "projectPage": {
     "backAction": "Back to projects",
