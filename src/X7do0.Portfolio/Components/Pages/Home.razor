@@ -24,7 +24,10 @@ else
                     <a class="button button--secondary" href="#contact">@_content.Hero.SecondaryAction</a>
                 </div>
                 <div class="hero-proof">
-                    @foreach (var item in _content.Hero.ProofItems) { <span>@item</span> }
+                    @foreach (var item in _content.Hero.ProofItems)
+                    {
+                        <span>@item</span>
+                    }
                 </div>
             </div>
             <WorkflowPreview />
@@ -48,7 +51,9 @@ else
                         <p class="project-kicker">@(project.Featured ? _content.ProjectsSection.FeaturedLabel : _content.ProjectsSection.ProjectLabel)</p>
                         <h3>@project.Title</h3>
                         <p>@project.Summary</p>
-                        <span class="text-link">@project.Cta <span aria-hidden="true">↗</span></span>
+                        <a class="text-link" href="/projects/@project.Slug">
+                            @project.Cta <span aria-hidden="true">↗</span>
+                        </a>
                     </div>
                     @if (project.Featured)
                     {
@@ -58,7 +63,10 @@ else
                     {
                         <div class="academy-window" aria-hidden="true">
                             <div class="academy-window__top"><span></span><span></span><span></span></div>
-                            <div class="academy-window__body"><div class="lesson-rail"></div><div class="lesson-content"><span></span><span></span><span></span></div></div>
+                            <div class="academy-window__body">
+                                <div class="lesson-rail"></div>
+                                <div class="lesson-content"><span></span><span></span><span></span></div>
+                            </div>
                         </div>
                     }
                 </article>
@@ -68,11 +76,17 @@ else
 
     <section id="skills" class="section section--muted">
         <div class="container">
-            <header class="section-heading compact-heading"><p class="eyebrow">@_content.SkillsSection.Eyebrow</p><h2>@_content.SkillsSection.Title</h2></header>
+            <header class="section-heading compact-heading">
+                <p class="eyebrow">@_content.SkillsSection.Eyebrow</p>
+                <h2>@_content.SkillsSection.Title</h2>
+            </header>
             <div class="skills-list">
                 @for (var index = 0; index < _content.SkillsSection.Items.Count; index++)
                 {
-                    <article class="skill-row"><span>@((index + 1).ToString("00"))</span><h3>@_content.SkillsSection.Items[index]</h3></article>
+                    <article class="skill-row">
+                        <span>@((index + 1).ToString("00"))</span>
+                        <h3>@_content.SkillsSection.Items[index]</h3>
+                    </article>
                 }
             </div>
         </div>
@@ -80,11 +94,23 @@ else
 
     <section id="technologies" class="section">
         <div class="container">
-            <header class="section-heading"><p class="eyebrow">@_content.TechnologiesSection.Eyebrow</p><h2>@_content.TechnologiesSection.Title</h2><p>@_content.TechnologiesSection.Description</p></header>
+            <header class="section-heading">
+                <p class="eyebrow">@_content.TechnologiesSection.Eyebrow</p>
+                <h2>@_content.TechnologiesSection.Title</h2>
+                <p>@_content.TechnologiesSection.Description</p>
+            </header>
             <div class="technology-grid">
                 @foreach (var group in _content.TechnologiesSection.Groups)
                 {
-                    <article class="technology-group"><h3>@group.Title</h3><div class="technology-tags">@foreach (var item in group.Items) { <span>@item</span> }</div></article>
+                    <article class="technology-group">
+                        <h3>@group.Title</h3>
+                        <div class="technology-tags">
+                            @foreach (var item in group.Items)
+                            {
+                                <span>@item</span>
+                            }
+                        </div>
+                    </article>
                 }
             </div>
         </div>
@@ -92,17 +118,38 @@ else
 
     <section id="education" class="section education-section">
         <div class="container split-card">
-            <div><p class="eyebrow">@_content.Education.Eyebrow</p><h2>@_content.Education.Title</h2></div>
-            <div><p class="large-copy">@_content.Education.Description</p><small>@_content.Education.Institution</small></div>
+            <div>
+                <p class="eyebrow">@_content.Education.Eyebrow</p>
+                <h2>@_content.Education.Title</h2>
+            </div>
+            <div>
+                <p class="large-copy">@_content.Education.Description</p>
+                <small>@_content.Education.Institution</small>
+            </div>
         </div>
     </section>
 
     <section id="knowledge" class="section">
         <div class="container">
-            <header class="section-heading"><p class="eyebrow">@_content.Knowledge.Eyebrow</p><h2>@_content.Knowledge.Title</h2><p>@_content.Knowledge.Description</p></header>
+            <header class="section-heading">
+                <p class="eyebrow">@_content.Knowledge.Eyebrow</p>
+                <h2>@_content.Knowledge.Title</h2>
+                <p>@_content.Knowledge.Description</p>
+            </header>
             <div class="knowledge-card">
-                <div class="channel-identity"><div class="channel-avatar">x7</div><div><strong>x7do0</strong><span>YouTube</span></div></div>
-                <div class="video-grid">@for (var index = 0; index < 3; index++) { <div class="video-placeholder"><span class="play-icon">▶</span><small>@_content.Knowledge.PendingLabel</small></div> }</div>
+                <div class="channel-identity">
+                    <div class="channel-avatar">x7</div>
+                    <div><strong>x7do0</strong><span>YouTube</span></div>
+                </div>
+                <div class="video-grid">
+                    @for (var index = 0; index < 3; index++)
+                    {
+                        <div class="video-placeholder">
+                            <span class="play-icon">▶</span>
+                            <small>@_content.Knowledge.PendingLabel</small>
+                        </div>
+                    }
+                </div>
                 <span class="button button--secondary is-disabled">@_content.Knowledge.Action</span>
             </div>
         </div>
@@ -110,9 +157,21 @@ else
 
     <section id="contact" class="section contact-section">
         <div class="container contact-card">
-            <div><p class="eyebrow">@_content.Contact.Eyebrow</p><h2>@_content.Contact.Title</h2><p>@_content.Contact.Description</p></div>
-            <div class="contact-actions"><span class="button button--primary is-disabled">@_content.Contact.EmailAction</span><span class="button button--secondary is-disabled">@_content.Contact.LinkedInAction</span></div>
-            <div class="social-links">@foreach (var social in _content.Contact.SocialLinks) { <span>@social</span> }</div>
+            <div>
+                <p class="eyebrow">@_content.Contact.Eyebrow</p>
+                <h2>@_content.Contact.Title</h2>
+                <p>@_content.Contact.Description</p>
+            </div>
+            <div class="contact-actions">
+                <span class="button button--primary is-disabled">@_content.Contact.EmailAction</span>
+                <span class="button button--secondary is-disabled">@_content.Contact.LinkedInAction</span>
+            </div>
+            <div class="social-links">
+                @foreach (var social in _content.Contact.SocialLinks)
+                {
+                    <span>@social</span>
+                }
+            </div>
         </div>
     </section>
 }
@@ -132,7 +191,8 @@ else
         await InvokeAsync(StateHasChanged);
     }
 
-    private async Task LoadContentAsync() => _content = await ContentService.LoadAsync(LanguageState.Code);
+    private async Task LoadContentAsync() =>
+        _content = await ContentService.LoadAsync(LanguageState.Code);
 
     public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
 }
