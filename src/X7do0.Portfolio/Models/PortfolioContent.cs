@@ -3,6 +3,7 @@ namespace X7do0.Portfolio.Models;
 public sealed class PortfolioContent
 {
     public BrandContent Brand { get; init; } = new();
+    public List<string> HomeSections { get; init; } = ["projects", "skills", "technologies", "education", "knowledge", "contact"];
     public HeroContent Hero { get; init; } = new();
     public ProjectsSectionContent ProjectsSection { get; init; } = new();
     public List<ProjectContent> Projects { get; init; } = [];
