@@ -47,6 +47,17 @@ public sealed class ProjectContent
     public string Summary { get; init; } = string.Empty;
     public bool Featured { get; init; }
     public string Cta { get; init; } = string.Empty;
+    public List<ProjectCaseStudySection> CaseStudy { get; init; } = [];
+}
+
+public sealed class ProjectCaseStudySection
+{
+    public string Id { get; init; } = string.Empty;
+    public string Eyebrow { get; init; } = string.Empty;
+    public string Title { get; init; } = string.Empty;
+    public List<string> Paragraphs { get; init; } = [];
+    public List<string> Items { get; init; } = [];
+    public bool Wide { get; init; }
 }
 
 public sealed class SkillsSectionContent
