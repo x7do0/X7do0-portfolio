@@ -6,6 +6,9 @@ namespace X7do0.Portfolio.Services;
 
 public sealed class PortfolioContentService(IWebHostEnvironment environment)
 {
+    private static readonly HashSet<string> SupportedHomeSections =
+        ["projects", "skills", "technologies", "education", "knowledge", "contact"];
+
     private readonly ConcurrentDictionary<string, PortfolioContent> _cache = new();
     private readonly JsonSerializerOptions _jsonOptions = new(JsonSerializerDefaults.Web) { PropertyNameCaseInsensitive = true };
 
@@ -31,6 +34,23 @@ public sealed class PortfolioContentService(IWebHostEnvironment environment)
         Require(content.Brand.Role, "brand.role", errors);
         Require(content.Hero.Title, "hero.title", errors);
         Require(content.Hero.Description, "hero.description", errors);
+
+        if (content.HomeSections.Count == 0) errors.Add("homeSections must contain at least one section");
+        var duplicateHomeSections = content.HomeSections
+            .Where(section => !string.IsNullOrWhiteSpace(section))
+            .GroupBy(section => section, StringComparer.OrdinalIgnoreCase)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .ToArray();
+        if (duplicateHomeSections.Length > 0) errors.Add($"homeSections cannot contain duplicates: {string.Join(", ", duplicateHomeSections)}");
+
+        foreach (var section in content.HomeSections)
+        {
+            if (!SupportedHomeSections.Contains(section)) errors.Add($"unsupported home section '{section}'");
+        }
+
+        if (content.HomeSections.Count > 0 && !string.Equals(content.HomeSections[0], "projects", StringComparison.OrdinalIgnoreCase))
+            errors.Add("homeSections must start with 'projects' to preserve the approved page order");
 
         if (content.Projects.Count == 0) errors.Add("projects must contain at least one item");
 
