@@ -64,6 +64,17 @@ app.UseAntiforgery();
 
 app.MapHealthChecks("/healthz");
 
+app.MapGet("/readinessz", async (HttpResponse response, PortfolioContentService contentService) =>
+{
+    response.Headers.CacheControl = "no-store";
+
+    var arabic = await contentService.LoadAsync("ar");
+    var english = await contentService.LoadAsync("en");
+    var report = PortfolioReadinessEvaluator.Evaluate(arabic, english);
+
+    return Results.Json(report);
+});
+
 app.MapGet("/robots.txt", (HttpRequest request, HttpResponse response) =>
 {
     response.Headers.CacheControl = "public,max-age=3600";
