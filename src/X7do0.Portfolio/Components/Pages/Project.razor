@@ -10,17 +10,7 @@
 else if (_project is null)
 {
     <SeoHead Title="@($"{_content.ProjectPage.NotFoundTitle} | x7do0")" Description="@_content.ProjectPage.NotFoundDescription" />
-
-    <section class="page-shell">
-        <div class="container narrow-page">
-            <a class="back-link" href="/#projects">← @_content.ProjectPage.BackAction</a>
-            <div class="empty-state">
-                <p class="eyebrow">x7do0</p>
-                <h1>@_content.ProjectPage.NotFoundTitle</h1>
-                <p>@_content.ProjectPage.NotFoundDescription</p>
-            </div>
-        </div>
-    </section>
+    <section class="page-shell"><div class="container narrow-page"><a class="back-link" href="/#projects">← @_content.ProjectPage.BackAction</a><div class="empty-state"><p class="eyebrow">x7do0</p><h1>@_content.ProjectPage.NotFoundTitle</h1><p>@_content.ProjectPage.NotFoundDescription</p></div></div></section>
 }
 else
 {
@@ -30,51 +20,31 @@ else
         <div class="hero-glow hero-glow--one"></div>
         <div class="container">
             <a class="back-link" href="/#projects">← @_content.ProjectPage.BackAction</a>
-            <div class="project-page-heading">
-                <div>
-                    <p class="eyebrow">@(_project.Featured ? _content.ProjectsSection.FeaturedLabel : _content.ProjectsSection.ProjectLabel)</p>
-                    <h1>@_project.Title</h1>
-                    <p class="hero-description">@_project.Summary</p>
-                </div>
-                <span class="project-number">@ProjectNumber</span>
-            </div>
+            <div class="project-page-heading"><div><p class="eyebrow">@(_project.Featured ? _content.ProjectsSection.FeaturedLabel : _content.ProjectsSection.ProjectLabel)</p><h1>@_project.Title</h1><p class="hero-description">@_project.Summary</p></div><span class="project-number">@ProjectNumber</span></div>
         </div>
     </section>
 
     <section class="section project-overview-section">
         <div class="container project-detail-grid">
-            <article class="detail-panel">
-                <p class="eyebrow">01</p>
-                <h2>@_content.ProjectPage.OverviewTitle</h2>
-                <p class="large-copy">@_project.Summary</p>
-            </article>
+            <article class="detail-panel"><p class="eyebrow">01</p><h2>@_content.ProjectPage.OverviewTitle</h2><p class="large-copy">@_project.Summary</p></article>
 
             <article class="detail-panel detail-panel--preview">
-                <p class="eyebrow">02</p>
-                <h2>@_content.ProjectPage.PreviewTitle</h2>
-                @if (_project.Featured)
-                {
-                    <WorkflowPreview Compact="true" />
-                }
-                else
-                {
-                    <div class="academy-window academy-window--page" aria-label="@_project.Title">
-                        <div class="academy-window__top"><span></span><span></span><span></span></div>
-                        <div class="academy-window__body">
-                            <div class="lesson-rail"></div>
-                            <div class="lesson-content"><span></span><span></span><span></span></div>
-                        </div>
-                    </div>
-                }
+                <p class="eyebrow">02</p><h2>@_content.ProjectPage.PreviewTitle</h2>
+                @if (_project.Featured) { <WorkflowPreview Compact="true" /> }
+                else { <div class="academy-window academy-window--page" aria-label="@_project.Title"><div class="academy-window__top"><span></span><span></span><span></span></div><div class="academy-window__body"><div class="lesson-rail"></div><div class="lesson-content"><span></span><span></span><span></span></div></div></div> }
             </article>
+
+            @if (_project.Media.Count > 0)
+            {
+                <article class="detail-panel detail-panel--wide">
+                    <p class="eyebrow">03</p><h2>@_content.ProjectPage.MediaTitle</h2>
+                    <ProjectMediaGallery Items="@_project.Media" />
+                </article>
+            }
 
             @if (_project.CaseStudy.Count == 0)
             {
-                <article class="detail-panel detail-panel--wide">
-                    <p class="eyebrow">03</p>
-                    <h2>@_content.ProjectPage.DetailsTitle</h2>
-                    <p>@_content.ProjectPage.DetailsPending</p>
-                </article>
+                <article class="detail-panel detail-panel--wide"><p class="eyebrow">@(NextSectionNumber.ToString("00"))</p><h2>@_content.ProjectPage.DetailsTitle</h2><p>@_content.ProjectPage.DetailsPending</p></article>
             }
             else
             {
@@ -82,21 +52,10 @@ else
                 {
                     var section = _project.CaseStudy[index];
                     <article id="@section.Id" class="detail-panel @(section.Wide ? "detail-panel--wide" : string.Empty)">
-                        <p class="eyebrow">@(string.IsNullOrWhiteSpace(section.Eyebrow) ? (index + 3).ToString("00") : section.Eyebrow)</p>
+                        <p class="eyebrow">@(string.IsNullOrWhiteSpace(section.Eyebrow) ? (index + NextSectionNumber).ToString("00") : section.Eyebrow)</p>
                         <h2>@section.Title</h2>
-                        @foreach (var paragraph in section.Paragraphs)
-                        {
-                            <p>@paragraph</p>
-                        }
-                        @if (section.Items.Count > 0)
-                        {
-                            <ul class="case-study-list">
-                                @foreach (var item in section.Items)
-                                {
-                                    <li>@item</li>
-                                }
-                            </ul>
-                        }
+                        @foreach (var paragraph in section.Paragraphs) { <p>@paragraph</p> }
+                        @if (section.Items.Count > 0) { <ul class="case-study-list">@foreach (var item in section.Items) { <li>@item</li> }</ul> }
                     </article>
                 }
             }
@@ -105,34 +64,14 @@ else
 }
 
 @code {
-    [Parameter]
-    public string Slug { get; set; } = string.Empty;
-
+    [Parameter] public string Slug { get; set; } = string.Empty;
     private PortfolioContent? _content;
     private ProjectContent? _project;
-
-    private string ProjectNumber => _content is null || _project is null
-        ? "00"
-        : (_content.Projects.IndexOf(_project) + 1).ToString("00");
-
-    protected override void OnInitialized() =>
-        LanguageState.Changed += HandleLanguageChanged;
-
+    private int NextSectionNumber => _project?.Media.Count > 0 ? 4 : 3;
+    private string ProjectNumber => _content is null || _project is null ? "00" : (_content.Projects.IndexOf(_project) + 1).ToString("00");
+    protected override void OnInitialized() => LanguageState.Changed += HandleLanguageChanged;
     protected override Task OnParametersSetAsync() => LoadContentAsync();
-
-    private async Task LoadContentAsync()
-    {
-        _content = await ContentService.LoadAsync(LanguageState.Code);
-        _project = _content.Projects.FirstOrDefault(project =>
-            string.Equals(project.Slug, Slug, StringComparison.OrdinalIgnoreCase));
-    }
-
-    private void HandleLanguageChanged() =>
-        _ = InvokeAsync(async () =>
-        {
-            await LoadContentAsync();
-            StateHasChanged();
-        });
-
+    private async Task LoadContentAsync() { _content = await ContentService.LoadAsync(LanguageState.Code); _project = _content.Projects.FirstOrDefault(project => string.Equals(project.Slug, Slug, StringComparison.OrdinalIgnoreCase)); }
+    private void HandleLanguageChanged() => _ = InvokeAsync(async () => { await LoadContentAsync(); StateHasChanged(); });
     public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
 }
