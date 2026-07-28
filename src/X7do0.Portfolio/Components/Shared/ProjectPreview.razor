@@ -1,0 +1,35 @@
+@switch (Project.PreviewKind.ToLowerInvariant())
+{
+    case "workflow":
+        <WorkflowPreview Compact="@Compact" />
+        break;
+    case "academy":
+        <div class="academy-window @(Compact ? string.Empty : "academy-window--page")" aria-label="@Project.Title">
+            <div class="academy-window__top"><span></span><span></span><span></span></div>
+            <div class="academy-window__body">
+                <div class="lesson-rail"></div>
+                <div class="lesson-content"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+        break;
+    default:
+        <div class="generic-project-preview @(Compact ? "generic-project-preview--compact" : string.Empty)" aria-label="@Project.Title">
+            <div class="generic-project-preview__bar"><span></span><span></span><span></span><strong>@Project.Title</strong></div>
+            <div class="generic-project-preview__body">
+                <div class="generic-project-preview__rail"><span></span><span></span><span></span><span></span></div>
+                <div class="generic-project-preview__content">
+                    <span class="generic-project-preview__headline"></span>
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+        break;
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public ProjectContent Project { get; set; } = new();
+
+    [Parameter]
+    public bool Compact { get; set; }
+}
