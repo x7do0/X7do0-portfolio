@@ -87,9 +87,9 @@ app.MapGet("/sitemap.xml", async (
     var urls = string.Join(
         Environment.NewLine,
         paths.Distinct(StringComparer.OrdinalIgnoreCase)
-            .Select(path => $"  <url><loc>{SecurityElement.Escape(origin + path)}</loc></url>"));
+            .SelectMany(path => BuildLocalizedSitemapEntries(origin, path)));
 
-    var xml = $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n{urls}\n</urlset>";
+    var xml = $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n{urls}\n</urlset>";
     return Results.Text(xml, "application/xml", Encoding.UTF8);
 });
 
@@ -97,6 +97,22 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+static IEnumerable<string> BuildLocalizedSitemapEntries(string origin, string path)
+{
+    var arabicUrl = origin + path;
+    var englishUrl = arabicUrl + "?lang=en";
+    var escapedArabicUrl = SecurityElement.Escape(arabicUrl);
+    var escapedEnglishUrl = SecurityElement.Escape(englishUrl);
+
+    var alternates =
+        $"    <xhtml:link rel=\"alternate\" hreflang=\"ar\" href=\"{escapedArabicUrl}\" />\n" +
+        $"    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"{escapedEnglishUrl}\" />\n" +
+        $"    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{escapedArabicUrl}\" />";
+
+    yield return $"  <url>\n    <loc>{escapedArabicUrl}</loc>\n{alternates}\n  </url>";
+    yield return $"  <url>\n    <loc>{escapedEnglishUrl}</loc>\n{alternates}\n  </url>";
+}
 
 static string GetPublicOrigin(HttpRequest request)
 {
