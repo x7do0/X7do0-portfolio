@@ -23,6 +23,21 @@
                 <a href="/#contact">@(LanguageState.IsArabic ? "التواصل" : "Contact")</a>
             </div>
 
+            <details class="mobile-nav">
+                <summary aria-label="@(LanguageState.IsArabic ? "فتح قائمة التنقل" : "Open navigation menu")">
+                    <span></span><span></span><span></span>
+                </summary>
+                <div class="mobile-nav__panel">
+                    <a href="/#projects">@(LanguageState.IsArabic ? "المشاريع" : "Projects")</a>
+                    <a href="/#skills">@(LanguageState.IsArabic ? "المهارات" : "Skills")</a>
+                    <a href="/#technologies">@(LanguageState.IsArabic ? "التقنيات" : "Technologies")</a>
+                    <a href="/#education">@(LanguageState.IsArabic ? "التعليم" : "Education")</a>
+                    <a href="/#knowledge">@(LanguageState.IsArabic ? "مشاركة المعرفة" : "Knowledge")</a>
+                    <a href="/resume">@(LanguageState.IsArabic ? "السيرة الذاتية" : "Resume")</a>
+                    <a href="/#contact">@(LanguageState.IsArabic ? "التواصل" : "Contact")</a>
+                </div>
+            </details>
+
             <button class="language-toggle" type="button" @onclick="ToggleLanguageAsync" aria-label="@(LanguageState.IsArabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic")">
                 @(LanguageState.IsArabic ? "EN" : "ع")
             </button>
