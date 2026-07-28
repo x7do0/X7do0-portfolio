@@ -1,0 +1,78 @@
+@using System.Text.Json
+@inject NavigationManager NavigationManager
+
+<HeadContent>
+    <script type="application/ld+json">@((MarkupString)Json)</script>
+</HeadContent>
+
+@code {
+    [Parameter, EditorRequired]
+    public PortfolioContent Content { get; set; } = new();
+
+    [Parameter]
+    public ProjectContent? Project { get; set; }
+
+    private string Json => JsonSerializer.Serialize(
+        Project is null ? BuildPortfolioGraph() : BuildProjectGraph(),
+        new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+    private object BuildPortfolioGraph()
+    {
+        var baseUrl = NavigationManager.BaseUri.TrimEnd('/');
+        var sameAs = Content.Contact.PrimaryLinks
+            .Concat(Content.Contact.SocialLinks)
+            .Where(link => link.Enabled)
+            .Select(link => link.Url)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        return new
+        {
+            @context = "https://schema.org",
+            @graph = new object[]
+            {
+                new
+                {
+                    @type = "Person",
+                    name = Content.Brand.Name,
+                    alternateName = "x7do0",
+                    jobTitle = Content.Brand.Role,
+                    description = Content.Hero.Description,
+                    url = baseUrl,
+                    sameAs
+                },
+                new
+                {
+                    @type = "ItemList",
+                    name = Content.ProjectsSection.Title,
+                    itemListElement = Content.Projects.Select((project, index) => new
+                    {
+                        @type = "ListItem",
+                        position = index + 1,
+                        url = $"{baseUrl}/projects/{project.Slug}",
+                        name = project.Title
+                    })
+                }
+            }
+        };
+    }
+
+    private object BuildProjectGraph()
+    {
+        var baseUrl = NavigationManager.BaseUri.TrimEnd('/');
+        return new
+        {
+            @context = "https://schema.org",
+            @type = "SoftwareApplication",
+            name = Project!.Title,
+            description = Project.Summary,
+            url = $"{baseUrl}/projects/{Project.Slug}",
+            author = new
+            {
+                @type = "Person",
+                name = Content.Brand.Name,
+                alternateName = "x7do0"
+            }
+        };
+    }
+}
