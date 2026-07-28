@@ -28,16 +28,16 @@ public static class BilingualContentConsistencyValidator
             "technologiesSection.groups",
             errors);
 
-        CompareCount(
-            arabic.Contact.PrimaryLinks.Count,
-            english.Contact.PrimaryLinks.Count,
-            "contact.primaryLinks",
+        CompareSequence(
+            arabic.Contact.PrimaryLinks.Select(link => link.Id),
+            english.Contact.PrimaryLinks.Select(link => link.Id),
+            "contact.primaryLinks ids",
             errors);
 
-        CompareCount(
-            arabic.Contact.SocialLinks.Count,
-            english.Contact.SocialLinks.Count,
-            "contact.socialLinks",
+        CompareSequence(
+            arabic.Contact.SocialLinks.Select(link => link.Id),
+            english.Contact.SocialLinks.Select(link => link.Id),
+            "contact.socialLinks ids",
             errors);
 
         CompareProjects(arabic.Projects, english.Projects, errors);
