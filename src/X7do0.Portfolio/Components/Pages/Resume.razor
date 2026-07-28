@@ -3,14 +3,14 @@
 @inject PortfolioContentService ContentService
 @implements IDisposable
 
-<PageTitle>@(_content is null ? "x7do0" : $"{_content.Resume.Title} | {_content.Resume.Eyebrow}")</PageTitle>
-
 @if (_content is null)
 {
     <div class="loading-shell" aria-busy="true"><span></span><span></span><span></span></div>
 }
 else
 {
+    <SeoHead Title="@($"{_content.Resume.Title} | x7do0")" Description="@_content.Resume.Intro" Type="profile" />
+
     <section class="page-shell resume-page">
         <div class="container">
             <header class="resume-header">
@@ -21,7 +21,7 @@ else
                     <p class="hero-description">@_content.Resume.Intro</p>
                 </div>
                 <div class="resume-actions">
-                    <span class="button button--primary is-disabled" title="@_content.Resume.DownloadPending">@_content.Resume.DownloadLabel</span>
+                    <span class="button button--primary is-disabled" aria-disabled="true" title="@_content.Resume.DownloadPending">@_content.Resume.DownloadLabel</span>
                     <small>@_content.Resume.DownloadPending</small>
                 </div>
             </header>
@@ -40,7 +40,7 @@ else
                     <ol class="resume-list">
                         @foreach (var skill in _content.SkillsSection.Items)
                         {
-                            <li>@skill</li>
+                            <li @key="skill">@skill</li>
                         }
                     </ol>
                 </section>
@@ -51,7 +51,7 @@ else
                     <div class="resume-technology-list">
                         @foreach (var group in _content.TechnologiesSection.Groups)
                         {
-                            <div>
+                            <div @key="group.Title">
                                 <strong>@group.Title</strong>
                                 <p>@string.Join(" · ", group.Items)</p>
                             </div>
@@ -65,7 +65,7 @@ else
                     <div class="resume-projects">
                         @foreach (var project in _content.Projects)
                         {
-                            <a href="/projects/@project.Slug">
+                            <a href="/projects/@project.Slug" @key="project.Slug">
                                 <strong>@project.Title</strong>
                                 <span>@project.Summary</span>
                             </a>
@@ -89,11 +89,12 @@ else
     private async Task LoadContentAsync() =>
         _content = await ContentService.LoadAsync(LanguageState.Code);
 
-    private async void HandleLanguageChanged()
-    {
-        await LoadContentAsync();
-        await InvokeAsync(StateHasChanged);
-    }
+    private void HandleLanguageChanged() =>
+        _ = InvokeAsync(async () =>
+        {
+            await LoadContentAsync();
+            StateHasChanged();
+        });
 
     public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
 }
