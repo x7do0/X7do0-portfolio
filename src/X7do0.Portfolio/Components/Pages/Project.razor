@@ -1,0 +1,110 @@
+@page "/projects/{Slug}"
+@inject LanguageState LanguageState
+@inject PortfolioContentService ContentService
+@implements IDisposable
+
+<PageTitle>@(_project is null ? "x7do0" : $"{_project.Title} | x7do0")</PageTitle>
+
+@if (_content is null)
+{
+    <div class="loading-shell" aria-busy="true"><span></span><span></span><span></span></div>
+}
+else if (_project is null)
+{
+    <section class="page-shell">
+        <div class="container narrow-page">
+            <a class="back-link" href="/#projects">← @_content.ProjectPage.BackAction</a>
+            <div class="empty-state">
+                <p class="eyebrow">x7do0</p>
+                <h1>@_content.ProjectPage.NotFoundTitle</h1>
+                <p>@_content.ProjectPage.NotFoundDescription</p>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="page-shell project-page-hero">
+        <div class="hero-glow hero-glow--one"></div>
+        <div class="container">
+            <a class="back-link" href="/#projects">← @_content.ProjectPage.BackAction</a>
+            <div class="project-page-heading">
+                <div>
+                    <p class="eyebrow">@(_project.Featured ? _content.ProjectsSection.FeaturedLabel : _content.ProjectsSection.ProjectLabel)</p>
+                    <h1>@_project.Title</h1>
+                    <p class="hero-description">@_project.Summary</p>
+                </div>
+                <span class="project-number">@ProjectNumber</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section project-overview-section">
+        <div class="container project-detail-grid">
+            <article class="detail-panel">
+                <p class="eyebrow">01</p>
+                <h2>@_content.ProjectPage.OverviewTitle</h2>
+                <p class="large-copy">@_project.Summary</p>
+            </article>
+
+            <article class="detail-panel detail-panel--preview">
+                <p class="eyebrow">02</p>
+                <h2>@_content.ProjectPage.PreviewTitle</h2>
+                @if (_project.Featured)
+                {
+                    <WorkflowPreview Compact="true" />
+                }
+                else
+                {
+                    <div class="academy-window academy-window--page" aria-label="@_project.Title">
+                        <div class="academy-window__top"><span></span><span></span><span></span></div>
+                        <div class="academy-window__body">
+                            <div class="lesson-rail"></div>
+                            <div class="lesson-content"><span></span><span></span><span></span></div>
+                        </div>
+                    </div>
+                }
+            </article>
+
+            <article class="detail-panel detail-panel--wide">
+                <p class="eyebrow">03</p>
+                <h2>@_content.ProjectPage.DetailsTitle</h2>
+                <p>@_content.ProjectPage.DetailsPending</p>
+            </article>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter] public string Slug { get; set; } = string.Empty;
+
+    private PortfolioContent? _content;
+    private ProjectContent? _project;
+
+    private string ProjectNumber => _content is null || _project is null
+        ? "00"
+        : (_content.Projects.IndexOf(_project) + 1).ToString("00");
+
+    protected override async Task OnInitializedAsync()
+    {
+        LanguageState.Changed += HandleLanguageChanged;
+        await LoadContentAsync();
+    }
+
+    protected override async Task OnParametersSetAsync() => await LoadContentAsync();
+
+    private async Task LoadContentAsync()
+    {
+        _content = await ContentService.LoadAsync(LanguageState.Code);
+        _project = _content.Projects.FirstOrDefault(project =>
+            string.Equals(project.Slug, Slug, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private async void HandleLanguageChanged()
+    {
+        await LoadContentAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
+}
