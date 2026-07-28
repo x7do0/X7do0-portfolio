@@ -1,8 +1,6 @@
-using System.Net;
 using System.Security;
 using System.Text;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using X7do0.Portfolio.Components;
 using X7do0.Portfolio.Services;
 
@@ -17,20 +15,24 @@ builder.Services.AddResponseCompression(options =>
     options.EnableForHttps = true;
 });
 
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
+var trustForwardedHeaders = builder.Configuration.GetValue<bool>("Hosting:TrustForwardedHeaders");
+if (trustForwardedHeaders)
 {
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
-                               ForwardedHeaders.XForwardedProto |
-                               ForwardedHeaders.XForwardedHost;
-    options.KnownNetworks.Clear();
-    options.KnownProxies.Clear();
-});
-
-builder.Services.AddHealthChecks()
-    .AddCheck("portfolio-content", () => HealthCheckResult.Healthy());
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                                   ForwardedHeaders.XForwardedProto |
+                                   ForwardedHeaders.XForwardedHost;
+        options.ForwardLimit = 1;
+        options.KnownNetworks.Clear();
+        options.KnownProxies.Clear();
+    });
+}
 
 builder.Services.AddScoped<LanguageState>();
 builder.Services.AddSingleton<PortfolioContentService>();
+builder.Services.AddHealthChecks()
+    .AddCheck<PortfolioContentHealthCheck>("portfolio-content");
 
 var app = builder.Build();
 
@@ -39,7 +41,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseForwardedHeaders();
+if (trustForwardedHeaders)
+{
+    app.UseForwardedHeaders();
+}
+
 app.UseResponseCompression();
 app.UseHttpsRedirection();
 
