@@ -85,6 +85,7 @@ public sealed class KnowledgeContent
     public string Description { get; init; } = string.Empty;
     public string Action { get; init; } = string.Empty;
     public string PendingLabel { get; init; } = string.Empty;
+    public string ChannelUrl { get; init; } = string.Empty;
 }
 
 public sealed class ContactContent
@@ -92,9 +93,16 @@ public sealed class ContactContent
     public string Eyebrow { get; init; } = string.Empty;
     public string Title { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
-    public string EmailAction { get; init; } = string.Empty;
-    public string LinkedInAction { get; init; } = string.Empty;
-    public List<string> SocialLinks { get; init; } = [];
+    public List<ContactLinkContent> PrimaryLinks { get; init; } = [];
+    public List<ContactLinkContent> SocialLinks { get; init; } = [];
+}
+
+public sealed class ContactLinkContent
+{
+    public string Label { get; init; } = string.Empty;
+    public string Url { get; init; } = string.Empty;
+    public string Kind { get; init; } = "secondary";
+    public bool Enabled => !string.IsNullOrWhiteSpace(Url);
 }
 
 public sealed class ProjectPageContent
