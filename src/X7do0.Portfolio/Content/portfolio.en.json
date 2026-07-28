@@ -51,13 +51,13 @@
     "title": "Let’s build something practical",
     "description": "Have a project idea or an opportunity to collaborate? I would be glad to hear about it and discuss how it could be built.",
     "primaryLinks": [
-      { "label": "Email me", "url": "", "kind": "primary" },
-      { "label": "Connect on LinkedIn", "url": "", "kind": "secondary" }
+      { "id": "email", "label": "Email me", "url": "", "kind": "primary" },
+      { "id": "linkedin", "label": "Connect on LinkedIn", "url": "", "kind": "secondary" }
     ],
     "socialLinks": [
-      { "label": "GitHub", "url": "https://github.com/x7do0", "kind": "secondary" },
-      { "label": "YouTube", "url": "", "kind": "secondary" },
-      { "label": "Instagram", "url": "", "kind": "secondary" }
+      { "id": "github", "label": "GitHub", "url": "https://github.com/x7do0", "kind": "secondary" },
+      { "id": "youtube", "label": "YouTube", "url": "", "kind": "secondary" },
+      { "id": "instagram", "label": "Instagram", "url": "", "kind": "secondary" }
     ]
   },
   "projectPage": {
