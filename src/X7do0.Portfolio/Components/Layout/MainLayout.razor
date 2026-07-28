@@ -3,9 +3,13 @@
 @implements IDisposable
 
 <div class="app-shell" dir="@LanguageState.Direction">
+    <a class="skip-link" href="#main-content">
+        @(LanguageState.IsArabic ? "تجاوز إلى المحتوى" : "Skip to content")
+    </a>
+
     <header class="site-header">
         <nav class="container nav-bar" aria-label="@(LanguageState.IsArabic ? "التنقل الرئيسي" : "Primary navigation")">
-            <a class="brand" href="/">
+            <a class="brand" href="/" aria-label="x7do0">
                 <span class="brand-mark">x7do0</span>
                 <span class="brand-copy">
                     <strong>@(LanguageState.IsArabic ? "حيدره مهند" : "Haidera Muhannad")</strong>
@@ -44,7 +48,7 @@
         </nav>
     </header>
 
-    <main>@Body</main>
+    <main id="main-content" tabindex="-1">@Body</main>
 
     <footer class="site-footer">
         <div class="container footer-inner">
@@ -55,21 +59,25 @@
 </div>
 
 @code {
-    protected override void OnInitialized() => LanguageState.Changed += HandleLanguageChanged;
+    protected override void OnInitialized() =>
+        LanguageState.Changed += HandleLanguageChanged;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (!firstRender)
         {
-            await LanguageState.InitializeAsync();
-            await InvokeAsync(StateHasChanged);
+            return;
         }
+
+        await LanguageState.InitializeAsync();
+        await InvokeAsync(StateHasChanged);
     }
 
-    private async Task ToggleLanguageAsync() =>
-        await LanguageState.SetAsync(LanguageState.IsArabic ? "en" : "ar");
+    private Task ToggleLanguageAsync() =>
+        LanguageState.SetAsync(LanguageState.IsArabic ? "en" : "ar");
 
-    private void HandleLanguageChanged() => InvokeAsync(StateHasChanged);
+    private void HandleLanguageChanged() =>
+        _ = InvokeAsync(StateHasChanged);
 
     public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
 }
