@@ -1,0 +1,130 @@
+@using X7do0.Portfolio.Models
+
+@switch (SectionId)
+{
+    case "projects":
+        <section id="projects" class="section">
+            <div class="container">
+                <SectionHeading Eyebrow="@Content.ProjectsSection.Eyebrow" Title="@Content.ProjectsSection.Title" Description="@Content.ProjectsSection.Description" />
+                @for (var index = 0; index < Content.Projects.Count; index++)
+                {
+                    var project = Content.Projects[index];
+                    <ProjectShowcase @key="project.Slug" Project="@project" Labels="@Content.ProjectsSection" Index="@index" />
+                }
+            </div>
+        </section>
+        break;
+
+    case "skills":
+        <section id="skills" class="section section--muted">
+            <div class="container">
+                <SectionHeading Eyebrow="@Content.SkillsSection.Eyebrow" Title="@Content.SkillsSection.Title" Compact="true" />
+                <div class="skills-list">
+                    @for (var index = 0; index < Content.SkillsSection.Items.Count; index++)
+                    {
+                        var skill = Content.SkillsSection.Items[index];
+                        <article class="skill-row" @key="skill"><span>@((index + 1).ToString("00"))</span><h3>@skill</h3></article>
+                    }
+                </div>
+            </div>
+        </section>
+        break;
+
+    case "technologies":
+        <section id="technologies" class="section">
+            <div class="container">
+                <SectionHeading Eyebrow="@Content.TechnologiesSection.Eyebrow" Title="@Content.TechnologiesSection.Title" Description="@Content.TechnologiesSection.Description" />
+                <TechnologyGroups Groups="@Content.TechnologiesSection.Groups" />
+            </div>
+        </section>
+        break;
+
+    case "education":
+        <section id="education" class="section education-section">
+            <div class="container split-card">
+                <div><p class="eyebrow">@Content.Education.Eyebrow</p><h2>@Content.Education.Title</h2></div>
+                <div><p class="large-copy">@Content.Education.Description</p><small>@Content.Education.Institution</small></div>
+            </div>
+        </section>
+        break;
+
+    case "knowledge":
+        <section id="knowledge" class="section">
+            <div class="container">
+                <SectionHeading Eyebrow="@Content.Knowledge.Eyebrow" Title="@Content.Knowledge.Title" Description="@Content.Knowledge.Description" />
+                <div class="knowledge-card">
+                    <div class="channel-identity"><div class="channel-avatar">x7</div><div><strong>x7do0</strong><span>YouTube</span></div></div>
+                    <div class="video-grid">
+                        @if (Content.Knowledge.Videos.Count > 0)
+                        {
+                            @foreach (var video in Content.Knowledge.Videos.Take(3))
+                            {
+                                <a class="video-placeholder" href="@video.Url" target="_blank" rel="noopener noreferrer" @key="video.Url">
+                                    @if (!string.IsNullOrWhiteSpace(video.ThumbnailUrl))
+                                    {
+                                        <img src="@video.ThumbnailUrl" alt="" loading="lazy" />
+                                    }
+                                    <span class="play-icon">▶</span><strong>@video.Title</strong>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            @for (var index = 0; index < 3; index++)
+                            {
+                                <div class="video-placeholder" @key="index"><span class="play-icon">▶</span><small>@Content.Knowledge.PendingLabel</small></div>
+                            }
+                        }
+                    </div>
+                    @if (string.IsNullOrWhiteSpace(Content.Knowledge.ChannelUrl))
+                    {
+                        <span class="button button--secondary is-disabled" aria-disabled="true">@Content.Knowledge.Action</span>
+                    }
+                    else
+                    {
+                        <a class="button button--secondary" href="@Content.Knowledge.ChannelUrl" target="_blank" rel="noopener noreferrer">@Content.Knowledge.Action</a>
+                    }
+                </div>
+            </div>
+        </section>
+        break;
+
+    case "contact":
+        <section id="contact" class="section contact-section">
+            <div class="container contact-card">
+                <div><p class="eyebrow">@Content.Contact.Eyebrow</p><h2>@Content.Contact.Title</h2><p>@Content.Contact.Description</p></div>
+                <div class="contact-actions">
+                    @foreach (var link in Content.Contact.PrimaryLinks)
+                    {
+                        @if (link.Enabled)
+                        {
+                            <a class="button @(link.Kind == "primary" ? "button--primary" : "button--secondary")" href="@link.Url" target="_blank" rel="noopener noreferrer">@link.Label</a>
+                        }
+                        else
+                        {
+                            <span class="button @(link.Kind == "primary" ? "button--primary" : "button--secondary") is-disabled" aria-disabled="true">@link.Label</span>
+                        }
+                    }
+                </div>
+                <div class="social-links">
+                    @foreach (var social in Content.Contact.SocialLinks)
+                    {
+                        @if (social.Enabled)
+                        {
+                            <a href="@social.Url" target="_blank" rel="noopener noreferrer">@social.Label</a>
+                        }
+                        else
+                        {
+                            <span class="is-disabled" aria-disabled="true">@social.Label</span>
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+        break;
+}
+
+@code {
+    [Parameter, EditorRequired] public string SectionId { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public PortfolioContent Content { get; set; } = new();
+}
