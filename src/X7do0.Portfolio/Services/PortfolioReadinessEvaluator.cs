@@ -32,11 +32,9 @@ public static class PortfolioReadinessEvaluator
             "Add the approved email contact URL.");
         Add(items, language, "contact.linkedin", content.Contact.PrimaryLinks.ElementAtOrDefault(1)?.Enabled == true,
             "Add the approved LinkedIn profile URL.");
-        Add(items, language, "social.youtube", content.Contact.SocialLinks.Any(link =>
-                link.Label.Contains("YouTube", StringComparison.OrdinalIgnoreCase) && link.Enabled),
+        Add(items, language, "social.youtube", content.Contact.SocialLinks.ElementAtOrDefault(1)?.Enabled == true,
             "Add the approved YouTube channel URL.");
-        Add(items, language, "social.instagram", content.Contact.SocialLinks.Any(link =>
-                link.Label.Contains("Instagram", StringComparison.OrdinalIgnoreCase) && link.Enabled),
+        Add(items, language, "social.instagram", content.Contact.SocialLinks.ElementAtOrDefault(2)?.Enabled == true,
             "Add the approved Instagram profile URL.");
     }
 
