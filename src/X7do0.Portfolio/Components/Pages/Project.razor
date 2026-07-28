@@ -68,11 +68,38 @@ else
                 }
             </article>
 
-            <article class="detail-panel detail-panel--wide">
-                <p class="eyebrow">03</p>
-                <h2>@_content.ProjectPage.DetailsTitle</h2>
-                <p>@_content.ProjectPage.DetailsPending</p>
-            </article>
+            @if (_project.CaseStudy.Count == 0)
+            {
+                <article class="detail-panel detail-panel--wide">
+                    <p class="eyebrow">03</p>
+                    <h2>@_content.ProjectPage.DetailsTitle</h2>
+                    <p>@_content.ProjectPage.DetailsPending</p>
+                </article>
+            }
+            else
+            {
+                @for (var index = 0; index < _project.CaseStudy.Count; index++)
+                {
+                    var section = _project.CaseStudy[index];
+                    <article id="@section.Id" class="detail-panel @(section.Wide ? "detail-panel--wide" : string.Empty)">
+                        <p class="eyebrow">@(string.IsNullOrWhiteSpace(section.Eyebrow) ? (index + 3).ToString("00") : section.Eyebrow)</p>
+                        <h2>@section.Title</h2>
+                        @foreach (var paragraph in section.Paragraphs)
+                        {
+                            <p>@paragraph</p>
+                        }
+                        @if (section.Items.Count > 0)
+                        {
+                            <ul class="case-study-list">
+                                @foreach (var item in section.Items)
+                                {
+                                    <li>@item</li>
+                                }
+                            </ul>
+                        }
+                    </article>
+                }
+            }
         </div>
     </section>
 }
