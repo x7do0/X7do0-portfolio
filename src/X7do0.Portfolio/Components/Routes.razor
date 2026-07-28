@@ -1,0 +1,17 @@
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>404 | x7do0</PageTitle>
+        <LayoutView Layout="typeof(MainLayout)">
+            <section class="page-shell narrow-page">
+                <p class="eyebrow">404</p>
+                <h1>الصفحة غير موجودة</h1>
+                <p>الرابط الذي فتحته غير متوفر حاليًا.</p>
+                <a class="button button--primary" href="/">العودة للرئيسية</a>
+            </section>
+        </LayoutView>
+    </NotFound>
+</Router>

@@ -1,0 +1,79 @@
+{
+  "brand": { "name": "Haidera Muhannad", "role": "Software & Backend Developer" },
+  "hero": {
+    "eyebrow": "Haidera Muhannad · x7do0",
+    "title": "I build complete software projects from idea to production",
+    "description": "I am a software and backend developer focused on building reliable systems with C# and .NET, using AI to accelerate planning, development, and testing.",
+    "primaryAction": "View my projects",
+    "secondaryAction": "Contact me",
+    "proofItems": ["C# & .NET", "Backend", "AI-assisted development"]
+  },
+  "projectsSection": {
+    "eyebrow": "Practical proof",
+    "title": "Selected projects",
+    "description": "Projects that show how I plan, shape systems, and review implementation from an early idea to a usable product.",
+    "featuredLabel": "Featured project",
+    "projectLabel": "Project"
+  },
+  "projects": [
+    {
+      "slug": "enterprise-workflow",
+      "title": "Enterprise Workflow",
+      "summary": "An integrated system for managing internal company requests and approvals, with roles, permissions, notifications, and a clear audit trail for every action.",
+      "featured": true,
+      "cta": "Explore project"
+    },
+    {
+      "slug": "coding-academy",
+      "title": "Coding Academy",
+      "summary": "An interactive learning platform for programming through structured paths, practical lessons, exercises, and assessments that help learners progress step by step.",
+      "featured": false,
+      "cta": "Explore project"
+    }
+  ],
+  "skillsSection": {
+    "eyebrow": "How I work",
+    "title": "Skills",
+    "items": [
+      "AI-assisted software development",
+      "Understanding full-stack web application architecture",
+      "Project planning and requirements analysis",
+      "Software testing, quality assurance, and release verification",
+      "Error diagnosis and problem solving",
+      "Managing work with Git and GitHub",
+      "Technical documentation and project handoff"
+    ]
+  },
+  "technologiesSection": {
+    "eyebrow": "Practical tools",
+    "title": "Technologies I use",
+    "description": "Technologies I use to build projects, presented without percentages or exaggerated proficiency labels.",
+    "groups": [
+      { "title": "Backend", "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core"] },
+      { "title": "Databases", "items": ["SQL Server"] },
+      { "title": "Additional languages", "items": ["Python", "C++"] },
+      { "title": "Development tools", "items": ["Git", "GitHub", "AI-assisted development tools"] }
+    ]
+  },
+  "education": {
+    "eyebrow": "Education",
+    "title": "Education and academic achievement",
+    "description": "Third-year Computer Engineering Technology student, ranked first during both the first and second academic years.",
+    "institution": "Al-Kafeel University — Computer Engineering Technology"
+  },
+  "knowledge": {
+    "eyebrow": "Teaching and communication",
+    "title": "Knowledge sharing",
+    "description": "I create educational content that explains Computer Engineering Technology subjects and makes concepts easier for students to understand.",
+    "action": "Visit the channel",
+    "pendingLabel": "Selected videos will be linked later"
+  },
+  "contact": {
+    "eyebrow": "Collaboration",
+    "title": "Let’s build something practical",
+    "description": "Have a project idea or an opportunity to collaborate? I would be glad to hear about it and discuss how it could be built.",
+    "emailAction": "Email me",
+    "linkedInAction": "Connect on LinkedIn",
+    "socialLinks": ["GitHub", "YouTube", "Instagram"]
+  }
+}

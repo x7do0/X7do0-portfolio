@@ -1,0 +1,59 @@
+@inherits LayoutComponentBase
+@inject LanguageState LanguageState
+@implements IDisposable
+
+<div class="app-shell" dir="@LanguageState.Direction">
+    <header class="site-header">
+        <nav class="container nav-bar" aria-label="@(LanguageState.IsArabic ? "التنقل الرئيسي" : "Primary navigation")">
+            <a class="brand" href="/">
+                <span class="brand-mark">x7do0</span>
+                <span class="brand-copy">
+                    <strong>@(LanguageState.IsArabic ? "حيدره مهند" : "Haidera Muhannad")</strong>
+                    <small>@(LanguageState.IsArabic ? "مطور برمجيات وباك إند" : "Software & Backend Developer")</small>
+                </span>
+            </a>
+
+            <div class="nav-links">
+                <a href="/#projects">@(LanguageState.IsArabic ? "المشاريع" : "Projects")</a>
+                <a href="/#skills">@(LanguageState.IsArabic ? "المهارات" : "Skills")</a>
+                <a href="/#technologies">@(LanguageState.IsArabic ? "التقنيات" : "Technologies")</a>
+                <a href="/#education">@(LanguageState.IsArabic ? "التعليم" : "Education")</a>
+                <a href="/#knowledge">@(LanguageState.IsArabic ? "مشاركة المعرفة" : "Knowledge")</a>
+                <a href="/#contact">@(LanguageState.IsArabic ? "التواصل" : "Contact")</a>
+            </div>
+
+            <button class="language-toggle" type="button" @onclick="ToggleLanguageAsync">
+                @(LanguageState.IsArabic ? "EN" : "ع")
+            </button>
+        </nav>
+    </header>
+
+    <main>@Body</main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div><strong>x7do0</strong><span>@(LanguageState.IsArabic ? " — حيدره مهند" : " — Haidera Muhannad")</span></div>
+            <p>@(LanguageState.IsArabic ? "بُني بعناية ليبقى واضحًا وقابلًا للتوسعة." : "Built carefully to stay clear and easy to extend.")</p>
+        </div>
+    </footer>
+</div>
+
+@code {
+    protected override void OnInitialized() => LanguageState.Changed += HandleLanguageChanged;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await LanguageState.InitializeAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task ToggleLanguageAsync() =>
+        await LanguageState.SetAsync(LanguageState.IsArabic ? "en" : "ar");
+
+    private void HandleLanguageChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
+}

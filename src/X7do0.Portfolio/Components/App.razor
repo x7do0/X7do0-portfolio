@@ -1,0 +1,26 @@
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07101f" />
+    <meta name="description" content="البورتفوليو الشخصي لحيدره مهند — مطور برمجيات وباك إند." />
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <HeadOutlet @rendermode="InteractiveServer" />
+</head>
+<body>
+    <Routes @rendermode="InteractiveServer" />
+
+    <div id="blazor-error-ui" role="alert">
+        حدث خطأ غير متوقع.
+        <a href="" class="reload">إعادة التحميل</a>
+        <button class="dismiss" type="button">×</button>
+    </div>
+
+    <script src="js/site.js"></script>
+    <script src="_framework/blazor.web.js"></script>
+</body>
+</html>
