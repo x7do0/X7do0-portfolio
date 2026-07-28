@@ -70,7 +70,7 @@ public sealed class KnowledgeContent
 
 public sealed class VideoContent { public string Title { get; init; } = string.Empty; public string Url { get; init; } = string.Empty; public string ThumbnailUrl { get; init; } = string.Empty; public bool Enabled => !string.IsNullOrWhiteSpace(Url); }
 public sealed class ContactContent { public string Eyebrow { get; init; } = string.Empty; public string Title { get; init; } = string.Empty; public string Description { get; init; } = string.Empty; public List<ContactLinkContent> PrimaryLinks { get; init; } = []; public List<ContactLinkContent> SocialLinks { get; init; } = []; }
-public sealed class ContactLinkContent { public string Label { get; init; } = string.Empty; public string Url { get; init; } = string.Empty; public string Kind { get; init; } = "secondary"; public bool Enabled => !string.IsNullOrWhiteSpace(Url); }
+public sealed class ContactLinkContent { public string Id { get; init; } = string.Empty; public string Label { get; init; } = string.Empty; public string Url { get; init; } = string.Empty; public string Kind { get; init; } = "secondary"; public bool Enabled => !string.IsNullOrWhiteSpace(Url); }
 
 public sealed class ProjectPageContent
 {
