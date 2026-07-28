@@ -17,8 +17,8 @@
     "projectLabel": "Project"
   },
   "projects": [
-    { "slug": "enterprise-workflow", "title": "Enterprise Workflow", "summary": "An integrated system for managing internal company requests and approvals, with roles, permissions, notifications, and a clear audit trail for every action.", "featured": true, "cta": "Explore project", "media": [], "caseStudy": [] },
-    { "slug": "coding-academy", "title": "Coding Academy", "summary": "An interactive learning platform for programming through structured paths, practical lessons, exercises, and assessments that help learners progress step by step.", "featured": false, "cta": "Explore project", "media": [], "caseStudy": [] }
+    { "slug": "enterprise-workflow", "title": "Enterprise Workflow", "summary": "An integrated system for managing internal company requests and approvals, with roles, permissions, notifications, and a clear audit trail for every action.", "featured": true, "previewKind": "workflow", "cta": "Explore project", "media": [], "caseStudy": [] },
+    { "slug": "coding-academy", "title": "Coding Academy", "summary": "An interactive learning platform for programming through structured paths, practical lessons, exercises, and assessments that help learners progress step by step.", "featured": false, "previewKind": "academy", "cta": "Explore project", "media": [], "caseStudy": [] }
   ],
   "skillsSection": {
     "eyebrow": "How I work",
