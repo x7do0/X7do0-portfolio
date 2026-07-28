@@ -9,6 +9,9 @@ public sealed class PortfolioContentService(IWebHostEnvironment environment)
     private static readonly HashSet<string> SupportedHomeSections =
         ["projects", "skills", "technologies", "education", "knowledge", "contact"];
 
+    private static readonly HashSet<string> SupportedPreviewKinds =
+        ["workflow", "academy", "generic"];
+
     private readonly ConcurrentDictionary<string, PortfolioContent> _cache = new();
     private readonly JsonSerializerOptions _jsonOptions = new(JsonSerializerDefaults.Web) { PropertyNameCaseInsensitive = true };
 
@@ -59,6 +62,10 @@ public sealed class PortfolioContentService(IWebHostEnvironment environment)
             Require(project.Slug, "projects[].slug", errors);
             Require(project.Title, $"projects[{project.Slug}].title", errors);
             Require(project.Summary, $"projects[{project.Slug}].summary", errors);
+            Require(project.PreviewKind, $"projects[{project.Slug}].previewKind", errors);
+
+            if (!SupportedPreviewKinds.Contains(project.PreviewKind))
+                errors.Add($"project '{project.Slug}' previewKind must be one of: {string.Join(", ", SupportedPreviewKinds)}");
 
             var duplicateSectionIds = project.CaseStudy
                 .Where(section => !string.IsNullOrWhiteSpace(section.Id))
