@@ -1,0 +1,99 @@
+@page "/resume"
+@inject LanguageState LanguageState
+@inject PortfolioContentService ContentService
+@implements IDisposable
+
+<PageTitle>@(_content is null ? "x7do0" : $"{_content.Resume.Title} | {_content.Resume.Eyebrow}")</PageTitle>
+
+@if (_content is null)
+{
+    <div class="loading-shell" aria-busy="true"><span></span><span></span><span></span></div>
+}
+else
+{
+    <section class="page-shell resume-page">
+        <div class="container">
+            <header class="resume-header">
+                <div>
+                    <p class="eyebrow">@_content.Resume.Eyebrow</p>
+                    <h1>@_content.Resume.Title</h1>
+                    <p class="resume-role">@_content.Brand.Role</p>
+                    <p class="hero-description">@_content.Resume.Intro</p>
+                </div>
+                <div class="resume-actions">
+                    <span class="button button--primary is-disabled" title="@_content.Resume.DownloadPending">@_content.Resume.DownloadLabel</span>
+                    <small>@_content.Resume.DownloadPending</small>
+                </div>
+            </header>
+
+            <div class="resume-grid">
+                <section class="resume-block resume-block--wide">
+                    <p class="eyebrow">01</p>
+                    <h2>@_content.Resume.EducationTitle</h2>
+                    <p class="large-copy">@_content.Education.Description</p>
+                    <small>@_content.Education.Institution</small>
+                </section>
+
+                <section class="resume-block">
+                    <p class="eyebrow">02</p>
+                    <h2>@_content.Resume.SkillsTitle</h2>
+                    <ol class="resume-list">
+                        @foreach (var skill in _content.SkillsSection.Items)
+                        {
+                            <li>@skill</li>
+                        }
+                    </ol>
+                </section>
+
+                <section class="resume-block">
+                    <p class="eyebrow">03</p>
+                    <h2>@_content.Resume.TechnologiesTitle</h2>
+                    <div class="resume-technology-list">
+                        @foreach (var group in _content.TechnologiesSection.Groups)
+                        {
+                            <div>
+                                <strong>@group.Title</strong>
+                                <p>@string.Join(" · ", group.Items)</p>
+                            </div>
+                        }
+                    </div>
+                </section>
+
+                <section class="resume-block resume-block--wide">
+                    <p class="eyebrow">04</p>
+                    <h2>@_content.Resume.ProjectsTitle</h2>
+                    <div class="resume-projects">
+                        @foreach (var project in _content.Projects)
+                        {
+                            <a href="/projects/@project.Slug">
+                                <strong>@project.Title</strong>
+                                <span>@project.Summary</span>
+                            </a>
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+}
+
+@code {
+    private PortfolioContent? _content;
+
+    protected override async Task OnInitializedAsync()
+    {
+        LanguageState.Changed += HandleLanguageChanged;
+        await LoadContentAsync();
+    }
+
+    private async Task LoadContentAsync() =>
+        _content = await ContentService.LoadAsync(LanguageState.Code);
+
+    private async void HandleLanguageChanged()
+    {
+        await LoadContentAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
+}
