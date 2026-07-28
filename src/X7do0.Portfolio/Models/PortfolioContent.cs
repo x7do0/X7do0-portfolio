@@ -15,30 +15,9 @@ public sealed class PortfolioContent
     public ResumeContent Resume { get; init; } = new();
 }
 
-public sealed class BrandContent
-{
-    public string Name { get; init; } = string.Empty;
-    public string Role { get; init; } = string.Empty;
-}
-
-public sealed class HeroContent
-{
-    public string Eyebrow { get; init; } = string.Empty;
-    public string Title { get; init; } = string.Empty;
-    public string Description { get; init; } = string.Empty;
-    public string PrimaryAction { get; init; } = string.Empty;
-    public string SecondaryAction { get; init; } = string.Empty;
-    public List<string> ProofItems { get; init; } = [];
-}
-
-public sealed class ProjectsSectionContent
-{
-    public string Eyebrow { get; init; } = string.Empty;
-    public string Title { get; init; } = string.Empty;
-    public string Description { get; init; } = string.Empty;
-    public string FeaturedLabel { get; init; } = string.Empty;
-    public string ProjectLabel { get; init; } = string.Empty;
-}
+public sealed class BrandContent { public string Name { get; init; } = string.Empty; public string Role { get; init; } = string.Empty; }
+public sealed class HeroContent { public string Eyebrow { get; init; } = string.Empty; public string Title { get; init; } = string.Empty; public string Description { get; init; } = string.Empty; public string PrimaryAction { get; init; } = string.Empty; public string SecondaryAction { get; init; } = string.Empty; public List<string> ProofItems { get; init; } = []; }
+public sealed class ProjectsSectionContent { public string Eyebrow { get; init; } = string.Empty; public string Title { get; init; } = string.Empty; public string Description { get; init; } = string.Empty; public string FeaturedLabel { get; init; } = string.Empty; public string ProjectLabel { get; init; } = string.Empty; }
 
 public sealed class ProjectContent
 {
@@ -47,7 +26,18 @@ public sealed class ProjectContent
     public string Summary { get; init; } = string.Empty;
     public bool Featured { get; init; }
     public string Cta { get; init; } = string.Empty;
+    public List<ProjectMediaContent> Media { get; init; } = [];
     public List<ProjectCaseStudySection> CaseStudy { get; init; } = [];
+}
+
+public sealed class ProjectMediaContent
+{
+    public string Type { get; init; } = "image";
+    public string Url { get; init; } = string.Empty;
+    public string ThumbnailUrl { get; init; } = string.Empty;
+    public string Alt { get; init; } = string.Empty;
+    public string Caption { get; init; } = string.Empty;
+    public bool IsVideo => string.Equals(Type, "video", StringComparison.OrdinalIgnoreCase);
 }
 
 public sealed class ProjectCaseStudySection
@@ -60,34 +50,10 @@ public sealed class ProjectCaseStudySection
     public bool Wide { get; init; }
 }
 
-public sealed class SkillsSectionContent
-{
-    public string Eyebrow { get; init; } = string.Empty;
-    public string Title { get; init; } = string.Empty;
-    public List<string> Items { get; init; } = [];
-}
-
-public sealed class TechnologiesSectionContent
-{
-    public string Eyebrow { get; init; } = string.Empty;
-    public string Title { get; init; } = string.Empty;
-    public string Description { get; init; } = string.Empty;
-    public List<TechnologyGroup> Groups { get; init; } = [];
-}
-
-public sealed class TechnologyGroup
-{
-    public string Title { get; init; } = string.Empty;
-    public List<string> Items { get; init; } = [];
-}
-
-public sealed class EducationContent
-{
-    public string Eyebrow { get; init; } = string.Empty;
-    public string Title { get; init; } = string.Empty;
-    public string Description { get; init; } = string.Empty;
-    public string Institution { get; init; } = string.Empty;
-}
+public sealed class SkillsSectionContent { public string Eyebrow { get; init; } = string.Empty; public string Title { get; init; } = string.Empty; public List<string> Items { get; init; } = []; }
+public sealed class TechnologiesSectionContent { public string Eyebrow { get; init; } = string.Empty; public string Title { get; init; } = string.Empty; public string Description { get; init; } = string.Empty; public List<TechnologyGroup> Groups { get; init; } = []; }
+public sealed class TechnologyGroup { public string Title { get; init; } = string.Empty; public List<string> Items { get; init; } = []; }
+public sealed class EducationContent { public string Eyebrow { get; init; } = string.Empty; public string Title { get; init; } = string.Empty; public string Description { get; init; } = string.Empty; public string Institution { get; init; } = string.Empty; }
 
 public sealed class KnowledgeContent
 {
@@ -100,36 +66,16 @@ public sealed class KnowledgeContent
     public List<VideoContent> Videos { get; init; } = [];
 }
 
-public sealed class VideoContent
-{
-    public string Title { get; init; } = string.Empty;
-    public string Url { get; init; } = string.Empty;
-    public string ThumbnailUrl { get; init; } = string.Empty;
-    public bool Enabled => !string.IsNullOrWhiteSpace(Url);
-}
-
-public sealed class ContactContent
-{
-    public string Eyebrow { get; init; } = string.Empty;
-    public string Title { get; init; } = string.Empty;
-    public string Description { get; init; } = string.Empty;
-    public List<ContactLinkContent> PrimaryLinks { get; init; } = [];
-    public List<ContactLinkContent> SocialLinks { get; init; } = [];
-}
-
-public sealed class ContactLinkContent
-{
-    public string Label { get; init; } = string.Empty;
-    public string Url { get; init; } = string.Empty;
-    public string Kind { get; init; } = "secondary";
-    public bool Enabled => !string.IsNullOrWhiteSpace(Url);
-}
+public sealed class VideoContent { public string Title { get; init; } = string.Empty; public string Url { get; init; } = string.Empty; public string ThumbnailUrl { get; init; } = string.Empty; public bool Enabled => !string.IsNullOrWhiteSpace(Url); }
+public sealed class ContactContent { public string Eyebrow { get; init; } = string.Empty; public string Title { get; init; } = string.Empty; public string Description { get; init; } = string.Empty; public List<ContactLinkContent> PrimaryLinks { get; init; } = []; public List<ContactLinkContent> SocialLinks { get; init; } = []; }
+public sealed class ContactLinkContent { public string Label { get; init; } = string.Empty; public string Url { get; init; } = string.Empty; public string Kind { get; init; } = "secondary"; public bool Enabled => !string.IsNullOrWhiteSpace(Url); }
 
 public sealed class ProjectPageContent
 {
     public string BackAction { get; init; } = string.Empty;
     public string OverviewTitle { get; init; } = string.Empty;
     public string PreviewTitle { get; init; } = string.Empty;
+    public string MediaTitle { get; init; } = string.Empty;
     public string DetailsTitle { get; init; } = string.Empty;
     public string DetailsPending { get; init; } = string.Empty;
     public string NotFoundTitle { get; init; } = string.Empty;
