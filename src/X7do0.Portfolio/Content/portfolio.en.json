@@ -1,5 +1,6 @@
 {
   "brand": { "name": "Haidera Muhannad", "role": "Software & Backend Developer" },
+  "homeSections": ["projects", "skills", "technologies", "education", "knowledge", "contact"],
   "hero": {
     "eyebrow": "Haidera Muhannad · x7do0",
     "title": "I build complete software projects from idea to production",
