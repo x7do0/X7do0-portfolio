@@ -28,14 +28,26 @@ public static class PortfolioReadinessEvaluator
 
     private static void AddLinkChecks(List<PortfolioReadinessItem> items, string language, PortfolioContent content)
     {
-        Add(items, language, "contact.email", content.Contact.PrimaryLinks.ElementAtOrDefault(0)?.Enabled == true,
-            "Add the approved email contact URL.");
-        Add(items, language, "contact.linkedin", content.Contact.PrimaryLinks.ElementAtOrDefault(1)?.Enabled == true,
-            "Add the approved LinkedIn profile URL.");
-        Add(items, language, "social.youtube", content.Contact.SocialLinks.ElementAtOrDefault(1)?.Enabled == true,
-            "Add the approved YouTube channel URL.");
-        Add(items, language, "social.instagram", content.Contact.SocialLinks.ElementAtOrDefault(2)?.Enabled == true,
-            "Add the approved Instagram profile URL.");
+        var links = content.Contact.PrimaryLinks
+            .Concat(content.Contact.SocialLinks)
+            .Where(link => !string.IsNullOrWhiteSpace(link.Id))
+            .ToDictionary(link => link.Id, StringComparer.OrdinalIgnoreCase);
+
+        AddLink(items, language, links, "email", "contact.email", "Add the approved email contact URL.");
+        AddLink(items, language, links, "linkedin", "contact.linkedin", "Add the approved LinkedIn profile URL.");
+        AddLink(items, language, links, "youtube", "social.youtube", "Add the approved YouTube channel URL.");
+        AddLink(items, language, links, "instagram", "social.instagram", "Add the approved Instagram profile URL.");
+    }
+
+    private static void AddLink(
+        List<PortfolioReadinessItem> items,
+        string language,
+        IReadOnlyDictionary<string, ContactLinkContent> links,
+        string linkId,
+        string checkKey,
+        string action)
+    {
+        Add(items, language, checkKey, links.TryGetValue(linkId, out var link) && link.Enabled, action);
     }
 
     private static void AddProjectChecks(List<PortfolioReadinessItem> items, string language, PortfolioContent content)
