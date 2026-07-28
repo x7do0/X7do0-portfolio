@@ -16,8 +16,8 @@
     "projectLabel": "Project"
   },
   "projects": [
-    { "slug": "enterprise-workflow", "title": "Enterprise Workflow", "summary": "An integrated system for managing internal company requests and approvals, with roles, permissions, notifications, and a clear audit trail for every action.", "featured": true, "cta": "Explore project" },
-    { "slug": "coding-academy", "title": "Coding Academy", "summary": "An interactive learning platform for programming through structured paths, practical lessons, exercises, and assessments that help learners progress step by step.", "featured": false, "cta": "Explore project" }
+    { "slug": "enterprise-workflow", "title": "Enterprise Workflow", "summary": "An integrated system for managing internal company requests and approvals, with roles, permissions, notifications, and a clear audit trail for every action.", "featured": true, "cta": "Explore project", "media": [], "caseStudy": [] },
+    { "slug": "coding-academy", "title": "Coding Academy", "summary": "An interactive learning platform for programming through structured paths, practical lessons, exercises, and assessments that help learners progress step by step.", "featured": false, "cta": "Explore project", "media": [], "caseStudy": [] }
   ],
   "skillsSection": {
     "eyebrow": "How I work",
@@ -63,6 +63,7 @@
     "backAction": "Back to projects",
     "overviewTitle": "Overview",
     "previewTitle": "Project preview",
+    "mediaTitle": "Project images and videos",
     "detailsTitle": "Case study",
     "detailsPending": "The complete case study will be added after the project details are accurately approved, without assumptions or exaggeration.",
     "notFoundTitle": "Project not found",
