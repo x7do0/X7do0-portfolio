@@ -31,8 +31,7 @@ else
 
             <article class="detail-panel detail-panel--preview">
                 <p class="eyebrow">02</p><h2>@_content.ProjectPage.PreviewTitle</h2>
-                @if (_project.Featured) { <WorkflowPreview Compact="true" /> }
-                else { <div class="academy-window academy-window--page" aria-label="@_project.Title"><div class="academy-window__top"><span></span><span></span><span></span></div><div class="academy-window__body"><div class="lesson-rail"></div><div class="lesson-content"><span></span><span></span><span></span></div></div></div> }
+                <ProjectPreview Project="@_project" />
             </article>
 
             @if (_project.Media.Count > 0)
