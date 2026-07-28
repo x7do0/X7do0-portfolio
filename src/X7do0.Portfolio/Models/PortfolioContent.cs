@@ -26,6 +26,7 @@ public sealed class ProjectContent
     public string Title { get; init; } = string.Empty;
     public string Summary { get; init; } = string.Empty;
     public bool Featured { get; init; }
+    public string PreviewKind { get; init; } = "generic";
     public string Cta { get; init; } = string.Empty;
     public List<ProjectMediaContent> Media { get; init; } = [];
     public List<ProjectCaseStudySection> CaseStudy { get; init; } = [];
