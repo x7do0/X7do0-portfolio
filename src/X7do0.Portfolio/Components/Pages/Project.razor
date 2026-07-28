@@ -15,6 +15,7 @@ else if (_project is null)
 else
 {
     <SeoHead Title="@($"{_project.Title} | x7do0")" Description="@_project.Summary" Type="article" />
+    <StructuredData Content="@_content" Project="@_project" />
 
     <section class="page-shell project-page-hero">
         <div class="hero-glow hero-glow--one"></div>
