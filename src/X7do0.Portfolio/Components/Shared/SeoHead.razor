@@ -1,10 +1,14 @@
+@inject NavigationManager NavigationManager
+
 <PageTitle>@Title</PageTitle>
 <HeadContent>
     <meta name="description" content="@Description" />
+    <link rel="canonical" href="@CanonicalUrl" />
     <meta property="og:title" content="@Title" />
     <meta property="og:description" content="@Description" />
     <meta property="og:type" content="@Type" />
     <meta property="og:site_name" content="x7do0" />
+    <meta property="og:url" content="@CanonicalUrl" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="@Title" />
     <meta name="twitter:description" content="@Description" />
@@ -19,4 +23,7 @@
 
     [Parameter]
     public string Type { get; set; } = "website";
+
+    private string CanonicalUrl =>
+        new Uri(NavigationManager.Uri).GetLeftPart(UriPartial.Path);
 }
