@@ -1,3 +1,5 @@
+@inject LanguageState LanguageState
+
 <Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)" />
@@ -6,11 +8,15 @@
     <NotFound>
         <PageTitle>404 | x7do0</PageTitle>
         <LayoutView Layout="typeof(MainLayout)">
-            <section class="page-shell narrow-page">
-                <p class="eyebrow">404</p>
-                <h1>الصفحة غير موجودة</h1>
-                <p>الرابط الذي فتحته غير متوفر حاليًا.</p>
-                <a class="button button--primary" href="/">العودة للرئيسية</a>
+            <section class="page-shell">
+                <div class="container narrow-page">
+                    <div class="empty-state">
+                        <p class="eyebrow">404</p>
+                        <h1>@(LanguageState.IsArabic ? "الصفحة غير موجودة" : "Page not found")</h1>
+                        <p>@(LanguageState.IsArabic ? "الرابط الذي فتحته غير متوفر حاليًا." : "The address you opened is not available.")</p>
+                        <a class="button button--primary" href="/">@(LanguageState.IsArabic ? "العودة للرئيسية" : "Back to home")</a>
+                    </div>
+                </div>
             </section>
         </LayoutView>
     </NotFound>
