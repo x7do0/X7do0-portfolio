@@ -150,7 +150,14 @@ else
                         </div>
                     }
                 </div>
-                <span class="button button--secondary is-disabled">@_content.Knowledge.Action</span>
+                @if (string.IsNullOrWhiteSpace(_content.Knowledge.ChannelUrl))
+                {
+                    <span class="button button--secondary is-disabled" aria-disabled="true">@_content.Knowledge.Action</span>
+                }
+                else
+                {
+                    <a class="button button--secondary" href="@_content.Knowledge.ChannelUrl" target="_blank" rel="noopener noreferrer">@_content.Knowledge.Action</a>
+                }
             </div>
         </div>
     </section>
@@ -163,13 +170,29 @@ else
                 <p>@_content.Contact.Description</p>
             </div>
             <div class="contact-actions">
-                <span class="button button--primary is-disabled">@_content.Contact.EmailAction</span>
-                <span class="button button--secondary is-disabled">@_content.Contact.LinkedInAction</span>
+                @foreach (var link in _content.Contact.PrimaryLinks)
+                {
+                    @if (link.Enabled)
+                    {
+                        <a class="button @(link.Kind == "primary" ? "button--primary" : "button--secondary")" href="@link.Url" target="_blank" rel="noopener noreferrer">@link.Label</a>
+                    }
+                    else
+                    {
+                        <span class="button @(link.Kind == "primary" ? "button--primary" : "button--secondary") is-disabled" aria-disabled="true">@link.Label</span>
+                    }
+                }
             </div>
             <div class="social-links">
                 @foreach (var social in _content.Contact.SocialLinks)
                 {
-                    <span>@social</span>
+                    @if (social.Enabled)
+                    {
+                        <a href="@social.Url" target="_blank" rel="noopener noreferrer">@social.Label</a>
+                    }
+                    else
+                    {
+                        <span class="is-disabled" aria-disabled="true">@social.Label</span>
+                    }
                 }
             </div>
         </div>
