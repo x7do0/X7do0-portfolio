@@ -75,5 +75,26 @@
     "emailAction": "راسلني عبر البريد",
     "linkedInAction": "تواصل معي على LinkedIn",
     "socialLinks": ["GitHub", "YouTube", "Instagram"]
+  },
+  "projectPage": {
+    "backAction": "العودة إلى المشاريع",
+    "overviewTitle": "نظرة عامة",
+    "previewTitle": "معاينة المشروع",
+    "detailsTitle": "دراسة الحالة",
+    "detailsPending": "تُستكمل تفاصيل دراسة الحالة بعد اعتماد معلومات المشروع الدقيقة، بدون افتراض أو مبالغة.",
+    "notFoundTitle": "المشروع غير موجود",
+    "notFoundDescription": "لم يتم العثور على مشروع مطابق لهذا الرابط."
+  },
+  "resume": {
+    "eyebrow": "السيرة الذاتية",
+    "title": "حيدره مهند",
+    "intro": "أبني مشاريع متكاملة بمساعدة الذكاء الاصطناعي، مع تركيز على تطوير الـBackend باستخدام C# و.NET، من الفكرة والتخطيط إلى التشغيل والإنتاج.",
+    "educationTitle": "التعليم",
+    "skillsTitle": "المهارات",
+    "technologiesTitle": "التقنيات",
+    "projectsTitle": "المشاريع المختارة",
+    "viewLabel": "عرض السيرة الذاتية",
+    "downloadLabel": "تحميل PDF",
+    "downloadPending": "سيُضاف ملف PDF بعد اعتماد النسخة النهائية للسيرة."
   }
 }
