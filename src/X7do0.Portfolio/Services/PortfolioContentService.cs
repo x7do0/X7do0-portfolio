@@ -86,6 +86,8 @@ public sealed class PortfolioContentService(IWebHostEnvironment environment)
             .GroupBy(project => project.Slug, StringComparer.OrdinalIgnoreCase).Where(group => group.Count() > 1).Select(group => group.Key).ToArray();
         if (duplicateSlugs.Length > 0) errors.Add($"project slugs must be unique: {string.Join(", ", duplicateSlugs)}");
 
+        ValidateContactLinks(content.Contact.PrimaryLinks.Concat(content.Contact.SocialLinks), errors);
+
         if (content.SkillsSection.Items.Any(string.IsNullOrWhiteSpace)) errors.Add("skillsSection.items cannot contain empty values");
         foreach (var group in content.TechnologiesSection.Groups)
         {
@@ -94,6 +96,26 @@ public sealed class PortfolioContentService(IWebHostEnvironment environment)
         }
 
         if (errors.Count > 0) throw new InvalidDataException($"Invalid portfolio content in '{filePath}':{Environment.NewLine}- " + string.Join($"{Environment.NewLine}- ", errors));
+    }
+
+    private static void ValidateContactLinks(IEnumerable<ContactLinkContent> links, ICollection<string> errors)
+    {
+        var linkList = links.ToArray();
+        foreach (var link in linkList)
+        {
+            Require(link.Id, "contact links[].id", errors);
+            Require(link.Label, $"contact link '{link.Id}'.label", errors);
+        }
+
+        var duplicateIds = linkList
+            .Where(link => !string.IsNullOrWhiteSpace(link.Id))
+            .GroupBy(link => link.Id, StringComparer.OrdinalIgnoreCase)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .ToArray();
+
+        if (duplicateIds.Length > 0)
+            errors.Add($"contact link ids must be unique across primaryLinks and socialLinks: {string.Join(", ", duplicateIds)}");
     }
 
     private static void Require(string value, string path, ICollection<string> errors)
