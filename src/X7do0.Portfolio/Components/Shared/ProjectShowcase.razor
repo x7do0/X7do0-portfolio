@@ -9,20 +9,7 @@
         </a>
     </div>
 
-    @if (Project.Featured)
-    {
-        <WorkflowPreview Compact="true" />
-    }
-    else
-    {
-        <div class="academy-window" aria-hidden="true">
-            <div class="academy-window__top"><span></span><span></span><span></span></div>
-            <div class="academy-window__body">
-                <div class="lesson-rail"></div>
-                <div class="lesson-content"><span></span><span></span><span></span></div>
-            </div>
-        </div>
-    }
+    <ProjectPreview Project="@Project" Compact="true" />
 </article>
 
 @code {
