@@ -3,14 +3,14 @@
 @inject PortfolioContentService ContentService
 @implements IDisposable
 
-<PageTitle>@(_project is null ? "x7do0" : $"{_project.Title} | x7do0")</PageTitle>
-
 @if (_content is null)
 {
     <div class="loading-shell" aria-busy="true"><span></span><span></span><span></span></div>
 }
 else if (_project is null)
 {
+    <SeoHead Title="@($"{_content.ProjectPage.NotFoundTitle} | x7do0")" Description="@_content.ProjectPage.NotFoundDescription" />
+
     <section class="page-shell">
         <div class="container narrow-page">
             <a class="back-link" href="/#projects">← @_content.ProjectPage.BackAction</a>
@@ -24,6 +24,8 @@ else if (_project is null)
 }
 else
 {
+    <SeoHead Title="@($"{_project.Title} | x7do0")" Description="@_project.Summary" Type="article" />
+
     <section class="page-shell project-page-hero">
         <div class="hero-glow hero-glow--one"></div>
         <div class="container">
@@ -76,7 +78,8 @@ else
 }
 
 @code {
-    [Parameter] public string Slug { get; set; } = string.Empty;
+    [Parameter]
+    public string Slug { get; set; } = string.Empty;
 
     private PortfolioContent? _content;
     private ProjectContent? _project;
@@ -85,13 +88,10 @@ else
         ? "00"
         : (_content.Projects.IndexOf(_project) + 1).ToString("00");
 
-    protected override async Task OnInitializedAsync()
-    {
+    protected override void OnInitialized() =>
         LanguageState.Changed += HandleLanguageChanged;
-        await LoadContentAsync();
-    }
 
-    protected override async Task OnParametersSetAsync() => await LoadContentAsync();
+    protected override Task OnParametersSetAsync() => LoadContentAsync();
 
     private async Task LoadContentAsync()
     {
@@ -100,11 +100,12 @@ else
             string.Equals(project.Slug, Slug, StringComparison.OrdinalIgnoreCase));
     }
 
-    private async void HandleLanguageChanged()
-    {
-        await LoadContentAsync();
-        await InvokeAsync(StateHasChanged);
-    }
+    private void HandleLanguageChanged() =>
+        _ = InvokeAsync(async () =>
+        {
+            await LoadContentAsync();
+            StateHasChanged();
+        });
 
     public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
 }
