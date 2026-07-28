@@ -17,8 +17,8 @@
     "projectLabel": "مشروع"
   },
   "projects": [
-    { "slug": "enterprise-workflow", "title": "Enterprise Workflow", "summary": "نظام متكامل لإدارة الطلبات والموافقات داخل الشركات، مع الأدوار والصلاحيات والإشعارات وسجل تدقيق واضح لكل إجراء.", "featured": true, "cta": "استكشف المشروع", "media": [], "caseStudy": [] },
-    { "slug": "coding-academy", "title": "أكاديمية البرمجة", "summary": "منصة تعليمية تفاعلية لتعلّم البرمجة عبر مسارات منظمة، ودروس عملية، وتمارين واختبارات تساعد المتعلم على التقدم خطوة بخطوة.", "featured": false, "cta": "استكشف المشروع", "media": [], "caseStudy": [] }
+    { "slug": "enterprise-workflow", "title": "Enterprise Workflow", "summary": "نظام متكامل لإدارة الطلبات والموافقات داخل الشركات، مع الأدوار والصلاحيات والإشعارات وسجل تدقيق واضح لكل إجراء.", "featured": true, "previewKind": "workflow", "cta": "استكشف المشروع", "media": [], "caseStudy": [] },
+    { "slug": "coding-academy", "title": "أكاديمية البرمجة", "summary": "منصة تعليمية تفاعلية لتعلّم البرمجة عبر مسارات منظمة، ودروس عملية، وتمارين واختبارات تساعد المتعلم على التقدم خطوة بخطوة.", "featured": false, "previewKind": "academy", "cta": "استكشف المشروع", "media": [], "caseStudy": [] }
   ],
   "skillsSection": {
     "eyebrow": "طريقة العمل",
