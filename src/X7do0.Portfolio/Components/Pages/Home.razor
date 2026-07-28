@@ -3,14 +3,14 @@
 @inject PortfolioContentService ContentService
 @implements IDisposable
 
-<PageTitle>@(_content is null ? "x7do0" : $"{_content.Brand.Name} | x7do0")</PageTitle>
-
 @if (_content is null)
 {
     <div class="loading-shell" aria-busy="true"><span></span><span></span><span></span></div>
 }
 else
 {
+    <SeoHead Title="@($"{_content.Brand.Name} | x7do0")" Description="@_content.Hero.Description" />
+
     <section class="hero">
         <div class="hero-glow hero-glow--one"></div>
         <div class="hero-glow hero-glow--two"></div>
@@ -26,7 +26,7 @@ else
                 <div class="hero-proof">
                     @foreach (var item in _content.Hero.ProofItems)
                     {
-                        <span>@item</span>
+                        <span @key="item">@item</span>
                     }
                 </div>
             </div>
@@ -36,56 +36,37 @@ else
 
     <section id="projects" class="section">
         <div class="container">
-            <header class="section-heading">
-                <p class="eyebrow">@_content.ProjectsSection.Eyebrow</p>
-                <h2>@_content.ProjectsSection.Title</h2>
-                <p>@_content.ProjectsSection.Description</p>
-            </header>
+            <SectionHeading
+                Eyebrow="@_content.ProjectsSection.Eyebrow"
+                Title="@_content.ProjectsSection.Title"
+                Description="@_content.ProjectsSection.Description" />
 
             @for (var index = 0; index < _content.Projects.Count; index++)
             {
                 var project = _content.Projects[index];
-                <article class="project-card @(project.Featured ? "project-card--featured" : string.Empty)">
-                    <div class="project-copy">
-                        <span class="project-index">@((index + 1).ToString("00"))</span>
-                        <p class="project-kicker">@(project.Featured ? _content.ProjectsSection.FeaturedLabel : _content.ProjectsSection.ProjectLabel)</p>
-                        <h3>@project.Title</h3>
-                        <p>@project.Summary</p>
-                        <a class="text-link" href="/projects/@project.Slug">
-                            @project.Cta <span aria-hidden="true">↗</span>
-                        </a>
-                    </div>
-                    @if (project.Featured)
-                    {
-                        <WorkflowPreview Compact="true" />
-                    }
-                    else
-                    {
-                        <div class="academy-window" aria-hidden="true">
-                            <div class="academy-window__top"><span></span><span></span><span></span></div>
-                            <div class="academy-window__body">
-                                <div class="lesson-rail"></div>
-                                <div class="lesson-content"><span></span><span></span><span></span></div>
-                            </div>
-                        </div>
-                    }
-                </article>
+                <ProjectShowcase
+                    @key="project.Slug"
+                    Project="@project"
+                    Labels="@_content.ProjectsSection"
+                    Index="@index" />
             }
         </div>
     </section>
 
     <section id="skills" class="section section--muted">
         <div class="container">
-            <header class="section-heading compact-heading">
-                <p class="eyebrow">@_content.SkillsSection.Eyebrow</p>
-                <h2>@_content.SkillsSection.Title</h2>
-            </header>
+            <SectionHeading
+                Eyebrow="@_content.SkillsSection.Eyebrow"
+                Title="@_content.SkillsSection.Title"
+                Compact="true" />
+
             <div class="skills-list">
                 @for (var index = 0; index < _content.SkillsSection.Items.Count; index++)
                 {
-                    <article class="skill-row">
+                    var skill = _content.SkillsSection.Items[index];
+                    <article class="skill-row" @key="skill">
                         <span>@((index + 1).ToString("00"))</span>
-                        <h3>@_content.SkillsSection.Items[index]</h3>
+                        <h3>@skill</h3>
                     </article>
                 }
             </div>
@@ -94,25 +75,11 @@ else
 
     <section id="technologies" class="section">
         <div class="container">
-            <header class="section-heading">
-                <p class="eyebrow">@_content.TechnologiesSection.Eyebrow</p>
-                <h2>@_content.TechnologiesSection.Title</h2>
-                <p>@_content.TechnologiesSection.Description</p>
-            </header>
-            <div class="technology-grid">
-                @foreach (var group in _content.TechnologiesSection.Groups)
-                {
-                    <article class="technology-group">
-                        <h3>@group.Title</h3>
-                        <div class="technology-tags">
-                            @foreach (var item in group.Items)
-                            {
-                                <span>@item</span>
-                            }
-                        </div>
-                    </article>
-                }
-            </div>
+            <SectionHeading
+                Eyebrow="@_content.TechnologiesSection.Eyebrow"
+                Title="@_content.TechnologiesSection.Title"
+                Description="@_content.TechnologiesSection.Description" />
+            <TechnologyGroups Groups="@_content.TechnologiesSection.Groups" />
         </div>
     </section>
 
@@ -131,11 +98,11 @@ else
 
     <section id="knowledge" class="section">
         <div class="container">
-            <header class="section-heading">
-                <p class="eyebrow">@_content.Knowledge.Eyebrow</p>
-                <h2>@_content.Knowledge.Title</h2>
-                <p>@_content.Knowledge.Description</p>
-            </header>
+            <SectionHeading
+                Eyebrow="@_content.Knowledge.Eyebrow"
+                Title="@_content.Knowledge.Title"
+                Description="@_content.Knowledge.Description" />
+
             <div class="knowledge-card">
                 <div class="channel-identity">
                     <div class="channel-avatar">x7</div>
@@ -144,7 +111,7 @@ else
                 <div class="video-grid">
                     @for (var index = 0; index < 3; index++)
                     {
-                        <div class="video-placeholder">
+                        <div class="video-placeholder" @key="index">
                             <span class="play-icon">▶</span>
                             <small>@_content.Knowledge.PendingLabel</small>
                         </div>
@@ -208,11 +175,12 @@ else
         await LoadContentAsync();
     }
 
-    private async void HandleLanguageChanged()
-    {
-        await LoadContentAsync();
-        await InvokeAsync(StateHasChanged);
-    }
+    private void HandleLanguageChanged() =>
+        _ = InvokeAsync(async () =>
+        {
+            await LoadContentAsync();
+            StateHasChanged();
+        });
 
     private async Task LoadContentAsync() =>
         _content = await ContentService.LoadAsync(LanguageState.Code);
