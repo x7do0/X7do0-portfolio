@@ -86,6 +86,15 @@ public sealed class KnowledgeContent
     public string Action { get; init; } = string.Empty;
     public string PendingLabel { get; init; } = string.Empty;
     public string ChannelUrl { get; init; } = string.Empty;
+    public List<VideoContent> Videos { get; init; } = [];
+}
+
+public sealed class VideoContent
+{
+    public string Title { get; init; } = string.Empty;
+    public string Url { get; init; } = string.Empty;
+    public string ThumbnailUrl { get; init; } = string.Empty;
+    public bool Enabled => !string.IsNullOrWhiteSpace(Url);
 }
 
 public sealed class ContactContent
@@ -128,4 +137,6 @@ public sealed class ResumeContent
     public string ViewLabel { get; init; } = string.Empty;
     public string DownloadLabel { get; init; } = string.Empty;
     public string DownloadPending { get; init; } = string.Empty;
+    public string PdfUrl { get; init; } = string.Empty;
+    public bool HasPdf => !string.IsNullOrWhiteSpace(PdfUrl);
 }
