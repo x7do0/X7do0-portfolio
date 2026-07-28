@@ -36,38 +36,23 @@ else
 
     <section id="projects" class="section">
         <div class="container">
-            <SectionHeading
-                Eyebrow="@_content.ProjectsSection.Eyebrow"
-                Title="@_content.ProjectsSection.Title"
-                Description="@_content.ProjectsSection.Description" />
-
+            <SectionHeading Eyebrow="@_content.ProjectsSection.Eyebrow" Title="@_content.ProjectsSection.Title" Description="@_content.ProjectsSection.Description" />
             @for (var index = 0; index < _content.Projects.Count; index++)
             {
                 var project = _content.Projects[index];
-                <ProjectShowcase
-                    @key="project.Slug"
-                    Project="@project"
-                    Labels="@_content.ProjectsSection"
-                    Index="@index" />
+                <ProjectShowcase @key="project.Slug" Project="@project" Labels="@_content.ProjectsSection" Index="@index" />
             }
         </div>
     </section>
 
     <section id="skills" class="section section--muted">
         <div class="container">
-            <SectionHeading
-                Eyebrow="@_content.SkillsSection.Eyebrow"
-                Title="@_content.SkillsSection.Title"
-                Compact="true" />
-
+            <SectionHeading Eyebrow="@_content.SkillsSection.Eyebrow" Title="@_content.SkillsSection.Title" Compact="true" />
             <div class="skills-list">
                 @for (var index = 0; index < _content.SkillsSection.Items.Count; index++)
                 {
                     var skill = _content.SkillsSection.Items[index];
-                    <article class="skill-row" @key="skill">
-                        <span>@((index + 1).ToString("00"))</span>
-                        <h3>@skill</h3>
-                    </article>
+                    <article class="skill-row" @key="skill"><span>@((index + 1).ToString("00"))</span><h3>@skill</h3></article>
                 }
             </div>
         </div>
@@ -75,46 +60,43 @@ else
 
     <section id="technologies" class="section">
         <div class="container">
-            <SectionHeading
-                Eyebrow="@_content.TechnologiesSection.Eyebrow"
-                Title="@_content.TechnologiesSection.Title"
-                Description="@_content.TechnologiesSection.Description" />
+            <SectionHeading Eyebrow="@_content.TechnologiesSection.Eyebrow" Title="@_content.TechnologiesSection.Title" Description="@_content.TechnologiesSection.Description" />
             <TechnologyGroups Groups="@_content.TechnologiesSection.Groups" />
         </div>
     </section>
 
     <section id="education" class="section education-section">
         <div class="container split-card">
-            <div>
-                <p class="eyebrow">@_content.Education.Eyebrow</p>
-                <h2>@_content.Education.Title</h2>
-            </div>
-            <div>
-                <p class="large-copy">@_content.Education.Description</p>
-                <small>@_content.Education.Institution</small>
-            </div>
+            <div><p class="eyebrow">@_content.Education.Eyebrow</p><h2>@_content.Education.Title</h2></div>
+            <div><p class="large-copy">@_content.Education.Description</p><small>@_content.Education.Institution</small></div>
         </div>
     </section>
 
     <section id="knowledge" class="section">
         <div class="container">
-            <SectionHeading
-                Eyebrow="@_content.Knowledge.Eyebrow"
-                Title="@_content.Knowledge.Title"
-                Description="@_content.Knowledge.Description" />
-
+            <SectionHeading Eyebrow="@_content.Knowledge.Eyebrow" Title="@_content.Knowledge.Title" Description="@_content.Knowledge.Description" />
             <div class="knowledge-card">
-                <div class="channel-identity">
-                    <div class="channel-avatar">x7</div>
-                    <div><strong>x7do0</strong><span>YouTube</span></div>
-                </div>
+                <div class="channel-identity"><div class="channel-avatar">x7</div><div><strong>x7do0</strong><span>YouTube</span></div></div>
                 <div class="video-grid">
-                    @for (var index = 0; index < 3; index++)
+                    @if (_content.Knowledge.Videos.Count > 0)
                     {
-                        <div class="video-placeholder" @key="index">
-                            <span class="play-icon">▶</span>
-                            <small>@_content.Knowledge.PendingLabel</small>
-                        </div>
+                        @foreach (var video in _content.Knowledge.Videos.Take(3))
+                        {
+                            <a class="video-placeholder" href="@video.Url" target="_blank" rel="noopener noreferrer" @key="video.Url">
+                                @if (!string.IsNullOrWhiteSpace(video.ThumbnailUrl))
+                                {
+                                    <img src="@video.ThumbnailUrl" alt="" loading="lazy" />
+                                }
+                                <span class="play-icon">▶</span><strong>@video.Title</strong>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        @for (var index = 0; index < 3; index++)
+                        {
+                            <div class="video-placeholder" @key="index"><span class="play-icon">▶</span><small>@_content.Knowledge.PendingLabel</small></div>
+                        }
                     }
                 </div>
                 @if (string.IsNullOrWhiteSpace(_content.Knowledge.ChannelUrl))
@@ -131,11 +113,7 @@ else
 
     <section id="contact" class="section contact-section">
         <div class="container contact-card">
-            <div>
-                <p class="eyebrow">@_content.Contact.Eyebrow</p>
-                <h2>@_content.Contact.Title</h2>
-                <p>@_content.Contact.Description</p>
-            </div>
+            <div><p class="eyebrow">@_content.Contact.Eyebrow</p><h2>@_content.Contact.Title</h2><p>@_content.Contact.Description</p></div>
             <div class="contact-actions">
                 @foreach (var link in _content.Contact.PrimaryLinks)
                 {
@@ -175,15 +153,7 @@ else
         await LoadContentAsync();
     }
 
-    private void HandleLanguageChanged() =>
-        _ = InvokeAsync(async () =>
-        {
-            await LoadContentAsync();
-            StateHasChanged();
-        });
-
-    private async Task LoadContentAsync() =>
-        _content = await ContentService.LoadAsync(LanguageState.Code);
-
+    private void HandleLanguageChanged() => _ = InvokeAsync(async () => { await LoadContentAsync(); StateHasChanged(); });
+    private async Task LoadContentAsync() => _content = await ContentService.LoadAsync(LanguageState.Code);
     public void Dispose() => LanguageState.Changed -= HandleLanguageChanged;
 }
