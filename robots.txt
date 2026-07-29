@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://x7do0.github.io/X7do0-portfolio/sitemap.xml
