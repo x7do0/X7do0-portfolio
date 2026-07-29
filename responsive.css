@@ -1,0 +1,995 @@
+/*
+  Professional responsive support
+  Loaded after the base theme and typography tuning.
+  Keeps the existing content and visual identity while adapting every surface
+  from compact phones to wide desktop displays.
+*/
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100svh;
+  overflow-x: clip;
+}
+
+body:has(.menu-button[aria-expanded="true"]) {
+  overflow: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+main,
+main > section,
+.shell,
+.hero-copy,
+.system-window,
+.project,
+.project-copy,
+.workflow-canvas,
+.academy-canvas,
+.capability-main,
+.technology-rail,
+.education-inner,
+.contact-grid,
+.project-hero,
+.project-hero__copy,
+.project-hero__visual,
+.project-overview__grid,
+.project-future,
+.future-panel,
+.resume-hero,
+.resume-intro,
+.resume-section,
+.resume-section__content {
+  min-width: 0;
+}
+
+pre,
+code {
+  max-width: 100%;
+}
+
+pre {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
+
+.button,
+.menu-button,
+.language-switch button,
+.flow-step,
+.inner-back,
+.back-to-top,
+.contact-link,
+.text-link {
+  min-height: 44px;
+}
+
+/* Wide screens */
+@media (min-width: 1600px) {
+  :root {
+    --shell: min(1500px, calc(100vw - 128px));
+  }
+
+  .hero {
+    min-height: min(940px, 100svh);
+  }
+
+  .system-window {
+    max-width: 840px;
+    justify-self: end;
+  }
+}
+
+/* Laptop and compact desktop */
+@media (max-width: 1280px) {
+  :root {
+    --shell: min(1180px, calc(100vw - 56px));
+  }
+
+  .header-inner {
+    gap: 24px;
+  }
+
+  .desktop-nav {
+    gap: clamp(20px, 2.5vw, 38px);
+  }
+
+  .hero {
+    grid-template-columns: minmax(340px, 0.86fr) minmax(520px, 1.14fr);
+    gap: clamp(38px, 4vw, 68px);
+  }
+
+  .system-body {
+    min-height: 480px;
+  }
+
+  .architecture,
+  .system-code {
+    min-height: 480px;
+  }
+
+  .project--workflow,
+  .project--academy {
+    gap: clamp(30px, 4vw, 54px);
+  }
+
+  .capabilities-grid {
+    gap: clamp(42px, 5vw, 78px);
+  }
+}
+
+/* Navigation collapse and tablet landscape */
+@media (max-width: 1080px) {
+  :root {
+    --shell: min(100% - 44px, 980px);
+  }
+
+  .site-header {
+    isolation: isolate;
+  }
+
+  .header-inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 18px;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .header-actions {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .menu-button {
+    display: block;
+    flex: 0 0 auto;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .mobile-menu {
+    position: absolute;
+    inset-block-start: calc(100% + 10px);
+    inset-inline: max(18px, env(safe-area-inset-left)) max(18px, env(safe-area-inset-right));
+    display: grid;
+    max-height: min(70svh, 560px);
+    padding: 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid rgba(185, 215, 255, 0.22);
+    border-radius: 22px;
+    background: rgba(8, 29, 61, 0.97);
+    box-shadow: 0 26px 70px rgba(1, 12, 32, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(24px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px) scale(0.985);
+    transform-origin: top center;
+    transition: opacity 180ms ease, transform 220ms var(--ease), visibility 180ms ease;
+  }
+
+  .mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .mobile-menu a {
+    min-height: 54px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 13px;
+    color: #dceaff;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .mobile-menu a:hover,
+  .mobile-menu a:focus-visible {
+    background: rgba(120, 174, 238, 0.12);
+  }
+
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 46px;
+  }
+
+  .hero-copy {
+    max-width: 850px;
+  }
+
+  .system-window {
+    width: min(100%, 880px);
+    justify-self: center;
+  }
+
+  .project--workflow,
+  .project--academy {
+    grid-template-columns: 1fr;
+  }
+
+  .project-copy {
+    max-width: 760px;
+  }
+
+  .project--academy .project-copy {
+    order: 1;
+  }
+
+  .project--academy .academy-canvas {
+    order: 2;
+  }
+
+  .workflow-canvas,
+  .academy-canvas {
+    width: 100%;
+  }
+
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .technology-rail {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+
+  .project-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-block: 72px;
+    gap: 48px;
+  }
+
+  .project-hero__copy {
+    max-width: 820px;
+  }
+
+  .project-hero__visual {
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .resume-hero,
+  .resume-section {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-hero {
+    min-height: auto;
+    gap: 52px;
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 820px) {
+  :root {
+    --shell: calc(100vw - 36px);
+    --header-height: 78px;
+  }
+
+  .section-shell {
+    padding-block: clamp(76px, 12vw, 104px);
+  }
+
+  .hero {
+    padding-block-start: calc(var(--header-height) + 44px);
+  }
+
+  .hero-actions {
+    gap: 12px;
+  }
+
+  .system-body {
+    grid-template-columns: 1fr;
+    min-height: 430px;
+  }
+
+  .system-code {
+    display: none;
+  }
+
+  .architecture {
+    min-height: 430px;
+  }
+
+  .window-bar {
+    grid-template-columns: auto auto 1fr;
+    gap: 14px;
+  }
+
+  .window-path {
+    display: none;
+  }
+
+  .section-heading {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .compact-heading {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .project {
+    padding: clamp(22px, 4vw, 32px);
+  }
+
+  .project-copy {
+    padding-block: 8px 18px;
+  }
+
+  .workflow-canvas,
+  .academy-canvas {
+    min-height: 410px;
+  }
+
+  .canvas-topline,
+  .canvas-footer {
+    flex-wrap: wrap;
+  }
+
+  .capability-list li {
+    grid-template-columns: 62px minmax(0, 1fr) auto;
+    gap: 16px;
+  }
+
+  .technology-group p {
+    flex-wrap: wrap;
+  }
+
+  .education-inner {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .education-copy {
+    max-width: 720px;
+  }
+
+  .media-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .contact-links {
+    width: 100%;
+  }
+
+  .project-overview__grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .project-overview p {
+    grid-column: auto;
+  }
+
+  .project-future {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-technologies {
+    grid-template-columns: 1fr 1fr;
+    gap: 0 28px;
+  }
+
+  .footer-inner {
+    gap: 22px;
+  }
+}
+
+/* Phones */
+@media (max-width: 620px) {
+  :root {
+    --shell: calc(100vw - 28px);
+    --header-height: 72px;
+    --radius-xl: 22px;
+    --radius-lg: 18px;
+    --radius-md: 15px;
+  }
+
+  body {
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+  }
+
+  .scroll-progress {
+    inset-block-start: env(safe-area-inset-top);
+  }
+
+  .site-header {
+    padding-block-start: env(safe-area-inset-top);
+  }
+
+  .header-inner {
+    min-height: var(--header-height);
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+  }
+
+  .brand {
+    font-size: 1.15rem;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .language-switch {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .language-switch button {
+    min-width: 46px;
+    min-height: 42px;
+    padding-inline: 8px;
+    font-size: 0.7rem;
+  }
+
+  .language-switch button[data-language="ar"] {
+    min-width: 58px;
+  }
+
+  .menu-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobile-menu {
+    inset-inline: 14px;
+    max-height: calc(100svh - var(--header-height) - env(safe-area-inset-top) - 30px);
+    padding-block-end: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .hero {
+    padding-block: calc(var(--header-height) + env(safe-area-inset-top) + 34px) 62px;
+    gap: 34px;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .button {
+    width: 100%;
+    min-height: 52px;
+    padding-inline: 17px;
+    gap: 18px;
+  }
+
+  .hero-proof {
+    gap: 8px 0;
+  }
+
+  .system-window {
+    border-radius: 18px;
+  }
+
+  .window-bar {
+    min-height: 50px;
+    padding-inline: 14px;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+  }
+
+  .runtime-state,
+  .window-path {
+    display: none;
+  }
+
+  .system-body,
+  .architecture {
+    min-height: 360px;
+  }
+
+  .architecture-lines {
+    inset: 5% 3%;
+    width: 94%;
+    height: 90%;
+  }
+
+  .architecture-node {
+    min-width: 102px;
+    padding: 9px 10px;
+  }
+
+  .architecture-node strong {
+    font-size: 0.58rem;
+  }
+
+  .architecture-node span {
+    display: none;
+  }
+
+  .window-statusbar {
+    min-height: 34px;
+    padding-inline: 12px;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .window-statusbar span:nth-child(-n + 2) {
+    display: none;
+  }
+
+  .section-shell {
+    padding-block: 72px;
+  }
+
+  .section-heading {
+    margin-block-end: 38px;
+  }
+
+  .section-heading > div > p {
+    margin-block-start: 14px;
+    font-size: 0.96rem;
+  }
+
+  .project {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .project + .project {
+    margin-block-start: 28px;
+  }
+
+  .project-number {
+    margin-block-end: 16px;
+  }
+
+  .project-copy > p {
+    margin-block-start: 16px;
+    line-height: 1.75;
+  }
+
+  .text-link {
+    margin-block-start: 24px;
+  }
+
+  .workflow-canvas,
+  .academy-canvas {
+    min-height: 350px;
+    padding: 16px;
+    border-radius: 17px;
+  }
+
+  .canvas-topline {
+    gap: 12px;
+  }
+
+  .canvas-state {
+    flex: 0 0 auto;
+  }
+
+  .flow-rail {
+    padding-block: 28px;
+  }
+
+  .flow-track {
+    inset-inline: 8%;
+  }
+
+  .flow-step {
+    padding-inline: 2px;
+  }
+
+  .flow-step i {
+    width: 23px;
+    height: 23px;
+  }
+
+  .flow-step strong,
+  .lesson strong {
+    display: none;
+  }
+
+  .canvas-footer {
+    padding-block-start: 14px;
+    font-size: 0.58rem;
+  }
+
+  .academy-head > span {
+    width: 42px;
+    height: 42px;
+  }
+
+  .lesson i {
+    width: 40px;
+    height: 40px;
+  }
+
+  .academy-canvas pre {
+    margin: 0 -16px -16px;
+    padding: 14px 16px;
+    font-size: 0.62rem;
+  }
+
+  .capability-main,
+  .technology-rail {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .capability-list li {
+    min-height: 84px;
+    padding: 16px 8px;
+    grid-template-columns: 46px minmax(0, 1fr) 12px;
+    gap: 10px;
+  }
+
+  .capability-list li::before {
+    font-size: 1.75rem;
+  }
+
+  .capability-list h3 {
+    overflow-wrap: anywhere;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .technology-group {
+    padding-block: 18px;
+  }
+
+  .technology-group p {
+    gap: 8px 12px;
+    font-size: 0.82rem;
+  }
+
+  .education-band,
+  .project-overview,
+  .resume-section {
+    margin-inline: 0;
+  }
+
+  .education-inner {
+    padding: 28px 20px;
+  }
+
+  .education-copy p {
+    overflow-wrap: anywhere;
+  }
+
+  .media-pending {
+    min-height: 220px;
+    padding: 24px 18px;
+  }
+
+  .contact-grid {
+    padding: 28px 20px;
+    border-radius: 22px;
+  }
+
+  .contact-link {
+    width: 100%;
+    padding: 14px 4px;
+    gap: 12px;
+  }
+
+  .site-footer {
+    padding-block-end: max(26px, env(safe-area-inset-bottom));
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px 18px;
+  }
+
+  .footer-inner > p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+  }
+
+  .back-to-top {
+    justify-self: end;
+  }
+
+  .inner-header__content {
+    min-height: var(--header-height);
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+  }
+
+  .inner-back {
+    justify-self: center;
+    min-width: 44px;
+    padding-inline: 10px;
+  }
+
+  .inner-back span {
+    display: none;
+  }
+
+  .inner-header .language-switch {
+    justify-self: end;
+  }
+
+  .project-hero {
+    padding-block: 54px 64px;
+    gap: 38px;
+  }
+
+  .project-hero__copy > p {
+    margin-block-start: 20px;
+    font-size: 1rem;
+  }
+
+  .project-hero__visual {
+    min-height: 390px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .page-workflow,
+  .page-academy {
+    padding: 20px;
+  }
+
+  .page-workflow__rail,
+  .page-academy__path {
+    gap: 4px;
+  }
+
+  .page-workflow__rail i,
+  .page-academy__path i {
+    width: 38px;
+    height: 38px;
+  }
+
+  .page-workflow__system {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-workflow__system span {
+    min-width: 0;
+    padding: 13px;
+  }
+
+  .page-academy pre {
+    padding: 16px;
+    overflow-x: auto;
+    font-size: 0.62rem;
+  }
+
+  .project-overview {
+    padding-block: 68px;
+    border-radius: 22px;
+  }
+
+  .project-overview__grid {
+    width: var(--shell);
+  }
+
+  .project-future {
+    padding-block: 70px;
+    gap: 20px;
+  }
+
+  .future-panel {
+    min-height: 230px;
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .resume-hero {
+    padding-block: 68px;
+    gap: 38px;
+  }
+
+  .resume-intro {
+    padding: 22px 20px;
+    border-radius: 20px;
+  }
+
+  .resume-section {
+    padding: 24px 20px;
+    gap: 34px;
+    border-radius: 20px;
+  }
+
+  .resume-section > header {
+    gap: 14px;
+  }
+
+  .resume-technologies {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-projects a {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+    padding-block: 22px;
+  }
+
+  .resume-projects h3,
+  .resume-projects p {
+    overflow-wrap: anywhere;
+  }
+
+  .not-found {
+    padding: 18px;
+  }
+
+  .not-found__inner {
+    padding: 30px 20px;
+    border-radius: 22px;
+  }
+
+  .not-found__code {
+    font-size: clamp(6rem, 34vw, 10rem) !important;
+  }
+
+  .not-found h1 {
+    margin-block-start: 40px !important;
+  }
+}
+
+/* Compact phones */
+@media (max-width: 390px) {
+  :root {
+    --shell: calc(100vw - 22px);
+  }
+
+  .brand {
+    font-size: 1.05rem;
+  }
+
+  .language-switch button {
+    min-width: 40px;
+    padding-inline: 6px;
+  }
+
+  .language-switch button[data-language="ar"] {
+    min-width: 52px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .hero {
+    padding-block-end: 54px;
+  }
+
+  .hero-proof span:not(:last-child)::after {
+    margin-inline: 8px;
+  }
+
+  .system-body,
+  .architecture {
+    min-height: 330px;
+  }
+
+  .architecture-node {
+    min-width: 92px;
+  }
+
+  .node-service-a {
+    inset-inline-start: 2%;
+  }
+
+  .node-service-b {
+    inset-inline-end: 2%;
+  }
+
+  .project,
+  .capability-main,
+  .technology-rail,
+  .contact-grid,
+  .resume-section,
+  .resume-intro {
+    padding-inline: 16px;
+  }
+
+  .workflow-canvas,
+  .academy-canvas {
+    min-height: 330px;
+  }
+
+  .canvas-footer > span:last-child {
+    display: none;
+  }
+
+  .page-workflow,
+  .page-academy {
+    padding: 16px;
+  }
+
+  .page-workflow__system {
+    gap: 8px;
+  }
+
+  .page-workflow__system span {
+    padding: 10px;
+  }
+
+  .resume-projects a {
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+}
+
+/* Short landscape phones and small-height devices */
+@media (max-height: 520px) and (orientation: landscape) {
+  .mobile-menu {
+    max-height: calc(100svh - var(--header-height) - 18px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding-block-start: calc(var(--header-height) + 30px);
+  }
+
+  .project-hero,
+  .resume-hero {
+    padding-block: 44px;
+  }
+}
+
+/* Touch devices: remove hover-only displacement */
+@media (hover: none) {
+  .button:hover,
+  .project:hover,
+  .system-window:hover,
+  .media-pending:hover,
+  .future-panel:hover {
+    transform: none;
+  }
+
+  .capability-list li:hover {
+    padding-inline: 18px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .project,
+  .system-window,
+  .future-panel,
+  .media-pending,
+  .button,
+  .contact-link {
+    transition-duration: 0.01ms !important;
+  }
+}
