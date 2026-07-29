@@ -1,11 +1,7 @@
-bin/
-obj/
-.vs/
 .vscode/
 .idea/
-*.user
-*.suo
-*.cache
 *.log
 .DS_Store
 Thumbs.db
+tmp/
+screenshots/

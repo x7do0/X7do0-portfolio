@@ -1,0 +1,137 @@
+{
+  "brand": { "name": "Haidera Muhannad", "role": "Software & Backend Developer" },
+  "meta": {
+    "title": "Haidera Muhannad | x7do0",
+    "description": "The official portfolio of Haidera Muhannad — Software & Backend Developer."
+  },
+  "nav": {
+    "projects": "Projects",
+    "skills": "Capabilities",
+    "education": "Education",
+    "resume": "Resume",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "I build complete software projects from idea to production",
+    "description": "I am a software and backend developer focused on building reliable systems with C# and .NET, using AI to accelerate planning, development, and testing.",
+    "primaryAction": "View my projects",
+    "secondaryAction": "Contact me",
+    "proofItems": ["C# & .NET", "Backend", "AI-assisted development"]
+  },
+  "projectsSection": {
+    "title": "Selected projects",
+    "description": "Projects that show how I plan, shape systems, and review implementation from an early idea to a usable product."
+  },
+  "projects": [
+    {
+      "slug": "enterprise-workflow",
+      "title": "Enterprise Workflow",
+      "summary": "An integrated system for managing internal company requests and approvals, with roles, permissions, notifications, and a clear audit trail for every action.",
+      "previewKind": "workflow",
+      "cta": "Explore project",
+      "media": [],
+      "caseStudy": []
+    },
+    {
+      "slug": "coding-academy",
+      "title": "Coding Academy",
+      "summary": "An interactive learning platform for programming through structured paths, practical lessons, exercises, and assessments that help learners progress step by step.",
+      "previewKind": "academy",
+      "cta": "Explore project",
+      "media": [],
+      "caseStudy": []
+    }
+  ],
+  "skillsSection": {
+    "title": "How I work",
+    "items": [
+      "AI-assisted software development",
+      "Understanding full-stack web application architecture",
+      "Project planning and requirements analysis",
+      "Software testing, quality assurance, and release verification",
+      "Error diagnosis and problem solving",
+      "Managing work with Git and GitHub",
+      "Technical documentation and project handoff"
+    ]
+  },
+  "technologiesSection": {
+    "title": "Technologies I use",
+    "groups": [
+      { "title": "Backend", "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core"] },
+      { "title": "Databases", "items": ["SQL Server"] },
+      { "title": "Additional languages", "items": ["Python", "C++"] },
+      { "title": "Development tools", "items": ["Git", "GitHub", "AI-assisted development tools"] }
+    ]
+  },
+  "education": {
+    "title": "Education and academic achievement",
+    "description": "Third-year Computer Engineering Technology student, ranked first during both the first and second academic years.",
+    "institution": "Al-Kafeel University — Computer Engineering Technology"
+  },
+  "knowledge": {
+    "title": "Knowledge sharing",
+    "description": "I create educational content that explains Computer Engineering Technology subjects and makes concepts easier for students to understand.",
+    "pendingLabel": "Selected videos will be linked later",
+    "channelUrl": "",
+    "videos": []
+  },
+  "contact": {
+    "title": "Let’s build something practical",
+    "description": "Have a project idea or an opportunity to collaborate? I would be glad to hear about it and discuss how it could be built.",
+    "links": [
+      { "id": "email", "label": "Email me", "url": "", "kind": "primary" },
+      { "id": "linkedin", "label": "Connect on LinkedIn", "url": "", "kind": "primary" },
+      { "id": "github", "label": "GitHub", "url": "https://github.com/x7do0", "kind": "social" },
+      { "id": "youtube", "label": "YouTube", "url": "", "kind": "social" },
+      { "id": "instagram", "label": "Instagram", "url": "", "kind": "social" }
+    ]
+  },
+  "projectPage": {
+    "backAction": "Back to projects",
+    "overviewTitle": "Overview",
+    "previewTitle": "Project preview",
+    "mediaTitle": "Project images and videos",
+    "mediaPending": "Media will be added after it is approved.",
+    "detailsTitle": "Case study",
+    "detailsPending": "The complete case study will be added after the project details are accurately approved, without assumptions or exaggeration."
+  },
+  "resume": {
+    "title": "Haidera Muhannad",
+    "intro": "I build complete projects with AI assistance, focusing on backend development with C# and .NET from idea and planning through operation and production.",
+    "educationTitle": "Education",
+    "skillsTitle": "Skills",
+    "technologiesTitle": "Technologies",
+    "projectsTitle": "Selected projects",
+    "viewLabel": "View resume",
+    "downloadLabel": "Download PDF",
+    "downloadPending": "The PDF will be added after the final resume is approved.",
+    "pdfUrl": ""
+  },
+  "ui": {
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "nav": "Primary navigation",
+    "mobileNav": "Mobile navigation",
+    "language": "Choose language",
+    "close": "Close",
+    "scroll": "Go to projects",
+    "top": "Back to top",
+    "running": "running",
+    "systemPreview": "Interactive system architecture preview",
+    "workflowPreview": "Approval workflow preview",
+    "academyPreview": "Learning path preview",
+    "newRequest": "New purchase request",
+    "audited": "Every action is audited",
+    "flowHint": "Select a stage to explore",
+    "flowSteps": "Request stages",
+    "flowStates": ["Created", "Manager review", "Financial review", "Legal review", "Approved"],
+    "flowStatus": ["Request created", "Manager review completed", "In financial review", "Waiting for legal review", "Request approved"],
+    "learningPath": "Learning path",
+    "stepByStep": "Progress step by step",
+    "basics": "Fundamentals",
+    "dataStructures": "Data structures",
+    "projectsLabel": "Build projects",
+    "finalProject": "Final project",
+    "upcoming": "Coming soon"
+  }
+}

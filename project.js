@@ -1,0 +1,146 @@
+(() => {
+  "use strict";
+
+  const body = document.body;
+  const root = body.dataset.root || "../../";
+  const slug = body.dataset.project;
+  const queryLanguage = new URLSearchParams(location.search).get("lang");
+  let language = queryLanguage === "en"
+    ? "en"
+    : localStorage.getItem("x7do0-language") === "en" ? "en" : "ar";
+
+  const qs = (selector, parent = document) => parent.querySelector(selector);
+  const qsa = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+
+  async function loadContent(nextLanguage) {
+    const response = await fetch(`${root}content/portfolio.${nextLanguage}.json`, { cache: "no-cache" });
+    if (!response.ok) throw new Error(`Content request failed (${response.status}).`);
+    return response.json();
+  }
+
+  function previewMarkup(kind) {
+    if (kind === "workflow") {
+      return `
+        <div class="page-workflow" aria-hidden="true">
+          <div class="page-workflow__head"><span>REQ-2026-0837</span><i></i><strong>workflow.active</strong></div>
+          <div class="page-workflow__rail">
+            <span class="is-done"><i></i><b>01</b></span>
+            <span class="is-done"><i></i><b>02</b></span>
+            <span class="is-active"><i></i><b>03</b></span>
+            <span><i></i><b>04</b></span>
+            <span><i></i><b>05</b></span>
+          </div>
+          <div class="page-workflow__system">
+            <span><small>AUTH</small><strong>Roles</strong></span>
+            <span><small>CORE</small><strong>Requests</strong></span>
+            <span><small>FLOW</small><strong>Approvals</strong></span>
+            <span><small>LOG</small><strong>Audit</strong></span>
+          </div>
+        </div>`;
+    }
+
+    return `
+      <div class="page-academy" aria-hidden="true">
+        <div class="page-academy__head"><span>&lt;/&gt;</span><strong>learning.path</strong><i></i></div>
+        <div class="page-academy__path">
+          <span class="is-active"><i>01</i><strong>syntax</strong></span>
+          <span><i>02</i><strong>data</strong></span>
+          <span><i>03</i><strong>build</strong></span>
+          <span><i>04</i><strong>ship</strong></span>
+        </div>
+        <pre><code><em>function</em> learn(skill) {
+  <em>return</em> practice(skill).repeat().master();
+}</code></pre>
+      </div>`;
+  }
+
+  function updateUrl(nextLanguage) {
+    const url = new URL(location.href);
+    if (nextLanguage === "en") url.searchParams.set("lang", "en");
+    else url.searchParams.delete("lang");
+    history.replaceState({}, "", url);
+  }
+
+  async function render(nextLanguage, updateHistory = true) {
+    const content = await loadContent(nextLanguage);
+    const project = content.projects.find((item) => item.slug === slug);
+    if (!project) {
+      location.href = root;
+      return;
+    }
+
+    language = nextLanguage;
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    localStorage.setItem("x7do0-language", language);
+    if (updateHistory) updateUrl(language);
+
+    qsa("[data-language]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.language === language));
+    });
+
+    qsa("[data-project-text='title']").forEach((element) => { element.textContent = project.title; });
+    qsa("[data-project-text='summary']").forEach((element) => { element.textContent = project.summary; });
+
+    const pageText = {
+      back: content.projectPage.backAction,
+      overview: content.projectPage.overviewTitle,
+      media: content.projectPage.mediaTitle,
+      mediaPending: content.projectPage.mediaPending,
+      details: content.projectPage.detailsTitle,
+      detailsPending: content.projectPage.detailsPending
+    };
+    qsa("[data-page-text]").forEach((element) => {
+      element.textContent = pageText[element.dataset.pageText] ?? element.textContent;
+    });
+
+    qs("#project-preview").innerHTML = previewMarkup(project.previewKind);
+    qs("#project-preview").setAttribute("aria-label", content.projectPage.previewTitle);
+    qs("[data-brand-name]").textContent = content.brand.name;
+    qs("[data-year]").textContent = String(new Date().getFullYear());
+    qs("[data-ui-top]").textContent = content.ui.top;
+    qs(".skip-link").textContent = content.ui.skip;
+
+    const back = qs(".inner-back");
+    back.href = language === "en" ? `${root}?lang=en#projects` : `${root}#projects`;
+    const home = qsa(".brand");
+    home.forEach((link) => { link.href = language === "en" ? `${root}?lang=en` : root; });
+
+    document.title = `${project.title} | x7do0`;
+    qs('meta[name="description"]').content = project.summary;
+    qs('meta[property="og:title"]').content = `${project.title} | x7do0`;
+    qs('meta[property="og:description"]').content = project.summary;
+    const canonical = qs('link[rel="canonical"]');
+    canonical.href = `https://x7do0.github.io/X7do0-portfolio/projects/${slug}/${language === "en" ? "?lang=en" : ""}`;
+  }
+
+  function setupMotion() {
+    const progress = qs(".scroll-progress span");
+    const update = () => {
+      const available = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = `${available > 0 ? (scrollY / available) * 100 : 0}%`;
+    };
+    addEventListener("scroll", update, { passive: true });
+    update();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    }, { threshold: 0.12 });
+    qsa(".reveal").forEach((element) => observer.observe(element));
+  }
+
+  qsa("[data-language]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      if (button.dataset.language === language) return;
+      await render(button.dataset.language);
+    });
+  });
+
+  setupMotion();
+  render(language, false).catch((error) => {
+    console.error(error);
+    location.href = root;
+  });
+})();

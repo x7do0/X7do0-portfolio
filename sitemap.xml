@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://x7do0.github.io/X7do0-portfolio/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/" />
+  </url>
+  <url>
+    <loc>https://x7do0.github.io/X7do0-portfolio/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/" />
+  </url>
+  <url>
+    <loc>https://x7do0.github.io/X7do0-portfolio/projects/enterprise-workflow/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/projects/enterprise-workflow/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/projects/enterprise-workflow/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/projects/enterprise-workflow/" />
+  </url>
+  <url>
+    <loc>https://x7do0.github.io/X7do0-portfolio/projects/coding-academy/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/projects/coding-academy/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/projects/coding-academy/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/projects/coding-academy/" />
+  </url>
+  <url>
+    <loc>https://x7do0.github.io/X7do0-portfolio/resume/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/resume/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/resume/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/resume/" />
+  </url>
+</urlset>
