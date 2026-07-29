@@ -1,0 +1,99 @@
+/*
+  Typography tuning
+  Slightly reduces oversized display text and loosens Arabic letter spacing.
+*/
+
+.hero h1 {
+  max-width: 13.5ch;
+  font-size: clamp(3.05rem, 4.65vw, 5.75rem);
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+}
+
+html[dir="ltr"] .hero h1 {
+  max-width: 12ch;
+  font-size: clamp(3rem, 4.55vw, 5.6rem);
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+
+.section-heading h2,
+.compact-heading h2,
+.education-inner h2,
+.contact h2 {
+  font-size: clamp(2.55rem, 4.25vw, 4.9rem);
+  letter-spacing: -0.028em;
+  line-height: 1.13;
+}
+
+.project h3 {
+  font-size: clamp(1.8rem, 2.45vw, 2.95rem);
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+}
+
+.project-number {
+  font-size: clamp(3.7rem, 5.8vw, 6.6rem);
+}
+
+.project-hero h1 {
+  font-size: clamp(2.9rem, 5vw, 6rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.project-hero__number {
+  font-size: clamp(4.2rem, 7.4vw, 8rem);
+}
+
+.project-overview h2,
+.future-panel h2 {
+  font-size: clamp(2.05rem, 3.25vw, 3.95rem);
+  letter-spacing: -0.028em;
+  line-height: 1.12;
+}
+
+.future-panel h2 {
+  font-size: clamp(1.8rem, 2.7vw, 3rem);
+}
+
+.resume-hero h1 {
+  font-size: clamp(3.8rem, 7vw, 7.7rem);
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.resume-section h2 {
+  font-size: clamp(2.25rem, 3.7vw, 4.15rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.not-found h1 {
+  font-size: clamp(2.2rem, 5.4vw, 4.45rem) !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.14 !important;
+}
+
+@media (max-width: 720px) {
+  .hero h1 {
+    max-width: 15ch;
+    font-size: clamp(2.65rem, 11vw, 4.15rem);
+    line-height: 1.18;
+  }
+
+  .section-heading h2,
+  .compact-heading h2,
+  .education-inner h2,
+  .contact h2 {
+    font-size: clamp(2.15rem, 9vw, 3.45rem);
+  }
+
+  .project-hero h1 {
+    font-size: clamp(2.65rem, 12vw, 4.1rem);
+  }
+
+  .resume-hero h1 {
+    font-size: clamp(3.35rem, 17vw, 5.6rem);
+  }
+}
