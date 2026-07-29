@@ -5,8 +5,8 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#05070a",
-  "theme_color": "#05070a",
+  "background_color": "#071a36",
+  "theme_color": "#0b2a59",
   "icons": [
     {
       "src": "./assets/x7do0-mark.svg",
