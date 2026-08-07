@@ -1,0 +1,89 @@
+/* Source-backed fidelity from MahsoobPOS app.css + CashierPage. */
+:root {
+  --mahsoob-brand: #126b50;
+  --mahsoob-sidebar: #10291f;
+  --mahsoob-sidebar-active: #1a4938;
+  --mahsoob-bg: #f4f7f5;
+  --mahsoob-line: #dbe5df;
+  --mahsoob-card-line: #e3ebe6;
+  --mahsoob-text: #17221d;
+  --mahsoob-muted: #66736d;
+}
+
+body { background: var(--mahsoob-bg) !important; color: var(--mahsoob-text) !important; }
+.topbar {
+  min-height: 70px !important;
+  padding-inline: 28px !important;
+  border-bottom: 1px solid var(--mahsoob-line) !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+.brand-mark { background: var(--mahsoob-brand) !important; border-radius: 12px !important; }
+.sample { border-color: #d7e5de !important; background: #edf7f2 !important; color: #126b50 !important; }
+.icon-btn,.ghost-btn { border-color: var(--mahsoob-line) !important; background: #fff !important; color: #30483e !important; border-radius: 11px !important; }
+
+.app-shell { grid-template-columns: 235px minmax(0,1fr) !important; }
+.sidebar {
+  padding: 25px 17px !important;
+  background: var(--mahsoob-sidebar) !important;
+  color: #fff !important;
+}
+.store { padding: 5px 5px 18px !important; border-bottom: 1px solid rgba(255,255,255,.10); }
+.store strong { color: #fff !important; }
+.store small { color: #a9c6b9 !important; }
+.sidebar nav { margin-top: 15px !important; }
+.nav-item { min-height: 44px !important; border-radius: 11px !important; color: #b9d0c6 !important; }
+.nav-item.active { background: var(--mahsoob-sidebar-active) !important; color: #fff !important; }
+.sidebar-note { border-color: rgba(255,255,255,.10) !important; background: rgba(255,255,255,.045) !important; border-radius: 14px !important; }
+.sidebar-note p { color: #a9c6b9 !important; }
+
+.workspace { padding: 25px 28px 38px !important; background: var(--mahsoob-bg) !important; }
+.page-head { margin-bottom: 18px !important; }
+.page-head h1 { color: var(--mahsoob-text) !important; }
+.page-head p { color: var(--mahsoob-muted) !important; }
+.status-dot { border-color: #d9e8e0 !important; background: #fff !important; color: #126b50 !important; border-radius: 999px !important; }
+.status-dot i { background: #16a36b !important; }
+
+.cashier-grid { grid-template-columns: minmax(0,1.6fr) minmax(320px,.75fr) !important; gap: 18px !important; }
+.panel {
+  border: 1px solid var(--mahsoob-card-line) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: 0 12px 30px rgba(24,48,37,.05) !important;
+}
+.panel-head h2 { color: var(--mahsoob-text) !important; }
+.panel-head p { color: var(--mahsoob-muted) !important; }
+.barcode-row { padding: 15px !important; border: 1px solid #e7eee9 !important; border-radius: 14px !important; background: #fafcfb !important; }
+.barcode-row input,.cash-field input { border-color: var(--mahsoob-line) !important; background: #fff !important; color: var(--mahsoob-text) !important; border-radius: 11px !important; }
+.primary,.checkout { border-radius: 11px !important; background: var(--mahsoob-brand) !important; color: #fff !important; box-shadow: none !important; }
+.product {
+  border-color: #e5ece8 !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+.product:hover { border-color: #b9d7ca !important; background: #f6fbf8 !important; }
+.product > b { color: var(--mahsoob-brand) !important; font-variant-numeric: tabular-nums; }
+.cart-row { border-color: #e9efeb !important; }
+.qty { border-color: var(--mahsoob-line) !important; border-radius: 10px !important; }
+.payment-box { border-top: 1px solid #e9efeb !important; background: #fff !important; }
+.total-line strong { color: var(--mahsoob-brand) !important; font-size: clamp(2rem,3vw,2.5rem) !important; font-variant-numeric: tabular-nums; }
+.change-line strong,[data-total],[data-change],[data-receipt-total],[data-receipt-cash],[data-receipt-change] { font-variant-numeric: tabular-nums; }
+
+.receipt { border-radius: 18px !important; }
+.receipt-logo { color: var(--mahsoob-brand) !important; }
+
+@media (max-width: 920px) {
+  .app-shell { grid-template-columns: 1fr !important; }
+  .sidebar { display: grid !important; grid-template-columns: 1fr !important; padding: 16px !important; }
+  .sidebar nav { display: flex !important; overflow-x: auto; }
+  .nav-item { flex: 0 0 auto; }
+  .sidebar-note { display: none !important; }
+  .cashier-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 620px) {
+  .topbar { min-height: 62px !important; padding-inline: 12px !important; }
+  .workspace { padding: 18px 12px 28px !important; }
+  .panel { border-radius: 14px !important; }
+}
