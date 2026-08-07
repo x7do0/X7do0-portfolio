@@ -1,0 +1,48 @@
+/* Preview controls are visual only because the whole mini-app surface is the link. */
+.live-preview-link button {
+  pointer-events: none;
+  border: 0;
+  font: inherit;
+}
+
+.live-academy-main button {
+  margin-top: 13px;
+  min-height: 34px;
+  padding: 7px 11px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9px;
+  background: #2457d6;
+  color: #fff;
+  font-size: .54rem;
+  font-weight: 750;
+}
+
+.live-cart button {
+  width: 100%;
+  margin-top: 10px;
+  min-height: 33px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #126b50;
+  color: #fff;
+  font-size: .52rem;
+  font-weight: 750;
+}
+
+.live-masroofi-head button {
+  min-height: 34px;
+  padding: 7px 10px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9px;
+  background: #0f8a5f;
+  color: #fff;
+  font-size: .52rem;
+  font-weight: 750;
+}
+
+@media (max-width: 620px) {
+  .live-masroofi-head button { display: none; }
+}
