@@ -27,6 +27,8 @@
         minute: '2-digit',
         hour12: false
       }).format(date);
+      element.dir = 'ltr';
+      element.style.unicodeBidi = 'isolate';
       if (element.textContent !== formatted) element.textContent = formatted;
     });
   }
