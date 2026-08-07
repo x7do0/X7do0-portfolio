@@ -1,0 +1,25 @@
+@media (min-width: 901px) and (max-height: 760px) {
+  .course-sidebar {
+    padding-block: 14px;
+    gap: 12px;
+  }
+
+  .progress-summary {
+    padding: 10px 12px;
+  }
+
+  .lesson-nav button {
+    min-height: 44px;
+  }
+
+  .goal {
+    margin-top: auto;
+    padding: 10px 12px 0;
+  }
+
+  .goal p {
+    margin-top: 3px;
+    line-height: 1.45;
+    font-size: 0.58rem;
+  }
+}
