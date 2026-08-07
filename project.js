@@ -88,7 +88,9 @@
       media: content.projectPage.mediaTitle,
       mediaPending: content.projectPage.mediaPending,
       details: content.projectPage.detailsTitle,
-      detailsPending: content.projectPage.detailsPending
+      detailsPending: content.projectPage.detailsPending,
+      tryDemo: content.projectPage.tryDemo,
+      demoHint: content.projectPage.demoHint
     };
     qsa("[data-page-text]").forEach((element) => {
       element.textContent = pageText[element.dataset.pageText] ?? element.textContent;
@@ -105,6 +107,13 @@
     back.href = language === "en" ? `${root}?lang=en#projects` : `${root}#projects`;
     const home = qsa(".brand");
     home.forEach((link) => { link.href = language === "en" ? `${root}?lang=en` : root; });
+
+    const demoLink = qs("[data-demo-link]");
+    if (demoLink) {
+      demoLink.href = language === "en"
+        ? `${root}demos/enterprise-workflow/?lang=en`
+        : `${root}demos/enterprise-workflow/`;
+    }
 
     document.title = `${project.title} | x7do0`;
     qs('meta[name="description"]').content = project.summary;
