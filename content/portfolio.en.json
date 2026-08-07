@@ -6,7 +6,7 @@
   },
   "nav": {
     "projects": "Projects",
-    "skills": "Capabilities",
+    "skills": "Skills",
     "education": "Education",
     "resume": "Resume",
     "contact": "Contact"
@@ -43,24 +43,23 @@
     }
   ],
   "skillsSection": {
-    "title": "How I work",
+    "title": "Skills",
     "items": [
-      "AI-assisted software development",
-      "Understanding full-stack web application architecture",
-      "Project planning and requirements analysis",
-      "Software testing, quality assurance, and release verification",
-      "Error diagnosis and problem solving",
-      "Managing work with Git and GitHub",
-      "Technical documentation and project handoff"
+      "Backend and systems development",
+      "Web application development",
+      "Databases and data modeling",
+      "Testing and quality assurance",
+      "Git, GitHub, and release workflow",
+      "AI-assisted development"
     ]
   },
   "technologiesSection": {
-    "title": "Technologies I use",
+    "title": "Languages & technologies",
     "groups": [
       { "title": "Backend", "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core"] },
       { "title": "Databases", "items": ["SQL Server"] },
       { "title": "Additional languages", "items": ["Python", "C++"] },
-      { "title": "Development tools", "items": ["Git", "GitHub", "AI-assisted development tools"] }
+      { "title": "Tools & workflow", "items": ["Git", "GitHub", "Testing", "Debugging", "AI-assisted development tools"] }
     ]
   },
   "education": {
@@ -90,6 +89,8 @@
     "backAction": "Back to projects",
     "overviewTitle": "Overview",
     "previewTitle": "Project preview",
+    "tryDemo": "Try the project",
+    "demoHint": "A compact interactive simulation using sample data only — no real login or backend.",
     "mediaTitle": "Project images and videos",
     "mediaPending": "Media will be added after it is approved.",
     "detailsTitle": "Case study",
@@ -132,6 +133,8 @@
     "dataStructures": "Data structures",
     "projectsLabel": "Build projects",
     "finalProject": "Final project",
+    "mahsoobCategory": "Cashier project",
+    "masroofiCategory": "Personal expense project",
     "upcoming": "Coming soon"
   }
 }
