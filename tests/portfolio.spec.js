@@ -20,7 +20,7 @@ test('home renders portrait, skills and both languages without runtime errors', 
   await expect(page.getByText('كيف أعمل', { exact: true })).toHaveCount(0);
 
   const portraitBackground = await page.locator('.system-window').evaluate((element) =>
-    getComputedStyle(element, '::before').backgroundImage
+    getComputedStyle(element, '::after').backgroundImage
   );
   expect(portraitBackground).toContain('profile-cutout.png');
 
@@ -54,12 +54,13 @@ test('Enterprise Workflow demo completes employee to manager approval flow', asy
   await page.locator('[data-submit-request]').click();
   await page.locator('[data-role-switch="manager"]').click();
 
-  await expect(page.locator('.request-row')).toHaveCount(1);
-  await page.locator('.request-row').first().click();
+  const managerInbox = page.locator('[data-dashboard-request-list] .request-row');
+  await expect(managerInbox).toHaveCount(1);
+  await managerInbox.first().click();
   await page.locator('[data-approve]').click();
   await page.locator('[data-role-switch="employee"]').click();
 
-  await expect(page.locator('.status-chip--approved')).toHaveCount(1);
+  await expect(page.locator('[data-dashboard-request-list] .status-chip--approved')).toHaveCount(1);
   await page.screenshot({ path: 'artifacts/enterprise-demo-approved.png', fullPage: true });
   expect(errors).toEqual([]);
 });
