@@ -1,0 +1,107 @@
+/* Final presentation polish: never advertise unfinished content to portfolio visitors. */
+
+/* Knowledge sharing stays as a confident statement until real videos are approved. */
+.knowledge .media-rail {
+  display: none;
+}
+
+.knowledge {
+  padding-block: clamp(84px, 9vw, 132px);
+}
+
+.knowledge .section-heading {
+  margin-block-end: 0;
+}
+
+.knowledge .section-heading > div {
+  max-width: 920px;
+}
+
+.knowledge #knowledge-description {
+  max-width: 680px;
+  font-size: clamp(1.02rem, 1.35vw, 1.2rem);
+  line-height: 1.9;
+}
+
+/* Only real, working contact destinations are shown. */
+.contact-link.is-disabled {
+  display: none;
+}
+
+.contact-links {
+  align-self: end;
+}
+
+.contact-links .contact-link[href]:only-child {
+  min-height: 88px;
+  padding-inline: 18px;
+  border: 1px solid rgba(115, 170, 242, 0.24);
+  background: linear-gradient(135deg, rgba(23, 104, 255, 0.09), rgba(255, 255, 255, 0.018));
+}
+
+.contact-links .contact-link[href]:only-child:hover {
+  padding-inline: 24px;
+  border-color: rgba(96, 165, 250, 0.58);
+  background: linear-gradient(135deg, rgba(23, 104, 255, 0.16), rgba(255, 255, 255, 0.03));
+}
+
+/* Project pages should feel complete. Empty media/case-study placeholders stay hidden
+   until real approved content is added. */
+body[data-page="project"] .project-future {
+  display: none;
+}
+
+/* Same rule for the resume PDF: no disabled download teaser before a real PDF exists. */
+.resume-download.is-disabled {
+  display: none;
+}
+
+/* Portrait balance: bring the person closer to the text and make the anchor feel structural. */
+@media (min-width: 1081px) {
+  .hero .system-window::after {
+    transform: scale(1.085);
+    transform-origin: center bottom;
+  }
+
+  .hero .window-statusbar {
+    inset-inline: 5% !important;
+    inset-block-end: 1.2% !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  .hero .system-window::after {
+    transform: scale(1.07);
+    transform-origin: center bottom;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero .system-window,
+  html[dir="ltr"] .hero .system-window {
+    min-height: 420px;
+    margin-block-start: -12px;
+  }
+
+  .hero .system-window::after {
+    transform: scale(1.13);
+    transform-origin: center bottom;
+  }
+
+  .hero .window-statusbar {
+    inset-inline: 4% !important;
+    inset-block-end: 1% !important;
+  }
+
+  .hero .window-statusbar::before {
+    inset-inline: 2%;
+  }
+
+  .knowledge {
+    padding-block: 72px;
+  }
+
+  .contact-links .contact-link[href]:only-child {
+    min-height: 72px;
+  }
+}
