@@ -31,8 +31,13 @@ http://localhost:8080/
 - `/` — الصفحة الرئيسية.
 - `/?lang=en` — النسخة الإنكليزية.
 - `/projects/enterprise-workflow/` — صفحة Enterprise Workflow.
-- `/demos/enterprise-workflow/` — Demo تفاعلي مصغر لـ Enterprise Workflow.
+- `/demos/enterprise-workflow/` — Demo تفاعلي لدورة الموظف والمدير والموافقة.
 - `/projects/coding-academy/` — صفحة أكاديمية البرمجة.
+- `/demos/coding-academy/` — Demo تعليمي: درس Python → تمرين → تقدم.
+- `/projects/mahsoob/` — صفحة محسوب.
+- `/demos/mahsoob/` — Demo كاشير: منتج → سلة → دفع → إيصال.
+- `/projects/masroofi/` — صفحة مصروفي.
+- `/demos/masroofi/` — Demo مصاريف: إضافة → تحديث الرصيد → حذف.
 - `/resume/` — السيرة الذاتية داخل الموقع.
 - `/404.html` — صفحة غير موجودة ثنائية اللغة.
 
@@ -55,6 +60,26 @@ http://localhost:8080/
 
 لا تُستخدم بيانات أو روابط أو وسائط وهمية بدل المحتوى الحقيقي.
 بيانات الـInteractive Demos تكون معلّمة بوضوح على أنها بيانات تجريبية وليست بيانات حقيقية.
+
+## Interactive Demos
+
+الـDemos عبارة عن محاكاة صغيرة لأهم تدفق في كل مشروع وليست نسخاً كاملة من التطبيقات الأصلية.
+
+- كل Demo يحافظ على الهوية البصرية الحقيقية للمشروع قدر الإمكان من مصدره الفعلي.
+- الحالة داخل `sessionStorage` فقط.
+- لا توجد حسابات حقيقية أو Backend حقيقي داخل الـDemo.
+- Enterprise Workflow يبدّل الثيم حسب الدور: Employee فاتح/أبيض وManager داكن.
+- جميع التدفقات الرئيسية مغطاة باختبارات Playwright حقيقية داخل Chromium.
+
+## Browser QA
+
+يشغل GitHub Actions فحص Playwright عند فتح Pull Request نحو `main`:
+
+- Desktop + Mobile screenshots.
+- فحص Console/Page errors.
+- فحص العربية والإنكليزية.
+- فحص روابط صفحات المشاريع والـDemos.
+- E2E لكل Interactive Demo.
 
 ## اتجاه التصميم الحالي
 
