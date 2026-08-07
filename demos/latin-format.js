@@ -1,15 +1,17 @@
 (() => {
   'use strict';
 
-  const arabicIndic = /[٠-٩]/g;
-  const easternArabicIndic = /[۰-۹]/g;
+  const arabicIndicGlobal = /[٠-٩]/g;
+  const easternArabicIndicGlobal = /[۰-۹]/g;
+  const arabicIndicTest = /[٠-٩]/;
+  const easternArabicIndicTest = /[۰-۹]/;
   const arabicDigits = '٠١٢٣٤٥٦٧٨٩';
   const easternDigits = '۰۱۲۳۴۵۶۷۸۹';
 
   function toLatinDigits(value) {
     return String(value)
-      .replace(arabicIndic, (digit) => String(arabicDigits.indexOf(digit)))
-      .replace(easternArabicIndic, (digit) => String(easternDigits.indexOf(digit)));
+      .replace(arabicIndicGlobal, (digit) => String(arabicDigits.indexOf(digit)))
+      .replace(easternArabicIndicGlobal, (digit) => String(easternDigits.indexOf(digit)));
   }
 
   function formatTimeElements(root = document) {
@@ -17,7 +19,7 @@
     elements.forEach((element) => {
       const date = new Date(element.dateTime);
       if (Number.isNaN(date.getTime())) return;
-      element.textContent = new Intl.DateTimeFormat('en-GB', {
+      const formatted = new Intl.DateTimeFormat('en-GB', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
@@ -25,6 +27,7 @@
         minute: '2-digit',
         hour12: false
       }).format(date);
+      if (element.textContent !== formatted) element.textContent = formatted;
     });
   }
 
@@ -34,7 +37,8 @@
       acceptNode(node) {
         const parent = node.parentElement;
         if (!parent || parent.closest('script, style, textarea, code, pre')) return NodeFilter.FILTER_REJECT;
-        return arabicIndic.test(node.nodeValue || '') || easternArabicIndic.test(node.nodeValue || '')
+        const value = node.nodeValue || '';
+        return arabicIndicTest.test(value) || easternArabicIndicTest.test(value)
           ? NodeFilter.FILTER_ACCEPT
           : NodeFilter.FILTER_REJECT;
       }
@@ -42,7 +46,10 @@
 
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach((node) => { node.nodeValue = toLatinDigits(node.nodeValue || ''); });
+    nodes.forEach((node) => {
+      const normalized = toLatinDigits(node.nodeValue || '');
+      if (node.nodeValue !== normalized) node.nodeValue = normalized;
+    });
   }
 
   let queued = false;
