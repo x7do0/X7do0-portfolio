@@ -54,13 +54,14 @@ http://localhost:8080/
 
 لا تُستخدم بيانات أو روابط أو وسائط وهمية بدل المحتوى الحقيقي.
 
-## خطة إعادة التصميم
+## اتجاه التصميم الحالي
 
-خطة إعادة تصميم البورتفوليو، تطوير عرض المشاريع والمهارات، إضافة الصورة الشخصية، وبناء Interactive Project Demos موثقة في:
+القرارات الحالية المعتمدة لتطوير الصفحة الرئيسية، هوية المشاريع، قسم المهارات، الصورة الشخصية، والـInteractive Project Demos موثقة في:
 
-- [`docs/PORTFOLIO-REDESIGN-ROADMAP.md`](./docs/PORTFOLIO-REDESIGN-ROADMAP.md)
+- [`docs/CURRENT-DESIGN-DIRECTION.md`](./docs/CURRENT-DESIGN-DIRECTION.md) — المرجع الحالي المعتمد.
+- [`docs/PORTFOLIO-REDESIGN-ROADMAP.md`](./docs/PORTFOLIO-REDESIGN-ROADMAP.md) — أفكار وخطة أقدم تبقى كمرجع تاريخي.
 
-يجب الرجوع إلى هذه الخطة قبل تنفيذ تغييرات كبيرة على الصفحة الرئيسية أو قسم المشاريع، لأن الستايل الحالي ليس الاتجاه النهائي المعتمد.
+عند التعارض بين الملفين، يعتمد `CURRENT-DESIGN-DIRECTION.md`.
 
 ## النشر
 
