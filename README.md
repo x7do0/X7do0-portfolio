@@ -31,6 +31,7 @@ http://localhost:8080/
 - `/` — الصفحة الرئيسية.
 - `/?lang=en` — النسخة الإنكليزية.
 - `/projects/enterprise-workflow/` — صفحة Enterprise Workflow.
+- `/demos/enterprise-workflow/` — Demo تفاعلي مصغر لـ Enterprise Workflow.
 - `/projects/coding-academy/` — صفحة أكاديمية البرمجة.
 - `/resume/` — السيرة الذاتية داخل الموقع.
 - `/404.html` — صفحة غير موجودة ثنائية اللغة.
@@ -53,6 +54,7 @@ http://localhost:8080/
 - ملفات السيرة PDF.
 
 لا تُستخدم بيانات أو روابط أو وسائط وهمية بدل المحتوى الحقيقي.
+بيانات الـInteractive Demos تكون معلّمة بوضوح على أنها بيانات تجريبية وليست بيانات حقيقية.
 
 ## اتجاه التصميم الحالي
 
