@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#126b50">
+  <meta name="description" content="Mahsoob POS interactive portfolio demo.">
+  <title>محسوب — تجربة الكاشير</title>
+  <link rel="stylesheet" href="./demo.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-row">
+      <a class="back" href="../../#projects" data-back>← <span data-i18n="portfolio">البورتفوليو</span></a>
+      <span class="divider"></span>
+      <div class="brand"><span class="brand-mark">م</span><div><strong>محسوب</strong><small>Mahsoob POS</small></div></div>
+    </div>
+    <div class="top-actions">
+      <span class="sample" data-i18n="sample">بيانات تجريبية فقط</span>
+      <button type="button" class="icon-btn" data-lang>EN</button>
+      <button type="button" class="ghost-btn" data-reset data-i18n="reset">إعادة التجربة</button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="store"><strong data-i18n="store">متجر محسوب التجريبي</strong><small data-i18n="offline">يعمل محليًا · بدون إنترنت</small></div>
+      <nav>
+        <button class="nav-item active" type="button"><span>▣</span><span data-i18n="cashier">الكاشير</span></button>
+        <button class="nav-item" type="button" disabled><span>▦</span><span data-i18n="catalog">المنتجات</span></button>
+        <button class="nav-item" type="button" disabled><span>◫</span><span data-i18n="reports">التقارير</span></button>
+      </nav>
+      <div class="sidebar-note"><strong data-i18n="goal">هدف التجربة</strong><p data-i18n="goalCopy">أضف منتجًا للسلة، أدخل المبلغ المستلم، ثم أكمل البيع وشاهد الإيصال.</p></div>
+    </aside>
+
+    <main class="workspace">
+      <section class="page-head">
+        <div><span class="eyebrow">CASHIER</span><h1 data-i18n="cashierTitle">نقطة البيع</h1><p data-i18n="cashierCopy">الباركود والسلة والدفع في شاشة واحدة.</p></div>
+        <div class="status-dot"><i></i><span data-i18n="ready">جاهز للبيع</span></div>
+      </section>
+
+      <div class="cashier-grid">
+        <section class="panel catalog-panel">
+          <header class="panel-head"><div><h2 data-i18n="quickProducts">منتجات سريعة</h2><p data-i18n="quickCopy">اضغط على أي منتج لإضافته للسلة.</p></div></header>
+          <form class="barcode-row" data-barcode-form>
+            <label><span data-i18n="barcode">الباركود</span><input data-barcode inputmode="numeric" value="1001" aria-label="Barcode"></label>
+            <button class="primary" type="submit" data-i18n="add">إضافة</button>
+          </form>
+          <div class="product-grid" data-products></div>
+        </section>
+
+        <section class="panel cart-panel">
+          <header class="panel-head cart-head"><div><h2 data-i18n="cart">السلة</h2><p><span data-cart-count>0</span> <span data-i18n="items">عنصر</span></p></div><button type="button" class="text-btn" data-clear data-i18n="clear">تفريغ</button></header>
+          <div class="cart-list" data-cart></div>
+          <div class="payment-box">
+            <div class="total-line"><span data-i18n="total">الإجمالي</span><strong data-total>0 د.ع</strong></div>
+            <label class="cash-field"><span data-i18n="received">المبلغ المستلم</span><input type="number" min="0" step="250" data-cash inputmode="numeric" placeholder="0"></label>
+            <div class="change-line"><span data-i18n="change">الباقي</span><strong data-change>0 د.ع</strong></div>
+            <button type="button" class="checkout" data-checkout disabled data-i18n="complete">إكمال البيع</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog data-receipt>
+    <article class="receipt">
+      <div class="receipt-logo">محسوب</div>
+      <p class="receipt-sub" data-i18n="receiptDemo">إيصال تجريبي</p>
+      <div class="receipt-lines" data-receipt-lines></div>
+      <div class="receipt-total"><span data-i18n="total">الإجمالي</span><strong data-receipt-total></strong></div>
+      <div class="receipt-meta"><span data-i18n="received">المبلغ المستلم</span><b data-receipt-cash></b></div>
+      <div class="receipt-meta"><span data-i18n="change">الباقي</span><b data-receipt-change></b></div>
+      <p class="thanks" data-i18n="thanks">شكرًا لزيارتكم</p>
+      <button type="button" class="primary wide" data-receipt-close data-i18n="newSale">عملية جديدة</button>
+    </article>
+  </dialog>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+  <script src="./demo.js"></script>
+</body>
+</html>
