@@ -35,8 +35,26 @@
     {
       "slug": "coding-academy",
       "title": "Coding Academy",
-      "summary": "An interactive learning platform for programming through structured paths, practical lessons, exercises, and assessments that help learners progress step by step.",
+      "summary": "An Arabic interactive platform for learning programming by practice, combining lessons, examples, exercises, and projects with device-local progress.",
       "previewKind": "academy",
+      "cta": "Explore project",
+      "media": [],
+      "caseStudy": []
+    },
+    {
+      "slug": "mahsoob",
+      "title": "Mahsoob",
+      "summary": "An Arabic offline Windows point-of-sale and store management application for groceries, minimarkets, and small shops in Iraq.",
+      "previewKind": "mahsoob",
+      "cta": "Explore project",
+      "media": [],
+      "caseStudy": []
+    },
+    {
+      "slug": "masroofi",
+      "title": "Masroofi",
+      "summary": "A personal Arabic web app for locally managing balance, income, and expenses with instant balance and history updates and device-local storage.",
+      "previewKind": "masroofi",
       "cta": "Explore project",
       "media": [],
       "caseStudy": []

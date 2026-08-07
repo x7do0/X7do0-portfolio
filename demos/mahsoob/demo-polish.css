@@ -1,0 +1,3 @@
+html[dir="rtl"] .toast {
+  inset: auto 22px 22px auto;
+}

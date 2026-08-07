@@ -1,0 +1,311 @@
+/* Employee role: intentionally light. Manager retains the original dark Enterprise identity. */
+html:has(.role-option[data-role-switch="employee"].is-active) {
+  color-scheme: light;
+  background: #f4f7fb;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) {
+  --bg: #f4f7fb;
+  --bg-soft: #eef3f9;
+  --surface: rgba(255, 255, 255, 0.94);
+  --surface-2: #f8fbff;
+  --card: #ffffff;
+  --card-hover: #f4f8fe;
+  --border: rgba(49, 78, 119, 0.14);
+  --border-strong: rgba(49, 78, 119, 0.25);
+  --text: #17243a;
+  --text-muted: #5f708a;
+  --text-subtle: #8090a7;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-soft: #eaf1ff;
+  --success-soft: #ecfdf3;
+  --warning-soft: #fff8e8;
+  --shadow: 0 24px 60px rgba(30, 52, 84, 0.10);
+  background:
+    radial-gradient(circle at 86% -10%, rgba(59, 130, 246, 0.10), transparent 28rem),
+    radial-gradient(circle at 7% 16%, rgba(96, 165, 250, 0.08), transparent 27rem),
+    #f4f7fb;
+  color: var(--text);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active)::before {
+  opacity: 0.55;
+  background-image:
+    linear-gradient(rgba(52, 92, 146, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 92, 146, 0.028) 1px, transparent 1px);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .demo-header {
+  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 36px rgba(40, 67, 105, 0.07);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .portfolio-back,
+body:has(.role-option[data-role-switch="employee"].is-active) .product-mark small,
+body:has(.role-option[data-role-switch="employee"].is-active) .workspace-head > div > p:last-child,
+body:has(.role-option[data-role-switch="employee"].is-active) .role-context p,
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card span,
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card small,
+body:has(.role-option[data-role-switch="employee"].is-active) .request-meta,
+body:has(.role-option[data-role-switch="employee"].is-active) .empty-state,
+body:has(.role-option[data-role-switch="employee"].is-active) .approval-box p,
+body:has(.role-option[data-role-switch="employee"].is-active) .employee-submit-box p,
+body:has(.role-option[data-role-switch="employee"].is-active) .dialog-head p,
+body:has(.role-option[data-role-switch="employee"].is-active) .audit-entry p {
+  color: var(--text-subtle);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .product-mark strong,
+body:has(.role-option[data-role-switch="employee"].is-active) .workspace-head h1,
+body:has(.role-option[data-role-switch="employee"].is-active) .panel-head h2,
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card strong,
+body:has(.role-option[data-role-switch="employee"].is-active) .request-copy strong,
+body:has(.role-option[data-role-switch="employee"].is-active) .empty-state strong,
+body:has(.role-option[data-role-switch="employee"].is-active) .audit-entry strong,
+body:has(.role-option[data-role-switch="employee"].is-active) .dialog-head h2,
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-summary strong,
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-notes p {
+  color: var(--text);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .product-logo {
+  border-color: #bdd1f6;
+  background: #edf4ff;
+  box-shadow: none;
+  color: #2459b8;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .demo-badge {
+  border-color: #c9dcf9;
+  background: #f1f7ff;
+  color: #29609e;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .icon-action,
+body:has(.role-option[data-role-switch="employee"].is-active) .reset-button,
+body:has(.role-option[data-role-switch="employee"].is-active) .secondary-action,
+body:has(.role-option[data-role-switch="employee"].is-active) .dialog-close {
+  border-color: var(--border);
+  background: #fff;
+  color: #4a607e;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .sidebar {
+  border-color: var(--border);
+  background: rgba(244, 248, 253, 0.92);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .eyebrow,
+body:has(.role-option[data-role-switch="employee"].is-active) .panel-eyebrow,
+body:has(.role-option[data-role-switch="employee"].is-active) .workspace-kicker {
+  color: #55749e;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .role-option {
+  color: #60728d;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .role-option:hover {
+  background: #edf3fb;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .role-option.is-active {
+  border-color: #bfd2f5;
+  background: linear-gradient(145deg, #edf4ff, #f8fbff);
+  color: #173c78;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .role-icon {
+  background: #e9f1fd;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .nav-item {
+  color: #657690;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .nav-item:hover,
+body:has(.role-option[data-role-switch="employee"].is-active) .nav-item.is-active {
+  background: #eaf1fb;
+  color: #244e8e;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .nav-count {
+  background: #e7eef8;
+  color: #4a668c;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note {
+  border-color: var(--border);
+  background: #fff;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note strong {
+  color: #304d74;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note p {
+  color: #73839a;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .role-context {
+  border-color: #c9dafa;
+  background: linear-gradient(90deg, #edf4ff, #f8fbff);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .context-icon {
+  border-color: #c4d7f7;
+  background: #fff;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .context-pill {
+  border-color: #c7d9f8;
+  background: #fff;
+  color: #3568ac;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card,
+body:has(.role-option[data-role-switch="employee"].is-active) .panel {
+  border-color: var(--border);
+  background: #fff;
+  box-shadow: 0 8px 26px rgba(37, 62, 98, 0.055);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--blue {
+  background: linear-gradient(145deg, #eef4ff, #fff);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--success {
+  background: linear-gradient(145deg, #effcf4, #fff);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--success strong {
+  color: #168447;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .request-row {
+  border-color: #e0e7f0;
+  background: #fbfcfe;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .request-row:hover {
+  border-color: #c5d7f2;
+  background: #f4f8ff;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .request-icon {
+  border-color: #cddcf5;
+  background: #edf4ff;
+  color: #3c6eb5;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .status-chip--draft {
+  border-color: #d2dce9;
+  background: #f0f3f7;
+  color: #697a91;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .status-chip--pending {
+  border-color: #f0d49d;
+  background: #fff8e8;
+  color: #9b6612;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .status-chip--approved {
+  border-color: #bce4c9;
+  background: #ecfdf3;
+  color: #168447;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .empty-state {
+  border-color: #d5deea;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .empty-state span {
+  background: #edf4ff;
+  color: #4677b9;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .demo-steps li.is-current {
+  border-color: #c6d8f6;
+  background: #edf4ff;
+  color: #244d89;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .status-filter {
+  border-color: var(--border);
+  background: #fff;
+  color: #64758d;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .audit-entry::before {
+  background: #dbe4f0;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .audit-dot {
+  border-color: #7597c7;
+  background: #f4f7fb;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) dialog {
+  color: var(--text);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) dialog::backdrop {
+  background: rgba(30, 47, 69, 0.28);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .dialog-card,
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-card {
+  border-color: #cbd8e8;
+  background: #fff;
+  box-shadow: 0 30px 90px rgba(31, 53, 83, 0.18);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .field > span,
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-summary span,
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-notes > span {
+  color: #66778e;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .field input,
+body:has(.role-option[data-role-switch="employee"].is-active) .field select,
+body:has(.role-option[data-role-switch="employee"].is-active) .field textarea {
+  border-color: #cfdae8;
+  background: #fff;
+  color: #17243a;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .field input:focus,
+body:has(.role-option[data-role-switch="employee"].is-active) .field select:focus,
+body:has(.role-option[data-role-switch="employee"].is-active) .field textarea:focus {
+  border-color: #7da8e8;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.09);
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-summary > div,
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-notes {
+  border-color: #e0e7f0;
+  background: #f9fbfd;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .employee-submit-box {
+  border-color: #c5d7f7;
+  background: #eef4ff;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .toast {
+  border-color: #c6d7ef;
+  background: #17345e;
+  color: #fff;
+}
+
+@media (max-width: 860px) {
+  body:has(.role-option[data-role-switch="employee"].is-active) .sidebar,
+  html[dir="rtl"] body:has(.role-option[data-role-switch="employee"].is-active) .sidebar {
+    background: rgba(246, 249, 253, 0.96);
+  }
+}

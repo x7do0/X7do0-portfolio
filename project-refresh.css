@@ -16,48 +16,25 @@
   gap: 24px;
   border: 1px solid rgba(96, 165, 250, 0.42);
   border-radius: 14px;
-  background:
-    linear-gradient(135deg, rgba(59, 130, 246, 0.98), rgba(37, 99, 235, 0.94));
-  box-shadow:
-    0 16px 34px rgba(37, 99, 235, 0.20),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.98), rgba(37, 99, 235, 0.94));
+  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   color: #fff;
   font-size: 0.9rem;
   font-weight: 700;
-  transition:
-    transform 220ms var(--ease),
-    border-color 220ms ease,
-    background 220ms ease,
-    box-shadow 220ms ease;
+  transition: transform 220ms var(--ease), border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
 }
 
 .project-demo-cta:hover {
   transform: translateY(-3px);
   border-color: rgba(147, 197, 253, 0.72);
-  background:
-    linear-gradient(135deg, #4b8cf7, #356ff0);
-  box-shadow:
-    0 20px 46px rgba(37, 99, 235, 0.28),
-    0 0 30px rgba(59, 130, 246, 0.10);
+  background: linear-gradient(135deg, #4b8cf7, #356ff0);
+  box-shadow: 0 20px 46px rgba(37, 99, 235, 0.28), 0 0 30px rgba(59, 130, 246, 0.10);
 }
 
-.project-demo-cta svg {
-  width: 19px;
-  height: 19px;
-  transition: transform 220ms var(--ease);
-}
-
-.project-demo-cta:hover svg {
-  transform: translateX(4px);
-}
-
-html[dir="rtl"] .project-demo-cta svg {
-  transform: rotate(180deg);
-}
-
-html[dir="rtl"] .project-demo-cta:hover svg {
-  transform: rotate(180deg) translateX(4px);
-}
+.project-demo-cta svg { width: 19px; height: 19px; transition: transform 220ms var(--ease); }
+.project-demo-cta:hover svg { transform: translateX(4px); }
+html[dir="rtl"] .project-demo-cta svg { transform: rotate(180deg); }
+html[dir="rtl"] .project-demo-cta:hover svg { transform: rotate(180deg) translateX(4px); }
 
 .project-demo-actions > p {
   max-width: 560px;
@@ -69,45 +46,78 @@ html[dir="rtl"] .project-demo-cta:hover svg {
 
 body[data-project="enterprise-workflow"] .project-hero__visual {
   border-color: rgba(142, 168, 255, 0.24);
-  background:
-    radial-gradient(circle at 86% 8%, rgba(40, 215, 255, 0.08), transparent 18rem),
-    linear-gradient(145deg, rgba(8, 19, 46, 0.96), rgba(5, 11, 31, 0.96));
-  box-shadow:
-    0 30px 90px rgba(0, 0, 0, 0.30),
-    0 0 70px rgba(37, 99, 255, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: radial-gradient(circle at 86% 8%, rgba(40, 215, 255, 0.08), transparent 18rem), linear-gradient(145deg, rgba(8, 19, 46, 0.96), rgba(5, 11, 31, 0.96));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.30), 0 0 70px rgba(37, 99, 255, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 body[data-project="enterprise-workflow"] .page-workflow__head strong,
-body[data-project="enterprise-workflow"] .page-workflow__system strong {
-  color: #b6d3ff;
-}
-
+body[data-project="enterprise-workflow"] .page-workflow__system strong { color: #b6d3ff; }
 body[data-project="enterprise-workflow"] .page-workflow__head i,
-body[data-project="enterprise-workflow"] .page-workflow__rail .is-done i {
-  background: #3b82f6;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.68);
-}
+body[data-project="enterprise-workflow"] .page-workflow__rail .is-done i { background: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.68); }
+body[data-project="enterprise-workflow"] .page-workflow__rail .is-active i { border-color: #60a5fa; box-shadow: 0 0 0 7px rgba(37, 99, 255, 0.16), 0 0 22px rgba(59, 130, 246, 0.60); }
 
-body[data-project="enterprise-workflow"] .page-workflow__rail .is-active i {
-  border-color: #60a5fa;
-  box-shadow:
-    0 0 0 7px rgba(37, 99, 255, 0.16),
-    0 0 22px rgba(59, 130, 246, 0.60);
+body[data-project="coding-academy"] .project-hero__visual {
+  border-color: rgba(91, 134, 247, 0.28);
+  background: linear-gradient(145deg, #15223a, #10192b);
+  box-shadow: 0 28px 80px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.05);
 }
+body[data-project="coding-academy"] .project-demo-cta { border-color:#5b86f7; background:linear-gradient(135deg,#5b86f7,#4874e8); }
+body[data-project="coding-academy"] .page-academy__head > span,
+body[data-project="coding-academy"] .page-academy__path .is-active { color:#8aabff; }
+
+.page-mahsoob {
+  min-height: 420px;
+  display: grid;
+  grid-template-columns: 150px minmax(0,1fr);
+  direction: rtl;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #f4f7f5;
+  color: #17221d;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+.page-mahsoob aside { padding: 28px 18px; display:grid;align-content:start;gap:9px;background:#10291f;color:#cfe1d8; }
+.page-mahsoob aside strong { margin-bottom:12px;color:#fff;font-size:1.15rem; }
+.page-mahsoob aside span { padding:8px 10px;border-radius:9px;font-size:.72rem; }
+.page-mahsoob aside span:first-of-type { background:#1a4938;color:#fff; }
+.page-mahsoob__sale { padding:28px;display:flex;flex-direction:column;gap:14px; }
+.page-mahsoob__items { display:grid;gap:10px; }
+.page-mahsoob__items span { padding:13px 14px;display:flex;justify-content:space-between;border:1px solid #dbe5df;border-radius:12px;background:#fff; }
+.page-mahsoob__items b { font-size:.78rem; }
+.page-mahsoob__items small { color:#66776e;font-size:.68rem; }
+.page-mahsoob__total { margin-top:auto;padding:18px;border:1px solid #dbe5df;border-radius:15px;background:#fff; }
+.page-mahsoob__total span { color:#64756c;font-size:.68rem; }
+.page-mahsoob__total strong { display:block;margin:5px 0 14px;color:#126b50;font-size:1.7rem; }
+.page-mahsoob__total i { display:block;padding:10px;border-radius:10px;background:#126b50;color:#fff;text-align:center;font-size:.72rem;font-style:normal;font-weight:700; }
+body[data-project="mahsoob"] .project-hero__visual { border-color:#d5e3dc;background:#edf4f0;box-shadow:0 24px 70px rgba(18,71,50,.12); }
+body[data-project="mahsoob"] .project-demo-cta { border-color:#126b50;background:linear-gradient(135deg,#158461,#126b50);box-shadow:0 16px 34px rgba(18,107,80,.18); }
+
+.page-masroofi { min-height:420px;padding:24px;display:grid;gap:12px;border-radius:22px;background:#f6f8f7;color:#19251f;font-family:"Segoe UI",Tahoma,Arial,sans-serif; }
+.page-masroofi__balance { padding:22px;border-radius:18px;background:linear-gradient(135deg,#168b5b,#0f6e47);color:#fff; }
+.page-masroofi__balance span,.page-masroofi__balance small { display:block;font-size:.68rem;opacity:.78; }
+.page-masroofi__balance strong { display:block;margin:6px 0;font-size:2rem; }
+.page-masroofi__summary { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+.page-masroofi__summary span { padding:13px;border:1px solid #e1e8e4;border-radius:13px;background:#fff; }
+.page-masroofi__summary small { display:block;color:#728079;font-size:.62rem; }
+.page-masroofi__summary b { display:block;margin-top:5px;color:#168b5b;font-size:.83rem; }
+.page-masroofi__summary span:last-child b { color:#c23a35; }
+.page-masroofi__rows { display:grid;gap:8px; }
+.page-masroofi__rows span { padding:12px;display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;border:1px solid #e7ece9;border-radius:12px;background:#fff;font-size:.7rem; }
+.page-masroofi__rows small { color:#728079; }
+body[data-project="masroofi"] .project-hero__visual { border-color:#dce8e1;background:#f6f8f7;box-shadow:0 24px 70px rgba(26,78,53,.10); }
+body[data-project="masroofi"] .project-demo-cta { border-color:#168b5b;background:linear-gradient(135deg,#168b5b,#0f6e47);box-shadow:0 16px 34px rgba(22,139,91,.18); }
+
+body[data-project="mahsoob"] .project-demo-actions > p,
+body[data-project="masroofi"] .project-demo-actions > p { color:#91a89b; }
 
 @media (max-width: 620px) {
-  .project-demo-actions {
-    width: 100%;
-    margin-block-start: 24px;
-  }
-
-  .project-demo-cta {
-    width: 100%;
-    min-height: 52px;
-  }
-
-  .project-demo-actions > p {
-    font-size: 0.68rem;
-  }
+  .project-demo-actions { width: 100%; margin-block-start: 24px; }
+  .project-demo-cta { width: 100%; min-height: 52px; }
+  .project-demo-actions > p { font-size: 0.68rem; }
+  .page-mahsoob { grid-template-columns:95px minmax(0,1fr);min-height:330px; }
+  .page-mahsoob aside { padding:18px 9px; }
+  .page-mahsoob aside span { padding:7px 5px;font-size:.6rem; }
+  .page-mahsoob__sale { padding:16px; }
+  .page-masroofi { min-height:330px;padding:14px; }
+  .page-masroofi__balance strong { font-size:1.45rem; }
 }
