@@ -23,20 +23,31 @@ async function revealWholePage(page) {
   await page.waitForTimeout(250);
 }
 
-test('home renders all four projects, portrait, skills and both languages', async ({ page }) => {
+test('home renders direct project UIs, anchored portrait, skills and both languages', async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await page.goto('/');
   await expect(page.locator('#hero-title')).toBeVisible();
   await expect(page.locator('#capabilities-title')).toContainText('المهارات');
   await expect(page.getByText('كيف أعمل', { exact: true })).toHaveCount(0);
   await expect(page.locator('[data-project-open]')).toHaveCount(4);
+  await expect(page.locator('.project-live-preview')).toHaveCount(4);
   await expect(page.locator('[data-project="mahsoob"]')).toContainText('محسوب');
   await expect(page.locator('[data-project="masroofi"]')).toContainText('مصروفي');
+
+  for (const slug of ['enterprise-workflow', 'coding-academy', 'mahsoob', 'masroofi']) {
+    const liveLink = page.locator(`[data-live-preview="${slug}"] .live-preview-link`);
+    await expect(liveLink).toBeVisible();
+    await expect(liveLink).toHaveAttribute('href', `./demos/${slug}/`);
+  }
+
+  await expect(page.locator('.live-enterprise')).toHaveCSS('background-color', 'rgb(244, 247, 251)');
 
   const portraitBackground = await page.locator('.system-window').evaluate((element) =>
     getComputedStyle(element, '::after').backgroundImage
   );
   expect(portraitBackground).toContain('profile-cutout.png');
+  await expect(page.locator('.hero .window-statusbar')).toHaveCSS('display', 'block');
+  await expect(page.locator('.hero .window-statusbar')).toHaveCSS('height', '1px');
 
   await revealWholePage(page);
   await page.screenshot({ path: 'artifacts/home-desktop.png', fullPage: true });
@@ -46,15 +57,18 @@ test('home renders all four projects, portrait, skills and both languages', asyn
   await expect(page.locator('#hero-title')).toContainText('I build');
   await expect(page.locator('[data-project="mahsoob"]')).toContainText('Mahsoob');
   await expect(page.locator('[data-project="masroofi"]')).toContainText('Masroofi');
+  await expect(page.locator('.live-enterprise')).toContainText('Employee');
   expect(errors).toEqual([]);
 });
 
-test('mobile home stays usable and produces a reference screenshot', async ({ page }) => {
+test('mobile home keeps direct previews and portrait base usable', async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await expect(page.locator('#hero-title')).toBeVisible();
   await expect(page.locator('.system-window')).toBeVisible();
+  await expect(page.locator('.project-live-preview')).toHaveCount(4);
+  await expect(page.locator('.hero .window-statusbar')).toHaveCSS('display', 'block');
   await revealWholePage(page);
   await page.screenshot({ path: 'artifacts/home-mobile.png', fullPage: true });
   expect(errors).toEqual([]);
@@ -70,7 +84,7 @@ test('every project detail page links to its own demo', async ({ page }) => {
   }
 });
 
-test('Enterprise employee is light, manager is dark, and approval flow completes', async ({ page }) => {
+test('Enterprise employee is light by default, manager is dark, and approval flow completes', async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await page.goto('/demos/enterprise-workflow/');
 
