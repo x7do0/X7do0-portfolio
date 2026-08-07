@@ -89,6 +89,8 @@
     "backAction": "Back to projects",
     "overviewTitle": "Overview",
     "previewTitle": "Project preview",
+    "tryDemo": "Try the project",
+    "demoHint": "A compact interactive simulation using sample data only — no real login or backend.",
     "mediaTitle": "Project images and videos",
     "mediaPending": "Media will be added after it is approved.",
     "detailsTitle": "Case study",
