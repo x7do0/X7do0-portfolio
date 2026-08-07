@@ -110,10 +110,12 @@ test('Mahsoob cashier adds a product, calculates change, and completes a sale', 
 
   await page.locator('[data-cash]').fill('1000');
   await expect(page.locator('[data-checkout]')).toBeEnabled();
+  await page.screenshot({ path: 'artifacts/mahsoob-cashier.png', fullPage: true });
+
   await page.locator('[data-checkout]').click();
   await expect(page.locator('[data-receipt]')).toBeVisible();
   await expect(page.locator('[data-receipt-total]')).not.toHaveText('');
-  await page.screenshot({ path: 'artifacts/mahsoob-demo.png', fullPage: true });
+  await page.screenshot({ path: 'artifacts/mahsoob-receipt.png', fullPage: true });
   expect(errors).toEqual([]);
 });
 
