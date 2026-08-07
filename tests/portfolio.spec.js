@@ -12,6 +12,27 @@ function watchRuntimeErrors(page) {
   return errors;
 }
 
+async function revealWholePage(page) {
+  await page.evaluate(async () => {
+    await new Promise((resolve) => {
+      let travelled = 0;
+      const step = Math.max(500, Math.floor(window.innerHeight * 0.75));
+      const timer = window.setInterval(() => {
+        window.scrollBy(0, step);
+        travelled += step;
+        const end = document.documentElement.scrollHeight - window.innerHeight;
+        if (travelled >= end) {
+          window.clearInterval(timer);
+          window.setTimeout(() => {
+            window.scrollTo(0, 0);
+            resolve();
+          }, 350);
+        }
+      }, 80);
+    });
+  });
+}
+
 test('home renders portrait, skills and both languages without runtime errors', async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await page.goto('/');
@@ -24,6 +45,7 @@ test('home renders portrait, skills and both languages without runtime errors', 
   );
   expect(portraitBackground).toContain('profile-cutout.png');
 
+  await revealWholePage(page);
   await page.screenshot({ path: 'artifacts/home-desktop.png', fullPage: true });
 
   await page.locator('[data-language="en"]').click();
@@ -38,6 +60,7 @@ test('mobile home stays usable and produces a reference screenshot', async ({ pa
   await page.goto('/');
   await expect(page.locator('#hero-title')).toBeVisible();
   await expect(page.locator('.system-window')).toBeVisible();
+  await revealWholePage(page);
   await page.screenshot({ path: 'artifacts/home-mobile.png', fullPage: true });
   expect(errors).toEqual([]);
 });
