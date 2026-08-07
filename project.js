@@ -39,18 +39,37 @@
         </div>`;
     }
 
+    if (kind === "mahsoob") {
+      return `
+        <div class="page-mahsoob" aria-hidden="true">
+          <aside><strong>محسوب</strong><span>الكاشير</span><span>المنتجات</span><span>التقارير</span></aside>
+          <div class="page-mahsoob__sale">
+            <div class="page-mahsoob__items"><span><b>ماء معدني</b><small>750 د.ع</small></span><span><b>حليب</b><small>2,000 د.ع</small></span></div>
+            <div class="page-mahsoob__total"><span>الإجمالي</span><strong>2,750 د.ع</strong><i>إكمال البيع</i></div>
+          </div>
+        </div>`;
+    }
+
+    if (kind === "masroofi") {
+      return `
+        <div class="page-masroofi" aria-hidden="true">
+          <div class="page-masroofi__balance"><span>الرصيد الحالي</span><strong>1,350,000 د.ع</strong><small>يتحدث فورًا</small></div>
+          <div class="page-masroofi__summary"><span><small>الدخل</small><b>1,500,000</b></span><span><small>المصروفات</small><b>150,000</b></span></div>
+          <div class="page-masroofi__rows"><span>↗ <b>راتب تجريبي</b><small>+1,500,000</small></span><span>🛍️ <b>مشتريات منزلية</b><small>−150,000</small></span></div>
+        </div>`;
+    }
+
     return `
       <div class="page-academy" aria-hidden="true">
         <div class="page-academy__head"><span>&lt;/&gt;</span><strong>learning.path</strong><i></i></div>
         <div class="page-academy__path">
           <span class="is-active"><i>01</i><strong>syntax</strong></span>
-          <span><i>02</i><strong>data</strong></span>
-          <span><i>03</i><strong>build</strong></span>
-          <span><i>04</i><strong>ship</strong></span>
+          <span><i>02</i><strong>practice</strong></span>
+          <span><i>03</i><strong>project</strong></span>
+          <span><i>04</i><strong>progress</strong></span>
         </div>
-        <pre><code><em>function</em> learn(skill) {
-  <em>return</em> practice(skill).repeat().master();
-}</code></pre>
+        <pre><code><em>name</em> = "x7do0"
+print(name)</code></pre>
       </div>`;
   }
 
@@ -105,14 +124,13 @@
 
     const back = qs(".inner-back");
     back.href = language === "en" ? `${root}?lang=en#projects` : `${root}#projects`;
-    const home = qsa(".brand");
-    home.forEach((link) => { link.href = language === "en" ? `${root}?lang=en` : root; });
+    qsa(".brand").forEach((link) => { link.href = language === "en" ? `${root}?lang=en` : root; });
 
     const demoLink = qs("[data-demo-link]");
     if (demoLink) {
       demoLink.href = language === "en"
-        ? `${root}demos/enterprise-workflow/?lang=en`
-        : `${root}demos/enterprise-workflow/`;
+        ? `${root}demos/${slug}/?lang=en`
+        : `${root}demos/${slug}/`;
     }
 
     document.title = `${project.title} | x7do0`;
