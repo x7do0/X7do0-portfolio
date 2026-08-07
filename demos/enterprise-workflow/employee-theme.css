@@ -1,45 +1,46 @@
-/* Employee role: intentionally light. Manager retains the original dark Enterprise identity. */
+/*
+  Enterprise Workflow employee fidelity layer.
+  Source: real light theme + dashboard/sidebar tokens in EnterpriseWorkflow-archive.
+  Manager intentionally keeps the dark/modern demo theme.
+*/
 html:has(.role-option[data-role-switch="employee"].is-active) {
   color-scheme: light;
-  background: #f4f7fb;
+  background: #fafafa;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) {
-  --bg: #f4f7fb;
-  --bg-soft: #eef3f9;
-  --surface: rgba(255, 255, 255, 0.94);
-  --surface-2: #f8fbff;
+  --bg: #fafafa;
+  --bg-soft: #f5f6f7;
+  --surface: #ffffff;
+  --surface-2: #ffffff;
   --card: #ffffff;
-  --card-hover: #f4f8fe;
-  --border: rgba(49, 78, 119, 0.14);
-  --border-strong: rgba(49, 78, 119, 0.25);
-  --text: #17243a;
-  --text-muted: #5f708a;
-  --text-subtle: #8090a7;
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-soft: #eaf1ff;
+  --card-hover: #f7f8f9;
+  --border: #e5e7eb;
+  --border-strong: #d7dadd;
+  --text: #292e35;
+  --text-muted: #656b73;
+  --text-subtle: #858b93;
+  --primary: #292e35;
+  --primary-hover: #171a1f;
+  --primary-soft: #f0f1f2;
   --success-soft: #ecfdf3;
   --warning-soft: #fff8e8;
-  --shadow: 0 24px 60px rgba(30, 52, 84, 0.10);
-  background:
-    radial-gradient(circle at 86% -10%, rgba(59, 130, 246, 0.10), transparent 28rem),
-    radial-gradient(circle at 7% 16%, rgba(96, 165, 250, 0.08), transparent 27rem),
-    #f4f7fb;
+  --shadow: 0 10px 28px rgba(23, 27, 32, .07);
+  --sidebar-width: 256px;
+  background: #fafafa;
   color: var(--text);
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active)::before {
-  opacity: 0.55;
-  background-image:
-    linear-gradient(rgba(52, 92, 146, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(52, 92, 146, 0.028) 1px, transparent 1px);
+  display: none;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .demo-header {
-  border-color: var(--border);
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 12px 36px rgba(40, 67, 105, 0.07);
+  min-height: 64px;
+  border-color: #e5e7eb;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 1px 0 rgba(15,23,42,.03);
+  backdrop-filter: blur(14px);
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .portfolio-back,
@@ -50,8 +51,6 @@ body:has(.role-option[data-role-switch="employee"].is-active) .metric-card span,
 body:has(.role-option[data-role-switch="employee"].is-active) .metric-card small,
 body:has(.role-option[data-role-switch="employee"].is-active) .request-meta,
 body:has(.role-option[data-role-switch="employee"].is-active) .empty-state,
-body:has(.role-option[data-role-switch="employee"].is-active) .approval-box p,
-body:has(.role-option[data-role-switch="employee"].is-active) .employee-submit-box p,
 body:has(.role-option[data-role-switch="employee"].is-active) .dialog-head p,
 body:has(.role-option[data-role-switch="employee"].is-active) .audit-entry p {
   color: var(--text-subtle);
@@ -71,148 +70,189 @@ body:has(.role-option[data-role-switch="employee"].is-active) .detail-notes p {
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .product-logo {
-  border-color: #bdd1f6;
-  background: #edf4ff;
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+  border: 0;
+  border-radius: 11px;
+  background: #292e35;
   box-shadow: none;
-  color: #2459b8;
+  color: #fff;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .demo-badge {
-  border-color: #c9dcf9;
-  background: #f1f7ff;
-  color: #29609e;
+  border-color: #e3e5e8;
+  background: #f7f8f9;
+  color: #666c74;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .demo-badge i {
+  background: #22c55e;
+  box-shadow: none;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .icon-action,
 body:has(.role-option[data-role-switch="employee"].is-active) .reset-button,
 body:has(.role-option[data-role-switch="employee"].is-active) .secondary-action,
 body:has(.role-option[data-role-switch="employee"].is-active) .dialog-close {
-  border-color: var(--border);
+  border-color: #e1e3e6;
+  border-radius: 10px;
   background: #fff;
-  color: #4a607e;
+  color: #555c65;
+  box-shadow: none;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .sidebar {
-  border-color: var(--border);
-  background: rgba(244, 248, 253, 0.92);
+  border-color: #e5e7eb;
+  background: #fafafa;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .eyebrow,
 body:has(.role-option[data-role-switch="employee"].is-active) .panel-eyebrow,
 body:has(.role-option[data-role-switch="employee"].is-active) .workspace-kicker {
-  color: #55749e;
+  color: #737981;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .role-option {
-  color: #60728d;
+  min-height: 62px;
+  border-radius: 10px;
+  color: #656b73;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .role-option:hover {
-  background: #edf3fb;
+  background: #f2f3f4;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .role-option.is-active {
-  border-color: #bfd2f5;
-  background: linear-gradient(145deg, #edf4ff, #f8fbff);
-  color: #173c78;
-  box-shadow: inset 0 1px 0 #fff;
+  border-color: #e0e2e5;
+  background: #f0f1f2;
+  color: #292e35;
+  box-shadow: none;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .role-icon {
-  background: #e9f1fd;
+  border-radius: 9px;
+  background: #e7e9eb;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .nav-item {
-  color: #657690;
+  position: relative;
+  border-radius: 8px;
+  color: #727880;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .nav-item:hover,
 body:has(.role-option[data-role-switch="employee"].is-active) .nav-item.is-active {
-  background: #eaf1fb;
-  color: #244e8e;
+  background: #f0f1f2;
+  color: #292e35;
+  box-shadow: none;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .nav-item.is-active::before {
+  content: "";
+  position: absolute;
+  inset-block: 20%;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 0 99px 99px 0;
+  background: #292e35;
+}
+
+html[dir="rtl"] body:has(.role-option[data-role-switch="employee"].is-active) .nav-item.is-active::before {
+  border-radius: 99px 0 0 99px;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .nav-count {
-  background: #e7eef8;
-  color: #4a668c;
+  background: #e8eaed;
+  color: #5f6670;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note {
-  border-color: var(--border);
+  border-color: #e5e7eb;
+  border-radius: 12px;
   background: #fff;
 }
 
-body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note strong {
-  color: #304d74;
+body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note strong { color: #363c44; }
+body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note p { color: #7b8188; }
+
+body:has(.role-option[data-role-switch="employee"].is-active) .workspace {
+  background: #fafafa;
 }
 
-body:has(.role-option[data-role-switch="employee"].is-active) .sidebar-note p {
-  color: #73839a;
+body:has(.role-option[data-role-switch="employee"].is-active) .primary-action {
+  border-color: #292e35;
+  border-radius: 9px;
+  background: #292e35;
+  box-shadow: none;
+}
+
+body:has(.role-option[data-role-switch="employee"].is-active) .primary-action:hover {
+  background: #171a1f;
+  box-shadow: none;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .role-context {
-  border-color: #c9dafa;
-  background: linear-gradient(90deg, #edf4ff, #f8fbff);
+  border-color: #e3e5e8;
+  border-radius: 12px;
+  background: #fff;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .context-icon {
-  border-color: #c4d7f7;
-  background: #fff;
+  border-color: #e3e5e8;
+  border-radius: 10px;
+  background: #f4f5f6;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .context-pill {
-  border-color: #c7d9f8;
-  background: #fff;
-  color: #3568ac;
+  border-color: #e1e3e6;
+  background: #f7f8f9;
+  color: #5d646c;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .metric-card,
 body:has(.role-option[data-role-switch="employee"].is-active) .panel {
-  border-color: var(--border);
+  border-color: #e5e7eb;
+  border-radius: 12px;
   background: #fff;
-  box-shadow: 0 8px 26px rgba(37, 62, 98, 0.055);
+  box-shadow: 0 1px 2px rgba(18,22,27,.035);
 }
 
-body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--blue {
-  background: linear-gradient(145deg, #eef4ff, #fff);
-}
-
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--blue,
 body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--success {
-  background: linear-gradient(145deg, #effcf4, #fff);
+  background: #fff;
 }
 
-body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--success strong {
-  color: #168447;
-}
+body:has(.role-option[data-role-switch="employee"].is-active) .metric-card--success strong { color: #168447; }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .request-row {
-  border-color: #e0e7f0;
-  background: #fbfcfe;
+  border-color: #e7e9eb;
+  border-radius: 10px;
+  background: #fff;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .request-row:hover {
-  border-color: #c5d7f2;
-  background: #f4f8ff;
+  border-color: #d5d8dc;
+  background: #f8f9fa;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .request-icon {
-  border-color: #cddcf5;
-  background: #edf4ff;
-  color: #3c6eb5;
+  border-color: #e0e2e5;
+  border-radius: 8px;
+  background: #f1f2f3;
+  color: #555c65;
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .status-chip--draft {
-  border-color: #d2dce9;
-  background: #f0f3f7;
-  color: #697a91;
+  border-color: #dfe2e5;
+  background: #f2f3f4;
+  color: #6e747c;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .status-chip--pending {
-  border-color: #f0d49d;
+  border-color: #efd79f;
   background: #fff8e8;
-  color: #9b6612;
+  color: #946414;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .status-chip--approved {
   border-color: #bce4c9;
   background: #ecfdf3;
@@ -220,92 +260,69 @@ body:has(.role-option[data-role-switch="employee"].is-active) .status-chip--appr
 }
 
 body:has(.role-option[data-role-switch="employee"].is-active) .empty-state {
-  border-color: #d5deea;
+  border-color: #dfe2e5;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .empty-state span {
-  background: #edf4ff;
-  color: #4677b9;
+  background: #f1f2f3;
+  color: #5d646c;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .demo-steps li.is-current {
-  border-color: #c6d8f6;
-  background: #edf4ff;
-  color: #244d89;
+  border-color: #dfe2e5;
+  background: #f1f2f3;
+  color: #343a42;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .status-filter {
-  border-color: var(--border);
+  border-color: #e1e3e6;
   background: #fff;
-  color: #64758d;
+  color: #656b73;
 }
+body:has(.role-option[data-role-switch="employee"].is-active) .audit-entry::before { background: #e2e4e7; }
+body:has(.role-option[data-role-switch="employee"].is-active) .audit-dot { border-color: #7b828b; background: #fafafa; }
 
-body:has(.role-option[data-role-switch="employee"].is-active) .audit-entry::before {
-  background: #dbe4f0;
-}
-
-body:has(.role-option[data-role-switch="employee"].is-active) .audit-dot {
-  border-color: #7597c7;
-  background: #f4f7fb;
-}
-
-body:has(.role-option[data-role-switch="employee"].is-active) dialog {
-  color: var(--text);
-}
-
-body:has(.role-option[data-role-switch="employee"].is-active) dialog::backdrop {
-  background: rgba(30, 47, 69, 0.28);
-}
-
+body:has(.role-option[data-role-switch="employee"].is-active) dialog { color: var(--text); }
+body:has(.role-option[data-role-switch="employee"].is-active) dialog::backdrop { background: rgba(22,27,34,.25); }
 body:has(.role-option[data-role-switch="employee"].is-active) .dialog-card,
 body:has(.role-option[data-role-switch="employee"].is-active) .detail-card {
-  border-color: #cbd8e8;
+  border-color: #dfe2e5;
+  border-radius: 16px;
   background: #fff;
-  box-shadow: 0 30px 90px rgba(31, 53, 83, 0.18);
+  box-shadow: 0 24px 70px rgba(27,32,39,.16);
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .field > span,
 body:has(.role-option[data-role-switch="employee"].is-active) .detail-summary span,
-body:has(.role-option[data-role-switch="employee"].is-active) .detail-notes > span {
-  color: #66778e;
-}
-
+body:has(.role-option[data-role-switch="employee"].is-active) .detail-notes > span { color: #6d737b; }
 body:has(.role-option[data-role-switch="employee"].is-active) .field input,
 body:has(.role-option[data-role-switch="employee"].is-active) .field select,
 body:has(.role-option[data-role-switch="employee"].is-active) .field textarea {
-  border-color: #cfdae8;
+  border-color: #dfe2e5;
+  border-radius: 10px;
   background: #fff;
-  color: #17243a;
+  color: #292e35;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .field input:focus,
 body:has(.role-option[data-role-switch="employee"].is-active) .field select:focus,
 body:has(.role-option[data-role-switch="employee"].is-active) .field textarea:focus {
-  border-color: #7da8e8;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.09);
+  border-color: #aab0b8;
+  box-shadow: 0 0 0 3px rgba(41,46,53,.08);
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .detail-summary > div,
 body:has(.role-option[data-role-switch="employee"].is-active) .detail-notes {
-  border-color: #e0e7f0;
-  background: #f9fbfd;
+  border-color: #e7e9eb;
+  background: #fafafa;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .employee-submit-box {
-  border-color: #c5d7f7;
-  background: #eef4ff;
+  border-color: #dfe2e5;
+  background: #f6f7f8;
 }
-
 body:has(.role-option[data-role-switch="employee"].is-active) .toast {
-  border-color: #c6d7ef;
-  background: #17345e;
+  border-color: #303640;
+  background: #292e35;
   color: #fff;
 }
 
 @media (max-width: 860px) {
   body:has(.role-option[data-role-switch="employee"].is-active) .sidebar,
   html[dir="rtl"] body:has(.role-option[data-role-switch="employee"].is-active) .sidebar {
-    background: rgba(246, 249, 253, 0.96);
+    background: #fafafa;
   }
 }
