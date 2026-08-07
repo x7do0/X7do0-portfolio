@@ -1,0 +1,338 @@
+/* Current portfolio direction — project identities + skills refresh */
+
+/* ──────────────────────────────────────────────────────────
+   Project identity layers
+   Keep the portfolio layout, let every project carry its own UI language.
+   ────────────────────────────────────────────────────────── */
+
+.project {
+  --project-accent: var(--blue);
+  --project-accent-soft: var(--blue-soft);
+}
+
+.project .project-number {
+  color: var(--project-accent);
+}
+
+/* Enterprise Workflow — source-backed modern theme */
+.project[data-project="enterprise-workflow"] {
+  --project-accent: #3b82f6;
+  --project-accent-soft: rgba(37, 99, 255, 0.16);
+}
+
+.project[data-project="enterprise-workflow"] .project-copy::before {
+  content: "";
+  position: absolute;
+  inset: 10% -24px 10% auto;
+  width: 1px;
+  background: linear-gradient(transparent, rgba(59, 130, 246, 0.75), transparent);
+}
+
+.project[data-project="enterprise-workflow"] .workflow-canvas {
+  border-color: rgba(142, 168, 255, 0.22);
+  background:
+    radial-gradient(circle at 78% 16%, rgba(40, 215, 255, 0.10), transparent 18rem),
+    linear-gradient(145deg, #071226, #050b1f 72%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28), 0 0 60px rgba(37, 99, 255, 0.08);
+}
+
+.project[data-project="enterprise-workflow"] .canvas-state {
+  border-color: rgba(96, 165, 250, 0.42);
+  background: rgba(37, 99, 255, 0.16);
+  color: #a7c7ff;
+}
+
+.project[data-project="enterprise-workflow"] .flow-track span,
+.project[data-project="enterprise-workflow"] .flow-step.is-complete i {
+  background: #3b82f6;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.72);
+}
+
+.project[data-project="enterprise-workflow"] .flow-step.is-active i {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 7px rgba(37, 99, 255, 0.16), 0 0 24px rgba(59, 130, 246, 0.72);
+}
+
+/* Coding Academy — source-backed royal-blue learning identity */
+.project[data-project="coding-academy"] {
+  --project-accent: #5b86f7;
+  --project-accent-soft: rgba(91, 134, 247, 0.16);
+}
+
+.project[data-project="coding-academy"] .academy-canvas {
+  border-color: #3b4e6e;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(91, 134, 247, 0.16), transparent 17rem),
+    linear-gradient(150deg, #192740, #10192b 68%);
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.26);
+}
+
+.project[data-project="coding-academy"] .academy-head > span {
+  border-color: #5b86f7;
+  background: rgba(91, 134, 247, 0.09);
+  color: #8aabff;
+}
+
+.project[data-project="coding-academy"] .academy-head small,
+.project[data-project="coding-academy"] .lesson {
+  color: #93a4bf;
+}
+
+.project[data-project="coding-academy"] .lesson-path::before {
+  background: #3b4e6e;
+}
+
+.project[data-project="coding-academy"] .lesson i {
+  border-color: #536887;
+  background: #15223a;
+}
+
+.project[data-project="coding-academy"] .lesson.is-current {
+  color: #8aabff;
+}
+
+.project[data-project="coding-academy"] .lesson.is-current i {
+  border-color: #5b86f7;
+  box-shadow: 0 0 24px rgba(91, 134, 247, 0.28);
+}
+
+.project[data-project="coding-academy"] .academy-canvas pre {
+  border-color: #16a34a;
+  background: #101d36;
+  color: #dce7ff;
+}
+
+.project[data-project="coding-academy"] .academy-canvas code span {
+  color: #8aabff;
+}
+
+/* Masroofi — source-backed light green personal-finance identity */
+.project[data-project="masroofi"] {
+  --project-accent: #18a36f;
+  --project-accent-soft: rgba(15, 138, 95, 0.13);
+}
+
+.project[data-project="masroofi"] .project-copy > p {
+  color: #9db8ad;
+}
+
+.project[data-project="masroofi"] .academy-canvas {
+  min-height: 430px;
+  border: 1px solid #d8e6df;
+  border-radius: 30px;
+  background:
+    linear-gradient(#ffffff, #ffffff) 7% 9% / 86% 13% no-repeat,
+    linear-gradient(135deg, #effbf5 0%, #e4f7ed 58%, #f9fcfa 100%) 7% 27% / 86% 31% no-repeat,
+    linear-gradient(#ffffff, #ffffff) 7% 64% / 41% 21% no-repeat,
+    linear-gradient(#ffffff, #ffffff) 93% 64% / 41% 21% no-repeat,
+    radial-gradient(circle at 80% -10%, rgba(15, 138, 95, 0.12), transparent 17rem),
+    #f5f8f6;
+  box-shadow: 0 24px 60px rgba(22, 60, 45, 0.14);
+}
+
+.project[data-project="masroofi"] .academy-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 9% 9% auto auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #0a7a50, #18a36f);
+  box-shadow:
+    -86px 138px 0 -5px #eefaf3,
+    -250px 138px 0 -5px #fff3f4,
+    0 12px 28px rgba(15, 138, 95, 0.22);
+}
+
+.project[data-project="masroofi"] .academy-canvas::after {
+  content: "";
+  position: absolute;
+  inset: auto 8% 8%;
+  height: 7%;
+  border-radius: 18px;
+  background:
+    linear-gradient(90deg,
+      #eefaf3 0 22%, transparent 22% 27%,
+      #f8fbf9 27% 47%, transparent 47% 52%,
+      #f8fbf9 52% 72%, transparent 72% 77%,
+      #f8fbf9 77% 100%);
+  transform: none;
+  transition: none;
+}
+
+.project[data-project="masroofi"]:hover .academy-canvas::after {
+  transform: none;
+}
+
+/* Mahsoob intentionally remains neutral until its real UI source is linked. */
+.project[data-project="mahsoob"] {
+  --project-accent: #7f8b9d;
+}
+
+.project[data-project="mahsoob"] .workflow-canvas {
+  border-style: dashed;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(145deg, #0b0f15, #070a0f);
+  background-size: 30px 30px, 30px 30px, auto;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Skills / technologies refresh
+   "How I work" is no longer the visual concept of this section.
+   ────────────────────────────────────────────────────────── */
+
+.capabilities {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 28%, rgba(23, 104, 255, 0.08), transparent 24rem),
+    radial-gradient(circle at 88% 76%, rgba(182, 238, 25, 0.045), transparent 22rem),
+    var(--ink);
+}
+
+.capabilities-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+  align-items: start;
+  gap: clamp(46px, 6vw, 96px);
+}
+
+.compact-heading {
+  margin-block-end: 42px;
+}
+
+.capability-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  border: 0;
+}
+
+.capability-list li {
+  min-height: 154px;
+  padding: 22px;
+  grid-template-columns: 1fr;
+  align-content: space-between;
+  gap: 26px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.018);
+  transition: transform 240ms var(--ease), border-color 240ms ease, background 240ms ease;
+}
+
+.capability-list li::before {
+  font-size: 0.68rem;
+  font-family: var(--mono);
+  letter-spacing: 0.12em;
+}
+
+.capability-list li::after {
+  display: none;
+}
+
+.capability-list li:hover {
+  padding: 22px;
+  transform: translateY(-4px);
+  border-color: rgba(68, 140, 255, 0.58);
+  background: linear-gradient(145deg, rgba(23, 104, 255, 0.09), rgba(255,255,255,0.018));
+}
+
+.capability-list h3 {
+  max-width: 15ch;
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+  line-height: 1.3;
+}
+
+.technology-rail {
+  position: sticky;
+  top: calc(var(--header-height) + 34px);
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: rgba(8, 12, 18, 0.72);
+  backdrop-filter: blur(16px);
+}
+
+.rail-title {
+  margin-block-end: 20px;
+}
+
+.rail-title h3 {
+  color: var(--paper);
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+}
+
+.technology-group {
+  padding-block: 22px;
+  border-color: var(--line);
+}
+
+.technology-group h4 {
+  margin-block-end: 14px;
+  color: #8fb8ff;
+  font-family: var(--display);
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+
+html[dir="ltr"] .technology-group h4 {
+  font-family: var(--latin);
+}
+
+.technology-group p {
+  gap: 8px;
+}
+
+.technology-group p span {
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid rgba(204, 216, 235, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #d8dde5;
+  font-size: 0.78rem;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.technology-group p span::after {
+  display: none !important;
+}
+
+.technology-group p span:hover {
+  transform: translateY(-2px);
+  border-color: rgba(68, 140, 255, 0.55);
+  background: rgba(23, 104, 255, 0.10);
+  color: #ffffff;
+}
+
+.technology-group:nth-child(2) h4 { color: #b6ee19; }
+.technology-group:nth-child(3) h4 { color: #c7a7ff; }
+.technology-group:nth-child(4) h4 { color: #78d9ff; }
+
+@media (max-width: 1000px) {
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .technology-rail {
+    position: static;
+    padding: 24px;
+    border-inline-start: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 680px) {
+  .capability-list {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-list li {
+    min-height: 126px;
+  }
+
+  .technology-rail {
+    padding: 20px;
+  }
+
+  .project[data-project="enterprise-workflow"] .project-copy::before {
+    display: none;
+  }
+}
