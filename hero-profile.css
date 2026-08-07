@@ -92,6 +92,10 @@ html[dir="ltr"] .hero .system-window {
   pointer-events: none;
   transform: none;
   transition: none;
+  opacity: 1;
+  mask: none;
+  -webkit-mask: none;
+  mask-composite: add;
 }
 
 /* A calm blue halo ties the cutout into the portfolio background. */
