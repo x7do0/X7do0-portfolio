@@ -26,6 +26,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/projects/coding-academy/" />
   </url>
   <url>
+    <loc>https://x7do0.github.io/X7do0-portfolio/projects/mahsoob/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/projects/mahsoob/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/projects/mahsoob/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/projects/mahsoob/" />
+  </url>
+  <url>
+    <loc>https://x7do0.github.io/X7do0-portfolio/projects/masroofi/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/projects/masroofi/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/projects/masroofi/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/projects/masroofi/" />
+  </url>
+  <url>
     <loc>https://x7do0.github.io/X7do0-portfolio/resume/</loc>
     <xhtml:link rel="alternate" hreflang="ar" href="https://x7do0.github.io/X7do0-portfolio/resume/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://x7do0.github.io/X7do0-portfolio/resume/?lang=en" />

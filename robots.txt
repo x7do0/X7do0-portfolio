@@ -1,3 +1,5 @@
 User-agent: *
-Allow: /
+Allow: /X7do0-portfolio/
+Disallow: /X7do0-portfolio/demos/
+
 Sitemap: https://x7do0.github.io/X7do0-portfolio/sitemap.xml
