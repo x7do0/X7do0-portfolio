@@ -25,6 +25,14 @@ async function revealWholePage(page) {
   await page.waitForTimeout(250);
 }
 
+async function expectNoHorizontalOverflow(page) {
+  const metrics = await page.evaluate(() => ({
+    scrollWidth: document.documentElement.scrollWidth,
+    clientWidth: document.documentElement.clientWidth
+  }));
+  expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
+}
+
 test('home renders direct project UIs, anchored portrait, skills and no unfinished placeholders', async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await page.goto('/');
@@ -40,6 +48,7 @@ test('home renders direct project UIs, anchored portrait, skills and no unfinish
     const liveLink = page.locator(`[data-live-preview="${slug}"] .live-preview-link`);
     await expect(liveLink).toBeVisible();
     await expect(liveLink).toHaveAttribute('href', `./demos/${slug}/`);
+    await expect(liveLink).toHaveAttribute('aria-label', /.+/);
   }
 
   await expect(page.locator('.live-enterprise')).toHaveCSS('background-color', 'rgb(244, 247, 251)');
@@ -61,6 +70,7 @@ test('home renders direct project UIs, anchored portrait, skills and no unfinish
   }
 
   await revealWholePage(page);
+  await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: 'artifacts/home-desktop.png', fullPage: true });
 
   await page.locator('[data-language="en"]').click();
@@ -69,10 +79,11 @@ test('home renders direct project UIs, anchored portrait, skills and no unfinish
   await expect(page.locator('[data-project="mahsoob"]')).toContainText('Mahsoob');
   await expect(page.locator('[data-project="masroofi"]')).toContainText('Masroofi');
   await expect(page.locator('.live-enterprise')).toContainText('Employee');
+  await expectNoHorizontalOverflow(page);
   expect(errors).toEqual([]);
 });
 
-test('mobile home keeps direct previews and portrait base usable', async ({ page }) => {
+test('mobile home keeps direct previews and portrait base usable without horizontal overflow', async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
@@ -82,8 +93,40 @@ test('mobile home keeps direct previews and portrait base usable', async ({ page
   await expect(page.locator('.hero .window-statusbar')).toHaveCSS('display', 'block');
   await expect(page.locator('.knowledge .media-rail')).toBeHidden();
   await revealWholePage(page);
+  await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: 'artifacts/home-mobile.png', fullPage: true });
   expect(errors).toEqual([]);
+});
+
+test('public SEO routes are healthy and demo simulations stay out of the crawl surface', async ({ request }) => {
+  const publicRoutes = [
+    '/',
+    '/?lang=en',
+    '/resume/',
+    '/projects/enterprise-workflow/',
+    '/projects/coding-academy/',
+    '/projects/mahsoob/',
+    '/projects/masroofi/'
+  ];
+
+  for (const route of publicRoutes) {
+    const response = await request.get(route);
+    expect(response.ok(), `${route} should return a successful response`).toBeTruthy();
+  }
+
+  const robotsResponse = await request.get('/robots.txt');
+  expect(robotsResponse.ok()).toBeTruthy();
+  const robots = await robotsResponse.text();
+  expect(robots).toContain('Disallow: /X7do0-portfolio/demos/');
+  expect(robots).toContain('Sitemap: https://x7do0.github.io/X7do0-portfolio/sitemap.xml');
+
+  const sitemapResponse = await request.get('/sitemap.xml');
+  expect(sitemapResponse.ok()).toBeTruthy();
+  const sitemap = await sitemapResponse.text();
+  for (const slug of ['enterprise-workflow', 'coding-academy', 'mahsoob', 'masroofi']) {
+    expect(sitemap).toContain(`https://x7do0.github.io/X7do0-portfolio/projects/${slug}/`);
+  }
+  expect(sitemap).not.toContain('/demos/');
 });
 
 test('every project detail page links to its own demo without empty future sections', async ({ page }) => {
@@ -94,6 +137,7 @@ test('every project detail page links to its own demo without empty future secti
     await expect(link).toBeVisible();
     await expect(link).toHaveAttribute('href', `../../demos/${slug}/`);
     await expect(page.locator('.project-future')).toBeHidden();
+    await expectNoHorizontalOverflow(page);
   }
 });
 
@@ -103,6 +147,7 @@ test('resume hides unavailable PDF instead of advertising unfinished content', a
   await expect(page.locator('[data-resume="title"]')).toBeVisible();
   await expect(page.locator('.resume-download.is-disabled')).toBeHidden();
   await expect(page.locator('#resume-projects > a')).toHaveCount(4);
+  await expectNoHorizontalOverflow(page);
   expect(errors).toEqual([]);
 });
 
@@ -132,6 +177,7 @@ test('Enterprise employee is light by default, manager is dark, and approval flo
 
   await expect(page.locator('[data-dashboard-request-list] .status-chip--approved')).toHaveCount(1);
   await expect(page.locator('body')).toHaveCSS('color', 'rgb(23, 36, 58)');
+  await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: 'artifacts/enterprise-demo-approved.png', fullPage: true });
   expect(errors).toEqual([]);
 });
@@ -146,6 +192,7 @@ test('Mahsoob cashier adds a product, calculates change, and completes a sale', 
 
   await page.locator('[data-cash]').fill('1000');
   await expect(page.locator('[data-checkout]')).toBeEnabled();
+  await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: 'artifacts/mahsoob-cashier.png', fullPage: true });
 
   await page.locator('[data-checkout]').click();
@@ -169,6 +216,7 @@ test('Masroofi adds an expense, updates totals, then reverts after delete', asyn
   await expect(page.locator('[data-transaction-id^="demo-"]')).toHaveCount(1);
   await expect(page.locator('[data-balance]')).not.toHaveText(initialBalance || '');
   await expect(page.locator('[data-expenses]')).not.toHaveText(initialExpenses || '');
+  await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: 'artifacts/masroofi-demo-added.png', fullPage: true });
 
   await page.locator('[data-transaction-id^="demo-"] [data-delete]').click();
@@ -190,6 +238,7 @@ test('Coding Academy validates Python practice and updates progress to 100%', as
   await expect(page.locator('[data-feedback]')).toHaveClass(/success/);
   await expect(page.locator('[data-progress-label]')).toHaveText('100%');
   await expect(page.locator('[data-view="result"]')).toHaveClass(/active/);
+  await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: 'artifacts/coding-academy-demo.png', fullPage: true });
   expect(errors).toEqual([]);
 });
