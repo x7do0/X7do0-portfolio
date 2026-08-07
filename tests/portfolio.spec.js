@@ -13,24 +13,16 @@ function watchRuntimeErrors(page) {
 }
 
 async function revealWholePage(page) {
-  await page.evaluate(async () => {
-    await new Promise((resolve) => {
-      let travelled = 0;
-      const step = Math.max(500, Math.floor(window.innerHeight * 0.75));
-      const timer = window.setInterval(() => {
-        window.scrollBy(0, step);
-        travelled += step;
-        const end = document.documentElement.scrollHeight - window.innerHeight;
-        if (travelled >= end) {
-          window.clearInterval(timer);
-          window.setTimeout(() => {
-            window.scrollTo(0, 0);
-            resolve();
-          }, 350);
-        }
-      }, 80);
-    });
-  });
+  const reveals = page.locator('.reveal');
+  const count = await reveals.count();
+
+  for (let index = 0; index < count; index += 1) {
+    await reveals.nth(index).scrollIntoViewIfNeeded();
+    await page.waitForTimeout(160);
+  }
+
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(300);
 }
 
 test('home renders portrait, skills and both languages without runtime errors', async ({ page }) => {
