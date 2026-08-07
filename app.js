@@ -73,6 +73,204 @@
     );
   }
 
+  function previewCopy() {
+    if (state.language === "en") {
+      return {
+        open: "Try project",
+        enterprise: {
+          portal: "Employee portal",
+          role: "Employee",
+          nav: ["Dashboard", "My requests", "Audit trail"],
+          title: "My requests",
+          newRequest: "New request",
+          metricTotal: "Total",
+          metricPending: "Pending",
+          metricApproved: "Approved",
+          request: "Equipment purchase request",
+          status: "Awaiting manager"
+        },
+        academy: {
+          path: "Python Fundamentals",
+          progress: "Progress",
+          lesson: "Variables & printing",
+          copy: "Learn the idea, edit the example, then validate your solution.",
+          lessons: ["Lesson", "Practice", "Progress"],
+          run: "Check solution"
+        },
+        mahsoob: {
+          cashier: "Cashier",
+          products: "Products",
+          reports: "Reports",
+          title: "New sale",
+          scan: "Scan barcode or search product",
+          item1: "Mineral water",
+          item2: "Notebook",
+          cart: "Cart",
+          total: "Total",
+          checkout: "Complete sale"
+        },
+        masroofi: {
+          greeting: "Good evening",
+          balance: "Current balance",
+          income: "Income",
+          expenses: "Expenses",
+          transactions: "Recent transactions",
+          salary: "Demo salary",
+          shopping: "Home shopping",
+          add: "Add expense"
+        }
+      };
+    }
+
+    return {
+      open: "جرّب المشروع",
+      enterprise: {
+        portal: "بوابة الموظف",
+        role: "موظف",
+        nav: ["لوحة التحكم", "طلباتي", "سجل التدقيق"],
+        title: "طلباتي",
+        newRequest: "طلب جديد",
+        metricTotal: "الإجمالي",
+        metricPending: "قيد الانتظار",
+        metricApproved: "تمت الموافقة",
+        request: "طلب شراء أجهزة",
+        status: "بانتظار المدير"
+      },
+      academy: {
+        path: "أساسيات بايثون",
+        progress: "التقدم",
+        lesson: "المتغيرات والطباعة",
+        copy: "افهم الفكرة، عدّل المثال، ثم تحقق من الحل داخل المسار.",
+        lessons: ["الدرس", "التمرين", "التقدم"],
+        run: "تحقق من الحل"
+      },
+      mahsoob: {
+        cashier: "الكاشير",
+        products: "المنتجات",
+        reports: "التقارير",
+        title: "عملية بيع جديدة",
+        scan: "امسح الباركود أو ابحث عن منتج",
+        item1: "مياه معدنية",
+        item2: "دفتر ملاحظات",
+        cart: "السلة",
+        total: "الإجمالي",
+        checkout: "إكمال البيع"
+      },
+      masroofi: {
+        greeting: "مساء الخير",
+        balance: "الرصيد الحالي",
+        income: "الدخل",
+        expenses: "المصروفات",
+        transactions: "آخر العمليات",
+        salary: "راتب تجريبي",
+        shopping: "مشتريات منزلية",
+        add: "إضافة مصروف"
+      }
+    };
+  }
+
+  function previewMarkup(slug) {
+    const copy = previewCopy();
+    const demoHref = withLanguage(`./demos/${slug}/`);
+
+    if (slug === "enterprise-workflow") {
+      const p = copy.enterprise;
+      return `
+        <a class="live-preview-link live-enterprise" href="${demoHref}" aria-label="${copy.open}: Enterprise Workflow">
+          <div class="live-appbar">
+            <span class="live-brand"><i>EW</i><b>Enterprise Workflow</b></span>
+            <span class="live-role-badge">${p.role}</span>
+          </div>
+          <div class="live-enterprise-body">
+            <aside class="live-enterprise-nav">
+              <span class="is-active"><i></i>${p.nav[0]}</span>
+              <span><i></i>${p.nav[1]}</span>
+              <span><i></i>${p.nav[2]}</span>
+            </aside>
+            <div class="live-enterprise-main">
+              <div class="live-screen-head"><div><small>${p.portal}</small><strong>${p.title}</strong></div><em>+ ${p.newRequest}</em></div>
+              <div class="live-metrics">
+                <span><small>${p.metricTotal}</small><b>03</b></span>
+                <span><small>${p.metricPending}</small><b>01</b></span>
+                <span><small>${p.metricApproved}</small><b>02</b></span>
+              </div>
+              <div class="live-request-row"><span class="live-request-mark">PO</span><div><b>${p.request}</b><small>REQ-2026-0837 · 250,000 IQD</small></div><em>${p.status}</em></div>
+            </div>
+          </div>
+          <span class="live-try">${copy.open}<b>↗</b></span>
+        </a>`;
+    }
+
+    if (slug === "coding-academy") {
+      const p = copy.academy;
+      return `
+        <a class="live-preview-link live-academy" href="${demoHref}" aria-label="${copy.open}: Coding Academy">
+          <div class="live-academy-top"><span class="live-brand"><i>&lt;/&gt;</i><b>X7do0 Academy</b></span><span>50%</span></div>
+          <div class="live-academy-body">
+            <aside class="live-academy-nav">
+              <strong>${p.path}</strong>
+              ${p.lessons.map((item, index) => `<span class="${index === 0 ? "is-active" : ""}"><i>0${index + 1}</i>${item}</span>`).join("")}
+              <div><small>${p.progress}</small><b><i style="width:50%"></i></b></div>
+            </aside>
+            <div class="live-academy-main">
+              <small>LESSON 01 · PYTHON</small>
+              <h4>${p.lesson}</h4>
+              <p>${p.copy}</p>
+              <pre><code><span>name</span> = <em>"x7do0"</em>\n<b>print</b>(name)</code></pre>
+              <button type="button" tabindex="-1">${p.run}</button>
+            </div>
+          </div>
+          <span class="live-try">${copy.open}<b>↗</b></span>
+        </a>`;
+    }
+
+    if (slug === "mahsoob") {
+      const p = copy.mahsoob;
+      return `
+        <a class="live-preview-link live-mahsoob" href="${demoHref}" aria-label="${copy.open}: Mahsoob POS">
+          <div class="live-mahsoob-body">
+            <aside class="live-mahsoob-nav">
+              <span class="live-mahsoob-logo">م</span><strong>محسوب</strong>
+              <span class="is-active">▣ ${p.cashier}</span><span>□ ${p.products}</span><span>⌁ ${p.reports}</span>
+              <small>Mahsoob POS</small>
+            </aside>
+            <div class="live-mahsoob-main">
+              <div class="live-mahsoob-head"><div><small>POS / CASHIER</small><strong>${p.title}</strong></div><span>● OFFLINE</span></div>
+              <div class="live-mahsoob-search">⌕ <span>${p.scan}</span></div>
+              <div class="live-mahsoob-grid">
+                <div class="live-product-list"><span><i>01</i><b>${p.item1}</b><em>500</em></span><span><i>02</i><b>${p.item2}</b><em>2,250</em></span></div>
+                <div class="live-cart"><small>${p.cart}</small><span><b>${p.item1}</b><em>500</em></span><span><b>${p.item2}</b><em>2,250</em></span><div><small>${p.total}</small><strong>2,750 IQD</strong></div><button type="button" tabindex="-1">${p.checkout}</button></div>
+              </div>
+            </div>
+          </div>
+          <span class="live-try">${copy.open}<b>↗</b></span>
+        </a>`;
+    }
+
+    const p = copy.masroofi;
+    return `
+      <a class="live-preview-link live-masroofi" href="${demoHref}" aria-label="${copy.open}: Masroofi">
+        <div class="live-masroofi-top"><span class="live-masroofi-logo">م</span><strong>مصروفي</strong><span>•••</span></div>
+        <div class="live-masroofi-main">
+          <div class="live-masroofi-head"><div><small>${p.greeting}</small><b>${p.balance}</b></div><button type="button" tabindex="-1">+ ${p.add}</button></div>
+          <div class="live-balance-card"><small>${p.balance}</small><strong>1,350,000 <em>د.ع</em></strong><span>↑ +8.4%</span></div>
+          <div class="live-money-stats"><span><small>${p.income}</small><b>1,500,000</b></span><span><small>${p.expenses}</small><b>150,000</b></span></div>
+          <div class="live-transactions"><small>${p.transactions}</small><span><i>↗</i><b>${p.salary}</b><em>+1,500,000</em></span><span><i>↘</i><b>${p.shopping}</b><em>−150,000</em></span></div>
+        </div>
+        <span class="live-try">${copy.open}<b>↗</b></span>
+      </a>`;
+  }
+
+  function renderProjectPreview(article, project) {
+    const preview = qs(".workflow-canvas, .academy-canvas", article);
+    if (!preview) return;
+    preview.classList.add("project-live-preview");
+    preview.dataset.livePreview = project.slug;
+    preview.removeAttribute("aria-hidden");
+    preview.setAttribute("aria-label", `${previewCopy().open}: ${project.title}`);
+    preview.innerHTML = previewMarkup(project.slug);
+  }
+
   function renderProjects(content) {
     setText("#projects-title", content.projectsSection.title);
     setText("#projects-description", content.projectsSection.description);
@@ -95,6 +293,7 @@
 
       const number = qs(".project-number", article);
       if (number) number.textContent = String(index + 1).padStart(2, "0");
+      renderProjectPreview(article, project);
     });
   }
 
