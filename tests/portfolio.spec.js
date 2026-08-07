@@ -16,14 +16,16 @@ async function revealWholePage(page) {
   const reveals = page.locator('.reveal');
   const count = await reveals.count();
   for (let index = 0; index < count; index += 1) {
-    await reveals.nth(index).scrollIntoViewIfNeeded();
+    const item = reveals.nth(index);
+    if (!(await item.isVisible())) continue;
+    await item.scrollIntoViewIfNeeded();
     await page.waitForTimeout(120);
   }
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(250);
 }
 
-test('home renders direct project UIs, anchored portrait, skills and both languages', async ({ page }) => {
+test('home renders direct project UIs, anchored portrait, skills and no unfinished placeholders', async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await page.goto('/');
   await expect(page.locator('#hero-title')).toBeVisible();
@@ -49,6 +51,15 @@ test('home renders direct project UIs, anchored portrait, skills and both langua
   await expect(page.locator('.hero .window-statusbar')).toHaveCSS('display', 'block');
   await expect(page.locator('.hero .window-statusbar')).toHaveCSS('height', '1px');
 
+  await expect(page.locator('.knowledge .media-rail')).toBeHidden();
+  await expect(page.locator('.contact-link[href]')).toHaveCount(1);
+  await expect(page.locator('.contact-link[href]')).toBeVisible();
+  const disabledContacts = page.locator('.contact-link.is-disabled');
+  await expect(disabledContacts).toHaveCount(4);
+  for (let index = 0; index < await disabledContacts.count(); index += 1) {
+    await expect(disabledContacts.nth(index)).toBeHidden();
+  }
+
   await revealWholePage(page);
   await page.screenshot({ path: 'artifacts/home-desktop.png', fullPage: true });
 
@@ -69,19 +80,30 @@ test('mobile home keeps direct previews and portrait base usable', async ({ page
   await expect(page.locator('.system-window')).toBeVisible();
   await expect(page.locator('.project-live-preview')).toHaveCount(4);
   await expect(page.locator('.hero .window-statusbar')).toHaveCSS('display', 'block');
+  await expect(page.locator('.knowledge .media-rail')).toBeHidden();
   await revealWholePage(page);
   await page.screenshot({ path: 'artifacts/home-mobile.png', fullPage: true });
   expect(errors).toEqual([]);
 });
 
-test('every project detail page links to its own demo', async ({ page }) => {
+test('every project detail page links to its own demo without empty future sections', async ({ page }) => {
   const slugs = ['enterprise-workflow', 'coding-academy', 'mahsoob', 'masroofi'];
   for (const slug of slugs) {
     await page.goto(`/projects/${slug}/`);
     const link = page.locator('[data-demo-link]');
     await expect(link).toBeVisible();
     await expect(link).toHaveAttribute('href', `../../demos/${slug}/`);
+    await expect(page.locator('.project-future')).toBeHidden();
   }
+});
+
+test('resume hides unavailable PDF instead of advertising unfinished content', async ({ page }) => {
+  const errors = watchRuntimeErrors(page);
+  await page.goto('/resume/');
+  await expect(page.locator('[data-resume="title"]')).toBeVisible();
+  await expect(page.locator('.resume-download.is-disabled')).toBeHidden();
+  await expect(page.locator('#resume-projects > a')).toHaveCount(4);
+  expect(errors).toEqual([]);
 });
 
 test('Enterprise employee is light by default, manager is dark, and approval flow completes', async ({ page }) => {
