@@ -16,7 +16,9 @@ async function revealWholePage(page) {
   const reveals = page.locator('.reveal');
   const count = await reveals.count();
   for (let index = 0; index < count; index += 1) {
-    await reveals.nth(index).scrollIntoViewIfNeeded();
+    const item = reveals.nth(index);
+    if (!(await item.isVisible())) continue;
+    await item.scrollIntoViewIfNeeded();
     await page.waitForTimeout(120);
   }
   await page.evaluate(() => window.scrollTo(0, 0));
