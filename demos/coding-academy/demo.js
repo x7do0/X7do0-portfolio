@@ -38,7 +38,7 @@
     document.title=language==='ar'?'أكاديمية X7do0 — تجربة تفاعلية':'X7do0 Academy — Interactive Demo';
   }
 
-  function applyTheme(){document.documentElement.dataset.theme=theme;localStorage.setItem(THEME_KEY,theme);qs('[data-theme]').textContent=theme==='dark'?'☀':'◐'}
+  function applyTheme(){document.documentElement.dataset.theme=theme;localStorage.setItem(THEME_KEY,theme);qs('button[data-theme]').textContent=theme==='dark'?'☀':'◐'}
 
   function setView(view){state.view=view;qsa('[data-view]').forEach(el=>el.classList.toggle('active',el.dataset.view===view));qsa('[data-nav]').forEach(btn=>btn.classList.toggle('active',btn.dataset.nav===view));renderProgress();save()}
 
@@ -70,7 +70,7 @@
   qs('[data-clear]').addEventListener('click',()=>{qs('[data-editor]').value='';qs('[data-editor]').focus()});
   qs('[data-check]').addEventListener('click',checkSolution);
   qs('[data-editor]').addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();checkSolution()}});
-  qs('[data-theme]').addEventListener('click',()=>{theme=theme==='light'?'dark':'light';applyTheme()});
+  qs('button[data-theme]').addEventListener('click',()=>{theme=theme==='light'?'dark':'light';applyTheme()});
   qs('[data-lang]').addEventListener('click',()=>{language=language==='ar'?'en':'ar';applyLanguage();renderProgress()});
   qs('[data-reset]').addEventListener('click',reset);
 
