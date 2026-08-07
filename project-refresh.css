@@ -1,0 +1,113 @@
+/* Project-page additions for interactive portfolio demos. */
+
+.project-demo-actions {
+  margin-block-start: 30px;
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+
+.project-demo-cta {
+  min-height: 54px;
+  padding: 12px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  border: 1px solid rgba(96, 165, 250, 0.42);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(59, 130, 246, 0.98), rgba(37, 99, 235, 0.94));
+  box-shadow:
+    0 16px 34px rgba(37, 99, 235, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition:
+    transform 220ms var(--ease),
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.project-demo-cta:hover {
+  transform: translateY(-3px);
+  border-color: rgba(147, 197, 253, 0.72);
+  background:
+    linear-gradient(135deg, #4b8cf7, #356ff0);
+  box-shadow:
+    0 20px 46px rgba(37, 99, 235, 0.28),
+    0 0 30px rgba(59, 130, 246, 0.10);
+}
+
+.project-demo-cta svg {
+  width: 19px;
+  height: 19px;
+  transition: transform 220ms var(--ease);
+}
+
+.project-demo-cta:hover svg {
+  transform: translateX(4px);
+}
+
+html[dir="rtl"] .project-demo-cta svg {
+  transform: rotate(180deg);
+}
+
+html[dir="rtl"] .project-demo-cta:hover svg {
+  transform: rotate(180deg) translateX(4px);
+}
+
+.project-demo-actions > p {
+  max-width: 560px;
+  margin: 0;
+  color: #8fa7c8;
+  font-size: 0.72rem;
+  line-height: 1.7;
+}
+
+body[data-project="enterprise-workflow"] .project-hero__visual {
+  border-color: rgba(142, 168, 255, 0.24);
+  background:
+    radial-gradient(circle at 86% 8%, rgba(40, 215, 255, 0.08), transparent 18rem),
+    linear-gradient(145deg, rgba(8, 19, 46, 0.96), rgba(5, 11, 31, 0.96));
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.30),
+    0 0 70px rgba(37, 99, 255, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body[data-project="enterprise-workflow"] .page-workflow__head strong,
+body[data-project="enterprise-workflow"] .page-workflow__system strong {
+  color: #b6d3ff;
+}
+
+body[data-project="enterprise-workflow"] .page-workflow__head i,
+body[data-project="enterprise-workflow"] .page-workflow__rail .is-done i {
+  background: #3b82f6;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.68);
+}
+
+body[data-project="enterprise-workflow"] .page-workflow__rail .is-active i {
+  border-color: #60a5fa;
+  box-shadow:
+    0 0 0 7px rgba(37, 99, 255, 0.16),
+    0 0 22px rgba(59, 130, 246, 0.60);
+}
+
+@media (max-width: 620px) {
+  .project-demo-actions {
+    width: 100%;
+    margin-block-start: 24px;
+  }
+
+  .project-demo-cta {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .project-demo-actions > p {
+    font-size: 0.68rem;
+  }
+}
