@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#2457d6">
+  <meta name="description" content="X7do0 Academy interactive portfolio demo.">
+  <title>أكاديمية X7do0 — تجربة تفاعلية</title>
+  <link rel="stylesheet" href="./demo.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-side">
+      <a href="../../#projects" class="back" data-back>← <span data-i18n="portfolio">البورتفوليو</span></a>
+      <span class="divider"></span>
+      <div class="brand"><span>&lt;/&gt;</span><div><strong>أكاديمية X7do0</strong><small data-i18n="demoLabel">تجربة تعليمية مصغرة</small></div></div>
+    </div>
+    <div class="actions">
+      <span class="sample" data-i18n="sample">بيانات تجريبية فقط</span>
+      <button type="button" data-theme aria-label="Theme">◐</button>
+      <button type="button" data-lang>EN</button>
+      <button type="button" data-reset data-i18n="reset">إعادة</button>
+    </div>
+  </header>
+
+  <div class="academy-shell">
+    <aside class="course-sidebar">
+      <div class="course-title"><span class="python">PY</span><div><strong data-i18n="python">أساسيات بايثون</strong><small data-i18n="courseHint">مسار تجريبي مصغر</small></div></div>
+      <div class="progress-summary"><div><span data-i18n="progress">التقدم</span><strong data-progress-label>0%</strong></div><div class="progress-track"><span data-progress-bar></span></div></div>
+      <nav class="lesson-nav">
+        <button type="button" class="active" data-nav="lesson"><b>01</b><span data-i18n="lesson">الدرس</span></button>
+        <button type="button" data-nav="practice"><b>02</b><span data-i18n="practice">التمرين</span></button>
+        <button type="button" data-nav="result"><b>03</b><span data-i18n="result">التقدم</span></button>
+      </nav>
+      <div class="goal"><strong data-i18n="goal">هدف التجربة</strong><p data-i18n="goalCopy">راجع المثال، حل تمرينًا بسيطًا، ثم شاهد تقدمك يتحدث محليًا.</p></div>
+    </aside>
+
+    <main class="workspace">
+      <section class="view active" data-view="lesson">
+        <div class="view-head"><div><span class="eyebrow">LESSON 01</span><h1 data-i18n="lessonTitle">المتغيرات والطباعة</h1><p data-i18n="lessonCopy">المتغير يحفظ قيمة يمكن استخدامها لاحقًا. نطبع القيمة باستخدام print.</p></div><span class="lesson-chip" data-i18n="fundamentals">الأساسيات</span></div>
+        <div class="lesson-grid">
+          <article class="explanation"><h2 data-i18n="idea">الفكرة</h2><p data-i18n="ideaCopy">أنشئ متغيرًا باسم name، خزّن بداخله نصًا، ثم اطبع المتغير.</p><ul><li data-i18n="point1">اسم المتغير واضح ومباشر.</li><li data-i18n="point2">النص يوضع بين علامتي اقتباس.</li><li data-i18n="point3">print تعرض القيمة في المخرجات.</li></ul><button type="button" class="primary" data-go-practice data-i18n="tryIt">جرّب بنفسك</button></article>
+          <article class="code-card"><header><span>example.py</span><i></i></header><pre><code><span class="kw">name</span> = <span class="str">"x7do0"</span>
+<span class="fn">print</span>(name)</code></pre><footer><span data-i18n="output">المخرجات</span><strong>x7do0</strong></footer></article>
+        </div>
+      </section>
+
+      <section class="view" data-view="practice">
+        <div class="view-head"><div><span class="eyebrow">PRACTICE</span><h1 data-i18n="practiceTitle">طبّق الفكرة</h1><p data-i18n="practiceCopy">اكتب متغيرًا باسم name ثم اطبعه. يقبل الـDemo أكثر من قيمة نصية.</p></div><span class="lesson-chip">Python</span></div>
+        <div class="practice-layout">
+          <article class="challenge"><h2 data-i18n="task">المطلوب</h2><p data-i18n="taskCopy">عرّف المتغير name بقيمة نصية، ثم استخدم print(name).</p><div class="hint"><strong data-i18n="hint">تلميح</strong><code>name = "..."</code></div></article>
+          <article class="editor-card"><header><span>solution.py</span><button type="button" data-fill data-i18n="example">مثال</button></header><textarea spellcheck="false" aria-label="Python code" data-editor>name = "x7do0"
+print(name)</textarea><div class="editor-actions"><button type="button" class="secondary" data-clear data-i18n="clear">مسح</button><button type="button" class="primary" data-check data-i18n="check">تحقق من الحل</button></div><div class="feedback" data-feedback aria-live="polite"></div></article>
+        </div>
+      </section>
+
+      <section class="view" data-view="result">
+        <div class="result-wrap">
+          <div class="result-icon" data-result-icon>✓</div>
+          <span class="eyebrow">LOCAL PROGRESS</span>
+          <h1 data-i18n="resultTitle">تقدمك في هذا الـDemo</h1>
+          <p data-result-copy></p>
+          <div class="big-progress"><div><span data-i18n="courseProgress">تقدم المسار المصغر</span><strong data-result-percent>0%</strong></div><div><span data-result-bar></span></div></div>
+          <div class="milestones"><span data-milestone="lesson"><i>01</i><b data-i18n="reviewLesson">مراجعة الدرس</b></span><span data-milestone="practice"><i>02</i><b data-i18n="solvePractice">حل التمرين</b></span><span data-milestone="progress"><i>03</i><b data-i18n="saveProgress">حفظ التقدم</b></span></div>
+          <button type="button" class="primary" data-back-lesson data-i18n="reviewAgain">راجع الدرس مرة أخرى</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+  <script src="./demo.js"></script>
+</body>
+</html>
