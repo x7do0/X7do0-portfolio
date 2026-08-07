@@ -167,7 +167,7 @@
       const icon = tx.type === 'income' ? '↗' : tx.category === 'transport' ? '🚕' : tx.category === 'shopping' ? '🛍️' : '☕';
       row.innerHTML = `
         <span class="tx-icon" aria-hidden="true">${icon}</span>
-        <div class="tx-copy"><strong>${transactionName(tx)}</strong><small>${categoryLabel(tx.category)} · ${formatTime(tx.at)}</small></div>
+        <div class="tx-copy"><strong>${transactionName(tx)}</strong><small>${categoryLabel(tx.category)} · <time dir="ltr" datetime="${new Date(tx.at).toISOString()}">${formatTime(tx.at)}</time></small></div>
         <strong class="tx-amount">${sign}${money(tx.amount)}</strong>
         <button class="delete" type="button" aria-label="${t('deleteLabel')}" data-delete="${tx.id}">×</button>`;
       row.querySelector('[data-delete]').addEventListener('click', () => deleteTransaction(tx.id));
