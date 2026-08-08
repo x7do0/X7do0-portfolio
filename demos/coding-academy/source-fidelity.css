@@ -94,7 +94,15 @@ html.is-embedded .sample,
 html.is-embedded .actions [data-reset],
 html.is-embedded .goal { display:none !important; }
 html.is-embedded .academy-shell { min-height:auto !important; }
-html.is-embedded .course-sidebar { height:auto !important; position:static !important; }
+html.is-embedded .topbar { min-height:54px !important; padding-block:6px !important; }
+html.is-embedded .academy-shell { grid-template-columns:220px minmax(0,1fr) !important; }
+html.is-embedded .course-sidebar { height:auto !important; padding:15px 12px !important; position:static !important; gap:14px !important; }
+html.is-embedded .workspace { padding:22px 28px 24px !important; }
+html.is-embedded .view-head h1 { font-size:2.8rem !important; }
+html.is-embedded .view-head p { margin-top:7px !important; }
+html.is-embedded .topic-grid { margin-top:17px !important; gap:10px !important; }
+html.is-embedded .topic-card { min-height:128px !important; padding:14px !important; }
+html.is-embedded .topic-note { margin-top:10px !important; }
 
 @media(max-width:760px){
   .course-sidebar { background:var(--academy-soft) !important; }

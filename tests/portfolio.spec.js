@@ -290,6 +290,58 @@ test('project demos provide project-specific guided flows in one viewport', asyn
   await expect(page.locator('[data-demo-guide-step="add"]')).toHaveClass(/is-current/);
 });
 
+test('project demos use short laptop and mobile space for a readable no-scroll presentation', async ({ page }) => {
+  const minimumDesktopScale = {
+    'enterprise-workflow': 0.89,
+    'coding-academy': 0.99,
+    mahsoob: 0.87,
+    masroofi: 0.99,
+  };
+
+  await page.setViewportSize({ width: 1536, height: 696 });
+  for (const slug of Object.keys(minimumDesktopScale)) {
+    await page.goto(`/projects/${slug}/`);
+    await page.locator('[data-demo-link]').click();
+    await page.locator('iframe[data-demo-fitted="true"]').waitFor();
+    await expectDemoFitsViewport(page);
+    const presentation = await page.locator('.project-inline-demo').evaluate((stage) => {
+      return {
+        scale: Number(getComputedStyle(stage).getPropertyValue('--demo-scale')),
+        guideFont: Number.parseFloat(getComputedStyle(stage.querySelector('[data-demo-guide-step] p')).fontSize),
+      };
+    });
+    expect(presentation.scale).toBeGreaterThanOrEqual(minimumDesktopScale[slug]);
+    expect(presentation.guideFont).toBeGreaterThanOrEqual(11.5);
+    await expect.poll(() => page.locator('.project-inline-demo iframe').evaluate((iframe) => (
+      iframe.contentDocument.documentElement.scrollHeight - iframe.clientHeight
+    ))).toBeLessThanOrEqual(2);
+  }
+
+  await page.goto('/projects/enterprise-workflow/');
+  await page.locator('[data-demo-link]').click();
+  const enterpriseFrame = page.frameLocator('.project-inline-demo iframe');
+  await expect.poll(() => enterpriseFrame.locator('.content-grid').evaluate((grid) => {
+    const panel = grid.querySelector('.requests-panel').getBoundingClientRect();
+    return panel.width / grid.getBoundingClientRect().width;
+  })).toBeGreaterThan(0.95);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const minimumMobileScale = {
+    'enterprise-workflow': 0.55,
+    'coding-academy': 0.55,
+    mahsoob: 0.43,
+    masroofi: 0.55,
+  };
+  for (const slug of Object.keys(minimumMobileScale)) {
+    await page.goto(`/projects/${slug}/`);
+    await page.locator('[data-demo-link]').click();
+    await page.locator('iframe[data-demo-fitted="true"]').waitFor();
+    await expectDemoFitsViewport(page);
+    const scale = await page.locator('.project-inline-demo').evaluate((stage) => Number(getComputedStyle(stage).getPropertyValue('--demo-scale')));
+    expect(scale).toBeGreaterThanOrEqual(minimumMobileScale[slug]);
+  }
+});
+
 test('project back control is prominent, fixed to the useful edge, and works in both directions', async ({ page }) => {
   for (const query of ['', '?lang=en']) {
     await page.goto(`/projects/enterprise-workflow/${query}`);

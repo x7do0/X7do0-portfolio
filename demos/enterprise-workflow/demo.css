@@ -41,8 +41,28 @@ html.is-embedded .brand-divider {
 }
 
 html.is-embedded .demo-header {
-  min-height: 64px;
+  min-height: 52px;
+  padding-block: 6px;
 }
+
+html.is-embedded body,
+html.is-embedded .demo-shell,
+html.is-embedded .demo-layout { min-height: 0; }
+html.is-embedded .demo-layout,
+html[dir="rtl"].is-embedded .demo-layout { grid-template-columns: minmax(0, 1fr) 220px; }
+html[dir="ltr"].is-embedded .demo-layout { grid-template-columns: 220px minmax(0, 1fr); }
+html.is-embedded .sidebar { position: static; height: auto; padding: 14px 10px; }
+html.is-embedded .workspace { padding: 20px 24px 22px; }
+html.is-embedded .workspace-head h1 { font-size: 2.55rem; }
+html.is-embedded .workspace-head > div > p:last-child { margin-top: 7px; }
+html.is-embedded .role-context { margin-block-start: 14px; padding: 10px 13px; }
+html.is-embedded .view-stack { margin-block-start: 14px; }
+html.is-embedded .metric-card { min-height: 90px; padding: 12px 16px; }
+html.is-embedded .metric-card strong { margin-block-start: 5px; font-size: 1.6rem; }
+html.is-embedded .metric-card small { margin-block-start: 7px; }
+html.is-embedded .content-grid { margin-block-start: 10px; grid-template-columns: 1fr; }
+html.is-embedded .panel { padding: 14px 16px; }
+html.is-embedded .empty-state { min-height: 92px; padding: 11px; }
 
 *,
 *::before,

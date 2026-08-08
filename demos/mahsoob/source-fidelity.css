@@ -74,7 +74,20 @@ body { background: var(--mahsoob-bg) !important; color: var(--mahsoob-text) !imp
 .receipt-logo { color: var(--mahsoob-brand) !important; }
 
 html.is-embedded .app-shell { min-height: auto !important; }
-html.is-embedded .sidebar { height: auto !important; position: static !important; }
+html.is-embedded .topbar { min-height:54px !important; height:54px !important; padding-inline:18px !important; }
+html.is-embedded .app-shell { grid-template-columns:1fr !important; }
+html.is-embedded .sidebar { display:none !important; }
+html.is-embedded .workspace { padding:14px 20px 18px !important; }
+html.is-embedded .page-head { margin-bottom:10px !important; }
+html.is-embedded .page-head h1 { font-size:2.15rem !important; }
+html.is-embedded .page-head p { margin-top:6px !important; }
+html.is-embedded .panel { padding:14px !important; }
+html.is-embedded .barcode-row { margin-top:10px !important; padding:10px !important; }
+html.is-embedded .product-grid { margin-top:10px !important; gap:8px !important; }
+html.is-embedded .product { padding:10px 12px !important; }
+html.is-embedded .cart-panel { min-height:450px !important; }
+html.is-embedded .empty { min-height:110px !important; }
+html.is-embedded .payment-box { padding-top:10px !important; }
 html.is-embedded .back,
 html.is-embedded .sample,
 html.is-embedded .top-actions [data-reset],
