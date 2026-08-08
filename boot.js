@@ -2,6 +2,7 @@
   "use strict";
 
   const html = document.documentElement;
+  html.style.visibility = "hidden";
   const requested = new URLSearchParams(location.search).get("lang");
   let stored = "ar";
   try {
@@ -19,6 +20,7 @@
   const reveal = () => {
     if (revealed) return;
     revealed = true;
+    html.style.removeProperty("visibility");
     html.classList.remove("portfolio-booting");
     html.classList.add("portfolio-ready");
   };
