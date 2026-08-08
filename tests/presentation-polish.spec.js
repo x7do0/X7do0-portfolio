@@ -21,11 +21,22 @@ async function jumpToSection(page, id) {
 
 test('editorial hero is complete in the first viewport and atmosphere changes through the page', async ({ page }) => {
   await page.goto('/');
+  const title = page.locator('#hero-title');
   const portrait = page.locator('.hero-portrait');
   const image = portrait.locator('img');
+  await expect(title).toBeVisible();
   await expect(portrait).toBeVisible();
   await expect(image).toBeVisible();
   expect(await image.evaluate((element) => element.complete && element.naturalWidth > 0)).toBeTruthy();
+
+  const titleBox = await title.boundingBox();
+  const portraitBox = await portrait.boundingBox();
+  expect(titleBox).not.toBeNull();
+  expect(portraitBox).not.toBeNull();
+  expect(titleBox.y).toBeLessThan(420);
+  expect(portraitBox.y).toBeLessThan(220);
+  expect(portraitBox.y + portraitBox.height).toBeGreaterThan(480);
+
   await page.screenshot({ path: 'artifacts/hero-initial-desktop.png' });
 
   const checkpoints = [
@@ -42,8 +53,20 @@ test('editorial hero is complete in the first viewport and atmosphere changes th
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await expect(page.locator('.hero-portrait')).toBeVisible();
-  await expect(page.locator('.hero-portrait img')).toBeVisible();
+  const mobileTitle = page.locator('#hero-title');
+  const mobilePortrait = page.locator('.hero-portrait');
+  await expect(mobileTitle).toBeVisible();
+  await expect(mobilePortrait).toBeVisible();
+  await expect(mobilePortrait.locator('img')).toBeVisible();
+
+  const mobileTitleBox = await mobileTitle.boundingBox();
+  const mobilePortraitBox = await mobilePortrait.boundingBox();
+  expect(mobileTitleBox).not.toBeNull();
+  expect(mobilePortraitBox).not.toBeNull();
+  expect(mobileTitleBox.y).toBeLessThan(330);
+  const visiblePortraitPixels = Math.min(844, mobilePortraitBox.y + mobilePortraitBox.height) - Math.max(0, mobilePortraitBox.y);
+  expect(visiblePortraitPixels).toBeGreaterThan(120);
+
   await page.screenshot({ path: 'artifacts/hero-initial-mobile.png' });
   await expectNoHorizontalOverflow(page);
 });
