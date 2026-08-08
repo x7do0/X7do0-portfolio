@@ -77,7 +77,8 @@ async function expectScrollAtmosphere(page) {
 
   await page.evaluate(() => {
     const target = document.getElementById('capabilities');
-    window.scrollTo(0, target ? target.offsetTop : document.body.scrollHeight * 0.55);
+    const absoluteTop = target ? target.getBoundingClientRect().top + window.scrollY : document.body.scrollHeight * 0.55;
+    window.scrollTo(0, Math.max(0, absoluteTop - window.innerHeight * 0.22));
   });
   await page.waitForTimeout(180);
 
