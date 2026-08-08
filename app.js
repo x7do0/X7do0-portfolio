@@ -196,6 +196,7 @@
   qsa("[data-language]").forEach((button) => button.addEventListener("click", () => {
     const language = button.dataset.language;
     if (language === state.language) return;
+    localStorage.setItem("x7do0-language", language);
     updateLanguageUrl(language);
     window.location.reload();
   }));

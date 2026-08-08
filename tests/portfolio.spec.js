@@ -43,6 +43,11 @@ test('English switches direction and keeps complete project content', async ({ p
   await expect(page.locator('[data-project="mahsoob"]')).toContainText('Offline-first');
   await expect(page.locator('[data-project="masroofi"]')).toContainText('IndexedDB');
   await expectNoOverflow(page);
+
+  await page.locator('[data-language="ar"]').click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  await expect(page.locator('h1')).toHaveText('حيدره مهند');
 });
 
 test('project details use real previews, source-backed facts, and an inline demo', async ({ page }) => {
