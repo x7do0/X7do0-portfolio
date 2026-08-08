@@ -64,7 +64,6 @@
       "previewKind": "workflow",
       "previewImage": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
       "previewAlt": "Enterprise Workflow employee dashboard in the light theme",
-      "previewCaption": "Employee workspace captured from the isolated E2E environment",
       "resumeSummary": "A self-hosted internal request and approval platform with dynamic routing, granular permissions, notifications, and audit history.",
       "cta": "Explore project",
       "links": [],
@@ -74,16 +73,12 @@
           "label": "Core roles with role-aware navigation"
         },
         {
-          "value": "IQD",
-          "label": "Fixed monetary policy for Iraq"
+          "value": "Multi-stage",
+          "label": "Approval routing shaped by company policy"
         },
         {
-          "value": "UTC",
-          "label": "Stored timestamps with Asia/Baghdad operations"
-        },
-        {
-          "value": "E2E",
-          "label": "Full approval journeys verified in an isolated environment"
+          "value": "Audit",
+          "label": "Traceable decisions and state changes"
         }
       ],
       "media": [
@@ -218,7 +213,6 @@
       "previewKind": "academy",
       "previewImage": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
       "previewAlt": "Arabic Python topic cards in Coding Academy",
-      "previewCaption": "Current topic-card interface after removing the deprecated final-project path",
       "resumeSummary": "An Arabic Python learning platform combining visual topic cards, detailed lessons, source files, and interactive exercises with local progress.",
       "cta": "Explore project",
       "links": [
@@ -344,10 +338,9 @@
       "slug": "mahsoob",
       "title": "Mahsoob",
       "category": "Windows application",
-      "summary": "An Arabic offline point-of-sale system for groceries, minimarkets, and small Iraqi shops, designed around cashier speed, IQD, and uninterrupted daily work.",
+      "summary": "An Arabic offline point-of-sale system for groceries, minimarkets, and small Iraqi shops, designed around cashier speed and uninterrupted daily work.",
       "facts": [
         "Offline-first",
-        "Iraqi dinar",
         "Built for Iraqi shops"
       ],
       "tech": [
@@ -357,9 +350,8 @@
       ],
       "previewKind": "mahsoob",
       "previewImage": "./assets/projects/mahsoob.png",
-      "previewAlt": "Source-faithful simulation of the Mahsoob checkout",
-      "previewCaption": "Source-faithful simulation",
-      "resumeSummary": "An offline-first Arabic point-of-sale system designed around cashier flow and Iraqi dinar workflows.",
+      "previewAlt": "Mahsoob main point-of-sale checkout interface",
+      "resumeSummary": "An offline-first Arabic point-of-sale system designed around a fast, uninterrupted cashier flow.",
       "cta": "Explore project",
       "media": [],
       "caseStudy": []
@@ -369,11 +361,11 @@
       "title": "Masroofi",
       "category": "Web application",
       "status": "Completed",
-      "summary": "A client-requested Arabic personal-finance product for recording income and expenses, seeing the derived balance immediately, and keeping private data on the device with validated backup, merge, and restore workflows.",
+      "summary": "A client-requested Arabic personal-finance product for recording income and expenses, seeing the balance immediately, and keeping private data on the device with validated backup, merge, and restore workflows.",
       "facts": [
         "Instant derived balance",
         "Validated backup and restore",
-        "RTL, IQD, and local-first data"
+        "Arabic RTL and local-first data"
       ],
       "tech": [
         "React 19",
@@ -385,7 +377,6 @@
       "previewKind": "masroofi",
       "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.png",
       "previewAlt": "Masroofi Arabic balance dashboard with sample transactions",
-      "previewCaption": "Current product UI captured locally from the verified source",
       "resumeSummary": "A client-requested Arabic income and expense tracker with local-first storage, instant balance calculation, and safe backup and restore.",
       "cta": "Explore project",
       "links": [
@@ -401,10 +392,6 @@
         }
       ],
       "metrics": [
-        {
-          "value": "IQD",
-          "label": "Currency formatted for Iraqi use"
-        },
         {
           "value": "4",
           "label": "Focused views: home, income, expenses, history"
@@ -722,7 +709,6 @@
     "tryDemo": "Try interactive simulation",
     "demoHint": "The simulation stays inside this portfolio and uses sample data only.",
     "mediaTitle": "Product walkthrough",
-    "mediaDescription": "Authentic screens captured from the current verified source and safe sample data.",
     "mediaPending": "Media will be added once approved.",
     "mediaNavigation": "Screenshot navigation",
     "previousImage": "Previous screenshot",
@@ -730,7 +716,10 @@
     "detailsTitle": "Case study",
     "detailsPending": "Details will be completed after accurate project information is approved, without assumptions or exaggeration.",
     "keyFacts": "Key project facts",
-    "enlargeImage": "Open larger image"
+    "enlargeImage": "Open larger image",
+    "otherProjectsTitle": "Explore other projects",
+    "otherProjectsDescription": "Continue directly to another project without returning to the home page.",
+    "openProject": "Open project"
   },
   "resume": {
     "title": "Resume",

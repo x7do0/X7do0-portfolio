@@ -71,12 +71,7 @@
       </button>`).join("");
 
     study.innerHTML = `
-      <section class="case-intro shell reveal">
-        <div><span class="case-kicker">${project.status}</span><h2>${project.caseStudy.title}</h2><p>${project.caseStudy.intro}</p></div>
-        <ul class="case-metrics" aria-label="${content.projectPage.keyFacts}">${metricMarkup}</ul>
-      </section>
-      <section class="case-story"><div class="shell"><header class="case-heading reveal"><span>02</span><h2>${content.projectPage.detailsTitle}</h2></header><div class="case-sections">${sectionMarkup}</div></div></section>
-      <section class="case-gallery shell"><header class="case-heading reveal"><span>03</span><div><h2>${content.projectPage.mediaTitle}</h2><p>${content.projectPage.mediaDescription}</p></div></header>
+      <section class="case-gallery shell"><header class="case-heading reveal"><span>02</span><div><h2>${content.projectPage.mediaTitle}</h2></div></header>
         <div class="case-media-browser reveal${featured.device === "phone" ? " is-phone-media" : ""}" data-media-browser tabindex="-1">
           <figure class="case-media-main" id="case-media-panel" role="tabpanel">
             <button class="case-media-main__open" type="button" data-media-open aria-label="${content.projectPage.enlargeImage}: ${featured.alt}">
@@ -94,8 +89,14 @@
             <p data-media-caption>${featured.caption}</p>
           </div>
         </div>
-      </section>`;
-    qs(".project-overview").after(study);
+      </section>
+      <section class="case-intro shell reveal">
+        <div><span class="case-kicker">${project.status}</span><h2>${project.caseStudy.title}</h2><p>${project.caseStudy.intro}</p></div>
+        <ul class="case-metrics" aria-label="${content.projectPage.keyFacts}">${metricMarkup}</ul>
+      </section>
+      <section class="case-story"><div class="shell"><header class="case-heading reveal"><span>03</span><h2>${content.projectPage.detailsTitle}</h2></header><div class="case-sections">${sectionMarkup}</div></div></section>`;
+    qs(".project-overview")?.remove();
+    qs(".project-hero").after(study);
 
     const browser = qs("[data-media-browser]", study);
     const mainImage = qs("[data-media-main-image]", browser);
@@ -173,6 +174,24 @@
       dialog.showModal();
       qs("[data-lightbox-close]", dialog).focus();
     });
+  }
+
+  function renderRelatedProjects(project, content) {
+    qs(".project-related")?.remove();
+    const related = content.projects.filter((item) => item.slug !== project.slug);
+    if (!related.length) return;
+
+    const section = document.createElement("section");
+    section.className = "project-related shell";
+    section.innerHTML = `
+      <header class="case-heading reveal"><span>04</span><div><h2>${content.projectPage.otherProjectsTitle}</h2><p>${content.projectPage.otherProjectsDescription}</p></div></header>
+      <div class="project-related__grid">
+        ${related.map((item) => `<a class="project-related__card reveal" href="${root}projects/${item.slug}/${language === "en" ? "?lang=en" : ""}">
+          <span class="project-related__image"><img src="${root}${item.previewImage.replace(/^\.\//, "")}" alt="${item.previewAlt}" width="640" height="400" loading="lazy" decoding="async"></span>
+          <span class="project-related__body"><small>${item.category}</small><strong>${item.title}</strong><span>${item.summary}</span><b>${content.projectPage.openProject}</b></span>
+        </a>`).join("")}
+      </div>`;
+    qs("main").appendChild(section);
   }
 
   async function loadContent(nextLanguage) {
@@ -307,10 +326,11 @@ print(name)</code></pre>
       element.textContent = pageText[element.dataset.pageText] ?? element.textContent;
     });
 
-    qs("#project-preview").innerHTML = `<figure class="project-source-preview"><img src="${root}${project.previewImage.replace(/^\.\//, "")}" alt="${project.previewAlt}" width="800" height="450"><figcaption>${project.previewCaption}</figcaption></figure>`;
+    qs("#project-preview").innerHTML = `<figure class="project-source-preview"><img src="${root}${project.previewImage.replace(/^\.\//, "")}" alt="${project.previewAlt}" width="800" height="450"></figure>`;
     qs("#project-preview").setAttribute("aria-label", content.projectPage.previewTitle);
     renderProjectLinks(project, content);
     renderCaseStudy(project, content);
+    renderRelatedProjects(project, content);
     qs("[data-brand-name]").textContent = content.brand.name;
     qs("[data-year]").textContent = String(new Date().getFullYear());
     qs("[data-ui-top]").textContent = content.ui.top;

@@ -116,6 +116,7 @@ test('project details use real previews, source-backed facts, and an inline demo
   for (const slug of ['enterprise-workflow', 'coding-academy', 'masroofi']) {
     await page.goto(`/projects/${slug}/`);
     await expect(page.locator('.project-source-preview img')).toBeVisible();
+    await expect(page.locator('.project-source-preview figcaption')).toHaveCount(0);
     await expect(page.locator('.project-case-study')).toBeVisible();
     await expect(page.locator('.case-section')).toHaveCount(4);
     await expect(page.locator('.case-media-main img')).toHaveCount(1);
@@ -127,6 +128,17 @@ test('project details use real previews, source-backed facts, and an inline demo
     await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', new RegExp(`/demos/${slug}/`));
     await page.locator('.project-inline-demo button').click();
     await expect(page.locator('.project-inline-demo')).toHaveCount(0);
+    await expect(page.locator('.project-overview')).toHaveCount(0);
+    await expect(page.locator('.project-related__card')).toHaveCount(3);
+    expect(await page.evaluate(() => {
+      const hero = document.querySelector('.project-hero');
+      const gallery = document.querySelector('.case-gallery');
+      const intro = document.querySelector('.case-intro');
+      const story = document.querySelector('.case-story');
+      const related = document.querySelector('.project-related');
+      const follows = (first, second) => Boolean(first.compareDocumentPosition(second) & Node.DOCUMENT_POSITION_FOLLOWING);
+      return follows(hero, gallery) && follows(gallery, intro) && follows(intro, story) && follows(story, related) && related === document.querySelector('main').lastElementChild;
+    })).toBeTruthy();
     await expectNoOverflow(page);
   }
 
@@ -135,10 +147,64 @@ test('project details use real previews, source-backed facts, and an inline demo
   await expect(page.locator('.project-future.has-content')).toBeVisible();
   await expect(page.locator('.future-panel')).toHaveCount(2);
   await expect(page.locator('.project-case-study')).toHaveCount(0);
+  await expect(page.locator('.project-related__card')).toHaveCount(3);
+  await expect(page.locator('main > .project-related')).toBeVisible();
 
   await page.goto('/projects/coding-academy/?demo=1#demo');
   await expect(page.locator('.project-inline-demo')).toBeVisible();
   await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', /\/demos\/coding-academy\//);
+});
+
+test('project pages keep internal copy useful and avoid technical capture labels', async ({ page }) => {
+  const removedPhrases = [
+    'لقطة فعلية من بيئة E2E المعزولة',
+    'واجهة البطاقات الحالية بعد إزالة مسار المشروع الختامي القديم',
+    'محاكاة مصدرية للواجهة',
+    'واجهة المنتج الحالية ملتقطة من المصدر المدقق',
+    'captured from the isolated E2E environment',
+    'after removing the deprecated final-project path',
+    'Source-faithful simulation',
+    'captured locally from the verified source',
+  ];
+
+  for (const languageQuery of ['', '?lang=en']) {
+    for (const slug of ['enterprise-workflow', 'coding-academy', 'mahsoob', 'masroofi']) {
+      await page.goto(`/projects/${slug}/${languageQuery}`);
+      const body = await page.locator('body').innerText();
+      for (const phrase of removedPhrases) expect(body).not.toContain(phrase);
+      await expect(page.locator('.project-related__card')).toHaveCount(3);
+    }
+  }
+
+  await page.goto('/projects/enterprise-workflow/');
+  await expect(page.locator('.case-metrics')).not.toContainText(/IQD|UTC|Asia\/Baghdad/);
+  await page.goto('/projects/masroofi/?lang=en');
+  await expect(page.locator('.case-metrics')).not.toContainText(/IQD|currency/i);
+});
+
+test('refresh and browser back return every visited page to the top', async ({ page }) => {
+  await page.goto('/projects/enterprise-workflow/');
+  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+  expect(await page.evaluate(() => scrollY)).toBeGreaterThan(300);
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
+
+  await page.locator('.project-related__card').first().scrollIntoViewIfNeeded();
+  const originalUrl = page.url();
+  await page.locator('.project-related__card').first().click();
+  await expect(page).not.toHaveURL(originalUrl);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
+  await page.goBack();
+  await expect(page).toHaveURL(originalUrl);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
+
+  await page.goto('/');
+  const details = page.locator('[data-project="enterprise-workflow"] .button--quiet');
+  await details.click();
+  await expect(page).toHaveURL(/\/projects\/enterprise-workflow\//);
+  await page.goBack();
+  await expect(page).toHaveURL(/\/$/);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
 });
 
 test('public product links and media lightbox are explicit and keyboard-safe', async ({ page }) => {
