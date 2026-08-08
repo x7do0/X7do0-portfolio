@@ -73,10 +73,11 @@
   "technologiesSection": {
     "title": "اللغات والتقنيات",
     "groups": [
-      { "title": "Backend", "items": [{"name":"C#","mark":"C#"},{"name":".NET","mark":".N"},{"name":"ASP.NET Core","mark":"API"},{"name":"EF Core","mark":"EF"}] },
-      { "title": "Data", "items": [{"name":"SQL Server","mark":"SQL"},{"name":"SQLite","mark":"DB"}] },
-      { "title": "Web", "items": [{"name":"JavaScript","mark":"JS"},{"name":"TypeScript","mark":"TS"},{"name":"React","mark":"R"}] },
-      { "title": "Languages", "items": [{"name":"Python","mark":"Py"},{"name":"C++","mark":"C++"},{"name":"GitHub","mark":"GH"}] }
+      { "title": "لغات البرمجة", "items": [{"name":"C++","icon":"cpp"},{"name":"Python","icon":"python"},{"name":"C#","icon":"csharp"}] },
+      { "title": "منظومة \u2066C#\u2069 و\u2066.NET\u2069", "items": [{"name":".NET","icon":"dotnet"},{"name":"ASP.NET Core","icon":"aspnet"},{"name":"EF Core","icon":"efcore"}] },
+      { "title": "التحكم بالإصدارات", "items": [{"name":"GitHub","icon":"github"}] },
+      { "title": "قواعد البيانات", "items": [{"name":"SQL Server","icon":"sqlserver"},{"name":"SQLite","icon":"sqlite"}] },
+      { "title": "تقنيات الويب", "items": [{"name":"JavaScript","icon":"javascript"},{"name":"TypeScript","icon":"typescript"},{"name":"React","icon":"react"}] }
     ]
   },
   "education": {

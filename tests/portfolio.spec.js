@@ -24,7 +24,18 @@ test('home identifies Haidara and routes every demo to its project page', async 
   await expect(page.locator('.project-actions a')).toHaveCount(8);
   await expect(page.locator('.skill-primary')).toHaveCount(1);
   await expect(page.locator('.skill-item')).toHaveCount(5);
+  await expect(page.locator('.technology-group')).toHaveCount(5);
   await expect(page.locator('.technology-mark')).toHaveCount(12);
+  await expect(page.locator('.technology-logo svg')).toHaveCount(12);
+  await expect(page.locator('.technology-mark').nth(0)).toContainText('C++');
+  await expect(page.locator('.technology-mark').nth(1)).toContainText('Python');
+  await expect(page.locator('.technology-mark').nth(2)).toContainText('C#');
+  await expect(page.locator('.technology-mark').nth(3)).toContainText('.NET');
+  const technologyComesFirst = await page.evaluate(() => Boolean(document.querySelector('.technology-section').compareDocumentPosition(document.querySelector('.skills-showcase')) & Node.DOCUMENT_POSITION_FOLLOWING));
+  expect(technologyComesFirst).toBeTruthy();
+  await expect(page.locator('.contact-link[data-social="github"] svg')).toBeVisible();
+  await expect(page.locator('.contact-link[data-social="youtube"] .youtube-body')).toBeVisible();
+  await expect(page.locator('.knowledge .youtube-body')).toBeVisible();
 
   const listWidth = await page.locator('#project-list').evaluate(element => element.getBoundingClientRect().width);
   expect(listWidth).toBeLessThanOrEqual(1120);
