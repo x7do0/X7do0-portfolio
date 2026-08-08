@@ -19,6 +19,19 @@ async function expectNoOverflow(page) {
   expect(widths.page).toBeLessThanOrEqual(widths.viewport + 1);
 }
 
+async function expectDemoFitsViewport(page) {
+  await expect.poll(() => page.locator('.project-inline-demo').evaluate((stage) => {
+    const frame = stage.querySelector('.project-demo-frame').getBoundingClientRect();
+    const iframe = stage.querySelector('iframe').getBoundingClientRect();
+    const bounds = stage.getBoundingClientRect();
+    return bounds.left >= 0 && bounds.top >= 0
+      && bounds.right <= innerWidth + 1 && bounds.bottom <= innerHeight + 1
+      && iframe.left >= frame.left - 1 && iframe.top >= frame.top - 1
+      && iframe.right <= frame.right + 1 && iframe.bottom <= frame.bottom + 1;
+  })).toBeTruthy();
+  await expect(page.locator('body')).toHaveCSS('overflow', 'hidden');
+}
+
 async function expectApprovedPublicIdentity(page) {
   await expect(page.locator('body')).not.toContainText(forbiddenEmail);
   await expect(page.locator('body')).not.toContainText(unapprovedNetwork);
@@ -162,11 +175,13 @@ test('project details use real previews, source-backed facts, and an inline demo
     await expect(page.locator('.project-future')).toHaveCount(0);
     await page.locator('[data-demo-link]').click();
     await expect(page.locator('.project-inline-demo')).toBeVisible();
+    await expect(page.locator('.project-demo-companion')).toBeVisible();
     await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', new RegExp(`/demos/${slug}/`));
     await expect.poll(() => page.locator('.project-inline-demo iframe').evaluate((iframe) => {
       const frameDocument = iframe.contentDocument;
       return Boolean(frameDocument?.body) && Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight) <= iframe.clientHeight + 2;
     })).toBeTruthy();
+    await expectDemoFitsViewport(page);
     await page.locator('[data-demo-close]').click();
     await expect(page.locator('.project-inline-demo')).toHaveCount(0);
     await expect(page.locator('.project-overview')).toHaveCount(0);
@@ -195,6 +210,8 @@ test('project details use real previews, source-backed facts, and an inline demo
     const frameDocument = iframe.contentDocument;
     return Boolean(frameDocument?.body) && Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight) <= iframe.clientHeight + 2;
   })).toBeTruthy();
+  await expect(page.locator('.project-demo-companion')).toBeVisible();
+  await expectDemoFitsViewport(page);
 
   await page.goto('/projects/coding-academy/?demo=1#demo');
   await expect(page.locator('.project-inline-demo')).toBeVisible();
@@ -211,9 +228,7 @@ test('embedded Enterprise demo keeps portfolio controls outside the product and 
   await expect(stage).toBeVisible();
   await expect(stage.locator('.project-demo-companion')).toBeVisible();
   await expect(stage.locator('iframe')).toHaveAttribute('src', /embedded=1/);
-  const stageBox = await stage.boundingBox();
-  expect(stageBox.width).toBeLessThanOrEqual(962);
-  expect(stageBox.width).toBeLessThan(1200);
+  await expectDemoFitsViewport(page);
 
   await expect(frame.locator('.role-panel')).toBeHidden();
   await expect(frame.locator('.guide-panel')).toBeHidden();
@@ -224,6 +239,87 @@ test('embedded Enterprise demo keeps portfolio controls outside the product and 
   await page.locator('[data-demo-role="employee"]').click();
   await expect(frame.locator('[data-create-request]')).toBeVisible();
   await expect(page.locator('[data-demo-guide-step="create"]')).toHaveClass(/is-current/);
+});
+
+test('project demos provide project-specific guided flows in one viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+
+  await page.goto('/projects/coding-academy/?lang=en');
+  await page.locator('[data-demo-link]').click();
+  await expect(page.locator('[data-demo-role]')).toHaveCount(0);
+  await expect(page.locator('[data-demo-guide-step]')).toHaveCount(4);
+  await expectDemoFitsViewport(page);
+  let frame = page.frameLocator('.project-inline-demo iframe');
+  await frame.locator('[data-open-lesson]').click();
+  await expect(page.locator('[data-demo-guide-step="lesson"]')).toHaveClass(/is-current/);
+  await frame.locator('[data-go-practice]').click();
+  await expect(page.locator('[data-demo-guide-step="practice"]')).toHaveClass(/is-current/);
+  await frame.locator('[data-check]').click();
+  await expect(page.locator('[data-demo-guide-step="result"]')).toHaveClass(/is-current/, { timeout: 2000 });
+  await page.locator('[data-demo-reset]').click();
+  await expect(page.locator('[data-demo-guide-step="topics"]')).toHaveClass(/is-current/);
+
+  await page.goto('/projects/mahsoob/?lang=en');
+  await page.locator('[data-demo-link]').click();
+  await expect(page.locator('[data-demo-role]')).toHaveCount(0);
+  await expect(page.locator('[data-demo-guide-step]')).toHaveCount(4);
+  await expectDemoFitsViewport(page);
+  frame = page.frameLocator('.project-inline-demo iframe');
+  await frame.locator('[data-product]').first().click();
+  await expect(page.locator('[data-demo-guide-step="payment"]')).toHaveClass(/is-current/);
+  await frame.locator('[data-cash]').fill('100000');
+  await expect(page.locator('[data-demo-guide-step="checkout"]')).toHaveClass(/is-current/);
+  await frame.locator('[data-checkout]').click();
+  await expect(page.locator('[data-demo-guide-step="receipt"]')).toHaveClass(/is-current/);
+  await page.locator('[data-demo-reset]').click();
+  await expect(frame.locator('[data-receipt]')).not.toHaveAttribute('open', '');
+  await expect(page.locator('[data-demo-guide-step="product"]')).toHaveClass(/is-current/);
+
+  await page.goto('/projects/masroofi/?lang=en');
+  await page.locator('[data-demo-link]').click();
+  await expect(page.locator('[data-demo-role]')).toHaveCount(0);
+  await expect(page.locator('[data-demo-guide-step]')).toHaveCount(3);
+  await expectDemoFitsViewport(page);
+  frame = page.frameLocator('.project-inline-demo iframe');
+  await frame.locator('[data-add-expense]').click();
+  await frame.locator('[data-form]').evaluate((form) => form.requestSubmit());
+  await expect(page.locator('[data-demo-guide-step="delete"]')).toHaveClass(/is-current/);
+  await frame.locator('[data-transaction-id^="demo-"] [data-delete]').click();
+  await expect(page.locator('[data-demo-guide-step="delete"]')).toHaveClass(/is-complete/);
+  await page.locator('[data-demo-reset]').click();
+  await expect(page.locator('[data-demo-guide-step="add"]')).toHaveClass(/is-current/);
+});
+
+test('project back control is prominent, fixed to the useful edge, and works in both directions', async ({ page }) => {
+  for (const query of ['', '?lang=en']) {
+    await page.goto(`/projects/enterprise-workflow/${query}`);
+    const back = page.locator('.inner-back');
+    await expect(back).toBeVisible();
+    await expect(back).toHaveAttribute('href', /#projects$/);
+    const visual = await back.evaluate((element) => {
+      const box = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      return { left: box.left, width: box.width, height: box.height, border: style.borderTopWidth, background: style.backgroundImage };
+    });
+    expect(visual.left).toBeLessThanOrEqual(80);
+    expect(visual.width).toBeGreaterThanOrEqual(46);
+    expect(visual.height).toBeGreaterThanOrEqual(44);
+    expect(visual.border).not.toBe('0px');
+    expect(visual.background).not.toBe('none');
+    await back.click();
+    await expect(page).toHaveURL(/\/(?:\?lang=en)?#projects$/);
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/projects/enterprise-workflow/');
+  const overlaps = await page.evaluate(() => {
+    const back = document.querySelector('.inner-back').getBoundingClientRect();
+    const brand = document.querySelector('.inner-header__content > .brand').getBoundingClientRect();
+    const language = document.querySelector('.inner-header .language-switch').getBoundingClientRect();
+    const intersects = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+    return intersects(back, brand) || intersects(back, language);
+  });
+  expect(overlaps).toBeFalsy();
 });
 
 test('project pages keep internal copy useful and avoid technical capture labels', async ({ page }) => {

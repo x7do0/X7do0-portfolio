@@ -20,6 +20,7 @@
   Object.assign(i18n.en,{topics:'Topics',topicsTitle:'Choose a summary and start',topicsCopy:'Each card summarizes a topic before opening its lesson and practice.',twelveTopics:'12 topics',variables:'Variables and printing',conditions:'Conditions and decisions',loops:'Loops and repetition',lists:'Lists and data',functions:'Functions',dictionaries:'Dictionaries',readyLesson:'Lesson + example + practice',summaryCard:'Summary card',topicNote:'This is a sample of the platform’s 12 topic cards. The variables card is active in this demo.'});
   let language=new URLSearchParams(location.search).get('lang')==='en'||localStorage.getItem(LANGUAGE_KEY)==='en'?'en':'ar';
   let theme=localStorage.getItem(THEME_KEY)==='dark'?'dark':'light';
+  const embedded=new URLSearchParams(location.search).get('embedded')==='1';
   let toastTimer;
 
   function defaultState(){return{view:'topics',lessonReviewed:false,practiceSolved:false};}
@@ -28,6 +29,15 @@
   function save(){sessionStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
   function t(k){return i18n[language][k]||k}
   function percent(){return state.practiceSolved?100:state.lessonReviewed?50:0}
+  function notifyParent(){
+    if(!embedded||parent===window)return;
+    parent.postMessage({source:'coding-academy-demo',type:'state',progress:{
+      topics:state.lessonReviewed?'complete':state.view==='topics'?'current':'idle',
+      lesson:state.view==='lesson'?'current':state.lessonReviewed?'complete':'idle',
+      practice:state.practiceSolved?'complete':state.view==='practice'?'current':'idle',
+      result:state.view==='result'?'current':state.practiceSolved?'complete':'idle'
+    }},location.origin);
+  }
 
   function showToast(text){const el=qs('[data-toast]');el.textContent=text;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1800)}
 
@@ -48,6 +58,7 @@
     const value=percent();qs('[data-progress-label]').textContent=`${value}%`;qs('[data-progress-bar]').style.width=`${value}%`;qs('[data-result-percent]').textContent=`${value}%`;qs('[data-result-bar]').style.width=`${value}%`;
     qs('[data-result-copy]').textContent=t(state.practiceSolved?'resultAfter':'resultBefore');
     qs('[data-milestone="lesson"]').classList.toggle('done',state.lessonReviewed);qs('[data-milestone="practice"]').classList.toggle('done',state.practiceSolved);qs('[data-milestone="progress"]').classList.toggle('done',state.practiceSolved);
+    notifyParent();
   }
 
   function validPython(code){
@@ -76,6 +87,7 @@
   qs('button[data-theme]').addEventListener('click',()=>{theme=theme==='light'?'dark':'light';applyTheme()});
   qs('[data-lang]').addEventListener('click',()=>{language=language==='ar'?'en':'ar';applyLanguage();renderProgress()});
   qs('[data-reset]').addEventListener('click',reset);
+  addEventListener('message',event=>{if(embedded&&event.origin===location.origin&&event.data?.source==='x7do0-portfolio'&&event.data.type==='reset')reset()});
 
   applyLanguage();applyTheme();setView(state.view);renderProgress();
 })();

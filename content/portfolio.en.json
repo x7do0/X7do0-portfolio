@@ -726,13 +726,53 @@
     "demoManager": "Manager",
     "demoReset": "Reset demo",
     "demoGuideTitle": "Suggested demo path",
-    "demoGuide": [
-      "Create a request in the Employee view",
-      "Submit the request for review",
-      "Switch to the Manager role",
-      "Review and approve the request",
-      "Return to Employee and verify the status"
-    ]
+    "demoExperiences": {
+      "enterprise-workflow": {
+        "mark": "WF",
+        "title": "Test the complete request cycle",
+        "description": "Start as an employee, switch to the manager for review, then return to verify the outcome.",
+        "roles": true,
+        "steps": [
+          { "id": "create", "text": "Create a request in the Employee view" },
+          { "id": "submit", "text": "Submit the request for review" },
+          { "id": "switch", "text": "Switch to the Manager role" },
+          { "id": "approve", "text": "Review and approve the request" },
+          { "id": "verify", "text": "Return to Employee and verify the status" }
+        ]
+      },
+      "coding-academy": {
+        "mark": "CODE",
+        "title": "Complete a short learning journey",
+        "description": "Move from a topic card to the lesson, apply the idea in the Python editor, and see your progress.",
+        "steps": [
+          { "id": "topics", "text": "Choose the variables and printing card" },
+          { "id": "lesson", "text": "Review the explanation and code example" },
+          { "id": "practice", "text": "Open the exercise and write the solution" },
+          { "id": "result", "text": "Check the solution and view your progress" }
+        ]
+      },
+      "mahsoob": {
+        "mark": "POS",
+        "title": "Complete a demo sale",
+        "description": "Try the cashier's core path from choosing a product through payment and receipt.",
+        "steps": [
+          { "id": "product", "text": "Add a product to the cart" },
+          { "id": "payment", "text": "Enter the received cash" },
+          { "id": "checkout", "text": "Complete the sale" },
+          { "id": "receipt", "text": "Review the demo receipt" }
+        ]
+      },
+      "masroofi": {
+        "mark": "IQD",
+        "title": "Watch the balance update instantly",
+        "description": "Add a demo expense, observe the totals, then delete it to restore the balance.",
+        "steps": [
+          { "id": "add", "text": "Add a new expense" },
+          { "id": "totals", "text": "Observe the updated balance and total" },
+          { "id": "delete", "text": "Delete the expense and verify the restored values" }
+        ]
+      }
+    }
   },
   "resume": {
     "title": "Resume",

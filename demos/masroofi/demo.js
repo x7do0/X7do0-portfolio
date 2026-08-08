@@ -68,6 +68,7 @@
   }
 
   let language = initialLanguage();
+  const embedded = new URLSearchParams(location.search).get('embedded') === '1';
   let state = loadState();
   let toastTimer = null;
 
@@ -184,6 +185,13 @@
     renderTransactions();
     renderGuide();
     saveState();
+    if (embedded && parent !== window) {
+      parent.postMessage({ source: 'masroofi-demo', type: 'state', progress: {
+        add: state.createdDemoExpense ? 'complete' : 'current',
+        totals: state.sawUpdatedTotals ? 'complete' : 'idle',
+        delete: state.deletedDemoExpense ? 'complete' : state.createdDemoExpense ? 'current' : 'idle'
+      } }, location.origin);
+    }
   }
 
   function openDialog() {
@@ -238,6 +246,9 @@
     createExpense(event.currentTarget);
   });
   qs('[data-reset]').addEventListener('click', reset);
+  addEventListener('message', (event) => {
+    if (embedded && event.origin === location.origin && event.data?.source === 'x7do0-portfolio' && event.data.type === 'reset') reset();
+  });
   qs('[data-lang]').addEventListener('click', () => {
     language = language === 'ar' ? 'en' : 'ar';
     applyLanguage();
