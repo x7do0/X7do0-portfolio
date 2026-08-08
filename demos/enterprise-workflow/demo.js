@@ -3,6 +3,8 @@
 
   const STORAGE_KEY = "x7do0-ew-demo-state-v1";
   const LANGUAGE_KEY = "x7do0-language";
+  const embedded = new URLSearchParams(location.search).get("embedded") === "1";
+  document.documentElement.classList.toggle("is-embedded", embedded);
 
   const translations = {
     ar: {
@@ -532,6 +534,16 @@
     });
   }
 
+  function notifyHost() {
+    if (!embedded || parent === window) return;
+    parent.postMessage({
+      source: "enterprise-workflow-demo",
+      type: "state",
+      role: state.role,
+      progress: guideProgress(),
+    }, location.origin);
+  }
+
   function render() {
     applyLanguage();
     renderRole();
@@ -542,6 +554,7 @@
     renderAudit();
     renderGuide();
     saveState();
+    notifyHost();
   }
 
   function openCreateDialog() {
@@ -705,6 +718,12 @@
       dialog.addEventListener("click", (event) => {
         if (event.target === dialog) dialog.close();
       });
+    });
+
+    addEventListener("message", (event) => {
+      if (!embedded || event.origin !== location.origin || event.data?.source !== "x7do0-portfolio") return;
+      if (event.data.type === "set-role") switchRole(event.data.role);
+      if (event.data.type === "reset") resetDemo();
     });
   }
 

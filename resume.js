@@ -5,7 +5,7 @@
   const requestedLanguage = new URLSearchParams(location.search).get("lang");
   let language = requestedLanguage === "en"
     ? "en"
-    : localStorage.getItem("x7do0-language") === "en" ? "en" : "ar";
+    : requestedLanguage === "ar" ? "ar" : localStorage.getItem("x7do0-language") === "en" ? "en" : "ar";
 
   const qs = (selector, parent = document) => parent.querySelector(selector);
   const qsa = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -141,6 +141,7 @@
     qs('meta[property="og:title"]').content = document.title;
     qs('meta[property="og:description"]').content = content.resume.summary;
     qs('link[rel="canonical"]').href = `https://x7do0.github.io/X7do0-portfolio/resume/${language === "en" ? "?lang=en" : ""}`;
+    await window.portfolioReady?.();
   }
 
   function setupMotion() {
@@ -174,6 +175,7 @@
   setupMotion();
   render(language, false).catch((error) => {
     console.error(error);
+    window.portfolioReady?.();
     location.href = root;
   });
 })();

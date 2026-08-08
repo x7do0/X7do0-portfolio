@@ -22,6 +22,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+html.portfolio-booting body { visibility: hidden; }
 body {
   margin: 0;
   min-width: 320px;
@@ -59,6 +60,8 @@ svg { width: 1.35em; fill: none; stroke: currentColor; stroke-linecap: round; st
 .language-switch { border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
 .language-switch button { border: 0; border-radius: 999px; background: transparent; color: var(--muted); padding: 5px 10px; cursor: pointer; font-size: 0.76rem; }
 .language-switch button[aria-pressed="true"] { background: var(--surface-strong); color: var(--text); }
+.site-header .header-inner, .inner-header__content { position: relative; padding-right: 150px; }
+.site-header .language-switch, .inner-header .language-switch { position: absolute; z-index: 4; top: 50%; right: 0; left: auto; direction: ltr; transform: translateY(-50%); }
 .menu-button { display: none; width: 40px; height: 40px; border: 1px solid var(--line); background: transparent; border-radius: 6px; cursor: pointer; place-content: center; gap: 6px; }
 .menu-button > span:not(.sr-only) { display: block; width: 17px; height: 1px; background: currentColor; }
 .mobile-menu { display: none; }
@@ -255,6 +258,9 @@ html[dir="rtl"] .resume-action .button svg { transform: scaleX(-1); }
   .container { width: min(100% - 32px, var(--container)); }
   .site-header .container { width: min(100% - 24px, var(--container)); }
   .header-inner { min-height: 62px; }
+  .site-header .header-inner { padding-right: 164px; }
+  .site-header .language-switch { right: 50px; }
+  .inner-header__content { padding-right: 132px; }
   .language-switch button { padding: 4px 8px; }
   .hero { padding-block: 58px 54px; grid-template-columns: 1fr; gap: 36px; }
   .hero h1 { font-size: clamp(3rem, 17vw, 5.3rem); }

@@ -719,7 +719,20 @@
     "enlargeImage": "Open larger image",
     "otherProjectsTitle": "Explore other projects",
     "otherProjectsDescription": "Continue directly to another project without returning to the home page.",
-    "openProject": "Open project"
+    "openProject": "Open project",
+    "demoControlsTitle": "Demo controls",
+    "demoRoleLabel": "Choose role",
+    "demoEmployee": "Employee",
+    "demoManager": "Manager",
+    "demoReset": "Reset demo",
+    "demoGuideTitle": "Suggested demo path",
+    "demoGuide": [
+      "Create a request in the Employee view",
+      "Submit the request for review",
+      "Switch to the Manager role",
+      "Review and approve the request",
+      "Return to Employee and verify the status"
+    ]
   },
   "resume": {
     "title": "Resume",

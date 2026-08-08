@@ -7,10 +7,11 @@
   const queryLanguage = new URLSearchParams(location.search).get("lang");
   let language = queryLanguage === "en"
     ? "en"
-    : localStorage.getItem("x7do0-language") === "en" ? "en" : "ar";
+    : queryLanguage === "ar" ? "ar" : localStorage.getItem("x7do0-language") === "en" ? "en" : "ar";
 
   const qs = (selector, parent = document) => parent.querySelector(selector);
   const qsa = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+  let demoHostCleanup = null;
 
   function renderProjectLinks(project, content) {
     const actions = qs(".project-demo-actions");
@@ -62,8 +63,8 @@
     const mediaUrl = (item) => `${root}${item.src.replace(/^\.\//, "")}`;
     const mediaDimensions = (item) => item.device === "phone" ? { width: 390, height: 844 } : { width: 1440, height: 960 };
     const featuredDimensions = mediaDimensions(featured);
-    const previousGlyph = language === "ar" ? "›" : "‹";
-    const nextGlyph = language === "ar" ? "‹" : "›";
+    const previousIcon = '<svg class="media-arrow media-arrow--previous" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+    const nextIcon = '<svg class="media-arrow media-arrow--next" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
     const thumbnailMarkup = media.map((item, index) => `
       <button class="case-media-thumb${item.device === "phone" ? " case-media-thumb--phone" : ""}" type="button" role="tab" aria-selected="${index === featuredIndex}" aria-controls="case-media-panel" tabindex="${index === featuredIndex ? "0" : "-1"}" data-media-index="${index}" aria-label="${String(index + 1).padStart(2, "0")}: ${item.alt}">
         <img src="${mediaUrl(item)}" alt="" width="240" height="160" loading="lazy" decoding="async">
@@ -78,9 +79,9 @@
               <img src="${mediaUrl(featured)}" alt="${featured.alt}" width="${featuredDimensions.width}" height="${featuredDimensions.height}" loading="eager" decoding="async" data-media-main-image>
             </button>
             <div class="case-media-main__controls" aria-hidden="false">
-              <button type="button" data-media-previous aria-label="${content.projectPage.previousImage}">${previousGlyph}</button>
+              <button type="button" data-media-previous aria-label="${content.projectPage.previousImage}">${previousIcon}</button>
               <span data-media-count aria-live="polite">${featuredIndex + 1} / ${media.length}</span>
-              <button type="button" data-media-next aria-label="${content.projectPage.nextImage}">${nextGlyph}</button>
+              <button type="button" data-media-next aria-label="${content.projectPage.nextImage}">${nextIcon}</button>
             </div>
           </figure>
           <div class="case-media-rail" role="tablist" aria-label="${content.projectPage.mediaNavigation}">${thumbnailMarkup}</div>
@@ -107,11 +108,14 @@
     const thumbnails = qsa("[data-media-index]", browser);
     let selectedIndex = featuredIndex;
     let dialog = null;
+    let transitionToken = 0;
 
-    const selectMedia = (nextIndex, focusThumbnail = false) => {
+    const selectMedia = (nextIndex, focusThumbnail = false, navigationDirection = "") => {
+      const currentTransition = ++transitionToken;
       selectedIndex = (nextIndex + media.length) % media.length;
       const item = media[selectedIndex];
       const selectedThumbnail = thumbnails[selectedIndex];
+      browser.dataset.mediaDirection = navigationDirection;
       browser.classList.add("is-changing");
       browser.classList.toggle("is-phone-media", item.device === "phone");
       const dimensions = mediaDimensions(item);
@@ -138,22 +142,35 @@
         dialogImage.src = mediaUrl(item);
         dialogImage.alt = item.alt;
       }
-      const settle = () => browser.classList.remove("is-changing");
-      if (mainImage.complete) settle();
+      const settle = () => {
+        setTimeout(() => {
+          if (currentTransition !== transitionToken) return;
+          browser.classList.remove("is-changing");
+          delete browser.dataset.mediaDirection;
+        }, 160);
+      };
+      if (mainImage.complete) requestAnimationFrame(settle);
       else mainImage.addEventListener("load", settle, { once: true });
       const nextItem = media[(selectedIndex + 1) % media.length];
       const preload = new Image();
       preload.src = mediaUrl(nextItem);
     };
 
-    const move = (delta, focusThumbnail = false) => selectMedia(selectedIndex + delta, focusThumbnail);
-    thumbnails.forEach((thumbnail) => thumbnail.addEventListener("click", () => selectMedia(Number(thumbnail.dataset.mediaIndex))));
+    const move = (delta, focusThumbnail = false) => selectMedia(selectedIndex + delta, focusThumbnail, delta > 0 ? "next" : "previous");
+    thumbnails.forEach((thumbnail) => thumbnail.addEventListener("click", () => {
+      const target = Number(thumbnail.dataset.mediaIndex);
+      selectMedia(target, false, target > selectedIndex ? "next" : target < selectedIndex ? "previous" : "");
+    }));
     qs("[data-media-previous]", browser).addEventListener("click", () => move(-1));
     qs("[data-media-next]", browser).addEventListener("click", () => move(1));
     browser.addEventListener("keydown", (event) => {
-      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
       event.preventDefault();
       const rtl = document.documentElement.dir === "rtl";
+      if (event.key === "Home" || event.key === "End") {
+        selectMedia(event.key === "Home" ? 0 : media.length - 1, true, event.key === "Home" ? "previous" : "next");
+        return;
+      }
       const delta = event.key === "ArrowRight" ? (rtl ? -1 : 1) : (rtl ? 1 : -1);
       move(delta, true);
     });
@@ -163,12 +180,22 @@
       dialog = document.createElement("dialog");
       dialog.className = `project-lightbox${media[selectedIndex].device === "phone" ? " is-phone-media" : ""}`;
       const dialogDimensions = mediaDimensions(media[selectedIndex]);
-      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}" width="${dialogDimensions.width}" height="${dialogDimensions.height}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">${previousGlyph}</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">${nextGlyph}</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
+      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}" width="${dialogDimensions.width}" height="${dialogDimensions.height}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">${previousIcon}</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">${nextIcon}</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
       document.body.appendChild(dialog);
       const close = () => dialog.close();
       qs("[data-lightbox-close]", dialog).addEventListener("click", close);
       qs("[data-lightbox-previous]", dialog).addEventListener("click", () => move(-1));
       qs("[data-lightbox-next]", dialog).addEventListener("click", () => move(1));
+      dialog.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const rtl = document.documentElement.dir === "rtl";
+        if (event.key === "Home" || event.key === "End") {
+          selectMedia(event.key === "Home" ? 0 : media.length - 1, false, event.key === "Home" ? "previous" : "next");
+          return;
+        }
+        move(event.key === "ArrowRight" ? (rtl ? -1 : 1) : (rtl ? 1 : -1));
+      });
       dialog.addEventListener("click", (event) => { if (event.target === dialog) close(); });
       dialog.addEventListener("close", () => { dialog.remove(); dialog = null; opener.focus(); });
       dialog.showModal();
@@ -292,6 +319,9 @@ print(name)</code></pre>
   }
 
   async function render(nextLanguage, updateHistory = true) {
+    qs(".project-inline-demo")?.remove();
+    demoHostCleanup?.();
+    demoHostCleanup = null;
     const content = await loadContent(nextLanguage);
     const project = content.projects.find((item) => item.slug === slug);
     if (!project) {
@@ -352,11 +382,53 @@ print(name)</code></pre>
           stage = document.createElement("section");
           stage.className = "project-inline-demo shell";
           stage.id = "demo";
-          stage.innerHTML = `<header><div><small>${content.projectPage.previewTitle}</small><h2>${project.title}</h2></div><button type="button" aria-label="${content.ui.close}">×</button></header><iframe title="${content.projectPage.previewTitle}: ${project.title}" loading="lazy"></iframe><p>${content.projectPage.demoHint}</p>`;
+          const enterpriseControls = slug === "enterprise-workflow" ? `
+            <aside class="project-demo-companion" aria-label="${content.projectPage.demoControlsTitle}">
+              <div class="project-demo-companion__roles">
+                <div><small>${content.projectPage.demoControlsTitle}</small><strong>${content.projectPage.demoRoleLabel}</strong></div>
+                <div class="project-demo-role-switch" role="group" aria-label="${content.projectPage.demoRoleLabel}">
+                  <button type="button" data-demo-role="employee" aria-pressed="true">${content.projectPage.demoEmployee}</button>
+                  <button type="button" data-demo-role="manager" aria-pressed="false">${content.projectPage.demoManager}</button>
+                </div>
+                <button class="project-demo-reset" type="button" data-demo-reset>${content.projectPage.demoReset}</button>
+              </div>
+              <div class="project-demo-companion__guide">
+                <strong>${content.projectPage.demoGuideTitle}</strong>
+                <ol>${content.projectPage.demoGuide.map((item, index) => `<li data-demo-guide-step="${["create", "submit", "switch", "approve", "verify"][index]}"><span>${String(index + 1).padStart(2, "0")}</span><p>${item}</p></li>`).join("")}</ol>
+              </div>
+            </aside>` : "";
+          stage.innerHTML = `<header><div><small>${content.projectPage.previewTitle}</small><h2>${project.title}</h2></div><button type="button" data-demo-close aria-label="${content.ui.close}">×</button></header>${enterpriseControls}<div class="project-demo-frame"><iframe title="${content.projectPage.previewTitle}: ${project.title}" loading="lazy"></iframe></div><p>${content.projectPage.demoHint}</p>`;
           qs(".project-hero").after(stage);
-          qs("button", stage).addEventListener("click", () => { stage.remove(); });
+          qs("[data-demo-close]", stage).addEventListener("click", () => {
+            demoHostCleanup?.();
+            demoHostCleanup = null;
+            stage.remove();
+          });
+
+          if (slug === "enterprise-workflow") {
+            const iframe = qs("iframe", stage);
+            const updateCompanion = (payload) => {
+              qsa("[data-demo-role]", stage).forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.demoRole === payload.role)));
+              qsa("[data-demo-guide-step]", stage).forEach((item) => {
+                const status = payload.progress?.[item.dataset.demoGuideStep] || "idle";
+                item.classList.toggle("is-current", status === "current");
+                item.classList.toggle("is-complete", status === "complete");
+              });
+            };
+            const send = (type, value = {}) => iframe.contentWindow?.postMessage({ source: "x7do0-portfolio", type, ...value }, location.origin);
+            const onMessage = (message) => {
+              if (message.origin !== location.origin || message.source !== iframe.contentWindow) return;
+              if (message.data?.source === "enterprise-workflow-demo" && message.data.type === "state") updateCompanion(message.data);
+            };
+            addEventListener("message", onMessage);
+            qsa("[data-demo-role]", stage).forEach((button) => button.addEventListener("click", () => send("set-role", { role: button.dataset.demoRole })));
+            qs("[data-demo-reset]", stage).addEventListener("click", () => send("reset"));
+            demoHostCleanup = () => removeEventListener("message", onMessage);
+          }
         }
-        qs("iframe", stage).src = demoLink.href;
+        const embeddedUrl = new URL(demoLink.href, location.href);
+        embeddedUrl.searchParams.set("embedded", "1");
+        qs("iframe", stage).src = embeddedUrl.href;
         stage.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
       };
       if (new URLSearchParams(location.search).get("demo") === "1") {
@@ -382,6 +454,7 @@ print(name)</code></pre>
     canonical.href = `https://x7do0.github.io/X7do0-portfolio/projects/${slug}/${language === "en" ? "?lang=en" : ""}`;
     updateProjectMetadata(project);
     setupRevealNodes();
+    await window.portfolioReady?.();
   }
 
   let observer;
@@ -420,6 +493,7 @@ print(name)</code></pre>
   setupMotion();
   render(language, false).catch((error) => {
     console.error(error);
+    window.portfolioReady?.();
     location.href = root;
   });
 })();
