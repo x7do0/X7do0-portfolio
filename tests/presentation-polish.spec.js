@@ -33,7 +33,12 @@ test('mobile puts project identity before its visual and keeps actions clear', a
     await expect(row.locator('.demo-trigger')).toBeVisible();
     await expect(row.locator('.project-actions a')).toHaveCount(2);
   }
+  for (const logo of await page.locator('.technology-logo img').all()) {
+    await logo.scrollIntoViewIfNeeded();
+    await expect(logo).toBeVisible();
+  }
   await page.screenshot({ path: 'artifacts/portfolio-v2-mobile.png', fullPage: true });
+  await page.locator('#skills').screenshot({ path: 'artifacts/technology-logos-mobile.png' });
   await expectNoOverflow(page);
 
   await page.goto('/?lang=en');

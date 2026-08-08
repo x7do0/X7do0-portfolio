@@ -20,30 +20,34 @@
     education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 12v5c3 2 7 2 10 0v-5"/></svg>',
     focus: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3V1M21 12h2M12 21v2M3 12H1"/></svg>',
     projects: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>',
-    email: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>',
-    telegram: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 4-3 16-6-5-4 3 1-5 8-6-10 5-4-2 18-6Z"/></svg>',
-    github: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.2-.4 6.5-1.6 6.5-7A5.4 5.4 0 0 0 19 3.7 5 5 0 0 0 18.9 0S17.7-.4 15 1.5a13.4 13.4 0 0 0-7 0C5.3-.4 4.1 0 4.1 0A5 5 0 0 0 4 3.7a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.5 7A4.8 4.8 0 0 0 8 18v4M8 19c-3 .9-3-1.5-4-2"/></svg>',
-    youtube: '<svg class="social-logo social-logo--youtube" viewBox="0 0 24 24" aria-hidden="true"><path class="youtube-body" d="M21.2 7.2a2.8 2.8 0 0 0-2-2C17.4 4.7 12 4.7 12 4.7s-5.4 0-7.2.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.3 12a29 29 0 0 0 .5 4.8 2.8 2.8 0 0 0 2 2c1.8.5 7.2.5 7.2.5s5.4 0 7.2-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-4.8 29 29 0 0 0-.5-4.8Z"/><path class="youtube-play" d="m10 9 5 3-5 3V9Z"/></svg>',
-    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>'
+    youtube: '<svg class="social-logo social-logo--youtube" viewBox="0 0 24 24" aria-hidden="true"><path class="youtube-body" d="M21.2 7.2a2.8 2.8 0 0 0-2-2C17.4 4.7 12 4.7 12 4.7s-5.4 0-7.2.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.3 12a29 29 0 0 0 .5 4.8 2.8 2.8 0 0 0 2 2c1.8.5 7.2.5 7.2.5s5.4 0 7.2-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0-.5-4.8Z"/><path class="youtube-play" d="m10 9 5 3-5 3V9Z"/></svg>'
   };
 
-  const technologyIcons = {
-    cpp: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="logo-bg" d="m24 3 19 10.5v21L24 45 5 34.5v-21L24 3Z"/><text x="24" y="29" text-anchor="middle">C++</text></svg>',
-    python: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="python-blue" d="M24 5c-9 0-9 4-9 9v5h18v3H12c-5 0-8 4-8 9s3 9 8 9h5v-7c0-5 4-8 8-8h8c4 0 7-3 7-7v-4c0-5-4-9-9-9h-7Z"/><path class="python-yellow" d="M24 43c9 0 9-4 9-9v-5H15v-3h21c5 0 8-4 8-9s-3-9-8-9h-5v7c0 5-4 8-8 8h-8c-4 0-7 3-7 7v4c0 5 4 9 9 9h7Z"/><circle cx="21" cy="11" r="2"/><circle cx="27" cy="37" r="2"/></svg>',
-    csharp: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="logo-bg" d="m24 3 19 10.5v21L24 45 5 34.5v-21L24 3Z"/><text x="24" y="29" text-anchor="middle">C#</text></svg>',
-    dotnet: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="logo-bg" x="4" y="7" width="40" height="34" rx="8"/><text x="24" y="28" text-anchor="middle">.NET</text></svg>',
-    aspnet: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="logo-bg" x="4" y="7" width="40" height="34" rx="8"/><path d="m15 18-6 6 6 6M33 18l6 6-6 6M28 14l-8 20"/></svg>',
-    efcore: '<svg viewBox="0 0 48 48" aria-hidden="true"><ellipse class="logo-bg" cx="24" cy="12" rx="16" ry="7"/><path class="logo-bg" d="M8 12v23c0 4 7 8 16 8s16-4 16-8V12"/><text x="24" y="31" text-anchor="middle">EF</text></svg>',
-    github: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="github-disc" cx="24" cy="24" r="21"/><path class="github-cat" d="M24 11c-7.2 0-13 5.8-13 13 0 5.7 3.7 10.6 8.9 12.3.7.1.9-.3.9-.7v-2.5c-3.6.8-4.4-1.5-4.4-1.5-.6-1.5-1.5-1.9-1.5-1.9-1.2-.8.1-.8.1-.8 1.3.1 2.1 1.4 2.1 1.4 1.2 2 3.1 1.4 3.8 1 .1-.9.5-1.4.8-1.7-2.9-.3-5.9-1.5-5.9-6.4 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.7.1-3.5 0 0 1.1-.4 3.6 1.3a12.5 12.5 0 0 1 6.6 0c2.5-1.7 3.6-1.3 3.6-1.3.7 1.8.2 3.2.1 3.5.8.9 1.3 2.1 1.3 3.5 0 5-3 6.1-5.9 6.4.5.4.9 1.2.9 2.4v3.6c0 .5.2.8.9.7A13 13 0 0 0 37 24c0-7.2-5.8-13-13-13Z"/></svg>',
-    sqlserver: '<svg viewBox="0 0 48 48" aria-hidden="true"><ellipse class="sql-top" cx="24" cy="11" rx="16" ry="7"/><path class="sql-body" d="M8 11v25c0 4 7 7 16 7s16-3 16-7V11c0 4-7 7-16 7S8 15 8 11Z"/><path d="M8 24c0 4 7 7 16 7s16-3 16-7"/></svg>',
-    sqlite: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="sqlite-db" d="M5 12c0-4 7-7 16-7s16 3 16 7v24c0 4-7 7-16 7S5 40 5 36V12Z"/><path class="sqlite-feather" d="M43 5c-11 3-18 12-20 28 5-8 10-12 17-14-5 0-9 1-13 4 4-8 9-13 16-18Z"/></svg>',
-    javascript: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="js-bg" x="4" y="4" width="40" height="40" rx="5"/><text class="js-text" x="27" y="36">JS</text></svg>',
-    typescript: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="ts-bg" x="4" y="4" width="40" height="40" rx="5"/><text x="24" y="34" text-anchor="middle">TS</text></svg>',
-    react: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="react-dot" cx="24" cy="24" r="4"/><g class="react-orbits"><ellipse cx="24" cy="24" rx="20" ry="8"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(120 24 24)"/></g></svg>',
-    git: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="git-bg" d="m24 3 21 21-21 21L3 24 24 3Z"/><circle cx="17" cy="17" r="3"/><circle cx="31" cy="31" r="3"/><circle cx="31" cy="17" r="3"/><path d="M20 17h8M17 20v6l11 5"/></svg>',
-    html: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="html-shield" d="M7 4h34l-3 35-14 5-14-5L7 4Z"/><text x="24" y="28" text-anchor="middle">HTML</text></svg>',
-    css: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="css-shield" d="M7 4h34l-3 35-14 5-14-5L7 4Z"/><text x="24" y="28" text-anchor="middle">CSS</text></svg>',
-    indexeddb: '<svg viewBox="0 0 48 48" aria-hidden="true"><ellipse class="idb-top" cx="24" cy="11" rx="16" ry="7"/><path class="idb-body" d="M8 11v25c0 4 7 7 16 7s16-3 16-7V11c0 4-7 7-16 7S8 15 8 11Z"/><text x="24" y="32" text-anchor="middle">IDB</text></svg>'
+  const technologyLogoPaths = {
+    csharp: "./assets/technology/csharp.svg",
+    dotnet: "./assets/technology/dotnet.svg",
+    aspnet: "./assets/technology/aspnetcore.svg",
+    efcore: "./assets/technology/efcore.svg",
+    sqlserver: "./assets/technology/sqlserver.svg",
+    sqlite: "./assets/technology/sqlite.svg",
+    python: "./assets/technology/python.svg",
+    cpp: "./assets/technology/cplusplus.svg",
+    git: "./assets/technology/git.svg",
+    github: "./assets/technology/github.svg",
+    html: "./assets/technology/html5.svg",
+    css: "./assets/technology/css3.svg",
+    javascript: "./assets/technology/javascript.svg",
+    typescript: "./assets/technology/typescript.svg",
+    react: "./assets/technology/react.svg",
+    indexeddb: "./assets/technology/indexeddb.svg"
+  };
+
+  const socialLogoPaths = {
+    email: "./assets/technology/gmail.svg",
+    telegram: "./assets/technology/telegram.svg",
+    github: "./assets/technology/github-light.svg",
+    youtube: "./assets/technology/youtube.svg",
+    instagram: "./assets/technology/instagram.svg"
   };
 
   function text(selector, value, root = document) {
@@ -151,7 +155,7 @@
       section.innerHTML = `
         <h4><span>${String(groupIndex + 1).padStart(2, "0")}</span>${group.title}</h4>
         <div class="technology-group__items">
-          ${group.items.map((item) => `<span class="technology-mark" data-technology="${item.icon}"><b class="technology-logo">${technologyIcons[item.icon]}</b><bdi dir="ltr">${item.name}</bdi></span>`).join("")}
+          ${group.items.map((item) => `<span class="technology-mark" data-technology="${item.icon}"><b class="technology-logo"><img src="${technologyLogoPaths[item.icon]}" alt="" width="36" height="36" loading="lazy" decoding="async"></b><bdi dir="ltr">${item.name}</bdi></span>`).join("")}
         </div>`;
       return section;
     }));
@@ -217,7 +221,7 @@
       anchor.className = `contact-link contact-link--${link.kind}`;
       anchor.dataset.social = link.id;
       anchor.dataset.kind = link.kind;
-      anchor.innerHTML = `${icons[link.id] || ""}<span><small>${link.label}</small><strong>${link.value}</strong></span><b aria-hidden="true">${link.url.startsWith("mailto:") ? "→" : "↗"}</b>`;
+      anchor.innerHTML = `<img class="contact-logo" src="${socialLogoPaths[link.id]}" alt="" width="24" height="24"><span><small>${link.label}</small><strong>${link.value}</strong></span><b aria-hidden="true">${link.url.startsWith("mailto:") ? "→" : "↗"}</b>`;
       return anchor;
     }));
   }

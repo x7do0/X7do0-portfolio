@@ -45,7 +45,8 @@ test('Arabic home presents the professional profile, work, learning, and approve
   await expect(page.locator('.skill-item')).toHaveCount(5);
   await expect(page.locator('.technology-group')).toHaveCount(4);
   await expect(page.locator('.technology-mark')).toHaveCount(16);
-  await expect(page.locator('.technology-logo svg')).toHaveCount(16);
+  await expect(page.locator('.technology-logo img')).toHaveCount(16);
+  expect(await page.locator('.technology-logo img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBeTruthy();
   for (const [index, name] of ['C#', '.NET', 'ASP.NET Core', 'EF Core'].entries()) {
     await expect(page.locator('.technology-mark').nth(index)).toContainText(name);
   }
@@ -74,7 +75,7 @@ test('Arabic home presents the professional profile, work, learning, and approve
   };
   for (const [id, href] of Object.entries(approvedLinks)) {
     await expect(page.locator(`.contact-link[data-social="${id}"]`)).toHaveAttribute('href', href);
-    await expect(page.locator(`.contact-link[data-social="${id}"] svg`)).toBeVisible();
+    await expect(page.locator(`.contact-link[data-social="${id}"] .contact-logo`)).toBeVisible();
   }
   await expect(page.locator('#full-resume-link')).toHaveAttribute('href', './resume/');
   await expectApprovedPublicIdentity(page);
