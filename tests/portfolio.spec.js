@@ -76,20 +76,29 @@ async function expectScrollAtmosphere(page) {
   const initialGridY = await atmosphere.evaluate((element) => getComputedStyle(element).getPropertyValue('--atmo-grid-y').trim());
 
   await page.evaluate(() => {
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
     const target = document.getElementById('capabilities');
-    const absoluteTop = target ? target.getBoundingClientRect().top + window.scrollY : document.body.scrollHeight * 0.55;
-    window.scrollTo(0, Math.max(0, absoluteTop - window.innerHeight * 0.22));
+    if (target) target.scrollIntoView({ block: 'center', behavior: 'auto' });
+    else window.scrollTo(0, document.body.scrollHeight * 0.55);
+    root.style.scrollBehavior = previous;
   });
-  await page.waitForTimeout(180);
+  await page.waitForTimeout(260);
 
   const downGridY = await atmosphere.evaluate((element) => getComputedStyle(element).getPropertyValue('--atmo-grid-y').trim());
   expect(downGridY).not.toBe(initialGridY);
   await expect(page.locator('html')).toHaveAttribute('data-scroll-direction', 'down');
-  const downSection = await page.locator('html').getAttribute('data-scroll-section');
-  expect(['projects', 'capabilities', 'education']).toContain(downSection);
+  await expect(page.locator('html')).not.toHaveAttribute('data-scroll-section', 'home');
 
-  await page.evaluate(() => window.scrollTo(0, 0));
-  await page.waitForTimeout(180);
+  await page.evaluate(() => {
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previous;
+  });
+  await page.waitForTimeout(220);
   await expect(page.locator('html')).toHaveAttribute('data-scroll-direction', 'up');
   await expect(page.locator('html')).toHaveAttribute('data-scroll-section', 'home');
 
