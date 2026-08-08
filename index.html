@@ -17,6 +17,7 @@
   <link rel="alternate" hreflang="x-default" href="https://x7do0.github.io/X7do0-portfolio/">
   <link rel="icon" href="./assets/x7do0-mark.svg" type="image/svg+xml">
   <link rel="manifest" href="./site.webmanifest">
+  <link rel="preload" as="image" href="./assets/profile/profile-cutout.png" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,7 +30,10 @@
       "name": "حيدره مهند",
       "alternateName": "x7do0",
       "url": "https://x7do0.github.io/X7do0-portfolio/",
-      "sameAs": ["https://github.com/x7do0"]
+      "sameAs": [
+        "https://github.com/x7do0",
+        "https://youtube.com/@x7do0eng"
+      ]
     }
   </script>
 </head>
@@ -37,6 +41,12 @@
   <a class="skip-link" href="#main-content" data-ui="skip">انتقل إلى المحتوى</a>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
   <div class="pointer-glow" aria-hidden="true"></div>
+  <div class="scroll-atmosphere" aria-hidden="true">
+    <div class="atmosphere-layer atmosphere-grid"></div>
+    <div class="atmosphere-layer atmosphere-orb atmosphere-orb--a"></div>
+    <div class="atmosphere-layer atmosphere-orb atmosphere-orb--b"></div>
+    <div class="atmosphere-layer atmosphere-lines"></div>
+  </div>
 
   <header class="site-header" id="site-header">
     <div class="shell header-inner">
@@ -94,46 +104,29 @@
         <div class="hero-proof" id="hero-proof" aria-label="التخصصات"></div>
       </div>
 
-      <div class="system-window reveal" aria-label="معاينة تفاعلية لبنية نظام" data-ui-aria="systemPreview">
-        <div class="window-bar">
-          <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <span class="window-title">system.flow</span>
-          <span class="runtime-state"><i></i><span data-ui="running">قيد التشغيل</span></span>
-          <span class="window-path">x7do0@dev:~/systems</span>
+      <figure class="hero-portrait" aria-hidden="true">
+        <div class="hero-portrait-backdrop">
+          <span class="hero-portrait-wordmark">X7DO0</span>
+          <span class="hero-portrait-kicker">SOFTWARE / BACKEND</span>
+          <div class="hero-portrait-grid"></div>
+          <div class="hero-portrait-orbit"></div>
         </div>
-        <div class="system-body">
-          <div class="system-code" aria-hidden="true">
-            <ol>
-              <li><span class="comment">// request pipeline</span></li>
-              <li><span class="blue">POST</span> /requests</li>
-              <li>authenticate<span class="muted">()</span></li>
-              <li>validate<span class="muted">(request)</span></li>
-              <li>&nbsp;</li>
-              <li><span class="blue">const</span> decision =</li>
-              <li>&nbsp;&nbsp;workflow.review<span class="muted">()</span>;</li>
-              <li>&nbsp;</li>
-              <li>audit.write<span class="muted">(decision)</span>;</li>
-              <li><span class="lime">return</span> response<span class="muted">(201)</span>;</li>
-            </ol>
-          </div>
-          <div class="architecture" aria-hidden="true">
-            <svg class="architecture-lines" viewBox="0 0 460 430" preserveAspectRatio="none">
-              <path d="M230 52V112M230 168V212M230 212H100V270M230 212H360V270M100 326V370H230M360 326V370H230"/>
-            </svg>
-            <div class="architecture-node node-client"><small>01</small><strong>Client</strong><span>Web / Mobile</span></div>
-            <div class="architecture-node node-gateway"><small>02</small><strong>API Gateway</strong><span>Request routing</span></div>
-            <div class="architecture-node node-service-a"><small>03</small><strong>Workflow</strong><span>Decision engine</span></div>
-            <div class="architecture-node node-service-b"><small>04</small><strong>Identity</strong><span>Roles & access</span></div>
-            <div class="architecture-node node-data"><small>05</small><strong>Audit Trail</strong><span>Immutable events</span></div>
-          </div>
+        <picture class="hero-portrait-media">
+          <img
+            src="./assets/profile/profile-cutout.png"
+            width="1365"
+            height="1100"
+            alt=""
+            loading="eager"
+            decoding="sync"
+            fetchpriority="high"
+          >
+        </picture>
+        <div class="hero-portrait-base">
+          <span></span>
+          <span></span>
         </div>
-        <div class="window-statusbar">
-          <span>Ln 13, Col 20</span>
-          <span>UTF-8</span>
-          <span><i></i> API</span>
-          <span>Ready</span>
-        </div>
-      </div>
+      </figure>
 
       <a class="scroll-cue" href="#projects" aria-label="انتقل إلى المشاريع" data-ui-aria="scroll">
         <span></span>
@@ -251,13 +244,13 @@
         <div class="capability-main">
           <header class="compact-heading reveal">
             <span class="section-index" aria-hidden="true">02</span>
-            <h2 id="capabilities-title">كيف أعمل</h2>
+            <h2 id="capabilities-title">المهارات</h2>
           </header>
           <ol class="capability-list" id="capability-list"></ol>
         </div>
         <aside class="technology-rail reveal" aria-labelledby="technologies-title">
           <div class="rail-title">
-            <h3 id="technologies-title">التقنيات التي أستخدمها</h3>
+            <h3 id="technologies-title">اللغات والتقنيات</h3>
             <span></span>
           </div>
           <div id="technology-groups"></div>
@@ -318,5 +311,6 @@
   </footer>
 
   <script src="./app.js"></script>
+  <script src="./scroll-atmosphere.js"></script>
 </body>
 </html>
