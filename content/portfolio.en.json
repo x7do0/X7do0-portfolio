@@ -217,36 +217,44 @@
       "media": [
         {
           "src": "./assets/projects/coding-academy/01-learning-home.jpg",
+          "order": 6,
           "alt": "Coding Academy Arabic landing page with a Python code visual",
           "caption": "A direct learning entry point with a clear Arabic value proposition."
         },
         {
           "src": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
+          "featured": true,
+          "order": 1,
           "alt": "Python concepts organized into colorful topic cards",
           "caption": "Twelve concept cards turn the syllabus into a visual, scannable path."
         },
         {
           "src": "./assets/projects/coding-academy/03-topic-code-preview.jpg",
+          "order": 2,
           "alt": "A Python topic card showing an on-hover code preview",
           "caption": "Learners can inspect a concise code example without leaving the overview."
         },
         {
           "src": "./assets/projects/coding-academy/04-lesson-and-source-files.jpg",
+          "order": 3,
           "alt": "Detailed Arabic Python lesson with embedded source and challenge files",
           "caption": "Detailed lessons connect explanation, examples, source files, and a follow-up challenge."
         },
         {
           "src": "./assets/projects/coding-academy/05-practice-library.jpg",
+          "order": 4,
           "alt": "Arabic Python exercise library grouped by topic",
           "caption": "The exercise library groups 25 questions by concept and shows local progress."
         },
         {
           "src": "./assets/projects/coding-academy/06-interactive-exercise.jpg",
+          "order": 5,
           "alt": "Interactive Python exercise with Arabic and English prompt",
           "caption": "Each exercise combines a bilingual prompt, steps, a coding area, and reference guidance."
         },
         {
           "src": "./assets/projects/coding-academy/07-mobile-topic-path.jpg",
+          "order": 7,
           "alt": "Coding Academy Python topic cards on a mobile viewport",
           "caption": "The same topic-first path adapts to a compact mobile reading flow."
         }
@@ -665,6 +673,9 @@
     "mediaTitle": "Product walkthrough",
     "mediaDescription": "Authentic screens captured from the current verified source and safe sample data.",
     "mediaPending": "Media will be added once approved.",
+    "mediaNavigation": "Screenshot navigation",
+    "previousImage": "Previous screenshot",
+    "nextImage": "Next screenshot",
     "detailsTitle": "Case study",
     "detailsPending": "Details will be completed after accurate project information is approved, without assumptions or exaggeration.",
     "keyFacts": "Key project facts",

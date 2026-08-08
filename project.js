@@ -54,13 +54,17 @@
         <span class="case-section__index">${String(index + 1).padStart(2, "0")}</span>
         <div><h3>${section.title}</h3><p>${section.body}</p>${section.items?.length ? `<ul>${section.items.map((item) => `<li>${item}</li>`).join("")}</ul>` : ""}</div>
       </article>`).join("");
-    const mediaMarkup = project.media.map((item, index) => `
-      <figure class="case-media-card reveal${index === 0 ? " case-media-card--featured" : ""}">
-        <button type="button" data-lightbox-image="${root}${item.src.replace(/^\.\//, "")}" aria-label="${content.projectPage.enlargeImage}: ${item.alt}">
-          <img src="${root}${item.src.replace(/^\.\//, "")}" alt="${item.alt}" width="1440" height="960" loading="${index < 2 ? "eager" : "lazy"}" decoding="async">
-        </button>
-        <figcaption><strong>${String(index + 1).padStart(2, "0")}</strong><span>${item.caption}</span></figcaption>
-      </figure>`).join("");
+    const media = project.media
+      .map((item, index) => ({ ...item, sourceIndex: index }))
+      .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || (a.order ?? a.sourceIndex) - (b.order ?? b.sourceIndex));
+    const featuredIndex = Math.max(0, media.findIndex((item) => item.featured));
+    const featured = media[featuredIndex];
+    const mediaUrl = (item) => `${root}${item.src.replace(/^\.\//, "")}`;
+    const thumbnailMarkup = media.map((item, index) => `
+      <button class="case-media-thumb" type="button" role="tab" aria-selected="${index === featuredIndex}" aria-controls="case-media-panel" tabindex="${index === featuredIndex ? "0" : "-1"}" data-media-index="${index}" aria-label="${String(index + 1).padStart(2, "0")}: ${item.alt}">
+        <img src="${mediaUrl(item)}" alt="" width="240" height="160" loading="lazy" decoding="async">
+        <span>${String(index + 1).padStart(2, "0")}</span>
+      </button>`).join("");
 
     study.innerHTML = `
       <section class="case-intro shell reveal">
@@ -68,21 +72,95 @@
         <ul class="case-metrics" aria-label="${content.projectPage.keyFacts}">${metricMarkup}</ul>
       </section>
       <section class="case-story"><div class="shell"><header class="case-heading reveal"><span>02</span><h2>${content.projectPage.detailsTitle}</h2></header><div class="case-sections">${sectionMarkup}</div></div></section>
-      <section class="case-gallery shell"><header class="case-heading reveal"><span>03</span><div><h2>${content.projectPage.mediaTitle}</h2><p>${content.projectPage.mediaDescription}</p></div></header><div class="case-gallery__grid">${mediaMarkup}</div></section>`;
+      <section class="case-gallery shell"><header class="case-heading reveal"><span>03</span><div><h2>${content.projectPage.mediaTitle}</h2><p>${content.projectPage.mediaDescription}</p></div></header>
+        <div class="case-media-browser reveal" data-media-browser tabindex="-1">
+          <figure class="case-media-main" id="case-media-panel" role="tabpanel">
+            <button class="case-media-main__open" type="button" data-media-open aria-label="${content.projectPage.enlargeImage}: ${featured.alt}">
+              <img src="${mediaUrl(featured)}" alt="${featured.alt}" width="1440" height="960" loading="eager" decoding="async" data-media-main-image>
+            </button>
+            <div class="case-media-main__controls" aria-hidden="false">
+              <button type="button" data-media-previous aria-label="${content.projectPage.previousImage}">‹</button>
+              <span data-media-count aria-live="polite">${featuredIndex + 1} / ${media.length}</span>
+              <button type="button" data-media-next aria-label="${content.projectPage.nextImage}">›</button>
+            </div>
+          </figure>
+          <div class="case-media-rail" role="tablist" aria-label="${content.projectPage.mediaNavigation}">${thumbnailMarkup}</div>
+          <div class="case-media-caption" aria-live="polite">
+            <strong data-media-label>${String(featuredIndex + 1).padStart(2, "0")}</strong>
+            <p data-media-caption>${featured.caption}</p>
+          </div>
+        </div>
+      </section>`;
     qs(".project-overview").after(study);
 
-    qsa("[data-lightbox-image]", study).forEach((button) => button.addEventListener("click", () => {
-      const dialog = document.createElement("dialog");
+    const browser = qs("[data-media-browser]", study);
+    const mainImage = qs("[data-media-main-image]", browser);
+    const mainButton = qs("[data-media-open]", browser);
+    const caption = qs("[data-media-caption]", browser);
+    const label = qs("[data-media-label]", browser);
+    const count = qs("[data-media-count]", browser);
+    const thumbnails = qsa("[data-media-index]", browser);
+    let selectedIndex = featuredIndex;
+    let dialog = null;
+
+    const selectMedia = (nextIndex, focusThumbnail = false) => {
+      selectedIndex = (nextIndex + media.length) % media.length;
+      const item = media[selectedIndex];
+      const selectedThumbnail = thumbnails[selectedIndex];
+      browser.classList.add("is-changing");
+      mainImage.src = mediaUrl(item);
+      mainImage.alt = item.alt;
+      mainButton.setAttribute("aria-label", `${content.projectPage.enlargeImage}: ${item.alt}`);
+      caption.textContent = item.caption;
+      label.textContent = String(selectedIndex + 1).padStart(2, "0");
+      count.textContent = `${selectedIndex + 1} / ${media.length}`;
+      thumbnails.forEach((thumbnail, index) => {
+        const selected = index === selectedIndex;
+        thumbnail.setAttribute("aria-selected", String(selected));
+        thumbnail.tabIndex = selected ? 0 : -1;
+      });
+      selectedThumbnail.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest", inline: "nearest" });
+      if (focusThumbnail) selectedThumbnail.focus();
+      if (dialog) {
+        const dialogImage = qs("img", dialog);
+        dialogImage.src = mediaUrl(item);
+        dialogImage.alt = item.alt;
+      }
+      const settle = () => browser.classList.remove("is-changing");
+      if (mainImage.complete) settle();
+      else mainImage.addEventListener("load", settle, { once: true });
+      const nextItem = media[(selectedIndex + 1) % media.length];
+      const preload = new Image();
+      preload.src = mediaUrl(nextItem);
+    };
+
+    const move = (delta, focusThumbnail = false) => selectMedia(selectedIndex + delta, focusThumbnail);
+    thumbnails.forEach((thumbnail) => thumbnail.addEventListener("click", () => selectMedia(Number(thumbnail.dataset.mediaIndex))));
+    qs("[data-media-previous]", browser).addEventListener("click", () => move(-1));
+    qs("[data-media-next]", browser).addEventListener("click", () => move(1));
+    browser.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const rtl = document.documentElement.dir === "rtl";
+      const delta = event.key === "ArrowRight" ? (rtl ? -1 : 1) : (rtl ? 1 : -1);
+      move(delta, true);
+    });
+
+    mainButton.addEventListener("click", () => {
+      const opener = mainButton;
+      dialog = document.createElement("dialog");
       dialog.className = "project-lightbox";
-      dialog.innerHTML = `<button type="button" aria-label="${content.ui.close}">×</button><img src="${button.dataset.lightboxImage}" alt="${qs("img", button).alt}">`;
+      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">‹</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">›</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
       document.body.appendChild(dialog);
-      const close = () => { dialog.close(); dialog.remove(); button.focus(); };
-      qs("button", dialog).addEventListener("click", close);
+      const close = () => dialog.close();
+      qs("[data-lightbox-close]", dialog).addEventListener("click", close);
+      qs("[data-lightbox-previous]", dialog).addEventListener("click", () => move(-1));
+      qs("[data-lightbox-next]", dialog).addEventListener("click", () => move(1));
       dialog.addEventListener("click", (event) => { if (event.target === dialog) close(); });
-      dialog.addEventListener("close", () => { if (dialog.isConnected) dialog.remove(); });
+      dialog.addEventListener("close", () => { dialog.remove(); dialog = null; opener.focus(); });
       dialog.showModal();
-      qs("button", dialog).focus();
-    }));
+      qs("[data-lightbox-close]", dialog).focus();
+    });
   }
 
   async function loadContent(nextLanguage) {

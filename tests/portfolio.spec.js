@@ -118,7 +118,8 @@ test('project details use real previews, source-backed facts, and an inline demo
     await expect(page.locator('.project-source-preview img')).toBeVisible();
     await expect(page.locator('.project-case-study')).toBeVisible();
     await expect(page.locator('.case-section')).toHaveCount(4);
-    await expect(page.locator('.case-media-card')).toHaveCount(slug === 'coding-academy' ? 7 : 6);
+    await expect(page.locator('.case-media-main img')).toHaveCount(1);
+    await expect(page.locator('.case-media-thumb')).toHaveCount(slug === 'coding-academy' ? 7 : 6);
     await expect(page.locator('.project-future')).toHaveCount(0);
     await page.locator('[data-demo-link]').click();
     await expect(page.locator('.project-inline-demo')).toBeVisible();
@@ -148,7 +149,7 @@ test('public product links and media lightbox are explicit and keyboard-safe', a
     const structured = JSON.parse(await page.locator('#project-structured-data').textContent());
     expect(structured['@type']).toBe('SoftwareApplication');
     expect(structured.author.name).toBe('Haidara Muhanned');
-    await page.locator('.case-media-card button').first().click();
+    await page.locator('.case-media-main__open').click();
     await expect(page.locator('.project-lightbox')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('.project-lightbox')).toHaveCount(0);
@@ -156,6 +157,58 @@ test('public product links and media lightbox are explicit and keyboard-safe', a
 
   await page.goto('/projects/enterprise-workflow/');
   await expect(page.locator('.project-external-links a')).toHaveCount(0);
+});
+
+test('case-study media browser is bilingual, responsive, selectable, and keyboard-safe', async ({ page }) => {
+  await page.goto('/');
+  const states = [
+    { query: '', language: 'ar', direction: 'rtl', viewport: { width: 1440, height: 960 } },
+    { query: '?lang=en', language: 'en', direction: 'ltr', viewport: { width: 1440, height: 960 } },
+    { query: '', language: 'ar', direction: 'rtl', viewport: { width: 390, height: 844 } },
+    { query: '?lang=en', language: 'en', direction: 'ltr', viewport: { width: 390, height: 844 } },
+  ];
+
+  for (const slug of ['enterprise-workflow', 'masroofi', 'coding-academy']) {
+    for (const state of states) {
+      await page.setViewportSize(state.viewport);
+      await page.evaluate(language => localStorage.setItem('x7do0-language', language), state.language);
+      await page.goto(`/projects/${slug}/${state.query}`);
+      await expect(page.locator('html')).toHaveAttribute('lang', state.language);
+      await expect(page.locator('html')).toHaveAttribute('dir', state.direction);
+
+      const mainImage = page.locator('[data-media-main-image]');
+      const thumbnails = page.locator('.case-media-thumb');
+      const caption = page.locator('[data-media-caption]');
+      await expect(mainImage).toHaveCount(1);
+      await expect(mainImage).toBeVisible();
+      expect(await thumbnails.count()).toBeGreaterThan(1);
+      await expect(thumbnails.first()).toHaveAttribute('aria-selected', 'true');
+
+      const initialSource = await mainImage.getAttribute('src');
+      const initialCaption = await caption.textContent();
+      await thumbnails.nth(1).click();
+      await expect(mainImage).not.toHaveAttribute('src', initialSource);
+      await expect(caption).not.toHaveText(initialCaption);
+      await expect(thumbnails.first()).toHaveAttribute('aria-selected', 'false');
+      await expect(thumbnails.nth(1)).toHaveAttribute('aria-selected', 'true');
+
+      const selectedSource = await mainImage.getAttribute('src');
+      await page.locator('.case-media-main__open').click();
+      await expect(page.locator('.project-lightbox img')).toHaveAttribute('src', selectedSource);
+      await page.keyboard.press('Escape');
+      await expect(page.locator('.project-lightbox')).toHaveCount(0);
+
+      await thumbnails.nth(1).focus();
+      await page.keyboard.press(state.direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight');
+      await expect(thumbnails.nth(2)).toHaveAttribute('aria-selected', 'true');
+      await expect(thumbnails.nth(2)).toBeFocused();
+
+      expect(await page.locator('.case-media-browser img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBeTruthy();
+      const rail = page.locator('.case-media-rail');
+      expect(await rail.evaluate(element => element.scrollWidth >= element.clientWidth)).toBeTruthy();
+      await expectNoOverflow(page);
+    }
+  }
 });
 
 test('resume is a complete bilingual web resume with approved public data', async ({ page }) => {

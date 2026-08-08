@@ -216,36 +216,44 @@
       "media": [
         {
           "src": "./assets/projects/coding-academy/01-learning-home.jpg",
+          "order": 6,
           "alt": "واجهة أكاديمية البرمجة العربية مع مثال بايثون مرئي",
           "caption": "مدخل مباشر للتعلم مع وعد واضح ومختصر باللغة العربية."
         },
         {
           "src": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
+          "featured": true,
+          "order": 1,
           "alt": "مفاهيم بايثون منظمة في بطاقات مواضيع ملونة",
           "caption": "اثنتا عشرة بطاقة تحول المنهج إلى مسار مرئي سهل المسح."
         },
         {
           "src": "./assets/projects/coding-academy/03-topic-code-preview.jpg",
+          "order": 2,
           "alt": "بطاقة موضوع بايثون تعرض معاينة للكود عند مرور المؤشر",
           "caption": "يمكن مشاهدة مثال برمجي مختصر من دون مغادرة النظرة العامة."
         },
         {
           "src": "./assets/projects/coding-academy/04-lesson-and-source-files.jpg",
+          "order": 3,
           "alt": "درس بايثون عربي تفصيلي مع ملفات الموضوع والتحدي",
           "caption": "يربط الدرس بين الشرح والأمثلة وملف الموضوع وتحدٍ لاحق."
         },
         {
           "src": "./assets/projects/coding-academy/05-practice-library.jpg",
+          "order": 4,
           "alt": "مكتبة تمارين بايثون العربية مرتبة حسب الموضوع",
           "caption": "تجمع المكتبة 25 سؤالاً حسب المفهوم وتعرض التقدم المحلي."
         },
         {
           "src": "./assets/projects/coding-academy/06-interactive-exercise.jpg",
+          "order": 5,
           "alt": "تمرين بايثون تفاعلي بنص عربي وإنكليزي",
           "caption": "يجمع التمرين بين المطلوب بلغتين والخطوات ومساحة الكتابة والإرشاد المرجعي."
         },
         {
           "src": "./assets/projects/coding-academy/07-mobile-topic-path.jpg",
+          "order": 7,
           "alt": "بطاقات بايثون في الأكاديمية على شاشة هاتف",
           "caption": "يتحول المسار نفسه إلى تدفق قراءة مريح على الهاتف."
         }
@@ -664,6 +672,9 @@
     "mediaTitle": "جولة داخل المنتج",
     "mediaDescription": "شاشات حقيقية ملتقطة من المصدر الحالي المدقق وببيانات تجريبية آمنة.",
     "mediaPending": "تضاف الوسائط بعد اعتمادها.",
+    "mediaNavigation": "التنقل بين صور المشروع",
+    "previousImage": "الصورة السابقة",
+    "nextImage": "الصورة التالية",
     "detailsTitle": "دراسة الحالة",
     "detailsPending": "تُستكمل التفاصيل بعد اعتماد معلومات المشروع الدقيقة، بدون افتراض أو مبالغة.",
     "keyFacts": "حقائق المشروع الأساسية",
