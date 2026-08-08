@@ -12,7 +12,7 @@ async function expectNoOverflow(page) {
   expect(widths.page).toBeLessThanOrEqual(widths.viewport + 1);
 }
 
-test('home identifies Haidera and routes every demo to its project page', async ({ page }) => {
+test('home identifies Haidara and routes every demo to its project page', async ({ page }) => {
   const errors = runtimeErrors(page);
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
@@ -39,7 +39,10 @@ test('English switches direction and keeps complete project content', async ({ p
   await page.goto('/?lang=en');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
-  await expect(page.locator('h1')).toHaveText('Haidera Muhannad');
+  await expect(page.locator('h1')).toHaveText('Haidara Muhanned');
+  await expect(page).toHaveTitle('Haidara Muhanned | Software & Backend Developer');
+  await expect(page.locator('[data-portrait-alt]')).toHaveAttribute('alt', 'Portrait of Haidara Muhanned');
+  await expect(page.locator('.portrait-mark')).toHaveText('x7do0');
   await expect(page.locator('[data-project="mahsoob"]')).toContainText('Offline-first');
   await expect(page.locator('[data-project="masroofi"]')).toContainText('IndexedDB');
   await expectNoOverflow(page);
@@ -108,4 +111,7 @@ test('public SEO routes and crawl boundaries remain healthy', async ({ request }
   expect(robots).toContain('Disallow: /X7do0-portfolio/demos/');
   const sitemap = await (await request.get('/sitemap.xml')).text();
   expect(sitemap).not.toContain('/demos/');
+  const manifest = await (await request.get('/site.webmanifest')).json();
+  expect(manifest.name).toBe('Haidara Muhanned — x7do0');
+  expect(manifest.description).toContain('Haidara Muhanned');
 });

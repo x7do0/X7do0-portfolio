@@ -83,7 +83,7 @@ html[lang="ar"] .hero-role { font-family: var(--font-ar); }
 .portrait-frame { position: relative; min-height: 390px; display: grid; place-items: end center; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, #102136, #08131f); }
 .portrait-frame::after { content: ""; position: absolute; inset: auto 0 0; height: 32%; background: linear-gradient(transparent, rgba(7,17,29,.92)); pointer-events: none; }
 .portrait-frame img { position: relative; z-index: 2; width: 100%; height: auto; object-fit: contain; object-position: bottom; }
-.portrait-mark { position: absolute; inset: 14% auto auto 6%; color: rgba(255,255,255,.035); font: 700 clamp(6rem, 13vw, 10rem)/1 var(--mono); }
+.portrait-mark { position: absolute; z-index: 1; inset: 4% 0 auto; color: rgba(255,255,255,.075); font: 700 clamp(2.35rem, 4vw, 3.25rem)/.9 var(--mono); letter-spacing: -.04em; text-align: center; white-space: nowrap; }
 
 .section { position: relative; padding-block: 88px; border-bottom: 1px solid var(--line-soft); }
 .projects { background: linear-gradient(115deg, rgba(31, 81, 148, .09), transparent 48%); box-shadow: 0 0 0 100vmax rgba(8, 23, 42, .36); clip-path: inset(0 -100vmax); }
