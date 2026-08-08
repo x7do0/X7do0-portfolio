@@ -164,6 +164,7 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
   const states = [
     { query: '', language: 'ar', direction: 'rtl', viewport: { width: 1440, height: 960 } },
     { query: '?lang=en', language: 'en', direction: 'ltr', viewport: { width: 1440, height: 960 } },
+    { query: '?lang=en', language: 'en', direction: 'ltr', viewport: { width: 820, height: 1180 } },
     { query: '', language: 'ar', direction: 'rtl', viewport: { width: 390, height: 844 } },
     { query: '?lang=en', language: 'en', direction: 'ltr', viewport: { width: 390, height: 844 } },
   ];
@@ -184,6 +185,16 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       expect(await thumbnails.count()).toBeGreaterThan(1);
       await expect(thumbnails.first()).toHaveAttribute('aria-selected', 'true');
 
+      const browserBox = await page.locator('.case-media-browser').boundingBox();
+      const mainStageBox = await page.locator('.case-media-main__open').boundingBox();
+      expect(browserBox.width).toBeLessThanOrEqual(state.viewport.width > 720 ? 962 : state.viewport.width - 30);
+      expect(mainStageBox.height).toBeLessThanOrEqual(state.viewport.width > 900 ? 602 : state.viewport.width > 720 ? 502 : 300);
+      const thumbnailSizes = await thumbnails.evaluateAll(buttons => buttons.map(button => {
+        const box = button.getBoundingClientRect();
+        return `${Math.round(box.width)}x${Math.round(box.height)}`;
+      }));
+      expect(new Set(thumbnailSizes).size).toBe(1);
+
       const initialSource = await mainImage.getAttribute('src');
       const initialCaption = await caption.textContent();
       await thumbnails.nth(1).click();
@@ -195,6 +206,9 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       const selectedSource = await mainImage.getAttribute('src');
       await page.locator('.case-media-main__open').click();
       await expect(page.locator('.project-lightbox img')).toHaveAttribute('src', selectedSource);
+      const lightboxBox = await page.locator('.project-lightbox').boundingBox();
+      expect(lightboxBox.width).toBeLessThanOrEqual(state.viewport.width > 720 ? Math.min(1122, state.viewport.width * .88) : state.viewport.width - 30);
+      expect(lightboxBox.height).toBeLessThanOrEqual(state.viewport.height * .86);
       await page.keyboard.press('Escape');
       await expect(page.locator('.project-lightbox')).toHaveCount(0);
 
