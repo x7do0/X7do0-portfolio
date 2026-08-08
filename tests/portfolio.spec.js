@@ -184,6 +184,8 @@ test('project pages keep internal copy useful and avoid technical capture labels
 
 test('refresh and browser back return every visited page to the top', async ({ page }) => {
   await page.goto('/projects/enterprise-workflow/');
+  await expect(page.locator('.project-related')).toBeVisible();
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
   expect(await page.evaluate(() => scrollY)).toBeGreaterThan(300);
   await page.reload();
