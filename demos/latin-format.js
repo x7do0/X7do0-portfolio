@@ -54,6 +54,21 @@
     });
   }
 
+  function installEnterpriseRoleControl() {
+    if (!window.location.pathname.includes('/demos/enterprise-workflow/')) return;
+
+    const rolePanel = document.querySelector('.role-panel');
+    if (rolePanel) rolePanel.classList.add('role-panel--floating');
+
+    if (!document.querySelector('link[data-floating-role-control]')) {
+      const stylesheet = document.createElement('link');
+      stylesheet.rel = 'stylesheet';
+      stylesheet.href = './floating-role-control.css';
+      stylesheet.dataset.floatingRoleControl = '';
+      document.head.append(stylesheet);
+    }
+  }
+
   let queued = false;
   function normalize() {
     queued = false;
@@ -68,6 +83,7 @@
   });
 
   const start = () => {
+    installEnterpriseRoleControl();
     normalize();
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
   };
