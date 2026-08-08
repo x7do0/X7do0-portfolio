@@ -60,8 +60,12 @@
     const featuredIndex = Math.max(0, media.findIndex((item) => item.featured));
     const featured = media[featuredIndex];
     const mediaUrl = (item) => `${root}${item.src.replace(/^\.\//, "")}`;
+    const mediaDimensions = (item) => item.device === "phone" ? { width: 390, height: 844 } : { width: 1440, height: 960 };
+    const featuredDimensions = mediaDimensions(featured);
+    const previousGlyph = language === "ar" ? "›" : "‹";
+    const nextGlyph = language === "ar" ? "‹" : "›";
     const thumbnailMarkup = media.map((item, index) => `
-      <button class="case-media-thumb" type="button" role="tab" aria-selected="${index === featuredIndex}" aria-controls="case-media-panel" tabindex="${index === featuredIndex ? "0" : "-1"}" data-media-index="${index}" aria-label="${String(index + 1).padStart(2, "0")}: ${item.alt}">
+      <button class="case-media-thumb${item.device === "phone" ? " case-media-thumb--phone" : ""}" type="button" role="tab" aria-selected="${index === featuredIndex}" aria-controls="case-media-panel" tabindex="${index === featuredIndex ? "0" : "-1"}" data-media-index="${index}" aria-label="${String(index + 1).padStart(2, "0")}: ${item.alt}">
         <img src="${mediaUrl(item)}" alt="" width="240" height="160" loading="lazy" decoding="async">
         <span>${String(index + 1).padStart(2, "0")}</span>
       </button>`).join("");
@@ -73,15 +77,15 @@
       </section>
       <section class="case-story"><div class="shell"><header class="case-heading reveal"><span>02</span><h2>${content.projectPage.detailsTitle}</h2></header><div class="case-sections">${sectionMarkup}</div></div></section>
       <section class="case-gallery shell"><header class="case-heading reveal"><span>03</span><div><h2>${content.projectPage.mediaTitle}</h2><p>${content.projectPage.mediaDescription}</p></div></header>
-        <div class="case-media-browser reveal" data-media-browser tabindex="-1">
+        <div class="case-media-browser reveal${featured.device === "phone" ? " is-phone-media" : ""}" data-media-browser tabindex="-1">
           <figure class="case-media-main" id="case-media-panel" role="tabpanel">
             <button class="case-media-main__open" type="button" data-media-open aria-label="${content.projectPage.enlargeImage}: ${featured.alt}">
-              <img src="${mediaUrl(featured)}" alt="${featured.alt}" width="1440" height="960" loading="eager" decoding="async" data-media-main-image>
+              <img src="${mediaUrl(featured)}" alt="${featured.alt}" width="${featuredDimensions.width}" height="${featuredDimensions.height}" loading="eager" decoding="async" data-media-main-image>
             </button>
             <div class="case-media-main__controls" aria-hidden="false">
-              <button type="button" data-media-previous aria-label="${content.projectPage.previousImage}">‹</button>
+              <button type="button" data-media-previous aria-label="${content.projectPage.previousImage}">${previousGlyph}</button>
               <span data-media-count aria-live="polite">${featuredIndex + 1} / ${media.length}</span>
-              <button type="button" data-media-next aria-label="${content.projectPage.nextImage}">›</button>
+              <button type="button" data-media-next aria-label="${content.projectPage.nextImage}">${nextGlyph}</button>
             </div>
           </figure>
           <div class="case-media-rail" role="tablist" aria-label="${content.projectPage.mediaNavigation}">${thumbnailMarkup}</div>
@@ -108,6 +112,10 @@
       const item = media[selectedIndex];
       const selectedThumbnail = thumbnails[selectedIndex];
       browser.classList.add("is-changing");
+      browser.classList.toggle("is-phone-media", item.device === "phone");
+      const dimensions = mediaDimensions(item);
+      mainImage.width = dimensions.width;
+      mainImage.height = dimensions.height;
       mainImage.src = mediaUrl(item);
       mainImage.alt = item.alt;
       mainButton.setAttribute("aria-label", `${content.projectPage.enlargeImage}: ${item.alt}`);
@@ -122,7 +130,10 @@
       selectedThumbnail.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest", inline: "nearest" });
       if (focusThumbnail) selectedThumbnail.focus();
       if (dialog) {
+        dialog.classList.toggle("is-phone-media", item.device === "phone");
         const dialogImage = qs("img", dialog);
+        dialogImage.width = dimensions.width;
+        dialogImage.height = dimensions.height;
         dialogImage.src = mediaUrl(item);
         dialogImage.alt = item.alt;
       }
@@ -149,8 +160,9 @@
     mainButton.addEventListener("click", () => {
       const opener = mainButton;
       dialog = document.createElement("dialog");
-      dialog.className = "project-lightbox";
-      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">‹</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">›</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
+      dialog.className = `project-lightbox${media[selectedIndex].device === "phone" ? " is-phone-media" : ""}`;
+      const dialogDimensions = mediaDimensions(media[selectedIndex]);
+      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}" width="${dialogDimensions.width}" height="${dialogDimensions.height}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">${previousGlyph}</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">${nextGlyph}</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
       document.body.appendChild(dialog);
       const close = () => dialog.close();
       qs("[data-lightbox-close]", dialog).addEventListener("click", close);

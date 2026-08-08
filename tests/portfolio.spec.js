@@ -119,7 +119,8 @@ test('project details use real previews, source-backed facts, and an inline demo
     await expect(page.locator('.project-case-study')).toBeVisible();
     await expect(page.locator('.case-section')).toHaveCount(4);
     await expect(page.locator('.case-media-main img')).toHaveCount(1);
-    await expect(page.locator('.case-media-thumb')).toHaveCount(slug === 'coding-academy' ? 7 : 6);
+    const expectedMediaCount = { 'enterprise-workflow': 13, 'coding-academy': 7, masroofi: 8 }[slug];
+    await expect(page.locator('.case-media-thumb')).toHaveCount(expectedMediaCount);
     await expect(page.locator('.project-future')).toHaveCount(0);
     await page.locator('[data-demo-link]').click();
     await expect(page.locator('.project-inline-demo')).toBeVisible();
@@ -170,6 +171,11 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
   ];
 
   for (const slug of ['enterprise-workflow', 'masroofi', 'coding-academy']) {
+    const primaryImage = {
+      'enterprise-workflow': '01-employee-dashboard-light.png',
+      masroofi: '01-balance-dashboard-light.png',
+      'coding-academy': '02-python-topic-cards.jpg',
+    }[slug];
     for (const state of states) {
       await page.setViewportSize(state.viewport);
       await page.evaluate(language => localStorage.setItem('x7do0-language', language), state.language);
@@ -184,6 +190,15 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       await expect(mainImage).toBeVisible();
       expect(await thumbnails.count()).toBeGreaterThan(1);
       await expect(thumbnails.first()).toHaveAttribute('aria-selected', 'true');
+      await expect(mainImage).toHaveAttribute('src', new RegExp(primaryImage.replace('.', '\\.')));
+
+      const previous = page.locator('[data-media-previous]');
+      const next = page.locator('[data-media-next]');
+      await expect(previous).toHaveText(state.direction === 'rtl' ? '›' : '‹');
+      await expect(next).toHaveText(state.direction === 'rtl' ? '‹' : '›');
+      const previousBox = await previous.boundingBox();
+      const nextBox = await next.boundingBox();
+      expect(state.direction === 'rtl' ? previousBox.x > nextBox.x : previousBox.x < nextBox.x).toBeTruthy();
 
       const browserBox = await page.locator('.case-media-browser').boundingBox();
       const mainStageBox = await page.locator('.case-media-main__open').boundingBox();
@@ -216,6 +231,20 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       await page.keyboard.press(state.direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight');
       await expect(thumbnails.nth(2)).toHaveAttribute('aria-selected', 'true');
       await expect(thumbnails.nth(2)).toBeFocused();
+
+      const phoneThumbnail = page.locator('.case-media-thumb--phone').first();
+      await expect(phoneThumbnail).toBeVisible();
+      await phoneThumbnail.click();
+      await expect(page.locator('.case-media-browser')).toHaveClass(/is-phone-media/);
+      await expect.poll(() => mainImage.evaluate(image => image.complete && image.naturalHeight > image.naturalWidth)).toBeTruthy();
+      const phoneStageBox = await page.locator('.case-media-main__open').boundingBox();
+      const phoneImageBox = await mainImage.boundingBox();
+      expect(phoneImageBox.width).toBeLessThan(phoneStageBox.width * .7);
+      await page.locator('.case-media-main__open').click();
+      await expect(page.locator('.project-lightbox')).toHaveClass(/is-phone-media/);
+      const phoneLightboxBox = await page.locator('.project-lightbox').boundingBox();
+      expect(phoneLightboxBox.width).toBeLessThanOrEqual(Math.min(380, state.viewport.width - 30));
+      await page.keyboard.press('Escape');
 
       expect(await page.locator('.case-media-browser img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBeTruthy();
       const rail = page.locator('.case-media-rail');

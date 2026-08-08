@@ -89,6 +89,7 @@
       "media": [
         {
           "src": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
+          "featured": true,
           "alt": "Enterprise Workflow employee dashboard in the light theme",
           "caption": "The employee dashboard keeps request creation, personal status, and recent activity in one focused workspace."
         },
@@ -103,19 +104,55 @@
           "caption": "Employees can track their own requests without seeing organization-wide data."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/04-manager-dashboard-dark.png",
+          "src": "./assets/projects/enterprise-workflow/04-employee-notifications-light.png",
+          "alt": "Enterprise Workflow notification center for an employee",
+          "caption": "A dedicated notification center keeps workflow updates separate from the employee's focused request list."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/05-manager-dashboard-dark.png",
           "alt": "Enterprise Workflow manager dashboard in the dark theme",
           "caption": "The manager experience changes navigation and priorities according to the active role."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/05-manager-approvals-dark.png",
+          "src": "./assets/projects/enterprise-workflow/06-manager-approvals-dark.png",
           "alt": "Enterprise Workflow pending approvals page in the dark theme",
           "caption": "The approvals workspace presents only requests awaiting the manager decision, including a clear empty state."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/06-manager-team-requests-dark.png",
+          "src": "./assets/projects/enterprise-workflow/07-manager-team-requests-dark.png",
           "alt": "Enterprise Workflow team requests page for a manager",
           "caption": "Managers can review team requests through a permission-scoped view."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/08-admin-employees-light.png",
+          "alt": "Enterprise Workflow employee directory for an administrator",
+          "caption": "Administrators can review reporting lines, departments, roles, and invitation status from one staff directory."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/09-admin-roles-light.png",
+          "alt": "Enterprise Workflow job roles and permissions administration",
+          "caption": "Role administration makes protected built-in roles, assignments, and permission scope visible before editing."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/10-admin-workflow-rules-light.png",
+          "alt": "Enterprise Workflow visual workflow designer",
+          "caption": "The workflow designer gives administrators a clear place to define approval routing instead of hiding it in code."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/11-admin-reports-light.png",
+          "alt": "Enterprise Workflow reports and export dashboard",
+          "caption": "Reports combine filterable request metrics with employee and department coverage and export controls."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/12-admin-audit-trail-light.png",
+          "alt": "Enterprise Workflow administrator audit trail",
+          "caption": "The audit trail exposes recorded system activity to support review and accountability."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/13-employee-mobile-dashboard-light.png",
+          "device": "phone",
+          "alt": "Enterprise Workflow employee dashboard on a mobile phone",
+          "caption": "On a phone, the employee dashboard becomes a single readable column with the primary request action kept prominent."
         }
       ],
       "caseStudy": {
@@ -254,6 +291,7 @@
         },
         {
           "src": "./assets/projects/coding-academy/07-mobile-topic-path.jpg",
+          "device": "phone",
           "order": 7,
           "alt": "Coding Academy Python topic cards on a mobile viewport",
           "caption": "The same topic-first path adapts to a compact mobile reading flow."
@@ -345,7 +383,7 @@
         "PWA"
       ],
       "previewKind": "masroofi",
-      "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+      "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.png",
       "previewAlt": "Masroofi Arabic balance dashboard with sample transactions",
       "previewCaption": "Current product UI captured locally from the verified source",
       "resumeSummary": "A client-requested Arabic income and expense tracker with local-first storage, instant balance calculation, and safe backup and restore.",
@@ -382,32 +420,45 @@
       ],
       "media": [
         {
-          "src": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+          "src": "./assets/projects/masroofi/01-balance-dashboard-light.png",
+          "featured": true,
           "alt": "Masroofi light-theme dashboard showing balance, income, expenses, and recent activity",
           "caption": "The home view derives the balance and current-month snapshot from the transaction ledger."
         },
         {
-          "src": "./assets/projects/masroofi/02-expenses-and-entry-form.jpg",
-          "alt": "Masroofi expense entry form and saved expense list",
-          "caption": "Income and expense flows share a focused form with amount, note, emoji, and date-time controls."
+          "src": "./assets/projects/masroofi/02-income-and-entry-form.png",
+          "alt": "Masroofi income entry form and current income total",
+          "caption": "The income flow keeps amount, label, icon, note, and date-time controls together in one focused form."
         },
         {
-          "src": "./assets/projects/masroofi/03-unified-history.jpg",
+          "src": "./assets/projects/masroofi/03-expenses-and-entry-form.png",
+          "alt": "Masroofi expense entry form and current expense total",
+          "caption": "Expense recording mirrors the income flow, reducing relearning while keeping the red expense context unmistakable."
+        },
+        {
+          "src": "./assets/projects/masroofi/04-unified-history.png",
           "alt": "Masroofi unified transaction history with income and expense filters",
           "caption": "A chronological history combines both transaction types and provides clear filters."
         },
         {
-          "src": "./assets/projects/masroofi/04-backup-and-restore.jpg",
+          "src": "./assets/projects/masroofi/05-backup-and-restore.png",
           "alt": "Masroofi backup and restore dialog",
           "caption": "Data tools export a versioned file and explain safe merge versus full replacement."
         },
         {
-          "src": "./assets/projects/masroofi/05-modern-date-picker.jpg",
+          "src": "./assets/projects/masroofi/06-modern-date-picker.png",
           "alt": "Masroofi custom date and time picker",
           "caption": "A custom calendar keeps date and time entry consistent across desktop and mobile."
         },
         {
-          "src": "./assets/projects/masroofi/06-mobile-dark-dashboard.jpg",
+          "src": "./assets/projects/masroofi/07-mobile-light-dashboard.png",
+          "device": "phone",
+          "alt": "Masroofi light dashboard on a mobile phone",
+          "caption": "The mobile layout keeps the balance, monthly summary, recent entries, and primary navigation readable without desktop cropping."
+        },
+        {
+          "src": "./assets/projects/masroofi/08-mobile-dark-dashboard.png",
+          "device": "phone",
           "alt": "Masroofi dashboard in dark theme on a mobile viewport",
           "caption": "The responsive mobile shell keeps primary actions and navigation within easy reach."
         }

@@ -61,8 +61,9 @@ python -m http.server 8080
 
 أدوات إعادة التقاط الصور:
 
-- `tools/capture-case-study-media.mjs` لمصروفي والأكاديمية بعد تشغيل مصدرهما محلياً.
-- `tools/capture-enterprise-media.mjs` لـEnterprise Workflow بعد تشغيل بيئة E2E المعزولة فقط وتوفير متغيرات `ENTERPRISE_E2E_EMPLOYEE_EMAIL` و`ENTERPRISE_E2E_MANAGER_EMAIL` و`ENTERPRISE_E2E_PASSWORD` لمستخدمين تجريبيين.
+- `tools/capture-case-study-media.mjs` للأكاديمية بعد تشغيل مصدرها محلياً.
+- `tools/capture-masroofi-media.mjs` لمصروفي؛ ينتج ثماني لقطات PNG واضحة لسطح المكتب والهاتف ببيانات تجريبية محلية.
+- `tools/capture-enterprise-media.mjs` لـEnterprise Workflow بعد تشغيل بيئة E2E المعزولة فقط. يمكن ضبط `ENTERPRISE_PREPARE=1` و`ENTERPRISE_SOURCE_ROOT` لتهيئة قاعدة `CompanyWorkflowDb_E2E` المحمية ببيانات `workflow.test`، أو تشغيل الالتقاط مباشرة على بيئة E2E مهيأة.
 
 لا تستخدم أداة Enterprise مع بيانات تطوير أو إنتاج، ولا تضع أسراراً أو معلومات أشخاص حقيقيين داخل الصور.
 
