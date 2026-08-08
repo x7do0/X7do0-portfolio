@@ -113,11 +113,13 @@ test('English switches direction, preserves content, and can switch back to Arab
 });
 
 test('project details use real previews, source-backed facts, and an inline demo', async ({ page }) => {
-  for (const slug of ['enterprise-workflow', 'coding-academy', 'mahsoob', 'masroofi']) {
+  for (const slug of ['enterprise-workflow', 'coding-academy', 'masroofi']) {
     await page.goto(`/projects/${slug}/`);
     await expect(page.locator('.project-source-preview img')).toBeVisible();
-    await expect(page.locator('.project-future.has-content')).toBeVisible();
-    await expect(page.locator('.future-panel')).toHaveCount(2);
+    await expect(page.locator('.project-case-study')).toBeVisible();
+    await expect(page.locator('.case-section')).toHaveCount(4);
+    await expect(page.locator('.case-media-card')).toHaveCount(slug === 'coding-academy' ? 7 : 6);
+    await expect(page.locator('.project-future')).toHaveCount(0);
     await page.locator('[data-demo-link]').click();
     await expect(page.locator('.project-inline-demo')).toBeVisible();
     await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', new RegExp(`/demos/${slug}/`));
@@ -126,9 +128,34 @@ test('project details use real previews, source-backed facts, and an inline demo
     await expectNoOverflow(page);
   }
 
+  await page.goto('/projects/mahsoob/');
+  await expect(page.locator('.project-source-preview img')).toBeVisible();
+  await expect(page.locator('.project-future.has-content')).toBeVisible();
+  await expect(page.locator('.future-panel')).toHaveCount(2);
+  await expect(page.locator('.project-case-study')).toHaveCount(0);
+
   await page.goto('/projects/coding-academy/?demo=1#demo');
   await expect(page.locator('.project-inline-demo')).toBeVisible();
   await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', /\/demos\/coding-academy\//);
+});
+
+test('public product links and media lightbox are explicit and keyboard-safe', async ({ page }) => {
+  for (const slug of ['coding-academy', 'masroofi']) {
+    await page.goto(`/projects/${slug}/`);
+    await expect(page.locator('.project-link--live')).toHaveAttribute('target', '_blank');
+    await expect(page.locator('.project-link--source')).toHaveAttribute('rel', /noopener/);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /assets\/projects/);
+    const structured = JSON.parse(await page.locator('#project-structured-data').textContent());
+    expect(structured['@type']).toBe('SoftwareApplication');
+    expect(structured.author.name).toBe('Haidara Muhanned');
+    await page.locator('.case-media-card button').first().click();
+    await expect(page.locator('.project-lightbox')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.project-lightbox')).toHaveCount(0);
+  }
+
+  await page.goto('/projects/enterprise-workflow/');
+  await expect(page.locator('.project-external-links a')).toHaveCount(0);
 });
 
 test('resume is a complete bilingual web resume with approved public data', async ({ page }) => {

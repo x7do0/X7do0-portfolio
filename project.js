@@ -12,6 +12,79 @@
   const qs = (selector, parent = document) => parent.querySelector(selector);
   const qsa = (selector, parent = document) => [...parent.querySelectorAll(selector)];
 
+  function renderProjectLinks(project, content) {
+    const actions = qs(".project-demo-actions");
+    if (!actions) return;
+    const demoLink = qs("[data-demo-link]", actions);
+    const hint = qs("[data-page-text='demoHint']", actions);
+    const externalLinks = project.links || [];
+    let links = qs(".project-external-links", actions);
+    if (!links) {
+      links = document.createElement("div");
+      links.className = "project-external-links";
+      actions.insertBefore(links, hint);
+    }
+    links.replaceChildren(...externalLinks.map((item) => {
+      const link = document.createElement("a");
+      link.className = `project-link project-link--${item.kind}`;
+      link.href = item.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = item.label;
+      link.setAttribute("aria-label", `${item.label} — ${project.title}`);
+      return link;
+    }));
+    if (demoLink) demoLink.classList.toggle("project-demo-cta--secondary", externalLinks.some((item) => item.kind === "live"));
+    if (hint) hint.textContent = content.projectPage.demoHint;
+  }
+
+  function renderCaseStudy(project, content) {
+    const existing = qs(".project-case-study");
+    if (existing) existing.remove();
+    if (!project.caseStudy?.sections?.length || !project.media?.length) return;
+
+    qs(".project-future")?.remove();
+
+    const study = document.createElement("div");
+    study.className = "project-case-study";
+    const metricMarkup = (project.metrics || []).map((item) => `
+      <li><strong>${item.value}</strong><span>${item.label}</span></li>`).join("");
+    const sectionMarkup = project.caseStudy.sections.map((section, index) => `
+      <article class="case-section reveal">
+        <span class="case-section__index">${String(index + 1).padStart(2, "0")}</span>
+        <div><h3>${section.title}</h3><p>${section.body}</p>${section.items?.length ? `<ul>${section.items.map((item) => `<li>${item}</li>`).join("")}</ul>` : ""}</div>
+      </article>`).join("");
+    const mediaMarkup = project.media.map((item, index) => `
+      <figure class="case-media-card reveal${index === 0 ? " case-media-card--featured" : ""}">
+        <button type="button" data-lightbox-image="${root}${item.src.replace(/^\.\//, "")}" aria-label="${content.projectPage.enlargeImage}: ${item.alt}">
+          <img src="${root}${item.src.replace(/^\.\//, "")}" alt="${item.alt}" width="1440" height="960" loading="${index < 2 ? "eager" : "lazy"}" decoding="async">
+        </button>
+        <figcaption><strong>${String(index + 1).padStart(2, "0")}</strong><span>${item.caption}</span></figcaption>
+      </figure>`).join("");
+
+    study.innerHTML = `
+      <section class="case-intro shell reveal">
+        <div><span class="case-kicker">${project.status}</span><h2>${project.caseStudy.title}</h2><p>${project.caseStudy.intro}</p></div>
+        <ul class="case-metrics" aria-label="${content.projectPage.keyFacts}">${metricMarkup}</ul>
+      </section>
+      <section class="case-story"><div class="shell"><header class="case-heading reveal"><span>02</span><h2>${content.projectPage.detailsTitle}</h2></header><div class="case-sections">${sectionMarkup}</div></div></section>
+      <section class="case-gallery shell"><header class="case-heading reveal"><span>03</span><div><h2>${content.projectPage.mediaTitle}</h2><p>${content.projectPage.mediaDescription}</p></div></header><div class="case-gallery__grid">${mediaMarkup}</div></section>`;
+    qs(".project-overview").after(study);
+
+    qsa("[data-lightbox-image]", study).forEach((button) => button.addEventListener("click", () => {
+      const dialog = document.createElement("dialog");
+      dialog.className = "project-lightbox";
+      dialog.innerHTML = `<button type="button" aria-label="${content.ui.close}">×</button><img src="${button.dataset.lightboxImage}" alt="${qs("img", button).alt}">`;
+      document.body.appendChild(dialog);
+      const close = () => { dialog.close(); dialog.remove(); button.focus(); };
+      qs("button", dialog).addEventListener("click", close);
+      dialog.addEventListener("click", (event) => { if (event.target === dialog) close(); });
+      dialog.addEventListener("close", () => { if (dialog.isConnected) dialog.remove(); });
+      dialog.showModal();
+      qs("button", dialog).focus();
+    }));
+  }
+
   async function loadContent(nextLanguage) {
     const response = await fetch(`${root}content/portfolio.${nextLanguage}.json`, { cache: "no-cache" });
     if (!response.ok) throw new Error(`Content request failed (${response.status}).`);
@@ -65,7 +138,7 @@
         <div class="page-academy__path">
           <span class="is-active"><i>01</i><strong>syntax</strong></span>
           <span><i>02</i><strong>practice</strong></span>
-          <span><i>03</i><strong>project</strong></span>
+          <span><i>03</i><strong>exercises</strong></span>
           <span><i>04</i><strong>progress</strong></span>
         </div>
         <pre><code><em>name</em> = "x7do0"
@@ -78,6 +151,35 @@ print(name)</code></pre>
     if (nextLanguage === "en") url.searchParams.set("lang", "en");
     else url.searchParams.delete("lang");
     history.replaceState({}, "", url);
+  }
+
+  function updateProjectMetadata(project) {
+    let imageMeta = qs('meta[property="og:image"]');
+    if (!imageMeta) {
+      imageMeta = document.createElement("meta");
+      imageMeta.setAttribute("property", "og:image");
+      document.head.appendChild(imageMeta);
+    }
+    imageMeta.content = new URL(`${root}${project.previewImage.replace(/^\.\//, "")}`, location.href).href;
+
+    let structured = qs("#project-structured-data");
+    if (!structured) {
+      structured = document.createElement("script");
+      structured.id = "project-structured-data";
+      structured.type = "application/ld+json";
+      document.head.appendChild(structured);
+    }
+    structured.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: project.title,
+      description: project.summary,
+      applicationCategory: project.category,
+      operatingSystem: project.slug === "mahsoob" ? "Windows" : "Web",
+      author: { "@type": "Person", name: "Haidara Muhanned" },
+      image: imageMeta.content,
+      url: location.href,
+    });
   }
 
   async function render(nextLanguage, updateHistory = true) {
@@ -117,6 +219,8 @@ print(name)</code></pre>
 
     qs("#project-preview").innerHTML = `<figure class="project-source-preview"><img src="${root}${project.previewImage.replace(/^\.\//, "")}" alt="${project.previewAlt}" width="800" height="450"><figcaption>${project.previewCaption}</figcaption></figure>`;
     qs("#project-preview").setAttribute("aria-label", content.projectPage.previewTitle);
+    renderProjectLinks(project, content);
+    renderCaseStudy(project, content);
     qs("[data-brand-name]").textContent = content.brand.name;
     qs("[data-year]").textContent = String(new Date().getFullYear());
     qs("[data-ui-top]").textContent = content.ui.top;
@@ -151,7 +255,7 @@ print(name)</code></pre>
     }
 
     const future = qs(".project-future");
-    if (future) {
+    if (future && !project.caseStudy?.sections?.length) {
       const panels = qsa(".future-panel", future);
       panels[0].querySelector("h2").textContent = language === "ar" ? "ما الذي يقدمه" : "What it delivers";
       panels[0].querySelector("p").textContent = project.facts.join(language === "ar" ? "، " : ", ");
@@ -166,6 +270,17 @@ print(name)</code></pre>
     qs('meta[property="og:description"]').content = project.summary;
     const canonical = qs('link[rel="canonical"]');
     canonical.href = `https://x7do0.github.io/X7do0-portfolio/projects/${slug}/${language === "en" ? "?lang=en" : ""}`;
+    updateProjectMetadata(project);
+    setupRevealNodes();
+  }
+
+  let observer;
+  function setupRevealNodes() {
+    if (!observer) return;
+    qsa(".reveal:not([data-reveal-bound])").forEach((element) => {
+      element.dataset.revealBound = "true";
+      observer.observe(element);
+    });
   }
 
   function setupMotion() {
@@ -177,12 +292,12 @@ print(name)</code></pre>
     addEventListener("scroll", update, { passive: true });
     update();
 
-    const observer = new IntersectionObserver((entries) => {
+    observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add("is-visible");
       });
     }, { threshold: 0.12 });
-    qsa(".reveal").forEach((element) => observer.observe(element));
+    setupRevealNodes();
   }
 
   qsa("[data-language]").forEach((button) => {

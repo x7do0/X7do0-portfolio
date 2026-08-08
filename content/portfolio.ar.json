@@ -1,17 +1,33 @@
 {
-  "brand": { "name": "حيدره مهند", "role": "مطور برمجيات يركز على الـBackend وبناء الأنظمة" },
-  "profile": { "location": "النجف، العراق", "locationLabel": "الموقع" },
+  "brand": {
+    "name": "حيدره مهند",
+    "role": "مطور برمجيات يركز على الـBackend وبناء الأنظمة"
+  },
+  "profile": {
+    "location": "النجف، العراق",
+    "locationLabel": "الموقع"
+  },
   "meta": {
     "title": "حيدره مهند | مطور برمجيات يركز على Backend",
     "description": "البورتفوليو الرسمي لحيدره مهند — مطور برمجيات يركز على الـBackend وبناء الأنظمة والمنتجات العملية."
   },
-  "nav": { "projects": "المشاريع", "skills": "المهارات", "education": "التعليم", "resume": "السيرة", "contact": "تواصل" },
+  "nav": {
+    "projects": "المشاريع",
+    "skills": "المهارات",
+    "education": "التعليم",
+    "resume": "السيرة",
+    "contact": "تواصل"
+  },
   "hero": {
     "title": "حيدره مهند",
     "description": "أبني أنظمة وتطبيقات عملية من الفكرة والمتطلبات إلى منتج قابل للاستخدام، مع تركيز على الـBackend، جودة التنفيذ، والقدرة على التكيّف مع احتياجات كل مشروع.",
     "primaryAction": "استعرض مشاريعي",
     "secondaryAction": "تعرّف عليّ",
-    "proofItems": ["C# و.NET", "Backend Systems", "من الفكرة إلى الإطلاق"],
+    "proofItems": [
+      "C# و.NET",
+      "Backend Systems",
+      "من الفكرة إلى الإطلاق"
+    ],
     "portraitAlt": "صورة حيدره مهند"
   },
   "about": {
@@ -27,61 +43,533 @@
   },
   "projects": [
     {
-      "slug": "enterprise-workflow", "title": "Enterprise Workflow", "category": "نظام أعمال",
-      "summary": "نظام لإدارة الطلبات الداخلية والموافقات التي تُدار عادةً عبر الورق والبريد، مع مسارات ديناميكية وصلاحيات وإشعارات وسجل تدقيق لكل إجراء.",
-      "facts": ["موافقات متعددة المراحل", "أدوار وصلاحيات", "سجل تدقيق"],
-      "tech": [".NET 10", "ASP.NET Core", "SQL Server"],
-      "previewKind": "workflow", "previewImage": "./assets/projects/enterprise-workflow.png", "previewAlt": "لوحة الطلبات في نظام Enterprise Workflow", "previewCaption": "لقطة من النظام",
-      "resumeSummary": "نظام لإدارة الطلبات الداخلية ومسارات الموافقات مع صلاحيات وإشعارات وسجل تدقيق.",
-      "cta": "استكشف المشروع", "media": [], "caseStudy": []
+      "slug": "enterprise-workflow",
+      "title": "Enterprise Workflow",
+      "category": "نظام أعمال",
+      "status": "مكتمل",
+      "summary": "منصة داخلية تُستضاف لكل شركة بصورة مستقلة، وتحول الطلبات الورقية وموافقات البريد المتفرقة إلى طلبات منظمة ومسارات تحكمها السياسات وقرارات حسب الدور وإشعارات وسجل تدقيق قابل للتتبع.",
+      "facts": [
+        "موافقات ديناميكية متعددة المراحل",
+        "صلاحيات دقيقة",
+        "سجل كامل للإجراءات"
+      ],
+      "tech": [
+        ".NET 10",
+        "ASP.NET Core",
+        "EF Core",
+        "SQL Server",
+        "Next.js 16",
+        "React 19"
+      ],
+      "previewKind": "workflow",
+      "previewImage": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
+      "previewAlt": "لوحة الموظف في Enterprise Workflow بالمظهر الفاتح",
+      "previewCaption": "لقطة فعلية من بيئة E2E المعزولة",
+      "resumeSummary": "منصة داخلية للطلبات والموافقات بمسارات ديناميكية وصلاحيات دقيقة وإشعارات وسجل تدقيق.",
+      "cta": "استكشف المشروع",
+      "links": [],
+      "metrics": [
+        {
+          "value": "4",
+          "label": "أدوار أساسية بتجربة وتنقل مناسبين لكل دور"
+        },
+        {
+          "value": "IQD",
+          "label": "سياسة مالية ثابتة للسوق العراقي"
+        },
+        {
+          "value": "UTC",
+          "label": "تخزين زمني موحد مع تشغيل Asia/Baghdad"
+        },
+        {
+          "value": "E2E",
+          "label": "اختبار رحلات الموافقة على بيئة معزولة"
+        }
+      ],
+      "media": [
+        {
+          "src": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
+          "alt": "لوحة الموظف في Enterprise Workflow بالمظهر الفاتح",
+          "caption": "تجمع لوحة الموظف إنشاء الطلب وحالته الشخصية وآخر النشاطات في مساحة مركزة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/02-employee-new-request-light.png",
+          "alt": "نموذج طلب جديد للموظف في Enterprise Workflow",
+          "caption": "يجمع النموذج المنظم البيانات المطلوبة قبل بدء اختيار مسار الموافقة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/03-employee-requests-light.png",
+          "alt": "قائمة طلبات الموظف في Enterprise Workflow بالمظهر الفاتح",
+          "caption": "يتابع الموظف طلباته فقط من دون الاطلاع على بيانات المؤسسة العامة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/04-manager-dashboard-dark.png",
+          "alt": "لوحة المدير في Enterprise Workflow بالمظهر الداكن",
+          "caption": "تتغير أولويات التنقل والواجهة بحسب دور المدير الفعلي."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/05-manager-approvals-dark.png",
+          "alt": "صفحة الموافقات المعلقة للمدير بالمظهر الداكن",
+          "caption": "تعرض مساحة الموافقات الطلبات التي تنتظر قرار المدير فقط، مع حالة فارغة واضحة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/06-manager-team-requests-dark.png",
+          "alt": "صفحة طلبات الفريق للمدير في Enterprise Workflow",
+          "caption": "يراجع المدير طلبات فريقه ضمن نطاق الصلاحيات الممنوح له."
+        }
+      ],
+      "caseStudy": {
+        "title": "من موافقات متفرقة إلى مسار واضح يمكن محاسبته",
+        "intro": "صُمم المنتج حول مشكلة مؤسساتية واقعية: الطلب يفقد سياقه عندما يتنقل بين الورق وملفات PDF وسلاسل البريد. النظام يجمع الطلب، يحدد مساره المناسب، يوثق كل قرار، ويعرض لكل دور العمل الذي يملك صلاحية تنفيذه.",
+        "sections": [
+          {
+            "title": "المشكلة",
+            "body": "طلبات الشراء والإجازة والمصاريف والسفر تحتاج مساراً ثابتاً ومالكاً واضحاً وسجلاً يمكن الرجوع إليه. سلاسل البريد تجعل الحالة والمسؤولية صعبتي الاستعادة.",
+            "items": [
+              "مصدر واحد لحقيقة كل طلب",
+              "وضوح المرحلة الحالية وصاحب القرار التالي",
+              "سجل زمني لتغييرات الحالة"
+            ]
+          },
+          {
+            "title": "نموذج المنتج",
+            "body": "كل شركة تشغّل نسخة مركزية وقاعدة SQL Server مستقلة. يرسل الموظف طلباً منظماً، ثم يختار المحرك مساراً منشوراً أو مساراً احتياطياً آمناً بحسب النوع والمبلغ والفرع والقسم.",
+            "items": [
+              "نشر مخصص لشركة واحدة",
+              "لقطة مسار ثابتة عند الإرسال",
+              "اعتماد المدير أو الدور أو الموظف أو القسم"
+            ]
+          },
+          {
+            "title": "القرارات الهندسية",
+            "body": "قواعد العمل محمية خلف الـAPI وليست مجرد إخفاء في الواجهة. السياسات تحمي نقاط النهاية، وانتقالات الـDomain ترفض الحالات غير الصحيحة، وتحمي الكوكيز الآمنة وفحص CSRF عمليات الكتابة.",
+            "items": [
+              "حدود Clean Architecture",
+              "Authorization حسب الصلاحية",
+              "Transactional Outbox للإشعارات المضمونة"
+            ]
+          },
+          {
+            "title": "التسليم والتحقق",
+            "body": "يغطي المشروع اختبارات وحدات وتكامل وواجهة وPlaywright. صور البورتفوليو ملتقطة من بيئة E2E المحمية ببيانات شركة تجريبية، وليست Dashboard مصطنعة.",
+            "items": [
+              "رحلات الموظف والمدير",
+              "واجهات عربية وإنكليزية",
+              "مظهران فاتح وداكن"
+            ]
+          }
+        ]
+      }
     },
     {
-      "slug": "coding-academy", "title": "أكاديمية البرمجة", "category": "منصة تعليمية",
-      "summary": "منصة عربية للتعلم بالتطبيق، تبدأ ببطاقات واضحة للملخصات والدروس ثم تنتقل إلى أمثلة وتمارين ومشاريع، مع حفظ التقدم على جهاز المتعلم.",
-      "facts": ["12 بطاقة موضوع", "25 تمريناً", "مشروع تطبيقي نهائي"],
-      "tech": ["HTML / CSS", "JavaScript", "Python"],
-      "previewKind": "academy", "previewImage": "./assets/projects/coding-academy.png", "previewAlt": "بطاقات دروس وملخصات أكاديمية البرمجة", "previewCaption": "واجهة الدروس الفعلية",
-      "resumeSummary": "منصة عربية تجمع بطاقات الدروس والأمثلة والتمارين مع حفظ تقدم المتعلم محلياً.",
-      "cta": "استكشف المشروع", "media": [], "caseStudy": []
+      "slug": "coding-academy",
+      "title": "أكاديمية البرمجة",
+      "category": "منصة تعليمية",
+      "status": "مكتمل",
+      "summary": "تجربة عربية لتعلم بايثون بالتطبيق، مبنية حول بطاقات مواضيع مرئية ودروس تفصيلية وملفات موضوع وتحدٍ و25 تمريناً تفاعلياً، مع حفظ التقدم على جهاز المتعلم.",
+      "facts": [
+        "12 بطاقة موضوع",
+        "25 تمريناً تفاعلياً",
+        "حفظ محلي من دون حساب"
+      ],
+      "tech": [
+        "HTML / CSS",
+        "JavaScript",
+        "Python"
+      ],
+      "previewKind": "academy",
+      "previewImage": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
+      "previewAlt": "بطاقات مواضيع بايثون العربية في أكاديمية البرمجة",
+      "previewCaption": "واجهة البطاقات الحالية بعد إزالة مسار المشروع الختامي القديم",
+      "resumeSummary": "منصة عربية لبايثون تجمع بطاقات مرئية ودروساً تفصيلية وملفات وتمارين تفاعلية مع حفظ التقدم محلياً.",
+      "cta": "استكشف المشروع",
+      "links": [
+        {
+          "kind": "live",
+          "label": "فتح الأكاديمية المنشورة",
+          "url": "https://x7do0.github.io/X7do0-Academy/"
+        },
+        {
+          "kind": "source",
+          "label": "عرض المصدر العام",
+          "url": "https://github.com/x7do0/X7do0-Academy"
+        }
+      ],
+      "metrics": [
+        {
+          "value": "12",
+          "label": "بطاقة مرئية لمواضيع بايثون"
+        },
+        {
+          "value": "25",
+          "label": "تمريناً وتحدياً برمجياً"
+        },
+        {
+          "value": "RTL",
+          "label": "تجربة قراءة عربية أولاً"
+        },
+        {
+          "value": "0",
+          "label": "حسابات مطلوبة لحفظ التقدم"
+        }
+      ],
+      "media": [
+        {
+          "src": "./assets/projects/coding-academy/01-learning-home.jpg",
+          "alt": "واجهة أكاديمية البرمجة العربية مع مثال بايثون مرئي",
+          "caption": "مدخل مباشر للتعلم مع وعد واضح ومختصر باللغة العربية."
+        },
+        {
+          "src": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
+          "alt": "مفاهيم بايثون منظمة في بطاقات مواضيع ملونة",
+          "caption": "اثنتا عشرة بطاقة تحول المنهج إلى مسار مرئي سهل المسح."
+        },
+        {
+          "src": "./assets/projects/coding-academy/03-topic-code-preview.jpg",
+          "alt": "بطاقة موضوع بايثون تعرض معاينة للكود عند مرور المؤشر",
+          "caption": "يمكن مشاهدة مثال برمجي مختصر من دون مغادرة النظرة العامة."
+        },
+        {
+          "src": "./assets/projects/coding-academy/04-lesson-and-source-files.jpg",
+          "alt": "درس بايثون عربي تفصيلي مع ملفات الموضوع والتحدي",
+          "caption": "يربط الدرس بين الشرح والأمثلة وملف الموضوع وتحدٍ لاحق."
+        },
+        {
+          "src": "./assets/projects/coding-academy/05-practice-library.jpg",
+          "alt": "مكتبة تمارين بايثون العربية مرتبة حسب الموضوع",
+          "caption": "تجمع المكتبة 25 سؤالاً حسب المفهوم وتعرض التقدم المحلي."
+        },
+        {
+          "src": "./assets/projects/coding-academy/06-interactive-exercise.jpg",
+          "alt": "تمرين بايثون تفاعلي بنص عربي وإنكليزي",
+          "caption": "يجمع التمرين بين المطلوب بلغتين والخطوات ومساحة الكتابة والإرشاد المرجعي."
+        },
+        {
+          "src": "./assets/projects/coding-academy/07-mobile-topic-path.jpg",
+          "alt": "بطاقات بايثون في الأكاديمية على شاشة هاتف",
+          "caption": "يتحول المسار نفسه إلى تدفق قراءة مريح على الهاتف."
+        }
+      ],
+      "caseStudy": {
+        "title": "طريق مرئي من المفهوم إلى التطبيق",
+        "intro": "صُممت الأكاديمية للمبتدئ العربي الذي يحتاج رؤية المسار قبل الدخول في شرح طويل. تُعرّف النظرة العامة بكل موضوع بصرياً، ثم ينتقل المتعلم إلى درس كامل أو يختبر فهمه بتمرين مركز.",
+        "sections": [
+          {
+            "title": "مشكلة التعلم",
+            "body": "قائمة الدروس الطويلة قد تخفي العلاقة بين المفاهيم. لذلك تعرض الواجهة منهج بايثون كبطاقات مرئية يسهل مسحها والعودة إليها.",
+            "items": [
+              "واجهة وشرح عربيان",
+              "الكود باتجاه LTR صحيح",
+              "معاينة المفاهيم من النظرة العامة"
+            ]
+          },
+          {
+            "title": "تصميم الدرس",
+            "body": "يربط كل درس تفصيلي بين شرح مختصر وأمثلة عملية وملفين حقيقيين: ملف موضوع للمراجعة وملف تحدٍ للتطبيق المستقل.",
+            "items": [
+              "12 موضوعاً منظماً",
+              "عارض ملفات داخل الصفحة",
+              "مظهر فاتح وداكن"
+            ]
+          },
+          {
+            "title": "نظام التمارين",
+            "body": "تُقسم مكتبة الأسئلة الخمسة والعشرين حسب الموضوع وتحفظ الإنجاز محلياً. يقرأ المتعلم المطلوب بالعربية والإنكليزية ويكشف الخطوات عند الحاجة ويكتب حله.",
+            "items": [
+              "تصنيفات وبحث",
+              "تقدم محلي من دون تسجيل",
+              "تنقل مناسب للهاتف"
+            ]
+          },
+          {
+            "title": "تنقية النطاق",
+            "body": "أُزيل مسار مشروع بايثون الختامي القديم من المصدر والتنقل حتى يبقى وعد المنتج الحالي صادقاً: بطاقات ودروس وتمارين فقط.",
+            "items": [
+              "لا روابط مشروع ميتة",
+              "تحديث sitemap والصفحات المولدة",
+              "تطابق وصف المصدر والبورتفوليو"
+            ]
+          }
+        ]
+      }
     },
     {
-      "slug": "mahsoob", "title": "محسوب", "category": "تطبيق Windows",
+      "slug": "mahsoob",
+      "title": "محسوب",
+      "category": "تطبيق Windows",
       "summary": "نظام نقاط بيع عربي يعمل دون إنترنت للبقالات والميني ماركت والمتاجر الصغيرة في العراق، ومصمم حول سرعة الكاشير والدينار العراقي واستمرارية العمل.",
-      "facts": ["يعمل دون إنترنت", "الدينار العراقي", "موجّه للمتاجر العراقية"],
-      "tech": [".NET 10", "SQLite", "Windows"],
-      "previewKind": "mahsoob", "previewImage": "./assets/projects/mahsoob.png", "previewAlt": "محاكاة واجهة البيع في نظام محسوب", "previewCaption": "محاكاة مصدرية للواجهة",
+      "facts": [
+        "يعمل دون إنترنت",
+        "الدينار العراقي",
+        "موجّه للمتاجر العراقية"
+      ],
+      "tech": [
+        ".NET 10",
+        "SQLite",
+        "Windows"
+      ],
+      "previewKind": "mahsoob",
+      "previewImage": "./assets/projects/mahsoob.png",
+      "previewAlt": "محاكاة واجهة البيع في نظام محسوب",
+      "previewCaption": "محاكاة مصدرية للواجهة",
       "resumeSummary": "نظام نقاط بيع عربي يعمل دون إنترنت ومصمم لتدفق الكاشير والدينار العراقي.",
-      "cta": "استكشف المشروع", "media": [], "caseStudy": []
+      "cta": "استكشف المشروع",
+      "media": [],
+      "caseStudy": []
     },
     {
-      "slug": "masroofi", "title": "مصروفي", "category": "تطبيق ويب",
-      "summary": "تطبيق عربي شخصي لتسجيل الدخل والمصروفات ومتابعة الرصيد مباشرةً، مع تخزين محلي ونسخ احتياطي واستعادة للبيانات من دون حساب مستخدم.",
-      "facts": ["تحديث فوري للرصيد", "نسخ احتياطي واستعادة", "RTL ودينار عراقي"],
-      "tech": ["React", "TypeScript", "IndexedDB"],
-      "previewKind": "masroofi", "previewImage": "./assets/projects/masroofi.png", "previewAlt": "واجهة تطبيق مصروفي لإدارة الدخل والمصروفات", "previewCaption": "لقطة من النسخة المنشورة",
-      "resumeSummary": "تطبيق ويب شخصي لتسجيل الدخل والمصروفات مع تخزين محلي ونسخ احتياطي واستعادة.",
-      "cta": "استكشف المشروع", "media": [], "caseStudy": []
+      "slug": "masroofi",
+      "title": "مصروفي",
+      "category": "تطبيق ويب",
+      "status": "مكتمل",
+      "summary": "منتج مالي عربي نُفذ بناءً على طلب عميل لتسجيل الدخل والمصروفات ورؤية الرصيد المحسوب مباشرة، مع بقاء البيانات الخاصة على الجهاز ووجود نسخ ودمج واستعادة مُتحقق منها.",
+      "facts": [
+        "رصيد مشتق يتحدث فوراً",
+        "نسخ واستعادة مُتحقق منهما",
+        "RTL ودينار عراقي وتخزين محلي"
+      ],
+      "tech": [
+        "React 19",
+        "TypeScript",
+        "Vite",
+        "IndexedDB",
+        "PWA"
+      ],
+      "previewKind": "masroofi",
+      "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+      "previewAlt": "لوحة مصروفي العربية مع معاملات تجريبية",
+      "previewCaption": "واجهة المنتج الحالية ملتقطة من المصدر المدقق",
+      "resumeSummary": "تطبيق مالي عربي مطلوب من عميل، بتخزين محلي ورصيد فوري ونسخ واستعادة آمنين.",
+      "cta": "استكشف المشروع",
+      "links": [
+        {
+          "kind": "live",
+          "label": "فتح التطبيق المنشور",
+          "url": "https://x7do0.github.io/Masroofi/"
+        },
+        {
+          "kind": "source",
+          "label": "عرض المصدر العام",
+          "url": "https://github.com/x7do0/Masroofi"
+        }
+      ],
+      "metrics": [
+        {
+          "value": "IQD",
+          "label": "تنسيق مالي مناسب للاستخدام العراقي"
+        },
+        {
+          "value": "4",
+          "label": "واجهات مركزة: الرئيسية والدخل والمصروفات والسجل"
+        },
+        {
+          "value": "Local",
+          "label": "بيانات IndexedDB من دون حساب"
+        },
+        {
+          "value": "PWA",
+          "label": "تطبيق قابل للتثبيت مع Service Worker"
+        }
+      ],
+      "media": [
+        {
+          "src": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+          "alt": "لوحة مصروفي الفاتحة تعرض الرصيد والدخل والمصروفات وآخر العمليات",
+          "caption": "تشتق الرئيسية الرصيد وملخص الشهر من سجل العمليات نفسه."
+        },
+        {
+          "src": "./assets/projects/masroofi/02-expenses-and-entry-form.jpg",
+          "alt": "نموذج إضافة مصروف وسجل المصروفات في مصروفي",
+          "caption": "يشترك الدخل والمصروف في نموذج واضح للمبلغ والملاحظة والإيموجي والوقت."
+        },
+        {
+          "src": "./assets/projects/masroofi/03-unified-history.jpg",
+          "alt": "سجل مصروفي الموحد مع فلاتر للدخل والمصروفات",
+          "caption": "يجمع السجل العمليتين زمنياً ويوفر فلاتر واضحة."
+        },
+        {
+          "src": "./assets/projects/masroofi/04-backup-and-restore.jpg",
+          "alt": "نافذة النسخ الاحتياطي والاستعادة في مصروفي",
+          "caption": "تصدّر أدوات البيانات ملفاً بإصدار واضح وتشرح الدمج مقابل الاستبدال."
+        },
+        {
+          "src": "./assets/projects/masroofi/05-modern-date-picker.jpg",
+          "alt": "منتقي التاريخ والوقت المخصص في مصروفي",
+          "caption": "يحافظ التقويم المخصص على إدخال متناسق في سطح المكتب والهاتف."
+        },
+        {
+          "src": "./assets/projects/masroofi/06-mobile-dark-dashboard.jpg",
+          "alt": "لوحة مصروفي بالمظهر الداكن على الهاتف",
+          "caption": "تحافظ الواجهة المتجاوبة على القرارات والتنقل ضمن وصول سهل."
+        }
+      ],
+      "caseStudy": {
+        "title": "إدارة مالية خاصة بلا احتكاك الحسابات",
+        "intro": "بدأ مصروفي من طلب عميل لتجربة مباشرة تناسب المستخدم العراقي. يتجنب المنتج إنشاء حساب أو تخزيناً بعيداً: تبقى العمليات في المتصفح، ويُحسب الرصيد دائماً من السجل، ويتحكم المستخدم بنسخه المحمولة.",
+        "sections": [
+          {
+            "title": "الطلب",
+            "body": "الحاجة الأساسية مباشرة: تسجيل المال الداخل والخارج، فهم الرصيد الحالي فوراً، وتقديم لغة مألوفة للمستخدم العربي.",
+            "items": [
+              "واجهة RTL من البداية",
+              "تنسيق IQD",
+              "مصطلحات واضحة للدخل والمصروف"
+            ]
+          },
+          {
+            "title": "نموذج Local-first",
+            "body": "يخزن نموذج Transaction موحد الدخل والمصروفات في IndexedDB. تُشتق الإجماليات والرصيد بدلاً من تكرار تخزينها، ما يقلل خطر اختلاف القيم.",
+            "items": [
+              "لا اعتماد على Backend أو حساب",
+              "فهارس للتاريخ والنوع",
+              "تحديث فوري بعد الكتابة"
+            ]
+          },
+          {
+            "title": "الأمان وقابلية النقل",
+            "body": "ملفات النسخ لها إصدار وتُفحص قبل تغيير السجل. وتمنح الاستعادة خياراً واضحاً بين دمج السجلات المتوافقة واستبدال التاريخ الحالي.",
+            "items": [
+              "فحص التكرار والحقول",
+              "تأكيد قبل الاستبدال",
+              "JSON محمول يملكه المستخدم"
+            ]
+          },
+          {
+            "title": "صقل المنتج",
+            "body": "تضم التجربة منتقي وقت وتاريخ مخصصاً وإيموجي اختيارياً وثيمات فاتحة وداكنة ونظامية وتقليل الحركة وتنقلاً متجاوباً وPWA قابلة للتثبيت.",
+            "items": [
+              "سطح مكتب وهاتف",
+              "تسميات وصول وقرارات واضحة",
+              "Service Worker وWeb Manifest"
+            ]
+          }
+        ]
+      }
     }
   ],
   "skillsSection": {
     "title": "المهارات والتقنيات",
     "description": "قدرات هندسية مترابطة لبناء النظام والتحقق منه وتسليمه، مع تركيز أساسي على الـBackend وC# و.NET.",
     "items": [
-      { "title": "Backend والأنظمة", "description": "تحويل المتطلبات وقواعد العمل إلى أنظمة وخدمات واضحة وقابلة للتطوير، مع تركيز خاص على C# و.NET.", "label": "REST APIs · Business Logic" },
-      { "title": "قواعد البيانات", "description": "نمذجة البيانات والعمل مع قواعد البيانات والاستعلامات بما يحافظ على الدقة وسهولة التطوير.", "label": "Data Modeling · SQL" },
-      { "title": "الاختبار والجودة", "description": "اختبار التدفقات الفعلية، تتبع الأخطاء، والتحقق من النتيجة قبل اعتبار العمل مكتملاً.", "label": "Testing · Debugging" },
-      { "title": "Git وGitHub", "description": "تغييرات مركزة وتاريخ واضح ومراجعة قابلة للتتبع.", "label": "Version Control" },
-      { "title": "تسليم المنتج من البداية إلى النهاية", "description": "متابعة المنتج من فهم المتطلبات إلى التنفيذ والاختبار والتجهيز للإطلاق، والتعامل مع التقنيات المساندة التي يحتاجها المشروع.", "label": "Requirements · Delivery" },
-      { "title": "هندسة برمجية مدعومة بالذكاء الاصطناعي", "description": "أستخدم أدوات الذكاء الاصطناعي لتسريع البحث، الاستكشاف، التنفيذ، الاختبار وتصحيح الأخطاء، مع بقاء تصميم الحل، مراجعة المخرجات، التحقق من صحتها، وجودة القرار الهندسي ضمن مسؤوليتي.", "label": "Research · Implementation · Verification" }
+      {
+        "title": "Backend والأنظمة",
+        "description": "تحويل المتطلبات وقواعد العمل إلى أنظمة وخدمات واضحة وقابلة للتطوير، مع تركيز خاص على C# و.NET.",
+        "label": "REST APIs · Business Logic"
+      },
+      {
+        "title": "قواعد البيانات",
+        "description": "نمذجة البيانات والعمل مع قواعد البيانات والاستعلامات بما يحافظ على الدقة وسهولة التطوير.",
+        "label": "Data Modeling · SQL"
+      },
+      {
+        "title": "الاختبار والجودة",
+        "description": "اختبار التدفقات الفعلية، تتبع الأخطاء، والتحقق من النتيجة قبل اعتبار العمل مكتملاً.",
+        "label": "Testing · Debugging"
+      },
+      {
+        "title": "Git وGitHub",
+        "description": "تغييرات مركزة وتاريخ واضح ومراجعة قابلة للتتبع.",
+        "label": "Version Control"
+      },
+      {
+        "title": "تسليم المنتج من البداية إلى النهاية",
+        "description": "متابعة المنتج من فهم المتطلبات إلى التنفيذ والاختبار والتجهيز للإطلاق، والتعامل مع التقنيات المساندة التي يحتاجها المشروع.",
+        "label": "Requirements · Delivery"
+      },
+      {
+        "title": "هندسة برمجية مدعومة بالذكاء الاصطناعي",
+        "description": "أستخدم أدوات الذكاء الاصطناعي لتسريع البحث، الاستكشاف، التنفيذ، الاختبار وتصحيح الأخطاء، مع بقاء تصميم الحل، مراجعة المخرجات، التحقق من صحتها، وجودة القرار الهندسي ضمن مسؤوليتي.",
+        "label": "Research · Implementation · Verification"
+      }
     ]
   },
   "technologiesSection": {
     "title": "التقنيات والخبرات العملية",
     "groups": [
-      { "title": "Backend الأساسي", "items": [{"name":"C#","icon":"csharp"},{"name":".NET","icon":"dotnet"},{"name":"ASP.NET Core","icon":"aspnet"},{"name":"EF Core","icon":"efcore"}] },
-      { "title": "البيانات", "items": [{"name":"SQL Server","icon":"sqlserver"},{"name":"SQLite","icon":"sqlite"}] },
-      { "title": "لغات وأدوات", "items": [{"name":"Python","icon":"python"},{"name":"C++","icon":"cpp"},{"name":"Git","icon":"git"},{"name":"GitHub","icon":"github"}] },
-      { "title": "تقنيات مساندة استخدمتها في المشاريع", "items": [{"name":"HTML","icon":"html"},{"name":"CSS","icon":"css"},{"name":"JavaScript","icon":"javascript"},{"name":"TypeScript","icon":"typescript"},{"name":"React","icon":"react"},{"name":"IndexedDB","icon":"indexeddb"}] }
+      {
+        "title": "Backend الأساسي",
+        "items": [
+          {
+            "name": "C#",
+            "icon": "csharp"
+          },
+          {
+            "name": ".NET",
+            "icon": "dotnet"
+          },
+          {
+            "name": "ASP.NET Core",
+            "icon": "aspnet"
+          },
+          {
+            "name": "EF Core",
+            "icon": "efcore"
+          }
+        ]
+      },
+      {
+        "title": "البيانات",
+        "items": [
+          {
+            "name": "SQL Server",
+            "icon": "sqlserver"
+          },
+          {
+            "name": "SQLite",
+            "icon": "sqlite"
+          }
+        ]
+      },
+      {
+        "title": "لغات وأدوات",
+        "items": [
+          {
+            "name": "Python",
+            "icon": "python"
+          },
+          {
+            "name": "C++",
+            "icon": "cpp"
+          },
+          {
+            "name": "Git",
+            "icon": "git"
+          },
+          {
+            "name": "GitHub",
+            "icon": "github"
+          }
+        ]
+      },
+      {
+        "title": "تقنيات مساندة استخدمتها في المشاريع",
+        "items": [
+          {
+            "name": "HTML",
+            "icon": "html"
+          },
+          {
+            "name": "CSS",
+            "icon": "css"
+          },
+          {
+            "name": "JavaScript",
+            "icon": "javascript"
+          },
+          {
+            "name": "TypeScript",
+            "icon": "typescript"
+          },
+          {
+            "name": "React",
+            "icon": "react"
+          },
+          {
+            "name": "IndexedDB",
+            "icon": "indexeddb"
+          }
+        ]
+      }
     ]
   },
   "education": {
@@ -95,52 +583,230 @@
   "knowledge": {
     "title": "التعلّم والتعليم",
     "description": "التعلّم بالنسبة إلي ليس مرحلة تنتهي عند اكتساب مهارة؛ هو جزء من طريقة عملي. أتعلم ما يحتاجه المشروع، وأشارك ما أفهمه عبر شروحات مبسطة تساعد الآخرين على بناء فهم واضح للمفاهيم التقنية.",
-    "channelLabel": "زيارة قناة YouTube", "channelUrl": "https://youtube.com/@x7do0eng",
-    "playLabel": "تشغيل الفيديو", "directLabel": "فتح على YouTube",
+    "channelLabel": "زيارة قناة YouTube",
+    "channelUrl": "https://youtube.com/@x7do0eng",
+    "playLabel": "تشغيل الفيديو",
+    "directLabel": "فتح على YouTube",
     "videos": [
-      { "id":"eYEO5DZsvqo", "title":"السر يبدأ بالشغف", "category":"قصتي مع التعلّم", "description":"قصة علاقتي بالتعلّم والشغف الذي دفعني إلى مشاركة المعرفة.", "url":"https://youtu.be/eYEO5DZsvqo", "featured":true },
-      { "id":"8eiVaCv26uk", "title":"البرمجة الكائنية - الصنف والكائن | Class & Object", "category":"شرح البرمجة", "description":"شرح مبسّط لمفهوم الصنف والكائن في البرمجة الكائنية، كأحد الأمثلة على أسلوبي في تحويل المفاهيم البرمجية إلى شرح واضح وقابل للتطبيق.", "url":"https://youtu.be/8eiVaCv26uk", "featured":false },
-      { "id":"SQuMf_pCC7U", "title":"Python Mind Map - الخريطة الذهنية لتعلم بايثون", "category":"Python وتجربة التعلّم", "description":"عرض لخريطة تعلّم Python وتجربة تعليمية تساعد الطالب على رؤية المسار بصورة منظمة، مع شرح للموقع التعليمي المستخدم في التجربة.", "url":"https://youtu.be/SQuMf_pCC7U", "featured":false }
+      {
+        "id": "eYEO5DZsvqo",
+        "title": "السر يبدأ بالشغف",
+        "category": "قصتي مع التعلّم",
+        "description": "قصة علاقتي بالتعلّم والشغف الذي دفعني إلى مشاركة المعرفة.",
+        "url": "https://youtu.be/eYEO5DZsvqo",
+        "featured": true
+      },
+      {
+        "id": "8eiVaCv26uk",
+        "title": "البرمجة الكائنية - الصنف والكائن | Class & Object",
+        "category": "شرح البرمجة",
+        "description": "شرح مبسّط لمفهوم الصنف والكائن في البرمجة الكائنية، كأحد الأمثلة على أسلوبي في تحويل المفاهيم البرمجية إلى شرح واضح وقابل للتطبيق.",
+        "url": "https://youtu.be/8eiVaCv26uk",
+        "featured": false
+      },
+      {
+        "id": "SQuMf_pCC7U",
+        "title": "Python Mind Map - الخريطة الذهنية لتعلم بايثون",
+        "category": "Python وتجربة التعلّم",
+        "description": "عرض لخريطة تعلّم Python وتجربة تعليمية تساعد الطالب على رؤية المسار بصورة منظمة، مع شرح للموقع التعليمي المستخدم في التجربة.",
+        "url": "https://youtu.be/SQuMf_pCC7U",
+        "featured": false
+      }
     ]
   },
   "contact": {
     "title": "عندك فكرة تحتاج تتحول إلى منتج؟",
     "description": "أعمل على المشاريع حسب الطلب وأرحب بالتعاون عن بُعد داخل العراق وخارجه. إذا لديك فكرة، نظام أو تطبيق يحتاج إلى بناء أو تطوير، تواصل معي لمناقشة المتطلبات وتحويلها إلى حل عملي.",
     "links": [
-      { "id": "email", "label": "البريد المهني", "value": "x7do0eng@gmail.com", "url": "mailto:x7do0eng@gmail.com", "kind": "primary" },
-      { "id": "telegram", "label": "Telegram", "value": "@ctedev", "url": "https://t.me/ctedev", "kind": "primary" },
-      { "id": "github", "label": "GitHub", "value": "x7do0", "url": "https://github.com/x7do0", "kind": "social" },
-      { "id": "youtube", "label": "YouTube", "value": "@x7do0eng", "url": "https://youtube.com/@x7do0eng", "kind": "social" },
-      { "id": "instagram", "label": "Instagram", "value": "@x7do0", "url": "https://instagram.com/x7do0", "kind": "social" }
+      {
+        "id": "email",
+        "label": "البريد المهني",
+        "value": "x7do0eng@gmail.com",
+        "url": "mailto:x7do0eng@gmail.com",
+        "kind": "primary"
+      },
+      {
+        "id": "telegram",
+        "label": "Telegram",
+        "value": "@ctedev",
+        "url": "https://t.me/ctedev",
+        "kind": "primary"
+      },
+      {
+        "id": "github",
+        "label": "GitHub",
+        "value": "x7do0",
+        "url": "https://github.com/x7do0",
+        "kind": "social"
+      },
+      {
+        "id": "youtube",
+        "label": "YouTube",
+        "value": "@x7do0eng",
+        "url": "https://youtube.com/@x7do0eng",
+        "kind": "social"
+      },
+      {
+        "id": "instagram",
+        "label": "Instagram",
+        "value": "@x7do0",
+        "url": "https://instagram.com/x7do0",
+        "kind": "social"
+      }
     ]
   },
   "projectPage": {
-    "backAction": "العودة إلى المشاريع", "overviewTitle": "نظرة عامة", "previewTitle": "معاينة المشروع", "tryDemo": "جرّب المشروع",
-    "demoHint": "محاكاة تفاعلية ببيانات تجريبية فقط — من دون تسجيل دخول أو Backend حقيقي.", "mediaTitle": "صور وفيديوهات المشروع", "mediaPending": "تضاف الوسائط بعد اعتمادها.",
-    "detailsTitle": "دراسة الحالة", "detailsPending": "تُستكمل التفاصيل بعد اعتماد معلومات المشروع الدقيقة، بدون افتراض أو مبالغة."
+    "backAction": "العودة إلى المشاريع",
+    "overviewTitle": "نظرة عامة",
+    "previewTitle": "معاينة المشروع",
+    "tryDemo": "جرّب المحاكاة التفاعلية",
+    "demoHint": "تبقى المحاكاة داخل البورتفوليو وتستخدم بيانات تجريبية فقط.",
+    "mediaTitle": "جولة داخل المنتج",
+    "mediaDescription": "شاشات حقيقية ملتقطة من المصدر الحالي المدقق وببيانات تجريبية آمنة.",
+    "mediaPending": "تضاف الوسائط بعد اعتمادها.",
+    "detailsTitle": "دراسة الحالة",
+    "detailsPending": "تُستكمل التفاصيل بعد اعتماد معلومات المشروع الدقيقة، بدون افتراض أو مبالغة.",
+    "keyFacts": "حقائق المشروع الأساسية",
+    "enlargeImage": "فتح الصورة بحجم أكبر"
   },
   "resume": {
-    "title": "السيرة", "role": "مطور برمجيات يركز على الـBackend", "summary": "مطور برمجيات يركز على الـBackend وبناء الأنظمة والمنتجات العملية، وطالب في المرحلة الثالثة في هندسة تقنيات الحاسوب بجامعة الكفيل. حاصل على المركز الأول في المرحلتين الأولى والثانية، مع تركيز على C# و.NET، قواعد البيانات، الاختبار، والتعلّم المستمر لما يحتاجه المنتج حتى يصل إلى نتيجة قابلة للاستخدام.",
-    "contactTitle": "التواصل والموقع", "educationTitle": "التعليم والإنجاز الأكاديمي", "skillsTitle": "المهارات الأساسية", "technologiesTitle": "التقنيات", "projectsTitle": "مشاريع مختارة", "learningTitle": "التعلّم والتعليم", "languagesTitle": "اللغات", "focusTitle": "التركيز المهني",
-    "focusItems": ["Backend وC# و.NET", "قواعد البيانات والاختبار", "تسليم منتجات عملية قابلة للاستخدام"],
-    "skillGroups": [
-      { "title":"Backend", "items":["C#", ".NET", "ASP.NET Core", "EF Core", "REST APIs", "Business Logic"] },
-      { "title":"قواعد البيانات", "items":["SQL Server", "SQLite", "Data Modeling", "SQL"] },
-      { "title":"سير العمل الهندسي", "items":["Testing", "Debugging", "Git", "GitHub", "Requirements-to-delivery workflow"] },
-      { "title":"هندسة مدعومة بالذكاء الاصطناعي", "items":["البحث والتنفيذ والاختبار وتصحيح الأخطاء والتحقق بمساعدة أدوات AI مع بقاء القرار الهندسي ضمن مسؤوليتي"] }
+    "title": "السيرة",
+    "role": "مطور برمجيات يركز على الـBackend",
+    "summary": "مطور برمجيات يركز على الـBackend وبناء الأنظمة والمنتجات العملية، وطالب في المرحلة الثالثة في هندسة تقنيات الحاسوب بجامعة الكفيل. حاصل على المركز الأول في المرحلتين الأولى والثانية، مع تركيز على C# و.NET، قواعد البيانات، الاختبار، والتعلّم المستمر لما يحتاجه المنتج حتى يصل إلى نتيجة قابلة للاستخدام.",
+    "contactTitle": "التواصل والموقع",
+    "educationTitle": "التعليم والإنجاز الأكاديمي",
+    "skillsTitle": "المهارات الأساسية",
+    "technologiesTitle": "التقنيات",
+    "projectsTitle": "مشاريع مختارة",
+    "learningTitle": "التعلّم والتعليم",
+    "languagesTitle": "اللغات",
+    "focusTitle": "التركيز المهني",
+    "focusItems": [
+      "Backend وC# و.NET",
+      "قواعد البيانات والاختبار",
+      "تسليم منتجات عملية قابلة للاستخدام"
     ],
-    "projectOrder": ["enterprise-workflow", "mahsoob", "masroofi", "coding-academy"],
-    "contactIds": ["email", "telegram", "github", "youtube"],
+    "skillGroups": [
+      {
+        "title": "Backend",
+        "items": [
+          "C#",
+          ".NET",
+          "ASP.NET Core",
+          "EF Core",
+          "REST APIs",
+          "Business Logic"
+        ]
+      },
+      {
+        "title": "قواعد البيانات",
+        "items": [
+          "SQL Server",
+          "SQLite",
+          "Data Modeling",
+          "SQL"
+        ]
+      },
+      {
+        "title": "سير العمل الهندسي",
+        "items": [
+          "Testing",
+          "Debugging",
+          "Git",
+          "GitHub",
+          "Requirements-to-delivery workflow"
+        ]
+      },
+      {
+        "title": "هندسة مدعومة بالذكاء الاصطناعي",
+        "items": [
+          "البحث والتنفيذ والاختبار وتصحيح الأخطاء والتحقق بمساعدة أدوات AI مع بقاء القرار الهندسي ضمن مسؤوليتي"
+        ]
+      }
+    ],
+    "projectOrder": [
+      "enterprise-workflow",
+      "mahsoob",
+      "masroofi",
+      "coding-academy"
+    ],
+    "contactIds": [
+      "email",
+      "telegram",
+      "github",
+      "youtube"
+    ],
     "learningText": "أقدّم محتوى تعليمياً في البرمجة ومواد هندسة تقنيات الحاسوب، مع تركيز على تبسيط المفاهيم وشرحها بصورة عملية ومنظمة.",
-    "languages": ["العربية — اللغة الأم", "الإنكليزية — مستوى متوسط"],
-    "viewLabel": "عرض السيرة الكاملة", "downloadLabel": "تحميل PDF", "downloadPending": "سيضاف ملف PDF بعد اعتماد النسخة النهائية للسيرة.", "pdfUrl": ""
+    "languages": [
+      "العربية — اللغة الأم",
+      "الإنكليزية — مستوى متوسط"
+    ],
+    "viewLabel": "عرض السيرة الكاملة",
+    "downloadLabel": "تحميل PDF",
+    "downloadPending": "سيضاف ملف PDF بعد اعتماد النسخة النهائية للسيرة.",
+    "pdfUrl": ""
   },
   "home": {
-    "skip": "انتقل إلى المحتوى", "menu": "القائمة", "nav": "التنقل الرئيسي", "mobileNav": "التنقل على الهاتف", "language": "اختيار اللغة",
-    "navProjects": "المشاريع", "navAbout": "عنّي", "navSkills": "المهارات", "navLearning": "التعلّم", "navResume": "السيرة", "navContact": "تواصل",
-    "interactiveDemo": "تجربة تفاعلية داخل الصفحة", "closeDemo": "إغلاق التجربة", "changeProject": "تغيير المشروع", "loadingDemo": "جاري تحميل التجربة...",
-    "demoNote": "محاكاة تفاعلية تستخدم بيانات تجريبية داخل جلسة المتصفح فقط.", "tryDemo": "عرض وتجربة المشروع", "fullDetails": "المعلومات الكاملة", "demoTitle": "تجربة مشروع",
-    "technologies": "التقنيات والخبرات العملية", "viewProjects": "عرض المشاريع", "backToTop": "إلى الأعلى"
+    "skip": "انتقل إلى المحتوى",
+    "menu": "القائمة",
+    "nav": "التنقل الرئيسي",
+    "mobileNav": "التنقل على الهاتف",
+    "language": "اختيار اللغة",
+    "navProjects": "المشاريع",
+    "navAbout": "عنّي",
+    "navSkills": "المهارات",
+    "navLearning": "التعلّم",
+    "navResume": "السيرة",
+    "navContact": "تواصل",
+    "interactiveDemo": "تجربة تفاعلية داخل الصفحة",
+    "closeDemo": "إغلاق التجربة",
+    "changeProject": "تغيير المشروع",
+    "loadingDemo": "جاري تحميل التجربة...",
+    "demoNote": "محاكاة تفاعلية تستخدم بيانات تجريبية داخل جلسة المتصفح فقط.",
+    "tryDemo": "عرض وتجربة المشروع",
+    "fullDetails": "المعلومات الكاملة",
+    "demoTitle": "تجربة مشروع",
+    "technologies": "التقنيات والخبرات العملية",
+    "viewProjects": "عرض المشاريع",
+    "backToTop": "إلى الأعلى"
   },
-  "ui": { "skip":"انتقل إلى المحتوى", "menu":"القائمة", "nav":"التنقل الرئيسي", "mobileNav":"التنقل على الهاتف", "language":"اختيار اللغة", "close":"إغلاق", "scroll":"انتقل إلى المشاريع", "top":"إلى الأعلى", "running":"قيد التشغيل", "systemPreview":"معاينة نظام", "workflowPreview":"معاينة سير الموافقات", "academyPreview":"معاينة مسار تعليمي", "newRequest":"طلب شراء جديد", "audited":"كل إجراء موثق", "flowHint":"اختر مرحلة", "flowSteps":"مراحل الطلب", "flowStates":["تم الإنشاء","مراجعة المدير","المراجعة المالية","مراجعة قانونية","تمت الموافقة"], "flowStatus":["تم إنشاء الطلب","تمت مراجعة المدير","قيد المراجعة المالية","بانتظار المراجعة القانونية","تمت الموافقة"], "learningPath":"مسار التعلم", "stepByStep":"تقدم خطوة بخطوة", "basics":"الأساسيات", "dataStructures":"هياكل البيانات", "projectsLabel":"بناء المشاريع", "finalProject":"مشروع نهائي", "mahsoobCategory":"مشروع كاشير", "masroofiCategory":"مشروع مصاريف شخصية", "upcoming":"قريباً" }
+  "ui": {
+    "skip": "انتقل إلى المحتوى",
+    "menu": "القائمة",
+    "nav": "التنقل الرئيسي",
+    "mobileNav": "التنقل على الهاتف",
+    "language": "اختيار اللغة",
+    "close": "إغلاق",
+    "scroll": "انتقل إلى المشاريع",
+    "top": "إلى الأعلى",
+    "running": "قيد التشغيل",
+    "systemPreview": "معاينة نظام",
+    "workflowPreview": "معاينة سير الموافقات",
+    "academyPreview": "معاينة مسار تعليمي",
+    "newRequest": "طلب شراء جديد",
+    "audited": "كل إجراء موثق",
+    "flowHint": "اختر مرحلة",
+    "flowSteps": "مراحل الطلب",
+    "flowStates": [
+      "تم الإنشاء",
+      "مراجعة المدير",
+      "المراجعة المالية",
+      "مراجعة قانونية",
+      "تمت الموافقة"
+    ],
+    "flowStatus": [
+      "تم إنشاء الطلب",
+      "تمت مراجعة المدير",
+      "قيد المراجعة المالية",
+      "بانتظار المراجعة القانونية",
+      "تمت الموافقة"
+    ],
+    "learningPath": "مسار التعلم",
+    "stepByStep": "تقدم خطوة بخطوة",
+    "basics": "الأساسيات",
+    "dataStructures": "هياكل البيانات",
+    "mahsoobCategory": "مشروع كاشير",
+    "masroofiCategory": "مشروع مصاريف شخصية",
+    "upcoming": "قريباً"
+  }
 }
