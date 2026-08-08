@@ -103,6 +103,12 @@ body { background: var(--m-bg) !important; color: var(--m-text) !important; }
 .demo-guide li.current { border-color:#cce7da !important; background:var(--m-green-50) !important; color:var(--m-green-900) !important; }
 .demo-guide li.done b { background:var(--m-green-700) !important; color:#fff !important; }
 
+html.is-embedded .portfolio-back,
+html.is-embedded .sample,
+html.is-embedded .actions [data-reset],
+html.is-embedded .demo-guide { display:none !important; }
+html.is-embedded .demo-wrap { grid-template-columns:1fr !important; margin-block:18px !important; }
+
 .expense-form { border-color:var(--m-border) !important; border-radius:24px !important; background:#fff !important; }
 .expense-form input,.expense-form select { border-color:var(--m-border) !important; border-radius:12px !important; background:#fff !important; color:var(--m-text) !important; }
 .expense-form .primary { background:var(--m-green-700) !important; border-radius:12px !important; }

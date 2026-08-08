@@ -18,6 +18,7 @@
   const qs = (s, p=document) => p.querySelector(s);
   const qsa = (s, p=document) => [...p.querySelectorAll(s)];
   let language = new URLSearchParams(location.search).get('lang') === 'en' || localStorage.getItem(LANGUAGE_KEY) === 'en' ? 'en' : 'ar';
+  const embedded = new URLSearchParams(location.search).get('embedded') === '1';
   let toastTimer;
 
   function defaultState(){ return { cart:{}, cash:0 }; }
@@ -27,6 +28,16 @@
   function t(k){ return i18n[language][k] || k; }
   function money(v){ return `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(v)} ${language==='ar'?'د.ع':'IQD'}`; }
   function total(){ return Object.entries(state.cart).reduce((sum,[id,qty]) => sum + (products.find(p=>p.id===id)?.price || 0)*qty,0); }
+  function notifyParent(){
+    if(!embedded||parent===window)return;
+    const sum=total();const cash=Number(qs('[data-cash]').value||state.cash||0);const receiptOpen=qs('[data-receipt]').open;
+    parent.postMessage({source:'mahsoob-demo',type:'state',progress:{
+      product:sum>0?'complete':'current',
+      payment:sum>0?(cash>=sum?'complete':'current'):'idle',
+      checkout:receiptOpen?'complete':cash>=sum&&sum>0?'current':'idle',
+      receipt:receiptOpen?'current':'idle'
+    }},location.origin);
+  }
   function showToast(text){ const el=qs('[data-toast]'); el.textContent=text; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),1800); }
 
   function applyLanguage(){
@@ -65,7 +76,7 @@
       row.querySelector('[data-minus]').addEventListener('click',()=>changeQty(id,-1)); row.querySelector('[data-plus]').addEventListener('click',()=>changeQty(id,1)); host.append(row);
     });
     const count=entries.reduce((s,[,q])=>s+q,0); const sum=total(); const cash=Number(qs('[data-cash]').value || state.cash || 0); state.cash=cash;
-    qs('[data-cart-count]').textContent=String(count); qs('[data-total]').textContent=money(sum); qs('[data-change]').textContent=money(Math.max(0,cash-sum)); qs('[data-checkout]').disabled=!sum || cash<sum; save();
+    qs('[data-cart-count]').textContent=String(count); qs('[data-total]').textContent=money(sum); qs('[data-change]').textContent=money(Math.max(0,cash-sum)); qs('[data-checkout]').disabled=!sum || cash<sum; save(); notifyParent();
   }
 
   function openReceipt(){
@@ -73,16 +84,17 @@
     const lines=qs('[data-receipt-lines]'); lines.replaceChildren(...Object.entries(state.cart).map(([id,qty])=>{
       const p=products.find(x=>x.id===id); const line=document.createElement('div'); line.className='receipt-line'; line.innerHTML=`<span>${language==='ar'?p.ar:p.en} × ${qty}</span><b>${money(p.price*qty)}</b>`; return line;
     }));
-    qs('[data-receipt-total]').textContent=money(sum); qs('[data-receipt-cash]').textContent=money(cash); qs('[data-receipt-change]').textContent=money(cash-sum); qs('[data-receipt]').showModal(); showToast(t('done'));
+    qs('[data-receipt-total]').textContent=money(sum); qs('[data-receipt-cash]').textContent=money(cash); qs('[data-receipt-change]').textContent=money(cash-sum); qs('[data-receipt]').showModal(); notifyParent(); showToast(t('done'));
   }
 
-  function reset(){ state=defaultState(); save(); qs('[data-cash]').value=''; renderCart(); }
+  function reset(){ state=defaultState(); save(); qs('[data-cash]').value=''; const receipt=qs('[data-receipt]'); if(receipt.open) receipt.close(); renderCart(); }
   qs('[data-barcode-form]').addEventListener('submit',e=>{e.preventDefault(); addProduct(qs('[data-barcode]').value.trim());});
   qs('[data-cash]').addEventListener('input',()=>{ state.cash=Number(qs('[data-cash]').value||0); renderCart(); });
   qs('[data-clear]').addEventListener('click',()=>{state.cart={};save();renderCart();});
   qs('[data-checkout]').addEventListener('click',openReceipt);
   qs('[data-receipt-close]').addEventListener('click',()=>{qs('[data-receipt]').close(); reset();});
   qs('[data-reset]').addEventListener('click',reset);
+  addEventListener('message',event=>{if(embedded&&event.origin===location.origin&&event.data?.source==='x7do0-portfolio'&&event.data.type==='reset')reset()});
   qs('[data-lang]').addEventListener('click',()=>{language=language==='ar'?'en':'ar';applyLanguage();renderProducts();renderCart();});
 
   applyLanguage(); renderProducts(); qs('[data-cash]').value=state.cash||''; renderCart();

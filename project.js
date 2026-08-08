@@ -390,81 +390,109 @@ print(name)</code></pre>
           stage = document.createElement("section");
           stage.className = "project-inline-demo shell";
           stage.id = "demo";
-          const enterpriseControls = slug === "enterprise-workflow" ? `
-            <aside class="project-demo-companion" aria-label="${content.projectPage.demoControlsTitle}">
-              <div class="project-demo-companion__roles">
-                <div><small>${content.projectPage.demoControlsTitle}</small><strong>${content.projectPage.demoRoleLabel}</strong></div>
-                <div class="project-demo-role-switch" role="group" aria-label="${content.projectPage.demoRoleLabel}">
-                  <button type="button" data-demo-role="employee" aria-pressed="true">${content.projectPage.demoEmployee}</button>
-                  <button type="button" data-demo-role="manager" aria-pressed="false">${content.projectPage.demoManager}</button>
-                </div>
-                <button class="project-demo-reset" type="button" data-demo-reset>${content.projectPage.demoReset}</button>
+          stage.setAttribute("role", "dialog");
+          stage.setAttribute("aria-modal", "true");
+          stage.setAttribute("aria-label", `${content.projectPage.previewTitle}: ${project.title}`);
+          const demoExperience = content.projectPage.demoExperiences[slug];
+          const demoSummary = demoExperience.roles ? `
+            <div class="project-demo-companion__roles">
+              <div class="project-demo-companion__copy"><small>${content.projectPage.demoControlsTitle}</small><strong>${content.projectPage.demoRoleLabel}</strong><p>${demoExperience.description}</p></div>
+              <div class="project-demo-role-switch" role="group" aria-label="${content.projectPage.demoRoleLabel}">
+                <button type="button" data-demo-role="employee" aria-pressed="true">${content.projectPage.demoEmployee}</button>
+                <button type="button" data-demo-role="manager" aria-pressed="false">${content.projectPage.demoManager}</button>
               </div>
+              <button class="project-demo-reset" type="button" data-demo-reset>${content.projectPage.demoReset}</button>
+            </div>` : `
+            <div class="project-demo-companion__summary">
+              <span class="project-demo-companion__mark" aria-hidden="true">${demoExperience.mark}</span>
+              <div class="project-demo-companion__copy"><small>${content.projectPage.demoControlsTitle}</small><strong>${demoExperience.title}</strong><p>${demoExperience.description}</p></div>
+              <button class="project-demo-reset" type="button" data-demo-reset>${content.projectPage.demoReset}</button>
+            </div>`;
+          const demoCompanion = `
+            <aside class="project-demo-companion" aria-label="${content.projectPage.demoControlsTitle}">
+              ${demoSummary}
               <div class="project-demo-companion__guide">
                 <strong>${content.projectPage.demoGuideTitle}</strong>
-                <ol>${content.projectPage.demoGuide.map((item, index) => `<li data-demo-guide-step="${["create", "submit", "switch", "approve", "verify"][index]}"><span>${String(index + 1).padStart(2, "0")}</span><p>${item}</p></li>`).join("")}</ol>
+                <ol style="--demo-step-count:${demoExperience.steps.length}">${demoExperience.steps.map((item, index) => `<li class="${index === 0 ? "is-current" : ""}" data-demo-guide-step="${item.id}"><span>${String(index + 1).padStart(2, "0")}</span><p>${item.text}</p></li>`).join("")}</ol>
               </div>
-            </aside>` : "";
-          stage.innerHTML = `<header><div><small>${content.projectPage.previewTitle}</small><h2>${project.title}</h2></div><button type="button" data-demo-close aria-label="${content.ui.close}">×</button></header>${enterpriseControls}<div class="project-demo-frame"><iframe title="${content.projectPage.previewTitle}: ${project.title}" loading="lazy"></iframe></div><p>${content.projectPage.demoHint}</p>`;
+            </aside>`;
+          stage.innerHTML = `<header><div><small>${content.projectPage.previewTitle}</small><h2>${project.title}</h2></div><button type="button" data-demo-close aria-label="${content.ui.close}">×</button></header><div class="project-demo-workspace">${demoCompanion}<div class="project-demo-frame"><iframe title="${content.projectPage.previewTitle}: ${project.title}" loading="lazy"></iframe></div></div><p>${content.projectPage.demoHint}</p>`;
           qs(".project-hero").after(stage);
+          body.classList.add("demo-preview-open");
           const iframe = qs("iframe", stage);
+          const frame = qs(".project-demo-frame", stage);
           const cleanups = [];
           demoHostCleanup = () => cleanups.splice(0).forEach((cleanup) => cleanup());
-          let frameResizeObserver = null;
           let fitFrameRequest = 0;
           const fitFrameToContent = () => {
             cancelAnimationFrame(fitFrameRequest);
             fitFrameRequest = requestAnimationFrame(() => {
               const frameDocument = iframe.contentDocument;
               if (!frameDocument?.body) return;
-              const contentHeight = Math.ceil(Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight));
-              if (contentHeight > iframe.clientHeight + 2) iframe.style.height = `${contentHeight}px`;
+              const virtualWidth = frame.clientWidth < 700 ? 920 : 1200;
+              iframe.style.width = `${virtualWidth}px`;
+              if (!iframe.dataset.demoFitted) {
+                iframe.style.height = "600px";
+                iframe.style.transform = "translate(-50%, -50%) scale(1)";
+              }
+              requestAnimationFrame(() => {
+                const contentHeight = Math.ceil(Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight));
+                const scale = Math.min(1, frame.clientWidth / virtualWidth, frame.clientHeight / contentHeight);
+                iframe.style.height = `${contentHeight}px`;
+                iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                iframe.dataset.demoFitted = "true";
+                stage.style.setProperty("--demo-scale", scale.toFixed(4));
+              });
             });
           };
           const onFrameLoad = () => {
             iframe.contentDocument.documentElement.classList.add("is-embedded");
             fitFrameToContent();
             requestAnimationFrame(fitFrameToContent);
-            frameResizeObserver?.disconnect();
-            frameResizeObserver = new ResizeObserver(fitFrameToContent);
-            frameResizeObserver.observe(iframe.contentDocument.body);
           };
+          const onViewportResize = () => fitFrameToContent();
           iframe.addEventListener("load", onFrameLoad);
+          addEventListener("resize", onViewportResize);
           cleanups.push(() => {
             iframe.removeEventListener("load", onFrameLoad);
-            frameResizeObserver?.disconnect();
+            removeEventListener("resize", onViewportResize);
             cancelAnimationFrame(fitFrameRequest);
+            body.classList.remove("demo-preview-open");
           });
-          qs("[data-demo-close]", stage).addEventListener("click", () => {
+          const closeDemo = () => {
             demoHostCleanup?.();
             demoHostCleanup = null;
             stage.remove();
-          });
+            demoLink.focus();
+          };
+          const onDemoKeydown = (event) => { if (event.key === "Escape") closeDemo(); };
+          qs("[data-demo-close]", stage).addEventListener("click", closeDemo);
+          addEventListener("keydown", onDemoKeydown);
+          cleanups.push(() => removeEventListener("keydown", onDemoKeydown));
 
-          if (slug === "enterprise-workflow") {
-            const updateCompanion = (payload) => {
-              qsa("[data-demo-role]", stage).forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.demoRole === payload.role)));
-              qsa("[data-demo-guide-step]", stage).forEach((item) => {
-                const status = payload.progress?.[item.dataset.demoGuideStep] || "idle";
-                item.classList.toggle("is-current", status === "current");
-                item.classList.toggle("is-complete", status === "complete");
-              });
-            };
-            const send = (type, value = {}) => iframe.contentWindow?.postMessage({ source: "x7do0-portfolio", type, ...value }, location.origin);
-            const onMessage = (message) => {
-              if (message.origin !== location.origin || message.source !== iframe.contentWindow) return;
-              if (message.data?.source === "enterprise-workflow-demo" && message.data.type === "state") updateCompanion(message.data);
-            };
-            addEventListener("message", onMessage);
-            qsa("[data-demo-role]", stage).forEach((button) => button.addEventListener("click", () => send("set-role", { role: button.dataset.demoRole })));
-            qs("[data-demo-reset]", stage).addEventListener("click", () => send("reset"));
-            cleanups.push(() => removeEventListener("message", onMessage));
-          }
+          const updateCompanion = (payload) => {
+            qsa("[data-demo-role]", stage).forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.demoRole === payload.role)));
+            qsa("[data-demo-guide-step]", stage).forEach((item) => {
+              const status = payload.progress?.[item.dataset.demoGuideStep] || "idle";
+              item.classList.toggle("is-current", status === "current");
+              item.classList.toggle("is-complete", status === "complete");
+            });
+            fitFrameToContent();
+          };
+          const send = (type, value = {}) => iframe.contentWindow?.postMessage({ source: "x7do0-portfolio", type, ...value }, location.origin);
+          const onMessage = (message) => {
+            if (message.origin !== location.origin || message.source !== iframe.contentWindow) return;
+            if (message.data?.source === `${slug}-demo` && message.data.type === "state") updateCompanion(message.data);
+          };
+          addEventListener("message", onMessage);
+          qsa("[data-demo-role]", stage).forEach((button) => button.addEventListener("click", () => send("set-role", { role: button.dataset.demoRole })));
+          qs("[data-demo-reset]", stage).addEventListener("click", () => send("reset"));
+          cleanups.push(() => removeEventListener("message", onMessage));
         }
         const embeddedUrl = new URL(demoLink.href, location.href);
         embeddedUrl.searchParams.set("embedded", "1");
         qs("iframe", stage).src = embeddedUrl.href;
-        stage.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+        requestAnimationFrame(() => qs("[data-demo-close]", stage).focus());
       };
       if (new URLSearchParams(location.search).get("demo") === "1") {
         requestAnimationFrame(() => demoLink.click());

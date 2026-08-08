@@ -75,6 +75,10 @@ body { background: var(--mahsoob-bg) !important; color: var(--mahsoob-text) !imp
 
 html.is-embedded .app-shell { min-height: auto !important; }
 html.is-embedded .sidebar { height: auto !important; position: static !important; }
+html.is-embedded .back,
+html.is-embedded .sample,
+html.is-embedded .top-actions [data-reset],
+html.is-embedded .sidebar-note { display: none !important; }
 
 @media (max-width: 920px) {
   .app-shell { grid-template-columns: 1fr !important; }

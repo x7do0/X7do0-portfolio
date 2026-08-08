@@ -89,6 +89,13 @@ body { transition:background-color .2s ease,color .2s ease; }
 .milestones > span.done { border-color:color-mix(in srgb,var(--academy-accent) 42%,var(--academy-border)) !important; background:var(--academy-accent-soft) !important; }
 [data-progress-label],[data-result-percent],.milestones i { font-variant-numeric:tabular-nums; }
 
+html.is-embedded .back,
+html.is-embedded .sample,
+html.is-embedded .actions [data-reset],
+html.is-embedded .goal { display:none !important; }
+html.is-embedded .academy-shell { min-height:auto !important; }
+html.is-embedded .course-sidebar { height:auto !important; position:static !important; }
+
 @media(max-width:760px){
   .course-sidebar { background:var(--academy-soft) !important; }
   .workspace { padding-inline:14px !important; }
