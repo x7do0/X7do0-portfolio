@@ -58,7 +58,11 @@
     if (!window.location.pathname.includes('/demos/enterprise-workflow/')) return;
 
     const rolePanel = document.querySelector('.role-panel');
-    if (rolePanel) rolePanel.classList.add('role-panel--floating');
+    if (rolePanel) {
+      rolePanel.classList.add('role-panel--floating');
+      rolePanel.setAttribute('aria-label', 'Demo role switcher');
+      if (rolePanel.parentElement !== document.body) document.body.append(rolePanel);
+    }
 
     if (!document.querySelector('link[data-floating-role-control]')) {
       const stylesheet = document.createElement('link');
