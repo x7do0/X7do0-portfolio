@@ -63,8 +63,11 @@
     const mediaUrl = (item) => `${root}${item.src.replace(/^\.\//, "")}`;
     const mediaDimensions = (item) => item.device === "phone" ? { width: 390, height: 844 } : { width: 1440, height: 960 };
     const featuredDimensions = mediaDimensions(featured);
-    const previousIcon = '<svg class="media-arrow media-arrow--previous" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
-    const nextIcon = '<svg class="media-arrow media-arrow--next" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+    const isRtl = document.documentElement.dir === "rtl";
+    const previousPath = isRtl ? "m9 18 6-6-6-6" : "m15 18-6-6 6-6";
+    const nextPath = isRtl ? "m15 18-6-6 6-6" : "m9 18 6-6-6-6";
+    const previousIcon = `<svg class="media-arrow media-arrow--previous" viewBox="0 0 24 24" aria-hidden="true"><path d="${previousPath}"/></svg>`;
+    const nextIcon = `<svg class="media-arrow media-arrow--next" viewBox="0 0 24 24" aria-hidden="true"><path d="${nextPath}"/></svg>`;
     const thumbnailMarkup = media.map((item, index) => `
       <button class="case-media-thumb${item.device === "phone" ? " case-media-thumb--phone" : ""}" type="button" role="tab" aria-selected="${index === featuredIndex}" aria-controls="case-media-panel" tabindex="${index === featuredIndex ? "0" : "-1"}" data-media-index="${index}" aria-label="${String(index + 1).padStart(2, "0")}: ${item.alt}">
         <img src="${mediaUrl(item)}" alt="" width="240" height="160" loading="lazy" decoding="async">
@@ -180,7 +183,12 @@
       dialog = document.createElement("dialog");
       dialog.className = `project-lightbox${media[selectedIndex].device === "phone" ? " is-phone-media" : ""}`;
       const dialogDimensions = mediaDimensions(media[selectedIndex]);
-      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}" width="${dialogDimensions.width}" height="${dialogDimensions.height}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">${previousIcon}</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">${nextIcon}</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
+      const previousControl = `<button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">${previousIcon}</button>`;
+      const nextControl = `<button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">${nextIcon}</button>`;
+      const lightboxControls = isRtl
+        ? `${nextControl}<span>${content.projectPage.mediaNavigation}</span>${previousControl}`
+        : `${previousControl}<span>${content.projectPage.mediaNavigation}</span>${nextControl}`;
+      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}" width="${dialogDimensions.width}" height="${dialogDimensions.height}"></div><div class="project-lightbox__controls">${lightboxControls}</div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
       document.body.appendChild(dialog);
       const close = () => dialog.close();
       qs("[data-lightbox-close]", dialog).addEventListener("click", close);
@@ -399,6 +407,34 @@ print(name)</code></pre>
             </aside>` : "";
           stage.innerHTML = `<header><div><small>${content.projectPage.previewTitle}</small><h2>${project.title}</h2></div><button type="button" data-demo-close aria-label="${content.ui.close}">×</button></header>${enterpriseControls}<div class="project-demo-frame"><iframe title="${content.projectPage.previewTitle}: ${project.title}" loading="lazy"></iframe></div><p>${content.projectPage.demoHint}</p>`;
           qs(".project-hero").after(stage);
+          const iframe = qs("iframe", stage);
+          const cleanups = [];
+          demoHostCleanup = () => cleanups.splice(0).forEach((cleanup) => cleanup());
+          let frameResizeObserver = null;
+          let fitFrameRequest = 0;
+          const fitFrameToContent = () => {
+            cancelAnimationFrame(fitFrameRequest);
+            fitFrameRequest = requestAnimationFrame(() => {
+              const frameDocument = iframe.contentDocument;
+              if (!frameDocument?.body) return;
+              const contentHeight = Math.ceil(Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight));
+              if (contentHeight > iframe.clientHeight + 2) iframe.style.height = `${contentHeight}px`;
+            });
+          };
+          const onFrameLoad = () => {
+            iframe.contentDocument.documentElement.classList.add("is-embedded");
+            fitFrameToContent();
+            requestAnimationFrame(fitFrameToContent);
+            frameResizeObserver?.disconnect();
+            frameResizeObserver = new ResizeObserver(fitFrameToContent);
+            frameResizeObserver.observe(iframe.contentDocument.body);
+          };
+          iframe.addEventListener("load", onFrameLoad);
+          cleanups.push(() => {
+            iframe.removeEventListener("load", onFrameLoad);
+            frameResizeObserver?.disconnect();
+            cancelAnimationFrame(fitFrameRequest);
+          });
           qs("[data-demo-close]", stage).addEventListener("click", () => {
             demoHostCleanup?.();
             demoHostCleanup = null;
@@ -406,7 +442,6 @@ print(name)</code></pre>
           });
 
           if (slug === "enterprise-workflow") {
-            const iframe = qs("iframe", stage);
             const updateCompanion = (payload) => {
               qsa("[data-demo-role]", stage).forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.demoRole === payload.role)));
               qsa("[data-demo-guide-step]", stage).forEach((item) => {
@@ -423,7 +458,7 @@ print(name)</code></pre>
             addEventListener("message", onMessage);
             qsa("[data-demo-role]", stage).forEach((button) => button.addEventListener("click", () => send("set-role", { role: button.dataset.demoRole })));
             qs("[data-demo-reset]", stage).addEventListener("click", () => send("reset"));
-            demoHostCleanup = () => removeEventListener("message", onMessage);
+            cleanups.push(() => removeEventListener("message", onMessage));
           }
         }
         const embeddedUrl = new URL(demoLink.href, location.href);

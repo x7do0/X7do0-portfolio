@@ -163,6 +163,10 @@ test('project details use real previews, source-backed facts, and an inline demo
     await page.locator('[data-demo-link]').click();
     await expect(page.locator('.project-inline-demo')).toBeVisible();
     await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', new RegExp(`/demos/${slug}/`));
+    await expect.poll(() => page.locator('.project-inline-demo iframe').evaluate((iframe) => {
+      const frameDocument = iframe.contentDocument;
+      return Boolean(frameDocument?.body) && Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight) <= iframe.clientHeight + 2;
+    })).toBeTruthy();
     await page.locator('[data-demo-close]').click();
     await expect(page.locator('.project-inline-demo')).toHaveCount(0);
     await expect(page.locator('.project-overview')).toHaveCount(0);
@@ -186,6 +190,11 @@ test('project details use real previews, source-backed facts, and an inline demo
   await expect(page.locator('.project-case-study')).toHaveCount(0);
   await expect(page.locator('.project-related__card')).toHaveCount(3);
   await expect(page.locator('main > .project-related')).toBeVisible();
+  await page.locator('[data-demo-link]').click();
+  await expect.poll(() => page.locator('.project-inline-demo iframe').evaluate((iframe) => {
+    const frameDocument = iframe.contentDocument;
+    return Boolean(frameDocument?.body) && Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight) <= iframe.clientHeight + 2;
+  })).toBeTruthy();
 
   await page.goto('/projects/coding-academy/?demo=1#demo');
   await expect(page.locator('.project-inline-demo')).toBeVisible();
@@ -329,7 +338,8 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       const next = page.locator('[data-media-next]');
       await expect(previous.locator('.media-arrow--previous')).toHaveCount(1);
       await expect(next.locator('.media-arrow--next')).toHaveCount(1);
-      expect(await previous.locator('svg').evaluate(svg => getComputedStyle(svg).transform === 'none' ? 1 : new DOMMatrix(getComputedStyle(svg).transform).a)).toBe(state.direction === 'rtl' ? -1 : 1);
+      await expect(previous.locator('path')).toHaveAttribute('d', state.direction === 'rtl' ? 'm9 18 6-6-6-6' : 'm15 18-6-6 6-6');
+      await expect(next.locator('path')).toHaveAttribute('d', state.direction === 'rtl' ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6');
       const previousBox = await previous.boundingBox();
       const nextBox = await next.boundingBox();
       expect(state.direction === 'rtl' ? previousBox.x > nextBox.x : previousBox.x < nextBox.x).toBeTruthy();
@@ -360,6 +370,13 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       const selectedSource = await mainImage.getAttribute('src');
       await page.locator('.case-media-main__open').click();
       await expect(page.locator('.project-lightbox img')).toHaveAttribute('src', selectedSource);
+      const lightboxPrevious = page.locator('[data-lightbox-previous]');
+      const lightboxNext = page.locator('[data-lightbox-next]');
+      await expect(lightboxPrevious.locator('path')).toHaveAttribute('d', state.direction === 'rtl' ? 'm9 18 6-6-6-6' : 'm15 18-6-6 6-6');
+      await expect(lightboxNext.locator('path')).toHaveAttribute('d', state.direction === 'rtl' ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6');
+      const lightboxPreviousBox = await lightboxPrevious.boundingBox();
+      const lightboxNextBox = await lightboxNext.boundingBox();
+      expect(state.direction === 'rtl' ? lightboxPreviousBox.x > lightboxNextBox.x : lightboxPreviousBox.x < lightboxNextBox.x).toBeTruthy();
       await page.keyboard.press(state.direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight');
       await expect(page.locator('.project-lightbox img')).not.toHaveAttribute('src', selectedSource);
       const lightboxBox = await page.locator('.project-lightbox').boundingBox();
