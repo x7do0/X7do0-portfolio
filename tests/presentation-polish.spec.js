@@ -8,6 +8,46 @@ async function expectNoHorizontalOverflow(page) {
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
 }
 
+async function jumpToSection(page, id) {
+  await page.evaluate((sectionId) => {
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    document.getElementById(sectionId)?.scrollIntoView({ block: 'center', behavior: 'auto' });
+    root.style.scrollBehavior = previous;
+  }, id);
+  await page.waitForTimeout(220);
+}
+
+test('editorial hero is complete in the first viewport and atmosphere changes through the page', async ({ page }) => {
+  await page.goto('/');
+  const portrait = page.locator('.hero-portrait');
+  const image = portrait.locator('img');
+  await expect(portrait).toBeVisible();
+  await expect(image).toBeVisible();
+  expect(await image.evaluate((element) => element.complete && element.naturalWidth > 0)).toBeTruthy();
+  await page.screenshot({ path: 'artifacts/hero-initial-desktop.png' });
+
+  const checkpoints = [
+    ['projects', 'atmosphere-projects.png'],
+    ['capabilities', 'atmosphere-capabilities.png'],
+    ['contact', 'atmosphere-contact.png']
+  ];
+
+  for (const [section, file] of checkpoints) {
+    await jumpToSection(page, section);
+    await expect(page.locator('html')).toHaveAttribute('data-scroll-section', section);
+    await page.screenshot({ path: `artifacts/${file}` });
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.locator('.hero-portrait')).toBeVisible();
+  await expect(page.locator('.hero-portrait img')).toBeVisible();
+  await page.screenshot({ path: 'artifacts/hero-initial-mobile.png' });
+  await expectNoHorizontalOverflow(page);
+});
+
 test('project identities are prominent and immediately readable beside live previews', async ({ page }) => {
   await page.goto('/');
 
