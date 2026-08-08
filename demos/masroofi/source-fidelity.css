@@ -107,7 +107,25 @@ html.is-embedded .portfolio-back,
 html.is-embedded .sample,
 html.is-embedded .actions [data-reset],
 html.is-embedded .demo-guide { display:none !important; }
-html.is-embedded .demo-wrap { grid-template-columns:1fr !important; margin-block:18px !important; }
+html.is-embedded .demo-topbar { min-height:54px !important; height:54px !important; padding-block:5px !important; }
+html.is-embedded .brand > span { width:38px !important; height:38px !important; border-radius:12px !important; }
+html.is-embedded .demo-wrap { grid-template-columns:1fr !important; margin-block:10px !important; }
+html.is-embedded .app-frame {
+  display:grid !important;
+  grid-template-columns:minmax(330px,.72fr) minmax(0,1.28fr) !important;
+  grid-template-areas:"head head" "balance transactions" "summary transactions" !important;
+  align-items:stretch !important;
+  gap:10px 12px !important;
+  padding:0 14px 14px !important;
+}
+html.is-embedded .app-head { grid-area:head; padding:14px 4px 5px !important; }
+html.is-embedded .balance-card { grid-area:balance; min-height:170px !important; margin:0 !important; padding:22px !important; border-radius:22px !important; }
+html.is-embedded .summary-grid { grid-area:summary; margin:0 !important; gap:8px !important; }
+html.is-embedded .summary { min-height:92px !important; padding:14px !important; border-radius:18px !important; }
+html.is-embedded .transactions-card { grid-area:transactions; margin:0 0 72px !important; padding:14px !important; border-radius:20px !important; }
+html.is-embedded .transaction-list { margin-top:9px !important; gap:6px !important; }
+html.is-embedded .transaction { padding:9px 11px !important; }
+html.is-embedded .bottom-nav { grid-column:2; inset-inline:auto 14px !important; width:calc(64% - 24px) !important; min-height:54px !important; inset-block-end:14px !important; }
 
 .expense-form { border-color:var(--m-border) !important; border-radius:24px !important; background:#fff !important; }
 .expense-form input,.expense-form select { border-color:var(--m-border) !important; border-radius:12px !important; background:#fff !important; color:var(--m-text) !important; }

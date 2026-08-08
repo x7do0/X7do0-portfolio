@@ -424,24 +424,31 @@ print(name)</code></pre>
           const cleanups = [];
           demoHostCleanup = () => cleanups.splice(0).forEach((cleanup) => cleanup());
           let fitFrameRequest = 0;
+          let frameResizeObserver = null;
           const fitFrameToContent = () => {
             cancelAnimationFrame(fitFrameRequest);
             fitFrameRequest = requestAnimationFrame(() => {
               const frameDocument = iframe.contentDocument;
               if (!frameDocument?.body) return;
-              const virtualWidth = frame.clientWidth < 700 ? 920 : 1200;
+              const canUseCompactDesktop = innerHeight <= 760 && ["coding-academy", "masroofi"].includes(slug);
+              const canReflowMobile = frame.clientWidth < 700 && slug !== "mahsoob";
+              const virtualWidth = frame.clientWidth < 700 ? canReflowMobile ? 640 : 820 : canUseCompactDesktop ? 1100 : 1200;
               iframe.style.width = `${virtualWidth}px`;
               if (!iframe.dataset.demoFitted) {
-                iframe.style.height = "600px";
+                iframe.style.height = canUseCompactDesktop ? "500px" : "600px";
                 iframe.style.transform = "translate(-50%, -50%) scale(1)";
               }
               requestAnimationFrame(() => {
-                const contentHeight = Math.ceil(Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight));
-                const scale = Math.min(1, frame.clientWidth / virtualWidth, frame.clientHeight / contentHeight);
-                iframe.style.height = `${contentHeight}px`;
-                iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                iframe.dataset.demoFitted = "true";
-                stage.style.setProperty("--demo-scale", scale.toFixed(4));
+                const measuredHeight = Math.ceil(frameDocument.body.scrollHeight || frameDocument.documentElement.scrollHeight);
+                iframe.style.height = `${measuredHeight}px`;
+                requestAnimationFrame(() => {
+                  const contentHeight = Math.ceil(Math.max(measuredHeight, frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight));
+                  const scale = Math.min(1, frame.clientWidth / virtualWidth, frame.clientHeight / contentHeight);
+                  iframe.style.height = `${contentHeight}px`;
+                  iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                  iframe.dataset.demoFitted = "true";
+                  stage.style.setProperty("--demo-scale", scale.toFixed(4));
+                });
               });
             });
           };
@@ -449,6 +456,9 @@ print(name)</code></pre>
             iframe.contentDocument.documentElement.classList.add("is-embedded");
             fitFrameToContent();
             requestAnimationFrame(fitFrameToContent);
+            frameResizeObserver?.disconnect();
+            frameResizeObserver = new ResizeObserver(fitFrameToContent);
+            frameResizeObserver.observe(iframe.contentDocument.body);
           };
           const onViewportResize = () => fitFrameToContent();
           iframe.addEventListener("load", onFrameLoad);
@@ -457,6 +467,7 @@ print(name)</code></pre>
             iframe.removeEventListener("load", onFrameLoad);
             removeEventListener("resize", onViewportResize);
             cancelAnimationFrame(fitFrameRequest);
+            frameResizeObserver?.disconnect();
             body.classList.remove("demo-preview-open");
           });
           const closeDemo = () => {
