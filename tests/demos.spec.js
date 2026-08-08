@@ -14,6 +14,7 @@ test('Enterprise demo creates, submits, and approves a request', async ({ page }
   await page.locator('[data-request-form] button[type="submit"]').click();
   await page.locator('[data-submit-request]').click();
   await page.locator('[data-role-switch="manager"]').click();
+  await expect(page.locator('[data-create-request]')).toBeHidden();
   await expect(page.locator('[data-dashboard-request-list] .request-row')).toHaveCount(1);
   await page.locator('[data-dashboard-request-list] .request-row').click();
   await page.locator('[data-approve]').click();

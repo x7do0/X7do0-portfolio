@@ -112,6 +112,43 @@ test('English switches direction, preserves content, and can switch back to Arab
   await expect(page.locator('h1')).toHaveText('حيدره مهند');
 });
 
+test('initial language and font are ready before the page becomes visible, and the language control stays fixed', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('x7do0-language', 'en'));
+  let releaseContent;
+  const contentGate = new Promise(resolve => { releaseContent = resolve; });
+  await page.route('**/content/portfolio.en.json', async route => {
+    await contentGate;
+    await route.continue();
+  });
+
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(page.locator('html')).toHaveClass(/portfolio-booting/);
+  await expect(page.locator('body')).toHaveCSS('visibility', 'hidden');
+  releaseContent();
+  await expect(page.locator('h1')).toHaveText('Haidara Muhanned');
+  await expect(page.locator('html')).toHaveClass(/portfolio-ready/);
+  await expect(page.locator('body')).toHaveCSS('font-family', /IBM Plex Sans Arabic|Space Grotesk/);
+
+  const englishSwitch = await page.locator('.site-header .language-switch').boundingBox();
+  await page.locator('[data-language="ar"]').click();
+  await expect(page.locator('h1')).toHaveText('حيدره مهند');
+  const arabicSwitch = await page.locator('.site-header .language-switch').boundingBox();
+  expect(Math.abs(englishSwitch.x - arabicSwitch.x)).toBeLessThan(1);
+  expect(Math.abs(englishSwitch.width - arabicSwitch.width)).toBeLessThan(1);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/projects/enterprise-workflow/?lang=en');
+  const mobileEnglishSwitch = await page.locator('.inner-header .language-switch').boundingBox();
+  await page.locator('[data-language="ar"]').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  const mobileArabicSwitch = await page.locator('.inner-header .language-switch').boundingBox();
+  expect(Math.abs(mobileEnglishSwitch.x - mobileArabicSwitch.x)).toBeLessThan(1);
+  expect(Math.abs(mobileEnglishSwitch.width - mobileArabicSwitch.width)).toBeLessThan(1);
+  await expectNoOverflow(page);
+});
+
 test('project details use real previews, source-backed facts, and an inline demo', async ({ page }) => {
   for (const slug of ['enterprise-workflow', 'coding-academy', 'masroofi']) {
     await page.goto(`/projects/${slug}/`);
@@ -126,7 +163,7 @@ test('project details use real previews, source-backed facts, and an inline demo
     await page.locator('[data-demo-link]').click();
     await expect(page.locator('.project-inline-demo')).toBeVisible();
     await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', new RegExp(`/demos/${slug}/`));
-    await page.locator('.project-inline-demo button').click();
+    await page.locator('[data-demo-close]').click();
     await expect(page.locator('.project-inline-demo')).toHaveCount(0);
     await expect(page.locator('.project-overview')).toHaveCount(0);
     await expect(page.locator('.project-related__card')).toHaveCount(3);
@@ -153,6 +190,31 @@ test('project details use real previews, source-backed facts, and an inline demo
   await page.goto('/projects/coding-academy/?demo=1#demo');
   await expect(page.locator('.project-inline-demo')).toBeVisible();
   await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', /\/demos\/coding-academy\//);
+});
+
+test('embedded Enterprise demo keeps portfolio controls outside the product and enforces role permissions', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.goto('/projects/enterprise-workflow/');
+  await page.locator('[data-demo-link]').click();
+
+  const stage = page.locator('.project-inline-demo');
+  const frame = page.frameLocator('.project-inline-demo iframe');
+  await expect(stage).toBeVisible();
+  await expect(stage.locator('.project-demo-companion')).toBeVisible();
+  await expect(stage.locator('iframe')).toHaveAttribute('src', /embedded=1/);
+  const stageBox = await stage.boundingBox();
+  expect(stageBox.width).toBeLessThanOrEqual(962);
+  expect(stageBox.width).toBeLessThan(1200);
+
+  await expect(frame.locator('.role-panel')).toBeHidden();
+  await expect(frame.locator('.guide-panel')).toBeHidden();
+  await expect(frame.locator('[data-create-request]')).toBeVisible();
+  await page.locator('[data-demo-role="manager"]').click();
+  await expect(frame.locator('[data-create-request]')).toBeHidden();
+  await expect(frame.locator('[data-page-title]')).toHaveText('لوحة المراجعة');
+  await page.locator('[data-demo-role="employee"]').click();
+  await expect(frame.locator('[data-create-request]')).toBeVisible();
+  await expect(page.locator('[data-demo-guide-step="create"]')).toHaveClass(/is-current/);
 });
 
 test('project pages keep internal copy useful and avoid technical capture labels', async ({ page }) => {
@@ -265,11 +327,17 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
 
       const previous = page.locator('[data-media-previous]');
       const next = page.locator('[data-media-next]');
-      await expect(previous).toHaveText(state.direction === 'rtl' ? '›' : '‹');
-      await expect(next).toHaveText(state.direction === 'rtl' ? '‹' : '›');
+      await expect(previous.locator('.media-arrow--previous')).toHaveCount(1);
+      await expect(next.locator('.media-arrow--next')).toHaveCount(1);
+      expect(await previous.locator('svg').evaluate(svg => getComputedStyle(svg).transform === 'none' ? 1 : new DOMMatrix(getComputedStyle(svg).transform).a)).toBe(state.direction === 'rtl' ? -1 : 1);
       const previousBox = await previous.boundingBox();
       const nextBox = await next.boundingBox();
       expect(state.direction === 'rtl' ? previousBox.x > nextBox.x : previousBox.x < nextBox.x).toBeTruthy();
+
+      await next.click();
+      await expect(thumbnails.nth(1)).toHaveAttribute('aria-selected', 'true');
+      await previous.click();
+      await expect(thumbnails.first()).toHaveAttribute('aria-selected', 'true');
 
       const browserBox = await page.locator('.case-media-browser').boundingBox();
       const mainStageBox = await page.locator('.case-media-main__open').boundingBox();
@@ -292,12 +360,15 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       const selectedSource = await mainImage.getAttribute('src');
       await page.locator('.case-media-main__open').click();
       await expect(page.locator('.project-lightbox img')).toHaveAttribute('src', selectedSource);
+      await page.keyboard.press(state.direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight');
+      await expect(page.locator('.project-lightbox img')).not.toHaveAttribute('src', selectedSource);
       const lightboxBox = await page.locator('.project-lightbox').boundingBox();
       expect(lightboxBox.width).toBeLessThanOrEqual(state.viewport.width > 720 ? Math.min(1122, state.viewport.width * .88) : state.viewport.width - 30);
       expect(lightboxBox.height).toBeLessThanOrEqual(state.viewport.height * .86);
       await page.keyboard.press('Escape');
       await expect(page.locator('.project-lightbox')).toHaveCount(0);
 
+      await thumbnails.nth(1).click();
       await thumbnails.nth(1).focus();
       await page.keyboard.press(state.direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight');
       await expect(thumbnails.nth(2)).toHaveAttribute('aria-selected', 'true');

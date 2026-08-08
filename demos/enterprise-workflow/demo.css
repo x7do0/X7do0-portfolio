@@ -29,6 +29,21 @@
   --ease: cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
+[hidden] { display: none !important; }
+
+html.is-embedded .role-panel,
+html.is-embedded .guide-panel,
+html.is-embedded .sidebar-note,
+html.is-embedded .demo-header .header-actions,
+html.is-embedded .portfolio-back,
+html.is-embedded .brand-divider {
+  display: none !important;
+}
+
+html.is-embedded .demo-header {
+  min-height: 64px;
+}
+
 *,
 *::before,
 *::after {

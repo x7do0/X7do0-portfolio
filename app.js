@@ -277,6 +277,7 @@
     renderContact(state.content);
     setupNavigation();
     setupReveal();
+    await window.portfolioReady?.();
   }
 
   qsa("[data-language]").forEach((button) => button.addEventListener("click", () => {
@@ -293,5 +294,6 @@
   load(initialLanguage).catch((error) => {
     console.error(error);
     document.body.classList.add("content-error");
+    window.portfolioReady?.();
   });
 })();

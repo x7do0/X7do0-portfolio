@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
+  <script src="./boot.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#05070a">
   <meta name="robots" content="noindex">
@@ -24,20 +25,22 @@
     <div class="not-found__inner">
       <span class="not-found__code" aria-hidden="true">404</span>
       <h1 id="title">الصفحة غير موجودة</h1>
-      <p id="description">لم يتم العثور على الصفحة المطلوبة، لكن يمكنك العودة إلى البورتفوليو ومتابعة الاستكشاف.</p>
+      <p id="description">لم يتم العثور على الصفحة المطلوبة، لكن يمكنك العودة إلى معرض الأعمال ومتابعة الاستكشاف.</p>
       <a class="button button--primary" href="/X7do0-portfolio/" id="action">العودة إلى الرئيسية</a>
     </div>
   </main>
   <script src="./navigation.js"></script>
   <script>
-    const english = new URLSearchParams(location.search).get("lang") === "en" || localStorage.getItem("x7do0-language") === "en";
+    const english = document.documentElement.lang === "en";
     if (english) {
-      document.documentElement.lang = "en"; document.documentElement.dir = "ltr";
       document.title = "Page not found | x7do0";
       document.querySelector("#title").textContent = "Page not found";
       document.querySelector("#description").textContent = "The page you requested could not be found. Return to the portfolio and keep exploring.";
-      const action = document.querySelector("#action"); action.textContent = "Back to home"; action.href = "/X7do0-portfolio/?lang=en";
+      const action = document.querySelector("#action");
+      action.textContent = "Back to home";
+      action.href = "/X7do0-portfolio/?lang=en";
     }
+    window.portfolioReady?.();
   </script>
 </body>
 </html>
