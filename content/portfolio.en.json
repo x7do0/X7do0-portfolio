@@ -64,7 +64,6 @@
       "previewKind": "workflow",
       "previewImage": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
       "previewAlt": "Enterprise Workflow employee dashboard in the light theme",
-      "previewCaption": "Employee workspace captured from the isolated E2E environment",
       "resumeSummary": "A self-hosted internal request and approval platform with dynamic routing, granular permissions, notifications, and audit history.",
       "cta": "Explore project",
       "links": [],
@@ -74,21 +73,18 @@
           "label": "Core roles with role-aware navigation"
         },
         {
-          "value": "IQD",
-          "label": "Fixed monetary policy for Iraq"
+          "value": "Multi-stage",
+          "label": "Approval routing shaped by company policy"
         },
         {
-          "value": "UTC",
-          "label": "Stored timestamps with Asia/Baghdad operations"
-        },
-        {
-          "value": "E2E",
-          "label": "Full approval journeys verified in an isolated environment"
+          "value": "Audit",
+          "label": "Traceable decisions and state changes"
         }
       ],
       "media": [
         {
           "src": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
+          "featured": true,
           "alt": "Enterprise Workflow employee dashboard in the light theme",
           "caption": "The employee dashboard keeps request creation, personal status, and recent activity in one focused workspace."
         },
@@ -103,19 +99,55 @@
           "caption": "Employees can track their own requests without seeing organization-wide data."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/04-manager-dashboard-dark.png",
+          "src": "./assets/projects/enterprise-workflow/04-employee-notifications-light.png",
+          "alt": "Enterprise Workflow notification center for an employee",
+          "caption": "A dedicated notification center keeps workflow updates separate from the employee's focused request list."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/05-manager-dashboard-dark.png",
           "alt": "Enterprise Workflow manager dashboard in the dark theme",
           "caption": "The manager experience changes navigation and priorities according to the active role."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/05-manager-approvals-dark.png",
+          "src": "./assets/projects/enterprise-workflow/06-manager-approvals-dark.png",
           "alt": "Enterprise Workflow pending approvals page in the dark theme",
           "caption": "The approvals workspace presents only requests awaiting the manager decision, including a clear empty state."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/06-manager-team-requests-dark.png",
+          "src": "./assets/projects/enterprise-workflow/07-manager-team-requests-dark.png",
           "alt": "Enterprise Workflow team requests page for a manager",
           "caption": "Managers can review team requests through a permission-scoped view."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/08-admin-employees-light.png",
+          "alt": "Enterprise Workflow employee directory for an administrator",
+          "caption": "Administrators can review reporting lines, departments, roles, and invitation status from one staff directory."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/09-admin-roles-light.png",
+          "alt": "Enterprise Workflow job roles and permissions administration",
+          "caption": "Role administration makes protected built-in roles, assignments, and permission scope visible before editing."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/10-admin-workflow-rules-light.png",
+          "alt": "Enterprise Workflow visual workflow designer",
+          "caption": "The workflow designer gives administrators a clear place to define approval routing instead of hiding it in code."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/11-admin-reports-light.png",
+          "alt": "Enterprise Workflow reports and export dashboard",
+          "caption": "Reports combine filterable request metrics with employee and department coverage and export controls."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/12-admin-audit-trail-light.png",
+          "alt": "Enterprise Workflow administrator audit trail",
+          "caption": "The audit trail exposes recorded system activity to support review and accountability."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/13-employee-mobile-dashboard-light.png",
+          "device": "phone",
+          "alt": "Enterprise Workflow employee dashboard on a mobile phone",
+          "caption": "On a phone, the employee dashboard becomes a single readable column with the primary request action kept prominent."
         }
       ],
       "caseStudy": {
@@ -181,7 +213,6 @@
       "previewKind": "academy",
       "previewImage": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
       "previewAlt": "Arabic Python topic cards in Coding Academy",
-      "previewCaption": "Current topic-card interface after removing the deprecated final-project path",
       "resumeSummary": "An Arabic Python learning platform combining visual topic cards, detailed lessons, source files, and interactive exercises with local progress.",
       "cta": "Explore project",
       "links": [
@@ -254,6 +285,7 @@
         },
         {
           "src": "./assets/projects/coding-academy/07-mobile-topic-path.jpg",
+          "device": "phone",
           "order": 7,
           "alt": "Coding Academy Python topic cards on a mobile viewport",
           "caption": "The same topic-first path adapts to a compact mobile reading flow."
@@ -306,10 +338,9 @@
       "slug": "mahsoob",
       "title": "Mahsoob",
       "category": "Windows application",
-      "summary": "An Arabic offline point-of-sale system for groceries, minimarkets, and small Iraqi shops, designed around cashier speed, IQD, and uninterrupted daily work.",
+      "summary": "An Arabic offline point-of-sale system for groceries, minimarkets, and small Iraqi shops, designed around cashier speed and uninterrupted daily work.",
       "facts": [
         "Offline-first",
-        "Iraqi dinar",
         "Built for Iraqi shops"
       ],
       "tech": [
@@ -319,9 +350,8 @@
       ],
       "previewKind": "mahsoob",
       "previewImage": "./assets/projects/mahsoob.png",
-      "previewAlt": "Source-faithful simulation of the Mahsoob checkout",
-      "previewCaption": "Source-faithful simulation",
-      "resumeSummary": "An offline-first Arabic point-of-sale system designed around cashier flow and Iraqi dinar workflows.",
+      "previewAlt": "Mahsoob main point-of-sale checkout interface",
+      "resumeSummary": "An offline-first Arabic point-of-sale system designed around a fast, uninterrupted cashier flow.",
       "cta": "Explore project",
       "media": [],
       "caseStudy": []
@@ -331,11 +361,11 @@
       "title": "Masroofi",
       "category": "Web application",
       "status": "Completed",
-      "summary": "A client-requested Arabic personal-finance product for recording income and expenses, seeing the derived balance immediately, and keeping private data on the device with validated backup, merge, and restore workflows.",
+      "summary": "A client-requested Arabic personal-finance product for recording income and expenses, seeing the balance immediately, and keeping private data on the device with validated backup, merge, and restore workflows.",
       "facts": [
         "Instant derived balance",
         "Validated backup and restore",
-        "RTL, IQD, and local-first data"
+        "Arabic RTL and local-first data"
       ],
       "tech": [
         "React 19",
@@ -345,9 +375,8 @@
         "PWA"
       ],
       "previewKind": "masroofi",
-      "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+      "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.png",
       "previewAlt": "Masroofi Arabic balance dashboard with sample transactions",
-      "previewCaption": "Current product UI captured locally from the verified source",
       "resumeSummary": "A client-requested Arabic income and expense tracker with local-first storage, instant balance calculation, and safe backup and restore.",
       "cta": "Explore project",
       "links": [
@@ -364,10 +393,6 @@
       ],
       "metrics": [
         {
-          "value": "IQD",
-          "label": "Currency formatted for Iraqi use"
-        },
-        {
           "value": "4",
           "label": "Focused views: home, income, expenses, history"
         },
@@ -382,32 +407,45 @@
       ],
       "media": [
         {
-          "src": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+          "src": "./assets/projects/masroofi/01-balance-dashboard-light.png",
+          "featured": true,
           "alt": "Masroofi light-theme dashboard showing balance, income, expenses, and recent activity",
           "caption": "The home view derives the balance and current-month snapshot from the transaction ledger."
         },
         {
-          "src": "./assets/projects/masroofi/02-expenses-and-entry-form.jpg",
-          "alt": "Masroofi expense entry form and saved expense list",
-          "caption": "Income and expense flows share a focused form with amount, note, emoji, and date-time controls."
+          "src": "./assets/projects/masroofi/02-income-and-entry-form.png",
+          "alt": "Masroofi income entry form and current income total",
+          "caption": "The income flow keeps amount, label, icon, note, and date-time controls together in one focused form."
         },
         {
-          "src": "./assets/projects/masroofi/03-unified-history.jpg",
+          "src": "./assets/projects/masroofi/03-expenses-and-entry-form.png",
+          "alt": "Masroofi expense entry form and current expense total",
+          "caption": "Expense recording mirrors the income flow, reducing relearning while keeping the red expense context unmistakable."
+        },
+        {
+          "src": "./assets/projects/masroofi/04-unified-history.png",
           "alt": "Masroofi unified transaction history with income and expense filters",
           "caption": "A chronological history combines both transaction types and provides clear filters."
         },
         {
-          "src": "./assets/projects/masroofi/04-backup-and-restore.jpg",
+          "src": "./assets/projects/masroofi/05-backup-and-restore.png",
           "alt": "Masroofi backup and restore dialog",
           "caption": "Data tools export a versioned file and explain safe merge versus full replacement."
         },
         {
-          "src": "./assets/projects/masroofi/05-modern-date-picker.jpg",
+          "src": "./assets/projects/masroofi/06-modern-date-picker.png",
           "alt": "Masroofi custom date and time picker",
           "caption": "A custom calendar keeps date and time entry consistent across desktop and mobile."
         },
         {
-          "src": "./assets/projects/masroofi/06-mobile-dark-dashboard.jpg",
+          "src": "./assets/projects/masroofi/07-mobile-light-dashboard.png",
+          "device": "phone",
+          "alt": "Masroofi light dashboard on a mobile phone",
+          "caption": "The mobile layout keeps the balance, monthly summary, recent entries, and primary navigation readable without desktop cropping."
+        },
+        {
+          "src": "./assets/projects/masroofi/08-mobile-dark-dashboard.png",
+          "device": "phone",
           "alt": "Masroofi dashboard in dark theme on a mobile viewport",
           "caption": "The responsive mobile shell keeps primary actions and navigation within easy reach."
         }
@@ -671,7 +709,6 @@
     "tryDemo": "Try interactive simulation",
     "demoHint": "The simulation stays inside this portfolio and uses sample data only.",
     "mediaTitle": "Product walkthrough",
-    "mediaDescription": "Authentic screens captured from the current verified source and safe sample data.",
     "mediaPending": "Media will be added once approved.",
     "mediaNavigation": "Screenshot navigation",
     "previousImage": "Previous screenshot",
@@ -679,7 +716,10 @@
     "detailsTitle": "Case study",
     "detailsPending": "Details will be completed after accurate project information is approved, without assumptions or exaggeration.",
     "keyFacts": "Key project facts",
-    "enlargeImage": "Open larger image"
+    "enlargeImage": "Open larger image",
+    "otherProjectsTitle": "Explore other projects",
+    "otherProjectsDescription": "Continue directly to another project without returning to the home page.",
+    "openProject": "Open project"
   },
   "resume": {
     "title": "Resume",

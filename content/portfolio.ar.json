@@ -64,7 +64,6 @@
       "previewKind": "workflow",
       "previewImage": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
       "previewAlt": "لوحة الموظف في Enterprise Workflow بالمظهر الفاتح",
-      "previewCaption": "لقطة فعلية من بيئة E2E المعزولة",
       "resumeSummary": "منصة داخلية للطلبات والموافقات بمسارات ديناميكية وصلاحيات دقيقة وإشعارات وسجل تدقيق.",
       "cta": "استكشف المشروع",
       "links": [],
@@ -74,21 +73,18 @@
           "label": "أدوار أساسية بتجربة وتنقل مناسبين لكل دور"
         },
         {
-          "value": "IQD",
-          "label": "سياسة مالية ثابتة للسوق العراقي"
+          "value": "متعدد المراحل",
+          "label": "مسارات موافقة تتكيف مع سياسة المؤسسة"
         },
         {
-          "value": "UTC",
-          "label": "تخزين زمني موحد مع تشغيل Asia/Baghdad"
-        },
-        {
-          "value": "E2E",
-          "label": "اختبار رحلات الموافقة على بيئة معزولة"
+          "value": "تدقيق",
+          "label": "قرارات وتغييرات حالة قابلة للتتبع"
         }
       ],
       "media": [
         {
           "src": "./assets/projects/enterprise-workflow/01-employee-dashboard-light.png",
+          "featured": true,
           "alt": "لوحة الموظف في Enterprise Workflow بالمظهر الفاتح",
           "caption": "تجمع لوحة الموظف إنشاء الطلب وحالته الشخصية وآخر النشاطات في مساحة مركزة."
         },
@@ -103,19 +99,55 @@
           "caption": "يتابع الموظف طلباته فقط من دون الاطلاع على بيانات المؤسسة العامة."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/04-manager-dashboard-dark.png",
+          "src": "./assets/projects/enterprise-workflow/04-employee-notifications-light.png",
+          "alt": "مركز إشعارات الموظف في Enterprise Workflow",
+          "caption": "تفصل شاشة الإشعارات تحديثات سير العمل عن قائمة طلبات الموظف حتى تبقى المتابعة واضحة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/05-manager-dashboard-dark.png",
           "alt": "لوحة المدير في Enterprise Workflow بالمظهر الداكن",
           "caption": "تتغير أولويات التنقل والواجهة بحسب دور المدير الفعلي."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/05-manager-approvals-dark.png",
+          "src": "./assets/projects/enterprise-workflow/06-manager-approvals-dark.png",
           "alt": "صفحة الموافقات المعلقة للمدير بالمظهر الداكن",
           "caption": "تعرض مساحة الموافقات الطلبات التي تنتظر قرار المدير فقط، مع حالة فارغة واضحة."
         },
         {
-          "src": "./assets/projects/enterprise-workflow/06-manager-team-requests-dark.png",
+          "src": "./assets/projects/enterprise-workflow/07-manager-team-requests-dark.png",
           "alt": "صفحة طلبات الفريق للمدير في Enterprise Workflow",
           "caption": "يراجع المدير طلبات فريقه ضمن نطاق الصلاحيات الممنوح له."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/08-admin-employees-light.png",
+          "alt": "دليل الموظفين لدى مدير النظام في Enterprise Workflow",
+          "caption": "يجمع دليل الموظفين خطوط الإدارة والأقسام والأدوار وحالة الدعوات في شاشة واحدة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/09-admin-roles-light.png",
+          "alt": "إدارة الأدوار والصلاحيات في Enterprise Workflow",
+          "caption": "توضح إدارة الأدوار الصلاحيات والتعيينات والأدوار الأساسية المحمية قبل تعديلها."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/10-admin-workflow-rules-light.png",
+          "alt": "مصمم مسارات الموافقة المرئي في Enterprise Workflow",
+          "caption": "يمنح المصمم المرئي مدير النظام مكاناً واضحاً لبناء مسارات الموافقة بدل إخفائها داخل الشيفرة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/11-admin-reports-light.png",
+          "alt": "لوحة التقارير والتصدير في Enterprise Workflow",
+          "caption": "تجمع التقارير مؤشرات الطلبات القابلة للتصفية مع بيانات الموظفين والأقسام وخيارات التصدير."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/12-admin-audit-trail-light.png",
+          "alt": "سجل التدقيق الإداري في Enterprise Workflow",
+          "caption": "يعرض سجل التدقيق نشاطات النظام المسجلة لدعم المراجعة والمحاسبة."
+        },
+        {
+          "src": "./assets/projects/enterprise-workflow/13-employee-mobile-dashboard-light.png",
+          "device": "phone",
+          "alt": "لوحة موظف Enterprise Workflow على هاتف",
+          "caption": "على الهاتف تتحول اللوحة إلى عمود واحد مقروء مع بقاء إجراء إنشاء الطلب واضحاً في الأعلى."
         }
       ],
       "caseStudy": {
@@ -180,7 +212,6 @@
       "previewKind": "academy",
       "previewImage": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
       "previewAlt": "بطاقات مواضيع بايثون العربية في أكاديمية البرمجة",
-      "previewCaption": "واجهة البطاقات الحالية بعد إزالة مسار المشروع الختامي القديم",
       "resumeSummary": "منصة عربية لبايثون تجمع بطاقات مرئية ودروساً تفصيلية وملفات وتمارين تفاعلية مع حفظ التقدم محلياً.",
       "cta": "استكشف المشروع",
       "links": [
@@ -253,6 +284,7 @@
         },
         {
           "src": "./assets/projects/coding-academy/07-mobile-topic-path.jpg",
+          "device": "phone",
           "order": 7,
           "alt": "بطاقات بايثون في الأكاديمية على شاشة هاتف",
           "caption": "يتحول المسار نفسه إلى تدفق قراءة مريح على الهاتف."
@@ -305,10 +337,9 @@
       "slug": "mahsoob",
       "title": "محسوب",
       "category": "تطبيق Windows",
-      "summary": "نظام نقاط بيع عربي يعمل دون إنترنت للبقالات والميني ماركت والمتاجر الصغيرة في العراق، ومصمم حول سرعة الكاشير والدينار العراقي واستمرارية العمل.",
+      "summary": "نظام نقاط بيع عربي يعمل دون إنترنت للبقالات والميني ماركت والمتاجر الصغيرة في العراق، ومصمم حول سرعة الكاشير واستمرارية العمل.",
       "facts": [
         "يعمل دون إنترنت",
-        "الدينار العراقي",
         "موجّه للمتاجر العراقية"
       ],
       "tech": [
@@ -318,9 +349,8 @@
       ],
       "previewKind": "mahsoob",
       "previewImage": "./assets/projects/mahsoob.png",
-      "previewAlt": "محاكاة واجهة البيع في نظام محسوب",
-      "previewCaption": "محاكاة مصدرية للواجهة",
-      "resumeSummary": "نظام نقاط بيع عربي يعمل دون إنترنت ومصمم لتدفق الكاشير والدينار العراقي.",
+      "previewAlt": "واجهة نقطة البيع الرئيسية في نظام محسوب",
+      "resumeSummary": "نظام نقاط بيع عربي يعمل دون إنترنت ومصمم لتدفق كاشير سريع ومستمر.",
       "cta": "استكشف المشروع",
       "media": [],
       "caseStudy": []
@@ -330,11 +360,11 @@
       "title": "مصروفي",
       "category": "تطبيق ويب",
       "status": "مكتمل",
-      "summary": "منتج مالي عربي نُفذ بناءً على طلب عميل لتسجيل الدخل والمصروفات ورؤية الرصيد المحسوب مباشرة، مع بقاء البيانات الخاصة على الجهاز ووجود نسخ ودمج واستعادة مُتحقق منها.",
+      "summary": "منتج مالي عربي نُفذ بناءً على طلب عميل لتسجيل الدخل والمصروفات ورؤية الرصيد مباشرة، مع بقاء البيانات الخاصة على الجهاز ووجود نسخ ودمج واستعادة مُتحقق منها.",
       "facts": [
         "رصيد مشتق يتحدث فوراً",
         "نسخ واستعادة مُتحقق منهما",
-        "RTL ودينار عراقي وتخزين محلي"
+        "واجهة عربية وتخزين محلي"
       ],
       "tech": [
         "React 19",
@@ -344,9 +374,8 @@
         "PWA"
       ],
       "previewKind": "masroofi",
-      "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+      "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.png",
       "previewAlt": "لوحة مصروفي العربية مع معاملات تجريبية",
-      "previewCaption": "واجهة المنتج الحالية ملتقطة من المصدر المدقق",
       "resumeSummary": "تطبيق مالي عربي مطلوب من عميل، بتخزين محلي ورصيد فوري ونسخ واستعادة آمنين.",
       "cta": "استكشف المشروع",
       "links": [
@@ -363,10 +392,6 @@
       ],
       "metrics": [
         {
-          "value": "IQD",
-          "label": "تنسيق مالي مناسب للاستخدام العراقي"
-        },
-        {
           "value": "4",
           "label": "واجهات مركزة: الرئيسية والدخل والمصروفات والسجل"
         },
@@ -381,32 +406,45 @@
       ],
       "media": [
         {
-          "src": "./assets/projects/masroofi/01-balance-dashboard-light.jpg",
+          "src": "./assets/projects/masroofi/01-balance-dashboard-light.png",
+          "featured": true,
           "alt": "لوحة مصروفي الفاتحة تعرض الرصيد والدخل والمصروفات وآخر العمليات",
           "caption": "تشتق الرئيسية الرصيد وملخص الشهر من سجل العمليات نفسه."
         },
         {
-          "src": "./assets/projects/masroofi/02-expenses-and-entry-form.jpg",
-          "alt": "نموذج إضافة مصروف وسجل المصروفات في مصروفي",
-          "caption": "يشترك الدخل والمصروف في نموذج واضح للمبلغ والملاحظة والإيموجي والوقت."
+          "src": "./assets/projects/masroofi/02-income-and-entry-form.png",
+          "alt": "نموذج إضافة دخل وإجمالي الدخل في مصروفي",
+          "caption": "يجمع مسار الدخل المبلغ والاسم والأيقونة والملاحظة والتاريخ والوقت في نموذج واحد واضح."
         },
         {
-          "src": "./assets/projects/masroofi/03-unified-history.jpg",
+          "src": "./assets/projects/masroofi/03-expenses-and-entry-form.png",
+          "alt": "نموذج إضافة مصروف وإجمالي المصروفات في مصروفي",
+          "caption": "يحافظ تسجيل المصروف على نفس منطق الدخل مع سياق أحمر واضح يقلل الالتباس."
+        },
+        {
+          "src": "./assets/projects/masroofi/04-unified-history.png",
           "alt": "سجل مصروفي الموحد مع فلاتر للدخل والمصروفات",
           "caption": "يجمع السجل العمليتين زمنياً ويوفر فلاتر واضحة."
         },
         {
-          "src": "./assets/projects/masroofi/04-backup-and-restore.jpg",
+          "src": "./assets/projects/masroofi/05-backup-and-restore.png",
           "alt": "نافذة النسخ الاحتياطي والاستعادة في مصروفي",
           "caption": "تصدّر أدوات البيانات ملفاً بإصدار واضح وتشرح الدمج مقابل الاستبدال."
         },
         {
-          "src": "./assets/projects/masroofi/05-modern-date-picker.jpg",
+          "src": "./assets/projects/masroofi/06-modern-date-picker.png",
           "alt": "منتقي التاريخ والوقت المخصص في مصروفي",
           "caption": "يحافظ التقويم المخصص على إدخال متناسق في سطح المكتب والهاتف."
         },
         {
-          "src": "./assets/projects/masroofi/06-mobile-dark-dashboard.jpg",
+          "src": "./assets/projects/masroofi/07-mobile-light-dashboard.png",
+          "device": "phone",
+          "alt": "لوحة مصروفي الفاتحة على هاتف",
+          "caption": "يحافظ تخطيط الهاتف على وضوح الرصيد وملخص الشهر وآخر العمليات والتنقل من دون قص واجهة سطح المكتب."
+        },
+        {
+          "src": "./assets/projects/masroofi/08-mobile-dark-dashboard.png",
+          "device": "phone",
           "alt": "لوحة مصروفي بالمظهر الداكن على الهاتف",
           "caption": "تحافظ الواجهة المتجاوبة على القرارات والتنقل ضمن وصول سهل."
         }
@@ -670,7 +708,6 @@
     "tryDemo": "جرّب المحاكاة التفاعلية",
     "demoHint": "تبقى المحاكاة داخل البورتفوليو وتستخدم بيانات تجريبية فقط.",
     "mediaTitle": "جولة داخل المنتج",
-    "mediaDescription": "شاشات حقيقية ملتقطة من المصدر الحالي المدقق وببيانات تجريبية آمنة.",
     "mediaPending": "تضاف الوسائط بعد اعتمادها.",
     "mediaNavigation": "التنقل بين صور المشروع",
     "previousImage": "الصورة السابقة",
@@ -678,7 +715,10 @@
     "detailsTitle": "دراسة الحالة",
     "detailsPending": "تُستكمل التفاصيل بعد اعتماد معلومات المشروع الدقيقة، بدون افتراض أو مبالغة.",
     "keyFacts": "حقائق المشروع الأساسية",
-    "enlargeImage": "فتح الصورة بحجم أكبر"
+    "enlargeImage": "فتح الصورة بحجم أكبر",
+    "otherProjectsTitle": "استكشف المشاريع الأخرى",
+    "otherProjectsDescription": "انتقل مباشرة إلى مشروع آخر من دون الرجوع إلى الصفحة الرئيسية.",
+    "openProject": "فتح المشروع"
   },
   "resume": {
     "title": "السيرة",

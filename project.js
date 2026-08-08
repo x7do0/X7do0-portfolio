@@ -60,28 +60,27 @@
     const featuredIndex = Math.max(0, media.findIndex((item) => item.featured));
     const featured = media[featuredIndex];
     const mediaUrl = (item) => `${root}${item.src.replace(/^\.\//, "")}`;
+    const mediaDimensions = (item) => item.device === "phone" ? { width: 390, height: 844 } : { width: 1440, height: 960 };
+    const featuredDimensions = mediaDimensions(featured);
+    const previousGlyph = language === "ar" ? "›" : "‹";
+    const nextGlyph = language === "ar" ? "‹" : "›";
     const thumbnailMarkup = media.map((item, index) => `
-      <button class="case-media-thumb" type="button" role="tab" aria-selected="${index === featuredIndex}" aria-controls="case-media-panel" tabindex="${index === featuredIndex ? "0" : "-1"}" data-media-index="${index}" aria-label="${String(index + 1).padStart(2, "0")}: ${item.alt}">
+      <button class="case-media-thumb${item.device === "phone" ? " case-media-thumb--phone" : ""}" type="button" role="tab" aria-selected="${index === featuredIndex}" aria-controls="case-media-panel" tabindex="${index === featuredIndex ? "0" : "-1"}" data-media-index="${index}" aria-label="${String(index + 1).padStart(2, "0")}: ${item.alt}">
         <img src="${mediaUrl(item)}" alt="" width="240" height="160" loading="lazy" decoding="async">
         <span>${String(index + 1).padStart(2, "0")}</span>
       </button>`).join("");
 
     study.innerHTML = `
-      <section class="case-intro shell reveal">
-        <div><span class="case-kicker">${project.status}</span><h2>${project.caseStudy.title}</h2><p>${project.caseStudy.intro}</p></div>
-        <ul class="case-metrics" aria-label="${content.projectPage.keyFacts}">${metricMarkup}</ul>
-      </section>
-      <section class="case-story"><div class="shell"><header class="case-heading reveal"><span>02</span><h2>${content.projectPage.detailsTitle}</h2></header><div class="case-sections">${sectionMarkup}</div></div></section>
-      <section class="case-gallery shell"><header class="case-heading reveal"><span>03</span><div><h2>${content.projectPage.mediaTitle}</h2><p>${content.projectPage.mediaDescription}</p></div></header>
-        <div class="case-media-browser reveal" data-media-browser tabindex="-1">
+      <section class="case-gallery shell"><header class="case-heading reveal"><span>02</span><div><h2>${content.projectPage.mediaTitle}</h2></div></header>
+        <div class="case-media-browser reveal${featured.device === "phone" ? " is-phone-media" : ""}" data-media-browser tabindex="-1">
           <figure class="case-media-main" id="case-media-panel" role="tabpanel">
             <button class="case-media-main__open" type="button" data-media-open aria-label="${content.projectPage.enlargeImage}: ${featured.alt}">
-              <img src="${mediaUrl(featured)}" alt="${featured.alt}" width="1440" height="960" loading="eager" decoding="async" data-media-main-image>
+              <img src="${mediaUrl(featured)}" alt="${featured.alt}" width="${featuredDimensions.width}" height="${featuredDimensions.height}" loading="eager" decoding="async" data-media-main-image>
             </button>
             <div class="case-media-main__controls" aria-hidden="false">
-              <button type="button" data-media-previous aria-label="${content.projectPage.previousImage}">‹</button>
+              <button type="button" data-media-previous aria-label="${content.projectPage.previousImage}">${previousGlyph}</button>
               <span data-media-count aria-live="polite">${featuredIndex + 1} / ${media.length}</span>
-              <button type="button" data-media-next aria-label="${content.projectPage.nextImage}">›</button>
+              <button type="button" data-media-next aria-label="${content.projectPage.nextImage}">${nextGlyph}</button>
             </div>
           </figure>
           <div class="case-media-rail" role="tablist" aria-label="${content.projectPage.mediaNavigation}">${thumbnailMarkup}</div>
@@ -90,8 +89,14 @@
             <p data-media-caption>${featured.caption}</p>
           </div>
         </div>
-      </section>`;
-    qs(".project-overview").after(study);
+      </section>
+      <section class="case-intro shell reveal">
+        <div><span class="case-kicker">${project.status}</span><h2>${project.caseStudy.title}</h2><p>${project.caseStudy.intro}</p></div>
+        <ul class="case-metrics" aria-label="${content.projectPage.keyFacts}">${metricMarkup}</ul>
+      </section>
+      <section class="case-story"><div class="shell"><header class="case-heading reveal"><span>03</span><h2>${content.projectPage.detailsTitle}</h2></header><div class="case-sections">${sectionMarkup}</div></div></section>`;
+    qs(".project-overview")?.remove();
+    qs(".project-hero").after(study);
 
     const browser = qs("[data-media-browser]", study);
     const mainImage = qs("[data-media-main-image]", browser);
@@ -108,6 +113,10 @@
       const item = media[selectedIndex];
       const selectedThumbnail = thumbnails[selectedIndex];
       browser.classList.add("is-changing");
+      browser.classList.toggle("is-phone-media", item.device === "phone");
+      const dimensions = mediaDimensions(item);
+      mainImage.width = dimensions.width;
+      mainImage.height = dimensions.height;
       mainImage.src = mediaUrl(item);
       mainImage.alt = item.alt;
       mainButton.setAttribute("aria-label", `${content.projectPage.enlargeImage}: ${item.alt}`);
@@ -122,7 +131,10 @@
       selectedThumbnail.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest", inline: "nearest" });
       if (focusThumbnail) selectedThumbnail.focus();
       if (dialog) {
+        dialog.classList.toggle("is-phone-media", item.device === "phone");
         const dialogImage = qs("img", dialog);
+        dialogImage.width = dimensions.width;
+        dialogImage.height = dimensions.height;
         dialogImage.src = mediaUrl(item);
         dialogImage.alt = item.alt;
       }
@@ -149,8 +161,9 @@
     mainButton.addEventListener("click", () => {
       const opener = mainButton;
       dialog = document.createElement("dialog");
-      dialog.className = "project-lightbox";
-      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">‹</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">›</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
+      dialog.className = `project-lightbox${media[selectedIndex].device === "phone" ? " is-phone-media" : ""}`;
+      const dialogDimensions = mediaDimensions(media[selectedIndex]);
+      dialog.innerHTML = `<div class="project-lightbox__stage"><img src="${mediaUrl(media[selectedIndex])}" alt="${media[selectedIndex].alt}" width="${dialogDimensions.width}" height="${dialogDimensions.height}"></div><div class="project-lightbox__controls"><button type="button" data-lightbox-previous aria-label="${content.projectPage.previousImage}">${previousGlyph}</button><span>${content.projectPage.mediaNavigation}</span><button type="button" data-lightbox-next aria-label="${content.projectPage.nextImage}">${nextGlyph}</button></div><button class="project-lightbox__close" type="button" data-lightbox-close aria-label="${content.ui.close}">×</button>`;
       document.body.appendChild(dialog);
       const close = () => dialog.close();
       qs("[data-lightbox-close]", dialog).addEventListener("click", close);
@@ -161,6 +174,24 @@
       dialog.showModal();
       qs("[data-lightbox-close]", dialog).focus();
     });
+  }
+
+  function renderRelatedProjects(project, content) {
+    qs(".project-related")?.remove();
+    const related = content.projects.filter((item) => item.slug !== project.slug);
+    if (!related.length) return;
+
+    const section = document.createElement("section");
+    section.className = "project-related shell";
+    section.innerHTML = `
+      <header class="case-heading reveal"><span>04</span><div><h2>${content.projectPage.otherProjectsTitle}</h2><p>${content.projectPage.otherProjectsDescription}</p></div></header>
+      <div class="project-related__grid">
+        ${related.map((item) => `<a class="project-related__card reveal" href="${root}projects/${item.slug}/${language === "en" ? "?lang=en" : ""}">
+          <span class="project-related__image"><img src="${root}${item.previewImage.replace(/^\.\//, "")}" alt="${item.previewAlt}" width="640" height="400" loading="lazy" decoding="async"></span>
+          <span class="project-related__body"><small>${item.category}</small><strong>${item.title}</strong><span>${item.summary}</span><b>${content.projectPage.openProject}</b></span>
+        </a>`).join("")}
+      </div>`;
+    qs("main").appendChild(section);
   }
 
   async function loadContent(nextLanguage) {
@@ -295,10 +326,11 @@ print(name)</code></pre>
       element.textContent = pageText[element.dataset.pageText] ?? element.textContent;
     });
 
-    qs("#project-preview").innerHTML = `<figure class="project-source-preview"><img src="${root}${project.previewImage.replace(/^\.\//, "")}" alt="${project.previewAlt}" width="800" height="450"><figcaption>${project.previewCaption}</figcaption></figure>`;
+    qs("#project-preview").innerHTML = `<figure class="project-source-preview"><img src="${root}${project.previewImage.replace(/^\.\//, "")}" alt="${project.previewAlt}" width="800" height="450"></figure>`;
     qs("#project-preview").setAttribute("aria-label", content.projectPage.previewTitle);
     renderProjectLinks(project, content);
     renderCaseStudy(project, content);
+    renderRelatedProjects(project, content);
     qs("[data-brand-name]").textContent = content.brand.name;
     qs("[data-year]").textContent = String(new Date().getFullYear());
     qs("[data-ui-top]").textContent = content.ui.top;

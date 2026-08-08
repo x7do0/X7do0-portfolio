@@ -121,7 +121,6 @@
         </div>
         <figure class="project-media">
           <img src="${project.previewImage}" alt="${project.previewAlt}" width="800" height="450" loading="lazy" decoding="async">
-          <figcaption>${project.previewCaption}</figcaption>
         </figure>
         <div class="project-actions">
           <a class="button button--primary demo-trigger" href="${localizedUrl(`./projects/${project.slug}/?demo=1#demo`)}">${content.home.tryDemo}<span aria-hidden="true">${state.language === "ar" ? "←" : "→"}</span></a>

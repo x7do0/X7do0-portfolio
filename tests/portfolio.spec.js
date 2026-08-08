@@ -116,16 +116,29 @@ test('project details use real previews, source-backed facts, and an inline demo
   for (const slug of ['enterprise-workflow', 'coding-academy', 'masroofi']) {
     await page.goto(`/projects/${slug}/`);
     await expect(page.locator('.project-source-preview img')).toBeVisible();
+    await expect(page.locator('.project-source-preview figcaption')).toHaveCount(0);
     await expect(page.locator('.project-case-study')).toBeVisible();
     await expect(page.locator('.case-section')).toHaveCount(4);
     await expect(page.locator('.case-media-main img')).toHaveCount(1);
-    await expect(page.locator('.case-media-thumb')).toHaveCount(slug === 'coding-academy' ? 7 : 6);
+    const expectedMediaCount = { 'enterprise-workflow': 13, 'coding-academy': 7, masroofi: 8 }[slug];
+    await expect(page.locator('.case-media-thumb')).toHaveCount(expectedMediaCount);
     await expect(page.locator('.project-future')).toHaveCount(0);
     await page.locator('[data-demo-link]').click();
     await expect(page.locator('.project-inline-demo')).toBeVisible();
     await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', new RegExp(`/demos/${slug}/`));
     await page.locator('.project-inline-demo button').click();
     await expect(page.locator('.project-inline-demo')).toHaveCount(0);
+    await expect(page.locator('.project-overview')).toHaveCount(0);
+    await expect(page.locator('.project-related__card')).toHaveCount(3);
+    expect(await page.evaluate(() => {
+      const hero = document.querySelector('.project-hero');
+      const gallery = document.querySelector('.case-gallery');
+      const intro = document.querySelector('.case-intro');
+      const story = document.querySelector('.case-story');
+      const related = document.querySelector('.project-related');
+      const follows = (first, second) => Boolean(first.compareDocumentPosition(second) & Node.DOCUMENT_POSITION_FOLLOWING);
+      return follows(hero, gallery) && follows(gallery, intro) && follows(intro, story) && follows(story, related) && related === document.querySelector('main').lastElementChild;
+    })).toBeTruthy();
     await expectNoOverflow(page);
   }
 
@@ -134,10 +147,69 @@ test('project details use real previews, source-backed facts, and an inline demo
   await expect(page.locator('.project-future.has-content')).toBeVisible();
   await expect(page.locator('.future-panel')).toHaveCount(2);
   await expect(page.locator('.project-case-study')).toHaveCount(0);
+  await expect(page.locator('.project-related__card')).toHaveCount(3);
+  await expect(page.locator('main > .project-related')).toBeVisible();
 
   await page.goto('/projects/coding-academy/?demo=1#demo');
   await expect(page.locator('.project-inline-demo')).toBeVisible();
   await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', /\/demos\/coding-academy\//);
+});
+
+test('project pages keep internal copy useful and avoid technical capture labels', async ({ page }) => {
+  const removedPhrases = [
+    'لقطة فعلية من بيئة E2E المعزولة',
+    'واجهة البطاقات الحالية بعد إزالة مسار المشروع الختامي القديم',
+    'محاكاة مصدرية للواجهة',
+    'واجهة المنتج الحالية ملتقطة من المصدر المدقق',
+    'captured from the isolated E2E environment',
+    'after removing the deprecated final-project path',
+    'Source-faithful simulation',
+    'captured locally from the verified source',
+  ];
+
+  for (const languageQuery of ['', '?lang=en']) {
+    for (const slug of ['enterprise-workflow', 'coding-academy', 'mahsoob', 'masroofi']) {
+      await page.goto(`/projects/${slug}/${languageQuery}`);
+      const body = await page.locator('body').innerText();
+      for (const phrase of removedPhrases) expect(body).not.toContain(phrase);
+      await expect(page.locator('.project-related__card')).toHaveCount(3);
+    }
+  }
+
+  await page.goto('/projects/enterprise-workflow/');
+  await expect(page.locator('.case-metrics')).not.toContainText(/IQD|UTC|Asia\/Baghdad/);
+  await page.goto('/projects/masroofi/?lang=en');
+  await expect(page.locator('.case-metrics')).not.toContainText(/IQD|currency/i);
+});
+
+test('refresh and browser back return every visited page to the top', async ({ page }) => {
+  await page.goto('/projects/enterprise-workflow/');
+  await expect(page.locator('.project-related')).toBeVisible();
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' });
+  });
+  expect(await page.evaluate(() => scrollY)).toBeGreaterThan(300);
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
+
+  await page.locator('.project-related__card').first().scrollIntoViewIfNeeded();
+  const originalUrl = page.url();
+  await page.locator('.project-related__card').first().click();
+  await expect(page).not.toHaveURL(originalUrl);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
+  await page.goBack();
+  await expect(page).toHaveURL(originalUrl);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
+
+  await page.goto('/');
+  const details = page.locator('[data-project="enterprise-workflow"] .button--quiet');
+  await details.click();
+  await expect(page).toHaveURL(/\/projects\/enterprise-workflow\//);
+  await page.goBack();
+  await expect(page).toHaveURL(/\/$/);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
 });
 
 test('public product links and media lightbox are explicit and keyboard-safe', async ({ page }) => {
@@ -170,6 +242,11 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
   ];
 
   for (const slug of ['enterprise-workflow', 'masroofi', 'coding-academy']) {
+    const primaryImage = {
+      'enterprise-workflow': '01-employee-dashboard-light.png',
+      masroofi: '01-balance-dashboard-light.png',
+      'coding-academy': '02-python-topic-cards.jpg',
+    }[slug];
     for (const state of states) {
       await page.setViewportSize(state.viewport);
       await page.evaluate(language => localStorage.setItem('x7do0-language', language), state.language);
@@ -184,6 +261,15 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       await expect(mainImage).toBeVisible();
       expect(await thumbnails.count()).toBeGreaterThan(1);
       await expect(thumbnails.first()).toHaveAttribute('aria-selected', 'true');
+      await expect(mainImage).toHaveAttribute('src', new RegExp(primaryImage.replace('.', '\\.')));
+
+      const previous = page.locator('[data-media-previous]');
+      const next = page.locator('[data-media-next]');
+      await expect(previous).toHaveText(state.direction === 'rtl' ? '›' : '‹');
+      await expect(next).toHaveText(state.direction === 'rtl' ? '‹' : '›');
+      const previousBox = await previous.boundingBox();
+      const nextBox = await next.boundingBox();
+      expect(state.direction === 'rtl' ? previousBox.x > nextBox.x : previousBox.x < nextBox.x).toBeTruthy();
 
       const browserBox = await page.locator('.case-media-browser').boundingBox();
       const mainStageBox = await page.locator('.case-media-main__open').boundingBox();
@@ -216,6 +302,20 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
       await page.keyboard.press(state.direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight');
       await expect(thumbnails.nth(2)).toHaveAttribute('aria-selected', 'true');
       await expect(thumbnails.nth(2)).toBeFocused();
+
+      const phoneThumbnail = page.locator('.case-media-thumb--phone').first();
+      await expect(phoneThumbnail).toBeVisible();
+      await phoneThumbnail.click();
+      await expect(page.locator('.case-media-browser')).toHaveClass(/is-phone-media/);
+      await expect.poll(() => mainImage.evaluate(image => image.complete && image.naturalHeight > image.naturalWidth)).toBeTruthy();
+      const phoneStageBox = await page.locator('.case-media-main__open').boundingBox();
+      const phoneImageBox = await mainImage.boundingBox();
+      expect(phoneImageBox.width).toBeLessThan(phoneStageBox.width * .7);
+      await page.locator('.case-media-main__open').click();
+      await expect(page.locator('.project-lightbox')).toHaveClass(/is-phone-media/);
+      const phoneLightboxBox = await page.locator('.project-lightbox').boundingBox();
+      expect(phoneLightboxBox.width).toBeLessThanOrEqual(Math.min(380, state.viewport.width - 30));
+      await page.keyboard.press('Escape');
 
       expect(await page.locator('.case-media-browser img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBeTruthy();
       const rail = page.locator('.case-media-rail');
