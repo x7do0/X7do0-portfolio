@@ -73,6 +73,9 @@ body { background: var(--mahsoob-bg) !important; color: var(--mahsoob-text) !imp
 .receipt { border-radius: 18px !important; }
 .receipt-logo { color: var(--mahsoob-brand) !important; }
 
+html.is-embedded .app-shell { min-height: auto !important; }
+html.is-embedded .sidebar { height: auto !important; position: static !important; }
+
 @media (max-width: 920px) {
   .app-shell { grid-template-columns: 1fr !important; }
   .sidebar { display: grid !important; grid-template-columns: 1fr !important; padding: 16px !important; }

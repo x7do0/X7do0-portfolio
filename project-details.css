@@ -82,10 +82,9 @@ html[dir="rtl"] .case-media-browser.is-changing[data-media-direction="next"] .ca
 html[dir="rtl"] .case-media-browser.is-changing[data-media-direction="previous"] .case-media-main img { transform: translateX(18px); }
 .case-media-main__open:focus-visible { outline: 2px solid var(--blue); outline-offset: -4px; }
 .case-media-main__controls { position: absolute; inset: auto 14px 14px auto; display: flex; align-items: center; gap: 7px; direction: ltr; }
-html[dir="rtl"] .case-media-main__controls, html[dir="rtl"] .project-lightbox__controls { flex-direction: row-reverse; }
+html[dir="rtl"] .case-media-main__controls { flex-direction: row-reverse; }
 .case-media-main__controls button, .project-lightbox__controls button { width: 38px; height: 38px; padding: 0; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.24); border-radius: 50%; background: rgba(3,9,20,.9); color: white; cursor: pointer; font-size: 1.25rem; transition: border-color 150ms ease, background 150ms ease; }
 .media-arrow { width: 18px; height: 18px; stroke-width: 2; }
-html[dir="rtl"] .media-arrow { transform: scaleX(-1); }
 .case-media-main__controls button:hover, .case-media-main__controls button:focus-visible, .project-lightbox__controls button:hover, .project-lightbox__controls button:focus-visible { border-color: var(--blue); background: rgba(24, 56, 94, .96); }
 .case-media-main__controls span { min-width: 56px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(3,9,20,.88); color: #dce7f4; font: 600 .66rem/1 "IBM Plex Mono", monospace; text-align: center; direction: ltr; }
 .case-media-rail { display: flex; gap: 10px; padding: 11px 12px; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; scrollbar-color: rgba(76,145,255,.6) rgba(255,255,255,.06); scroll-snap-type: inline proximity; }
@@ -110,7 +109,7 @@ html[dir="rtl"] .case-media-rail { direction: rtl; }
 .project-lightbox::backdrop { background: rgba(0, 5, 12, .82); backdrop-filter: blur(4px); }
 .project-lightbox__stage { display: grid; max-height: calc(84vh - 58px); place-items: center; overflow: auto; }
 .project-lightbox img { display: block; max-width: 100%; max-height: calc(84vh - 58px); margin: auto; object-fit: contain; }
-.project-lightbox__controls { min-height: 56px; padding: 8px 16px; display: flex; align-items: center; justify-content: center; gap: 12px; border-top: 1px solid var(--line-strong); }
+.project-lightbox__controls { min-height: 56px; padding: 8px 16px; display: flex; align-items: center; justify-content: center; gap: 12px; border-top: 1px solid var(--line-strong); direction: ltr; }
 .project-lightbox__controls span { color: var(--muted); font-size: .72rem; }
 .project-lightbox__close { position: absolute; z-index: 2; inset: 12px 12px auto auto; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: rgba(3,7,13,.9); color: white; font-size: 1.3rem; cursor: pointer; }
 .project-lightbox.is-phone-media { width: min(380px, calc(100vw - 32px)); }
