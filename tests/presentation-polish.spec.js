@@ -35,6 +35,46 @@ test('mobile puts project identity before its visual and keeps actions clear', a
   }
   await page.screenshot({ path: 'artifacts/portfolio-v2-mobile.png', fullPage: true });
   await expectNoOverflow(page);
+
+  await page.goto('/?lang=en');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  for (const image of await page.locator('.project-media img').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect(image).toBeVisible();
+  }
+  await page.screenshot({ path: 'artifacts/portfolio-v2-mobile-english.png', fullPage: true });
+  await expectNoOverflow(page);
+});
+
+test('English, tablet, and resume layouts remain visually reviewable', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/?lang=en');
+  await expect(page.locator('#knowledge-title')).toHaveText('Learning & Teaching');
+  await page.screenshot({ path: 'artifacts/portfolio-v2-english.png', fullPage: true });
+  await expectNoOverflow(page);
+
+  await page.setViewportSize({ width: 820, height: 1180 });
+  await page.goto('/');
+  await expect(page.locator('.video-card')).toHaveCount(3);
+  for (const image of await page.locator('.project-media img').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect(image).toBeVisible();
+  }
+  await page.screenshot({ path: 'artifacts/portfolio-v2-tablet.png', fullPage: true });
+  await expectNoOverflow(page);
+
+  await page.setViewportSize({ width: 1280, height: 1000 });
+  await page.goto('/resume/?lang=en');
+  await expect(page.locator('#resume-projects > a')).toHaveCount(4);
+  await page.screenshot({ path: 'artifacts/resume-v2-english.png', fullPage: true });
+  await expectNoOverflow(page);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/resume/');
+  await page.locator('[data-language="ar"]').click();
+  await expect(page.locator('.education-entry')).toContainText('المركز الأول');
+  await page.screenshot({ path: 'artifacts/resume-v2-mobile-arabic.png', fullPage: true });
+  await expectNoOverflow(page);
 });
 
 test('reduced motion removes animated duration', async ({ browser }) => {

@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07111d">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="البورتفوليو الرسمي لحيدره مهند — مطور برمجيات متخصص في تطوير الـBackend والأنظمة العملية.">
+  <meta name="description" content="البورتفوليو الرسمي لحيدره مهند — مطور برمجيات يركز على الـBackend وبناء الأنظمة والمنتجات العملية.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="حيدره مهند | مطور Backend">
-  <meta property="og:description" content="مشاريع برمجية عملية، تجارب تفاعلية، ومهارات في تطوير الأنظمة والـBackend.">
+  <meta property="og:title" content="حيدره مهند | مطور برمجيات يركز على Backend">
+  <meta property="og:description" content="أنظمة ومنتجات عملية، مشاريع قابلة للتجربة، ومحتوى تعليمي تقني.">
   <meta property="og:url" content="https://x7do0.github.io/X7do0-portfolio/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://x7do0.github.io/X7do0-portfolio/">
@@ -22,19 +22,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
-  <title>حيدره مهند | مطور Backend</title>
+  <title>حيدره مهند | مطور برمجيات يركز على Backend</title>
   <script type="application/ld+json" id="structured-data">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "حيدره مهند",
       "alternateName": "x7do0",
-      "jobTitle": "Software and Backend Developer",
+      "jobTitle": "Backend-focused Software Developer",
       "url": "https://x7do0.github.io/X7do0-portfolio/",
       "sameAs": [
         "https://github.com/x7do0",
-        "https://youtube.com/@x7do0eng"
-      ]
+        "https://youtube.com/@x7do0eng",
+        "https://instagram.com/x7do0"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Najaf",
+        "addressCountry": "IQ"
+      }
     }
   </script>
 </head>
@@ -49,6 +55,7 @@
         <a href="#projects" data-copy="navProjects">المشاريع</a>
         <a href="#about" data-copy="navAbout">عنّي</a>
         <a href="#skills" data-copy="navSkills">المهارات</a>
+        <a href="#knowledge" data-copy="navLearning">التعلّم</a>
         <a href="#resume" data-copy="navResume">السيرة</a>
         <a href="#contact" data-copy="navContact">تواصل</a>
       </nav>
@@ -69,6 +76,7 @@
       <a href="#projects" data-copy="navProjects">المشاريع</a>
       <a href="#about" data-copy="navAbout">عنّي</a>
       <a href="#skills" data-copy="navSkills">المهارات</a>
+      <a href="#knowledge" data-copy="navLearning">التعلّم</a>
       <a href="#resume" data-copy="navResume">السيرة</a>
       <a href="#contact" data-copy="navContact">تواصل</a>
     </nav>
@@ -122,7 +130,8 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-5 9 5-9 5-9-5Z"/><path d="M7 12.5V17c2.8 2 7.2 2 10 0v-4.5M21 10v6"/></svg>
           <div>
             <strong data-about="educationLabel">التعليم</strong>
-            <p data-about="educationText"></p>
+            <p data-education="institution"></p>
+            <small data-education="compactAchievement"></small>
           </div>
         </aside>
       </div>
@@ -180,28 +189,40 @@
           <a class="text-link" href="#projects" data-copy="viewProjects">عرض المشاريع</a>
         </article>
       </div>
+      <div class="resume-action">
+        <a class="button button--primary" id="full-resume-link" href="./resume/">
+          <span data-resume="viewLabel">عرض السيرة الكاملة</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </section>
 
     <section class="section knowledge container" id="knowledge" aria-labelledby="knowledge-title">
-      <div class="knowledge-copy">
-        <span class="youtube-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path class="youtube-body" d="M21.2 7.2a2.8 2.8 0 0 0-2-2C17.4 4.7 12 4.7 12 4.7s-5.4 0-7.2.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.3 12a29 29 0 0 0 .5 4.8 2.8 2.8 0 0 0 2 2c1.8.5 7.2.5 7.2.5s5.4 0 7.2-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-4.8 29 29 0 0 0-.5-4.8Z"/><path class="youtube-play" d="m10 9 5 3-5 3V9Z"/></svg>
-        </span>
+      <div class="section-heading section-heading--with-copy">
+        <span class="section-number" aria-hidden="true">05</span>
         <div>
           <h2 id="knowledge-title" data-knowledge="title">مشاركة المعرفة</h2>
           <p data-knowledge="description"></p>
         </div>
       </div>
-      <a class="button button--secondary" id="knowledge-link" href="#" target="_blank" rel="noopener noreferrer">
-        <span data-knowledge="channelLabel">زيارة قناة YouTube</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-      </a>
+      <div class="knowledge-videos" id="knowledge-videos"></div>
+      <div class="knowledge-footer">
+        <span class="youtube-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path class="youtube-body" d="M21.2 7.2a2.8 2.8 0 0 0-2-2C17.4 4.7 12 4.7 12 4.7s-5.4 0-7.2.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.3 12a29 29 0 0 0 .5 4.8 2.8 2.8 0 0 0 2 2c1.8.5 7.2.5 7.2.5s5.4 0 7.2-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-4.8 29 29 0 0 0-.5-4.8Z"/><path class="youtube-play" d="m10 9 5 3-5 3V9Z"/></svg>
+        </span>
+        <a class="button button--secondary" id="knowledge-link" href="#" target="_blank" rel="noopener noreferrer">
+          <span data-knowledge="channelLabel">زيارة قناة YouTube</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
     </section>
 
     <section class="section contact container" id="contact" aria-labelledby="contact-title">
-      <div>
+      <div class="contact-copy">
+        <span class="section-number" aria-hidden="true">06</span>
         <h2 id="contact-title" data-contact="title">تواصل</h2>
         <p data-contact="description"></p>
+        <p class="contact-location"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-profile="location"></span></p>
       </div>
       <div class="contact-links" id="contact-links"></div>
     </section>

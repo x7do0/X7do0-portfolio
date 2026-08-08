@@ -20,8 +20,11 @@
     education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 12v5c3 2 7 2 10 0v-5"/></svg>',
     focus: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3V1M21 12h2M12 21v2M3 12H1"/></svg>',
     projects: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>',
+    email: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>',
+    telegram: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 4-3 16-6-5-4 3 1-5 8-6-10 5-4-2 18-6Z"/></svg>',
     github: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.2-.4 6.5-1.6 6.5-7A5.4 5.4 0 0 0 19 3.7 5 5 0 0 0 18.9 0S17.7-.4 15 1.5a13.4 13.4 0 0 0-7 0C5.3-.4 4.1 0 4.1 0A5 5 0 0 0 4 3.7a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.5 7A4.8 4.8 0 0 0 8 18v4M8 19c-3 .9-3-1.5-4-2"/></svg>',
-    youtube: '<svg class="social-logo social-logo--youtube" viewBox="0 0 24 24" aria-hidden="true"><path class="youtube-body" d="M21.2 7.2a2.8 2.8 0 0 0-2-2C17.4 4.7 12 4.7 12 4.7s-5.4 0-7.2.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.3 12a29 29 0 0 0 .5 4.8 2.8 2.8 0 0 0 2 2c1.8.5 7.2.5 7.2.5s5.4 0 7.2-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-4.8 29 29 0 0 0-.5-4.8Z"/><path class="youtube-play" d="m10 9 5 3-5 3V9Z"/></svg>'
+    youtube: '<svg class="social-logo social-logo--youtube" viewBox="0 0 24 24" aria-hidden="true"><path class="youtube-body" d="M21.2 7.2a2.8 2.8 0 0 0-2-2C17.4 4.7 12 4.7 12 4.7s-5.4 0-7.2.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.3 12a29 29 0 0 0 .5 4.8 2.8 2.8 0 0 0 2 2c1.8.5 7.2.5 7.2.5s5.4 0 7.2-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-4.8 29 29 0 0 0-.5-4.8Z"/><path class="youtube-play" d="m10 9 5 3-5 3V9Z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>'
   };
 
   const technologyIcons = {
@@ -36,7 +39,11 @@
     sqlite: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="sqlite-db" d="M5 12c0-4 7-7 16-7s16 3 16 7v24c0 4-7 7-16 7S5 40 5 36V12Z"/><path class="sqlite-feather" d="M43 5c-11 3-18 12-20 28 5-8 10-12 17-14-5 0-9 1-13 4 4-8 9-13 16-18Z"/></svg>',
     javascript: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="js-bg" x="4" y="4" width="40" height="40" rx="5"/><text class="js-text" x="27" y="36">JS</text></svg>',
     typescript: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="ts-bg" x="4" y="4" width="40" height="40" rx="5"/><text x="24" y="34" text-anchor="middle">TS</text></svg>',
-    react: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="react-dot" cx="24" cy="24" r="4"/><g class="react-orbits"><ellipse cx="24" cy="24" rx="20" ry="8"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(120 24 24)"/></g></svg>'
+    react: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="react-dot" cx="24" cy="24" r="4"/><g class="react-orbits"><ellipse cx="24" cy="24" rx="20" ry="8"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(120 24 24)"/></g></svg>',
+    git: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="git-bg" d="m24 3 21 21-21 21L3 24 24 3Z"/><circle cx="17" cy="17" r="3"/><circle cx="31" cy="31" r="3"/><circle cx="31" cy="17" r="3"/><path d="M20 17h8M17 20v6l11 5"/></svg>',
+    html: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="html-shield" d="M7 4h34l-3 35-14 5-14-5L7 4Z"/><text x="24" y="28" text-anchor="middle">HTML</text></svg>',
+    css: '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="css-shield" d="M7 4h34l-3 35-14 5-14-5L7 4Z"/><text x="24" y="28" text-anchor="middle">CSS</text></svg>',
+    indexeddb: '<svg viewBox="0 0 48 48" aria-hidden="true"><ellipse class="idb-top" cx="24" cy="11" rx="16" ry="7"/><path class="idb-body" d="M8 11v25c0 4 7 7 16 7s16-3 16-7V11c0 4-7 7-16 7S8 15 8 11Z"/><text x="24" y="32" text-anchor="middle">IDB</text></svg>'
   };
 
   function text(selector, value, root = document) {
@@ -58,6 +65,18 @@
     qs('meta[property="og:title"]').content = content.meta.title;
     qs('meta[property="og:description"]').content = content.meta.description;
     qsa("[data-language]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.language === state.language)));
+    const structuredData = qs("#structured-data");
+    if (structuredData) {
+      const profile = JSON.parse(structuredData.textContent);
+      profile.name = content.brand.name;
+      profile.alternateName = ["x7do0", "Haidara Muhanned"];
+      profile.jobTitle = "Backend-focused Software Developer";
+      profile.sameAs = content.contact.links
+        .filter((link) => ["github", "youtube", "instagram"].includes(link.id))
+        .map((link) => link.url);
+      profile.address = { "@type": "PostalAddress", addressLocality: "Najaf", addressCountry: "IQ" };
+      structuredData.textContent = JSON.stringify(profile);
+    }
   }
 
   function renderStatic(content) {
@@ -70,6 +89,7 @@
     qsa("[data-contact]").forEach((node) => { node.textContent = content.contact[node.dataset.contact] || ""; });
     qsa("[data-resume]").forEach((node) => { node.textContent = content.resume[node.dataset.resume] || ""; });
     qsa("[data-education]").forEach((node) => { node.textContent = content.education[node.dataset.education] || ""; });
+    qsa("[data-profile]").forEach((node) => { node.textContent = content.profile[node.dataset.profile] || ""; });
     qsa("[data-copy]").forEach((node) => { if (content.home[node.dataset.copy]) node.textContent = content.home[node.dataset.copy]; });
     qsa("[data-aria]").forEach((node) => { if (content.home[node.dataset.aria]) node.setAttribute("aria-label", content.home[node.dataset.aria]); });
     text("[data-brand='role']", content.brand.role);
@@ -108,7 +128,7 @@
   }
 
   function renderSkills(content) {
-    const iconNames = ["backend", "web", "database", "quality", "git", "ai"];
+    const iconNames = ["backend", "database", "quality", "git", "projects", "ai"];
     const skills = content.skillsSection.items;
     const showcase = qs("#capability-rail");
     showcase.className = "skills-showcase";
@@ -145,6 +165,44 @@
     qs("#resume-projects").replaceChildren(...content.projects.slice(0, 3).map((project) => {
       const li = document.createElement("li"); li.innerHTML = `<a href="#projects" data-project-jump="${project.slug}">${project.title}</a>`; return li;
     }));
+    qs("#full-resume-link").href = localizedUrl("./resume/");
+  }
+
+  function renderKnowledge(content) {
+    const videos = qs("#knowledge-videos");
+    videos.replaceChildren(...content.knowledge.videos.map((video) => {
+      const article = document.createElement("article");
+      article.className = `video-card${video.featured ? " video-card--featured" : ""}`;
+      article.dataset.videoId = video.id;
+      article.innerHTML = `
+        <div class="video-preview">
+          <img src="https://i.ytimg.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" width="480" height="360" loading="lazy" decoding="async">
+          <button class="video-play" type="button" data-video-play aria-label="${content.knowledge.playLabel}: ${video.title}">
+            <span>${icons.youtube}</span>
+          </button>
+        </div>
+        <div class="video-copy">
+          <span>${video.category}</span>
+          <h3>${video.title}</h3>
+          <p>${video.description}</p>
+          <a href="${video.url}" target="_blank" rel="noopener noreferrer">${content.knowledge.directLabel}<b aria-hidden="true">↗</b></a>
+        </div>`;
+      return article;
+    }));
+
+    qsa("[data-video-play]", videos).forEach((button) => button.addEventListener("click", () => {
+      const article = button.closest("[data-video-id]");
+      const video = content.knowledge.videos.find((item) => item.id === article.dataset.videoId);
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0`;
+      iframe.title = video.title;
+      iframe.loading = "lazy";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.allowFullscreen = true;
+      article.querySelector(".video-preview").replaceChildren(iframe);
+      iframe.focus();
+    }));
   }
 
   function renderContact(content) {
@@ -152,11 +210,14 @@
     qs("#contact-links").replaceChildren(...links.map((link) => {
       const anchor = document.createElement("a");
       anchor.href = link.url;
-      anchor.target = "_blank";
-      anchor.rel = "noopener noreferrer";
-      anchor.className = "contact-link";
+      if (!link.url.startsWith("mailto:")) {
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+      }
+      anchor.className = `contact-link contact-link--${link.kind}`;
       anchor.dataset.social = link.id;
-      anchor.innerHTML = `${icons[link.id] || ""}<span>${link.label}</span><b aria-hidden="true">↗</b>`;
+      anchor.dataset.kind = link.kind;
+      anchor.innerHTML = `${icons[link.id] || ""}<span><small>${link.label}</small><strong>${link.value}</strong></span><b aria-hidden="true">${link.url.startsWith("mailto:") ? "→" : "↗"}</b>`;
       return anchor;
     }));
   }
@@ -209,6 +270,7 @@
     renderProjects(state.content);
     renderSkills(state.content);
     renderResume(state.content);
+    renderKnowledge(state.content);
     renderContact(state.content);
     setupNavigation();
     setupReveal();

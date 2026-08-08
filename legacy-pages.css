@@ -1,3 +1,8 @@
+body[data-page="resume"] .shell {
+  width: min(1120px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
 .inner-header {
   position: relative;
   z-index: 10;
@@ -430,7 +435,7 @@ html[dir="rtl"] .inner-back svg {
 
 .resume-hero h1 {
   margin: 28px 0 0;
-  font-size: clamp(4.5rem, 9vw, 10rem);
+  font-size: clamp(4.5rem, 7vw, 8.25rem);
   font-weight: 500;
   letter-spacing: -0.07em;
   line-height: 0.9;
@@ -515,6 +520,104 @@ html[dir="ltr"] .resume-hero h1 {
 .education-entry p {
   margin: 18px 0 0;
   color: var(--lime);
+}
+
+.education-entry strong {
+  display: block;
+  margin-block-start: 8px;
+  color: #f2f7fd;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.resume-contact-block {
+  padding-block-start: 24px;
+  border-top: 1px solid var(--blue);
+}
+
+.resume-location {
+  margin: 0 0 22px;
+  display: grid;
+  gap: 4px;
+}
+
+.resume-location span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.resume-location strong {
+  color: #f2f7fd;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.resume-contact-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.resume-contact-links a {
+  min-width: 0;
+  padding: 14px 16px;
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.resume-contact-links a:hover {
+  border-color: var(--blue);
+  background: rgba(92, 151, 222, 0.08);
+}
+
+.resume-contact-links span {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.resume-contact-links strong {
+  overflow-wrap: anywhere;
+  color: #eef6ff;
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+.resume-skill-groups {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.resume-skill-groups section {
+  min-height: 92px;
+  padding-block: 18px;
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  align-items: start;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.resume-skill-groups section > span {
+  padding-block-start: 5px;
+  color: var(--blue);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.resume-skill-groups strong {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.resume-skill-groups p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-family: var(--latin);
+  font-size: 0.82rem;
+  line-height: 1.7;
 }
 
 .resume-skills {
@@ -613,6 +716,54 @@ html[dir="ltr"] .resume-hero h1 {
   font-size: 0.88rem;
 }
 
+.resume-projects small {
+  display: block;
+  margin-block-start: 10px;
+  color: #9bc5f5;
+  font-family: var(--latin);
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.resume-teaching {
+  padding-block-start: 24px;
+  border-top: 1px solid var(--blue);
+}
+
+.resume-teaching p {
+  max-width: 760px;
+  margin: 0;
+  color: #b5bbc4;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.resume-teaching a {
+  width: fit-content;
+  display: inline-flex;
+  gap: 8px;
+  margin-block-start: 24px;
+  color: #b9d8fb;
+  font-family: var(--latin);
+  font-weight: 500;
+}
+
+.resume-languages {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+}
+
+.resume-languages li {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: #eef6ff;
+}
+
 @media (max-width: 900px) {
   .resume-hero,
   .resume-section {
@@ -627,6 +778,10 @@ html[dir="ltr"] .resume-hero h1 {
 }
 
 @media (max-width: 620px) {
+  body[data-page="resume"] .shell {
+    width: calc(100% - 28px);
+  }
+
   .resume-hero h1 {
     font-size: clamp(4rem, 20vw, 6.5rem);
   }
@@ -638,5 +793,15 @@ html[dir="ltr"] .resume-hero h1 {
 
   .resume-technologies {
     grid-template-columns: 1fr;
+  }
+
+  .resume-contact-links,
+  .resume-languages {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-skill-groups section {
+    grid-template-columns: 38px 1fr;
+    gap: 12px;
   }
 }
