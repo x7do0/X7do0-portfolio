@@ -1,159 +1,23 @@
 {
-  "brand": { "name": "Haidera Muhannad", "role": "Software & Backend Developer" },
-  "meta": {
-    "title": "Haidera Muhannad | x7do0",
-    "description": "The official portfolio of Haidera Muhannad — Software & Backend Developer."
-  },
-  "nav": {
-    "projects": "Projects",
-    "skills": "Skills",
-    "education": "Education",
-    "resume": "Resume",
-    "contact": "Contact"
-  },
-  "hero": {
-    "title": "I build complete software projects from idea to production",
-    "description": "I am a software and backend developer focused on building reliable systems with C# and .NET, using AI to accelerate planning, development, and testing.",
-    "primaryAction": "View my projects",
-    "secondaryAction": "Contact me",
-    "proofItems": ["C# & .NET", "Backend", "AI-assisted development"]
-  },
-  "projectsSection": {
-    "title": "Selected projects",
-    "description": "Projects that show how I plan, shape systems, and review implementation from an early idea to a usable product."
-  },
+  "brand": { "name": "Haidera Muhannad", "role": "Software Developer focused on Backend" },
+  "meta": { "title": "Haidera Muhannad | Software & Backend Developer", "description": "The official portfolio of Haidera Muhannad — a software developer focused on backend systems and practical applications." },
+  "nav": { "projects": "Projects", "skills": "Skills", "education": "Education", "resume": "Resume", "contact": "Contact" },
+  "hero": { "title": "Haidera Muhannad", "description": "I build reliable software systems and practical web applications, with a strong focus on backend engineering, implementation quality, and clear user experiences.", "primaryAction": "View my projects", "secondaryAction": "About me", "proofItems": ["C# & .NET", "Backend", "Practical systems"], "portraitAlt": "Portrait of Haidera Muhannad" },
+  "about": { "title": "About me", "paragraphOne": "I am a software developer and Computer Engineering Technology student. I gravitate toward systems that solve a real problem: from understanding a workflow and shaping its data, to building the backend and testing the result as a complete product.", "paragraphTwo": "My work includes an enterprise approvals system, an Arabic coding academy, an offline point-of-sale application, and a personal expense tracker. I treat the interface as part of system quality, not as a decorative layer.", "educationLabel": "Education", "educationText": "Computer Engineering Technology — Al-Kafeel University" },
+  "projectsSection": { "title": "My projects", "description": "Four practical products for four different contexts. Understand what each one does, try its simulation here, or open the complete project details." },
   "projects": [
-    {
-      "slug": "enterprise-workflow",
-      "title": "Enterprise Workflow",
-      "summary": "An integrated system for managing internal company requests and approvals, with roles, permissions, notifications, and a clear audit trail for every action.",
-      "previewKind": "workflow",
-      "cta": "Explore project",
-      "media": [],
-      "caseStudy": []
-    },
-    {
-      "slug": "coding-academy",
-      "title": "Coding Academy",
-      "summary": "An Arabic interactive platform for learning programming by practice, combining lessons, examples, exercises, and projects with device-local progress.",
-      "previewKind": "academy",
-      "cta": "Explore project",
-      "media": [],
-      "caseStudy": []
-    },
-    {
-      "slug": "mahsoob",
-      "title": "Mahsoob",
-      "summary": "An Arabic offline Windows point-of-sale and store management application for groceries, minimarkets, and small shops in Iraq.",
-      "previewKind": "mahsoob",
-      "cta": "Explore project",
-      "media": [],
-      "caseStudy": []
-    },
-    {
-      "slug": "masroofi",
-      "title": "Masroofi",
-      "summary": "A personal Arabic web app for locally managing balance, income, and expenses with instant balance and history updates and device-local storage.",
-      "previewKind": "masroofi",
-      "cta": "Explore project",
-      "media": [],
-      "caseStudy": []
-    }
+    { "slug":"enterprise-workflow", "title":"Enterprise Workflow", "category":"Business system", "summary":"A system for internal requests and approvals usually handled through paper and email, with dynamic workflows, permissions, notifications, and an audit trail for each action.", "facts":["Multi-stage approvals","Roles and permissions","Audit trail"], "tech":[".NET 10","ASP.NET Core","SQL Server"], "previewKind":"workflow", "previewImage":"./assets/projects/enterprise-workflow.png", "previewAlt":"Enterprise Workflow requests dashboard", "previewCaption":"Captured from the system", "cta":"Explore project", "media":[], "caseStudy":[] },
+    { "slug":"coding-academy", "title":"Coding Academy", "category":"Learning platform", "summary":"An Arabic practice-first platform that begins with clear lesson and summary cards, then moves into examples, exercises, and projects while keeping progress on the learner's device.", "facts":["12 topic cards","25 exercises","Final practical project"], "tech":["HTML / CSS","JavaScript","Python"], "previewKind":"academy", "previewImage":"./assets/projects/coding-academy.png", "previewAlt":"Coding Academy lesson and summary cards", "previewCaption":"Actual lesson interface", "cta":"Explore project", "media":[], "caseStudy":[] },
+    { "slug":"mahsoob", "title":"Mahsoob", "category":"Windows application", "summary":"An Arabic offline point-of-sale system for groceries, minimarkets, and small Iraqi shops, designed around cashier speed, IQD, and uninterrupted daily work.", "facts":["Offline-first","Iraqi dinar","Built for Iraqi shops"], "tech":[".NET 10","SQLite","Windows"], "previewKind":"mahsoob", "previewImage":"./assets/projects/mahsoob.png", "previewAlt":"Source-faithful simulation of the Mahsoob checkout", "previewCaption":"Source-faithful simulation", "cta":"Explore project", "media":[], "caseStudy":[] },
+    { "slug":"masroofi", "title":"Masroofi", "category":"Web application", "summary":"A personal Arabic app for recording income and expenses and tracking the balance instantly, with local storage plus data backup and restore without requiring an account.", "facts":["Instant balance updates","Backup and restore","RTL and IQD"], "tech":["React","TypeScript","IndexedDB"], "previewKind":"masroofi", "previewImage":"./assets/projects/masroofi.png", "previewAlt":"Masroofi income and expense dashboard", "previewCaption":"Captured from the live app", "cta":"Explore project", "media":[], "caseStudy":[] }
   ],
-  "skillsSection": {
-    "title": "Skills",
-    "items": [
-      "Backend and systems development",
-      "Web application development",
-      "Databases and data modeling",
-      "Testing and quality assurance",
-      "Git, GitHub, and release workflow",
-      "AI-assisted development"
-    ]
-  },
-  "technologiesSection": {
-    "title": "Languages & technologies",
-    "groups": [
-      { "title": "Backend", "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core"] },
-      { "title": "Databases", "items": ["SQL Server"] },
-      { "title": "Additional languages", "items": ["Python", "C++"] },
-      { "title": "Tools & workflow", "items": ["Git", "GitHub", "Testing", "Debugging", "AI-assisted development tools"] }
-    ]
-  },
-  "education": {
-    "title": "Education and academic achievement",
-    "description": "Third-year Computer Engineering Technology student, ranked first during both the first and second academic years.",
-    "institution": "Al-Kafeel University — Computer Engineering Technology"
-  },
-  "knowledge": {
-    "title": "Knowledge sharing",
-    "description": "I create educational content that explains Computer Engineering Technology subjects and makes concepts easier for students to understand.",
-    "pendingLabel": "Selected videos will be linked later",
-    "channelLabel": "Watch my educational content on YouTube",
-    "channelUrl": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq",
-    "videos": []
-  },
-  "contact": {
-    "title": "Let’s build something practical",
-    "description": "Have a project idea or an opportunity to collaborate? I would be glad to hear about it and discuss how it could be built.",
-    "links": [
-      { "id": "email", "label": "Email me", "url": "", "kind": "primary" },
-      { "id": "linkedin", "label": "Connect on LinkedIn", "url": "", "kind": "primary" },
-      { "id": "github", "label": "GitHub", "url": "https://github.com/x7do0", "kind": "social" },
-      { "id": "youtube", "label": "YouTube", "url": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq", "kind": "social" },
-      { "id": "instagram", "label": "Instagram", "url": "", "kind": "social" }
-    ]
-  },
-  "projectPage": {
-    "backAction": "Back to projects",
-    "overviewTitle": "Overview",
-    "previewTitle": "Project preview",
-    "tryDemo": "Try the project",
-    "demoHint": "A compact interactive simulation using sample data only — no real login or backend.",
-    "mediaTitle": "Project images and videos",
-    "mediaPending": "Media will be added after it is approved.",
-    "detailsTitle": "Case study",
-    "detailsPending": "The complete case study will be added after the project details are accurately approved, without assumptions or exaggeration."
-  },
-  "resume": {
-    "title": "Haidera Muhannad",
-    "intro": "I build complete projects with AI assistance, focusing on backend development with C# and .NET from idea and planning through operation and production.",
-    "educationTitle": "Education",
-    "skillsTitle": "Skills",
-    "technologiesTitle": "Technologies",
-    "projectsTitle": "Selected projects",
-    "viewLabel": "View resume",
-    "downloadLabel": "Download PDF",
-    "downloadPending": "The PDF will be added after the final resume is approved.",
-    "pdfUrl": ""
-  },
-  "ui": {
-    "skip": "Skip to content",
-    "menu": "Menu",
-    "nav": "Primary navigation",
-    "mobileNav": "Mobile navigation",
-    "language": "Choose language",
-    "close": "Close",
-    "scroll": "Go to projects",
-    "top": "Back to top",
-    "running": "running",
-    "systemPreview": "Interactive system architecture preview",
-    "workflowPreview": "Approval workflow preview",
-    "academyPreview": "Learning path preview",
-    "newRequest": "New purchase request",
-    "audited": "Every action is audited",
-    "flowHint": "Select a stage to explore",
-    "flowSteps": "Request stages",
-    "flowStates": ["Created", "Manager review", "Financial review", "Legal review", "Approved"],
-    "flowStatus": ["Request created", "Manager review completed", "In financial review", "Waiting for legal review", "Request approved"],
-    "learningPath": "Learning path",
-    "stepByStep": "Progress step by step",
-    "basics": "Fundamentals",
-    "dataStructures": "Data structures",
-    "projectsLabel": "Build projects",
-    "finalProject": "Final project",
-    "mahsoobCategory": "Cashier project",
-    "masroofiCategory": "Personal expense project",
-    "upcoming": "Coming soon"
-  }
+  "skillsSection": { "title":"Skills and technologies", "description":"Connected capabilities for building a system from business logic and data to a usable, verifiable interface.", "items":[{"title":"Backend & systems","description":"Turning business rules into clear, reliable services with deliberate system boundaries.","label":"APIs · Business Logic"},{"title":"Web applications","description":"Fast responsive interfaces with Arabic and RTL considered from the first design decision.","label":"Responsive · RTL"},{"title":"Databases","description":"Data models and queries designed for accuracy and maintainable growth.","label":"Modeling · SQL"},{"title":"Testing & quality","description":"Testing real workflows and tracing faults before they reach the user.","label":"Testing · Debugging"},{"title":"Git & GitHub","description":"Focused changes, readable history, and reviewable delivery.","label":"Version Control"},{"title":"AI-assisted delivery","description":"Using AI to accelerate research and execution while keeping judgment and verification human-led.","label":"Planning · Verification"}] },
+  "technologiesSection": { "title":"Languages and technologies", "groups":[{"title":"Backend","items":[{"name":"C#","mark":"C#"},{"name":".NET","mark":".N"},{"name":"ASP.NET Core","mark":"API"},{"name":"EF Core","mark":"EF"}]},{"title":"Data","items":[{"name":"SQL Server","mark":"SQL"},{"name":"SQLite","mark":"DB"}]},{"title":"Web","items":[{"name":"JavaScript","mark":"JS"},{"name":"TypeScript","mark":"TS"},{"name":"React","mark":"R"}]},{"title":"Languages","items":[{"name":"Python","mark":"Py"},{"name":"C++","mark":"C++"},{"name":"GitHub","mark":"GH"}]}] },
+  "education": { "title":"Education and academic achievement", "description":"Third-year Computer Engineering Technology student, ranked first during both the first and second academic years.", "institution":"Al-Kafeel University — Computer Engineering Technology" },
+  "knowledge": { "title":"Knowledge sharing", "description":"I create educational content that explains Computer Engineering Technology subjects and makes concepts easier for students to understand.", "pendingLabel":"Selected videos will be added later", "channelLabel":"Visit YouTube channel", "channelUrl":"https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq", "videos":[] },
+  "contact": { "title":"Let's build something practical", "description":"For now, you can explore my code and educational content. Direct contact methods will be added once approved.", "links":[{"id":"email","label":"Email me","url":"","kind":"primary"},{"id":"linkedin","label":"LinkedIn","url":"","kind":"primary"},{"id":"github","label":"GitHub","url":"https://github.com/x7do0","kind":"social"},{"id":"youtube","label":"YouTube","url":"https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq","kind":"social"},{"id":"instagram","label":"Instagram","url":"","kind":"social"}] },
+  "projectPage": { "backAction":"Back to projects", "overviewTitle":"Overview", "previewTitle":"Project preview", "tryDemo":"Try the project", "demoHint":"An interactive simulation with sample data only — no real login or backend.", "mediaTitle":"Project media", "mediaPending":"Media will be added once approved.", "detailsTitle":"Case study", "detailsPending":"Details will be completed after accurate project information is approved, without assumptions or exaggeration." },
+  "resume": { "title":"Resume", "intro":"Software developer focused on backend engineering and practical product delivery.", "educationTitle":"Education", "skillsTitle":"Skills", "technologiesTitle":"Technologies", "projectsTitle":"Selected projects", "focusTitle":"What I focus on", "focusItems":["Business logic and data design","Building testable systems","Connecting interface quality to product quality"], "viewLabel":"View resume", "downloadLabel":"Download PDF", "downloadPending":"The PDF will be added after the final resume is approved.", "pdfUrl":"" },
+  "home": { "skip":"Skip to content", "menu":"Menu", "nav":"Primary navigation", "mobileNav":"Mobile navigation", "language":"Choose language", "navProjects":"Projects", "navAbout":"About", "navSkills":"Skills", "navResume":"Resume", "navContact":"Contact", "interactiveDemo":"Interactive demo inside this page", "closeDemo":"Close demo", "changeProject":"Change project", "loadingDemo":"Loading demo...", "demoNote":"Interactive simulation using sample data within this browser session only.", "tryDemo":"View & try project", "fullDetails":"Full details", "demoTitle":"Project demo", "technologies":"Technologies I use", "viewProjects":"View projects", "backToTop":"Back to top" },
+  "ui": { "skip":"Skip to content", "menu":"Menu", "nav":"Primary navigation", "mobileNav":"Mobile navigation", "language":"Choose language", "close":"Close", "scroll":"Go to projects", "top":"Back to top", "running":"running", "systemPreview":"System preview", "workflowPreview":"Workflow preview", "academyPreview":"Learning path preview", "newRequest":"New purchase request", "audited":"Every action is audited", "flowHint":"Select a stage", "flowSteps":"Request stages", "flowStates":["Created","Manager review","Financial review","Legal review","Approved"], "flowStatus":["Request created","Manager review completed","In financial review","Waiting for legal review","Request approved"], "learningPath":"Learning path", "stepByStep":"Progress step by step", "basics":"Fundamentals", "dataStructures":"Data structures", "projectsLabel":"Build projects", "finalProject":"Final project", "mahsoobCategory":"Cashier project", "masroofiCategory":"Personal expense project", "upcoming":"Coming soon" }
 }

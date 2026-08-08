@@ -1,83 +1,82 @@
 {
-  "brand": { "name": "حيدره مهند", "role": "مطور برمجيات وباك إند" },
+  "brand": { "name": "حيدره مهند", "role": "مطور برمجيات متخصص في Backend" },
   "meta": {
-    "title": "حيدره مهند | x7do0",
-    "description": "البورتفوليو الرسمي لحيدره مهند — مطور برمجيات وباك إند."
+    "title": "حيدره مهند | مطور برمجيات وBackend",
+    "description": "البورتفوليو الرسمي لحيدره مهند — مطور برمجيات متخصص في Backend وبناء الأنظمة والتطبيقات العملية."
   },
-  "nav": {
-    "projects": "المشاريع",
-    "skills": "المهارات",
-    "education": "التعليم",
-    "resume": "السيرة",
-    "contact": "تواصل"
-  },
+  "nav": { "projects": "المشاريع", "skills": "المهارات", "education": "التعليم", "resume": "السيرة", "contact": "تواصل" },
   "hero": {
-    "title": "أبني مشاريع برمجية متكاملة من الفكرة إلى الإنتاج",
-    "description": "مطور برمجيات وباك إند، أركز على بناء أنظمة موثوقة باستخدام C# و.NET، وأستخدم الذكاء الاصطناعي لتسريع التخطيط والتطوير والاختبار.",
+    "title": "حيدره مهند",
+    "description": "أبني أنظمة برمجية موثوقة وتطبيقات ويب عملية، مع تركيز خاص على الـBackend وجودة التنفيذ ووضوح تجربة المستخدم.",
     "primaryAction": "استعرض مشاريعي",
-    "secondaryAction": "تواصل معي",
-    "proofItems": ["C# و.NET", "Backend", "تطوير بمساعدة الذكاء الاصطناعي"]
+    "secondaryAction": "تعرّف عليّ",
+    "proofItems": ["C# و.NET", "Backend", "أنظمة عملية"],
+    "portraitAlt": "صورة حيدره مهند"
+  },
+  "about": {
+    "title": "عنّي",
+    "paragraphOne": "أنا مطور برمجيات وطالب في هندسة تقنيات الحاسوب. أميل إلى العمل على الأنظمة التي تحل مشكلة فعلية: من فهم سير العمل وتصميم البيانات، إلى بناء الـBackend واختبار النتيجة كمنتج متكامل.",
+    "paragraphTwo": "مشاريعي تشمل نظام موافقات للشركات، ومنصة عربية لتعلم البرمجة، ونظام نقاط بيع يعمل دون إنترنت، وتطبيقاً شخصياً لإدارة المصروفات. أتعامل مع الواجهة باعتبارها جزءاً من جودة النظام، لا مجرد طبقة شكلية.",
+    "educationLabel": "التعليم",
+    "educationText": "هندسة تقنيات الحاسوب — جامعة الكفيل"
   },
   "projectsSection": {
-    "title": "مشاريع مختارة",
-    "description": "مشاريع توضح طريقة تفكيري في التخطيط وبناء الأنظمة ومراجعة التنفيذ من الفكرة إلى نسخة قابلة للاستخدام."
+    "title": "مشاريعي",
+    "description": "أربعة منتجات عملية، كل واحد منها يعالج سياقاً مختلفاً. شاهد ما يفعله المشروع أولاً، ثم جرّب محاكاته داخل هذه الصفحة أو افتح تفاصيله الكاملة."
   },
   "projects": [
     {
-      "slug": "enterprise-workflow",
-      "title": "Enterprise Workflow",
-      "summary": "نظام متكامل لإدارة الطلبات والموافقات داخل الشركات، مع الأدوار والصلاحيات والإشعارات وسجل تدقيق واضح لكل إجراء.",
-      "previewKind": "workflow",
-      "cta": "استكشف المشروع",
-      "media": [],
-      "caseStudy": []
+      "slug": "enterprise-workflow", "title": "Enterprise Workflow", "category": "نظام أعمال",
+      "summary": "نظام لإدارة الطلبات الداخلية والموافقات التي تُدار عادةً عبر الورق والبريد، مع مسارات ديناميكية وصلاحيات وإشعارات وسجل تدقيق لكل إجراء.",
+      "facts": ["موافقات متعددة المراحل", "أدوار وصلاحيات", "سجل تدقيق"],
+      "tech": [".NET 10", "ASP.NET Core", "SQL Server"],
+      "previewKind": "workflow", "previewImage": "./assets/projects/enterprise-workflow.png", "previewAlt": "لوحة الطلبات في نظام Enterprise Workflow", "previewCaption": "لقطة من النظام",
+      "cta": "استكشف المشروع", "media": [], "caseStudy": []
     },
     {
-      "slug": "coding-academy",
-      "title": "أكاديمية البرمجة",
-      "summary": "منصة عربية تفاعلية لتعلم البرمجة بالتطبيق، تجمع الدروس والأمثلة والتمارين العملية والمشاريع مع حفظ التقدم محليًا.",
-      "previewKind": "academy",
-      "cta": "استكشف المشروع",
-      "media": [],
-      "caseStudy": []
+      "slug": "coding-academy", "title": "أكاديمية البرمجة", "category": "منصة تعليمية",
+      "summary": "منصة عربية للتعلم بالتطبيق، تبدأ ببطاقات واضحة للملخصات والدروس ثم تنتقل إلى أمثلة وتمارين ومشاريع، مع حفظ التقدم على جهاز المتعلم.",
+      "facts": ["12 بطاقة موضوع", "25 تمريناً", "مشروع تطبيقي نهائي"],
+      "tech": ["HTML / CSS", "JavaScript", "Python"],
+      "previewKind": "academy", "previewImage": "./assets/projects/coding-academy.png", "previewAlt": "بطاقات دروس وملخصات أكاديمية البرمجة", "previewCaption": "واجهة الدروس الفعلية",
+      "cta": "استكشف المشروع", "media": [], "caseStudy": []
     },
     {
-      "slug": "mahsoob",
-      "title": "محسوب",
-      "summary": "تطبيق نقاط بيع وإدارة متجر عربي يعمل على Windows دون اتصال بالإنترنت، وموجّه للبقالات والميني ماركت والمتاجر الصغيرة في العراق.",
-      "previewKind": "mahsoob",
-      "cta": "استكشف المشروع",
-      "media": [],
-      "caseStudy": []
+      "slug": "mahsoob", "title": "محسوب", "category": "تطبيق Windows",
+      "summary": "نظام نقاط بيع عربي يعمل دون إنترنت للبقالات والميني ماركت والمتاجر الصغيرة في العراق، ومصمم حول سرعة الكاشير والدينار العراقي واستمرارية العمل.",
+      "facts": ["يعمل دون إنترنت", "الدينار العراقي", "موجّه للمتاجر العراقية"],
+      "tech": [".NET 10", "SQLite", "Windows"],
+      "previewKind": "mahsoob", "previewImage": "./assets/projects/mahsoob.png", "previewAlt": "محاكاة واجهة البيع في نظام محسوب", "previewCaption": "محاكاة مصدرية للواجهة",
+      "cta": "استكشف المشروع", "media": [], "caseStudy": []
     },
     {
-      "slug": "masroofi",
-      "title": "مصروفي",
-      "summary": "تطبيق ويب شخصي عربي لإدارة الرصيد والدخل والمصروفات محليًا، مع تحديث فوري للرصيد والسجل وحفظ البيانات على الجهاز.",
-      "previewKind": "masroofi",
-      "cta": "استكشف المشروع",
-      "media": [],
-      "caseStudy": []
+      "slug": "masroofi", "title": "مصروفي", "category": "تطبيق ويب",
+      "summary": "تطبيق عربي شخصي لتسجيل الدخل والمصروفات ومتابعة الرصيد مباشرةً، مع تخزين محلي ونسخ احتياطي واستعادة للبيانات من دون حساب مستخدم.",
+      "facts": ["تحديث فوري للرصيد", "نسخ احتياطي واستعادة", "RTL ودينار عراقي"],
+      "tech": ["React", "TypeScript", "IndexedDB"],
+      "previewKind": "masroofi", "previewImage": "./assets/projects/masroofi.png", "previewAlt": "واجهة تطبيق مصروفي لإدارة الدخل والمصروفات", "previewCaption": "لقطة من النسخة المنشورة",
+      "cta": "استكشف المشروع", "media": [], "caseStudy": []
     }
   ],
   "skillsSection": {
-    "title": "المهارات",
+    "title": "المهارات والتقنيات",
+    "description": "قدرات مترابطة لبناء النظام من منطق الأعمال والبيانات إلى واجهة قابلة للاستخدام والتحقق.",
     "items": [
-      "تطوير الباك إند والأنظمة",
-      "بناء تطبيقات الويب",
-      "قواعد البيانات ونمذجة البيانات",
-      "الاختبار وضمان الجودة",
-      "Git وGitHub وإدارة الإصدارات",
-      "التطوير بمساعدة الذكاء الاصطناعي"
+      { "title": "Backend والأنظمة", "description": "تحويل قواعد العمل إلى خدمات واضحة وموثوقة، مع اهتمام ببنية النظام وحدود مسؤولياته.", "label": "APIs · Business Logic" },
+      { "title": "تطبيقات الويب", "description": "واجهات سريعة ومتجاوبة تدعم العربية وRTL من أول قرار تصميم.", "label": "Responsive · RTL" },
+      { "title": "قواعد البيانات", "description": "نمذجة البيانات والاستعلامات بما يحافظ على الدقة وسهولة التطوير.", "label": "Modeling · SQL" },
+      { "title": "الاختبار والجودة", "description": "فحص التدفقات الفعلية وتتبع الأخطاء قبل أن تصل إلى المستخدم.", "label": "Testing · Debugging" },
+      { "title": "Git وGitHub", "description": "تغييرات مركزة وتاريخ واضح ومراجعة قابلة للتتبع.", "label": "Version Control" },
+      { "title": "تطوير بمساعدة AI", "description": "تسريع البحث والتنفيذ مع إبقاء القرار والتحقق بيد المطور.", "label": "Planning · Verification" }
     ]
   },
   "technologiesSection": {
     "title": "اللغات والتقنيات",
     "groups": [
-      { "title": "الباك إند", "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core"] },
-      { "title": "قواعد البيانات", "items": ["SQL Server"] },
-      { "title": "لغات إضافية", "items": ["Python", "C++"] },
-      { "title": "الأدوات وسير العمل", "items": ["Git", "GitHub", "Testing", "Debugging", "أدوات التطوير بمساعدة الذكاء الاصطناعي"] }
+      { "title": "Backend", "items": [{"name":"C#","mark":"C#"},{"name":".NET","mark":".N"},{"name":"ASP.NET Core","mark":"API"},{"name":"EF Core","mark":"EF"}] },
+      { "title": "Data", "items": [{"name":"SQL Server","mark":"SQL"},{"name":"SQLite","mark":"DB"}] },
+      { "title": "Web", "items": [{"name":"JavaScript","mark":"JS"},{"name":"TypeScript","mark":"TS"},{"name":"React","mark":"R"}] },
+      { "title": "Languages", "items": [{"name":"Python","mark":"Py"},{"name":"C++","mark":"C++"},{"name":"GitHub","mark":"GH"}] }
     ]
   },
   "education": {
@@ -87,73 +86,36 @@
   },
   "knowledge": {
     "title": "مشاركة المعرفة",
-    "description": "أقدم محتوى تعليميا يشرح مواد هندسة تقنيات الحاسوب ويبسط المفاهيم للطلاب.",
-    "pendingLabel": "سيتم اختيار الفيديوهات وربطها لاحقا",
-    "channelLabel": "شاهد المحتوى التعليمي على YouTube",
-    "channelUrl": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq",
-    "videos": []
+    "description": "أقدّم محتوى تعليمياً يشرح مواد هندسة تقنيات الحاسوب ويبسط المفاهيم للطلاب.",
+    "pendingLabel": "تضاف الفيديوهات المختارة لاحقاً", "channelLabel": "زيارة قناة YouTube", "channelUrl": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq", "videos": []
   },
   "contact": {
-    "title": "لنبن شيئا عمليا",
-    "description": "لديك فكرة مشروع أو فرصة للتعاون؟ يسعدني أن أسمع عنها وأناقش إمكانية تنفيذها.",
+    "title": "لنَبنِ شيئاً عملياً",
+    "description": "حالياً يمكنك الاطلاع على الكود والمحتوى التعليمي. ستُضاف وسائل التواصل المباشر بعد اعتمادها.",
     "links": [
       { "id": "email", "label": "راسلني عبر البريد", "url": "", "kind": "primary" },
-      { "id": "linkedin", "label": "تواصل معي على LinkedIn", "url": "", "kind": "primary" },
+      { "id": "linkedin", "label": "LinkedIn", "url": "", "kind": "primary" },
       { "id": "github", "label": "GitHub", "url": "https://github.com/x7do0", "kind": "social" },
       { "id": "youtube", "label": "YouTube", "url": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq", "kind": "social" },
       { "id": "instagram", "label": "Instagram", "url": "", "kind": "social" }
     ]
   },
   "projectPage": {
-    "backAction": "العودة إلى المشاريع",
-    "overviewTitle": "نظرة عامة",
-    "previewTitle": "معاينة المشروع",
-    "tryDemo": "جرّب المشروع",
-    "demoHint": "محاكاة تفاعلية مصغرة ببيانات تجريبية فقط — بدون تسجيل دخول أو Backend حقيقي.",
-    "mediaTitle": "صور وفيديوهات المشروع",
-    "mediaPending": "تضاف الوسائط بعد اعتمادها.",
-    "detailsTitle": "دراسة الحالة",
-    "detailsPending": "تستكمل تفاصيل دراسة الحالة بعد اعتماد معلومات المشروع الدقيقة، بدون افتراض أو مبالغة."
+    "backAction": "العودة إلى المشاريع", "overviewTitle": "نظرة عامة", "previewTitle": "معاينة المشروع", "tryDemo": "جرّب المشروع",
+    "demoHint": "محاكاة تفاعلية ببيانات تجريبية فقط — من دون تسجيل دخول أو Backend حقيقي.", "mediaTitle": "صور وفيديوهات المشروع", "mediaPending": "تضاف الوسائط بعد اعتمادها.",
+    "detailsTitle": "دراسة الحالة", "detailsPending": "تُستكمل التفاصيل بعد اعتماد معلومات المشروع الدقيقة، بدون افتراض أو مبالغة."
   },
   "resume": {
-    "title": "حيدره مهند",
-    "intro": "أبني مشاريع متكاملة بمساعدة الذكاء الاصطناعي، مع تركيز على تطوير الـBackend باستخدام C# و.NET، من الفكرة والتخطيط إلى التشغيل والإنتاج.",
-    "educationTitle": "التعليم",
-    "skillsTitle": "المهارات",
-    "technologiesTitle": "التقنيات",
-    "projectsTitle": "المشاريع المختارة",
-    "viewLabel": "عرض السيرة الذاتية",
-    "downloadLabel": "تحميل PDF",
-    "downloadPending": "سيضاف ملف PDF بعد اعتماد النسخة النهائية للسيرة.",
-    "pdfUrl": ""
+    "title": "السيرة", "intro": "مطور برمجيات يركز على Backend وبناء المنتجات العملية.", "educationTitle": "التعليم", "skillsTitle": "المهارات", "technologiesTitle": "التقنيات", "projectsTitle": "مشاريع مختارة", "focusTitle": "ما أركز عليه",
+    "focusItems": ["تصميم منطق الأعمال والبيانات", "بناء أنظمة قابلة للاختبار", "ربط جودة الواجهة بجودة المنتج"],
+    "viewLabel": "عرض السيرة الذاتية", "downloadLabel": "تحميل PDF", "downloadPending": "سيضاف ملف PDF بعد اعتماد النسخة النهائية للسيرة.", "pdfUrl": ""
   },
-  "ui": {
-    "skip": "انتقل إلى المحتوى",
-    "menu": "القائمة",
-    "nav": "التنقل الرئيسي",
-    "mobileNav": "التنقل على الهاتف",
-    "language": "اختيار اللغة",
-    "close": "إغلاق",
-    "scroll": "انتقل إلى المشاريع",
-    "top": "إلى الأعلى",
-    "running": "قيد التشغيل",
-    "systemPreview": "معاينة تفاعلية لبنية نظام",
-    "workflowPreview": "معاينة سير الموافقات",
-    "academyPreview": "معاينة مسار تعليمي",
-    "newRequest": "طلب شراء جديد",
-    "audited": "كل إجراء موثق",
-    "flowHint": "اختر مرحلة لاستعراضها",
-    "flowSteps": "مراحل الطلب",
-    "flowStates": ["تم الإنشاء", "مراجعة المدير", "المراجعة المالية", "مراجعة قانونية", "تمت الموافقة"],
-    "flowStatus": ["تم إنشاء الطلب", "تمت مراجعة المدير", "قيد المراجعة المالية", "بانتظار المراجعة القانونية", "تمت الموافقة"],
-    "learningPath": "مسار التعلم",
-    "stepByStep": "تقدم خطوة بخطوة",
-    "basics": "الأساسيات",
-    "dataStructures": "هياكل البيانات",
-    "projectsLabel": "بناء المشاريع",
-    "finalProject": "مشروع نهائي",
-    "mahsoobCategory": "مشروع كاشير",
-    "masroofiCategory": "مشروع مصاريف شخصية",
-    "upcoming": "قريبا"
-  }
+  "home": {
+    "skip": "انتقل إلى المحتوى", "menu": "القائمة", "nav": "التنقل الرئيسي", "mobileNav": "التنقل على الهاتف", "language": "اختيار اللغة",
+    "navProjects": "المشاريع", "navAbout": "عنّي", "navSkills": "المهارات", "navResume": "السيرة", "navContact": "تواصل",
+    "interactiveDemo": "تجربة تفاعلية داخل الصفحة", "closeDemo": "إغلاق التجربة", "changeProject": "تغيير المشروع", "loadingDemo": "جاري تحميل التجربة...",
+    "demoNote": "محاكاة تفاعلية تستخدم بيانات تجريبية داخل جلسة المتصفح فقط.", "tryDemo": "عرض وتجربة المشروع", "fullDetails": "المعلومات الكاملة", "demoTitle": "تجربة مشروع",
+    "technologies": "التقنيات التي أستخدمها", "viewProjects": "عرض المشاريع", "backToTop": "إلى الأعلى"
+  },
+  "ui": { "skip":"انتقل إلى المحتوى", "menu":"القائمة", "nav":"التنقل الرئيسي", "mobileNav":"التنقل على الهاتف", "language":"اختيار اللغة", "close":"إغلاق", "scroll":"انتقل إلى المشاريع", "top":"إلى الأعلى", "running":"قيد التشغيل", "systemPreview":"معاينة نظام", "workflowPreview":"معاينة سير الموافقات", "academyPreview":"معاينة مسار تعليمي", "newRequest":"طلب شراء جديد", "audited":"كل إجراء موثق", "flowHint":"اختر مرحلة", "flowSteps":"مراحل الطلب", "flowStates":["تم الإنشاء","مراجعة المدير","المراجعة المالية","مراجعة قانونية","تمت الموافقة"], "flowStatus":["تم إنشاء الطلب","تمت مراجعة المدير","قيد المراجعة المالية","بانتظار المراجعة القانونية","تمت الموافقة"], "learningPath":"مسار التعلم", "stepByStep":"تقدم خطوة بخطوة", "basics":"الأساسيات", "dataStructures":"هياكل البيانات", "projectsLabel":"بناء المشاريع", "finalProject":"مشروع نهائي", "mahsoobCategory":"مشروع كاشير", "masroofiCategory":"مشروع مصاريف شخصية", "upcoming":"قريباً" }
 }

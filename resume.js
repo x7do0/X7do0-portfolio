@@ -61,7 +61,7 @@
         const number = document.createElement("span");
         number.textContent = String(index + 1).padStart(2, "0");
         const title = document.createElement("strong");
-        title.textContent = skill;
+        title.textContent = typeof skill === "string" ? skill : skill.title;
         item.append(number, title);
         return item;
       })
@@ -74,7 +74,7 @@
         const heading = document.createElement("h3");
         heading.textContent = group.title;
         const list = document.createElement("p");
-        list.textContent = group.items.join(" · ");
+        list.textContent = group.items.map((item) => typeof item === "string" ? item : item.name).join(" · ");
         section.append(heading, list);
         return section;
       })

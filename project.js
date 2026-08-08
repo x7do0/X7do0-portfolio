@@ -115,7 +115,7 @@ print(name)</code></pre>
       element.textContent = pageText[element.dataset.pageText] ?? element.textContent;
     });
 
-    qs("#project-preview").innerHTML = previewMarkup(project.previewKind);
+    qs("#project-preview").innerHTML = `<figure class="project-source-preview"><img src="${root}${project.previewImage.replace(/^\.\//, "")}" alt="${project.previewAlt}" width="800" height="450"><figcaption>${project.previewCaption}</figcaption></figure>`;
     qs("#project-preview").setAttribute("aria-label", content.projectPage.previewTitle);
     qs("[data-brand-name]").textContent = content.brand.name;
     qs("[data-year]").textContent = String(new Date().getFullYear());
@@ -131,6 +131,33 @@ print(name)</code></pre>
       demoLink.href = language === "en"
         ? `${root}demos/${slug}/?lang=en`
         : `${root}demos/${slug}/`;
+      demoLink.onclick = (event) => {
+        event.preventDefault();
+        let stage = qs(".project-inline-demo");
+        if (!stage) {
+          stage = document.createElement("section");
+          stage.className = "project-inline-demo shell";
+          stage.id = "demo";
+          stage.innerHTML = `<header><div><small>${content.projectPage.previewTitle}</small><h2>${project.title}</h2></div><button type="button" aria-label="${content.ui.close}">×</button></header><iframe title="${content.projectPage.previewTitle}: ${project.title}" loading="lazy"></iframe><p>${content.projectPage.demoHint}</p>`;
+          qs(".project-hero").after(stage);
+          qs("button", stage).addEventListener("click", () => { stage.remove(); });
+        }
+        qs("iframe", stage).src = demoLink.href;
+        stage.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      };
+      if (new URLSearchParams(location.search).get("demo") === "1") {
+        requestAnimationFrame(() => demoLink.click());
+      }
+    }
+
+    const future = qs(".project-future");
+    if (future) {
+      const panels = qsa(".future-panel", future);
+      panels[0].querySelector("h2").textContent = language === "ar" ? "ما الذي يقدمه" : "What it delivers";
+      panels[0].querySelector("p").textContent = project.facts.join(language === "ar" ? "، " : ", ");
+      panels[1].querySelector("h2").textContent = language === "ar" ? "التقنيات الأساسية" : "Core technologies";
+      panels[1].querySelector("p").textContent = project.tech.join(" · ");
+      future.classList.add("has-content");
     }
 
     document.title = `${project.title} | x7do0`;

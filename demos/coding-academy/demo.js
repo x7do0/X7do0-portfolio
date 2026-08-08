@@ -16,11 +16,13 @@
 
   const qs=(s,p=document)=>p.querySelector(s);
   const qsa=(s,p=document)=>[...p.querySelectorAll(s)];
+  Object.assign(i18n.ar,{topics:'الموضوعات',topicsTitle:'اختر ملخصاً وابدأ',topicsCopy:'كل بطاقة تلخّص موضوعاً وتوضح ما ستتعلمه قبل الدخول إلى الدرس والتطبيق.',twelveTopics:'12 موضوعاً',variables:'المتغيرات والطباعة',conditions:'الشروط واتخاذ القرار',loops:'الحلقات والتكرار',lists:'القوائم والبيانات',functions:'الدوال',dictionaries:'القواميس',readyLesson:'درس + مثال + تمرين',summaryCard:'بطاقة ملخص',topicNote:'هذه عينة من 12 بطاقة موضوع في المنصة الفعلية. بطاقة المتغيرات مفعّلة في هذا الـDemo.'});
+  Object.assign(i18n.en,{topics:'Topics',topicsTitle:'Choose a summary and start',topicsCopy:'Each card summarizes a topic before opening its lesson and practice.',twelveTopics:'12 topics',variables:'Variables and printing',conditions:'Conditions and decisions',loops:'Loops and repetition',lists:'Lists and data',functions:'Functions',dictionaries:'Dictionaries',readyLesson:'Lesson + example + practice',summaryCard:'Summary card',topicNote:'This is a sample of the platform’s 12 topic cards. The variables card is active in this demo.'});
   let language=new URLSearchParams(location.search).get('lang')==='en'||localStorage.getItem(LANGUAGE_KEY)==='en'?'en':'ar';
   let theme=localStorage.getItem(THEME_KEY)==='dark'?'dark':'light';
   let toastTimer;
 
-  function defaultState(){return{view:'lesson',lessonReviewed:true,practiceSolved:false};}
+  function defaultState(){return{view:'topics',lessonReviewed:false,practiceSolved:false};}
   function load(){try{return{...defaultState(),...JSON.parse(sessionStorage.getItem(STORAGE_KEY)||'{}')}}catch{return defaultState()}}
   let state=load();
   function save(){sessionStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
@@ -61,9 +63,10 @@
     if(ok){state.practiceSolved=true;state.lessonReviewed=true;save();renderProgress();showToast(t('toastSuccess'));setTimeout(()=>setView('result'),550)}
   }
 
-  function reset(){state=defaultState();qs('[data-editor]').value='name = "x7do0"\nprint(name)';qs('[data-feedback]').className='feedback';qs('[data-feedback]').textContent='';setView('lesson');renderProgress();save()}
+  function reset(){state=defaultState();qs('[data-editor]').value='name = "x7do0"\nprint(name)';qs('[data-feedback]').className='feedback';qs('[data-feedback]').textContent='';setView('topics');renderProgress();save()}
 
   qsa('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.nav)));
+  qs('[data-open-lesson]').addEventListener('click',()=>{state.lessonReviewed=true;setView('lesson')});
   qs('[data-go-practice]').addEventListener('click',()=>setView('practice'));
   qs('[data-back-lesson]').addEventListener('click',()=>setView('lesson'));
   qs('[data-fill]').addEventListener('click',()=>{qs('[data-editor]').value='name = "x7do0"\nprint(name)'});

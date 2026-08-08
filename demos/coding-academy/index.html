@@ -6,10 +6,12 @@
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#2457d6">
   <meta name="description" content="X7do0 Academy interactive portfolio demo.">
+  <link rel="icon" href="../../assets/x7do0-mark.svg" type="image/svg+xml">
   <title>أكاديمية X7do0 — تجربة تفاعلية</title>
   <link rel="stylesheet" href="./demo.css">
   <link rel="stylesheet" href="./demo-polish.css">
   <link rel="stylesheet" href="./source-fidelity.css">
+  <link rel="stylesheet" href="./topics.css">
 </head>
 <body>
   <header class="topbar">
@@ -31,7 +33,8 @@
       <div class="course-title"><span class="python">PY</span><div><strong data-i18n="python">أساسيات بايثون</strong><small data-i18n="courseHint">مسار تجريبي مصغر</small></div></div>
       <div class="progress-summary"><div><span data-i18n="progress">التقدم</span><strong data-progress-label>0%</strong></div><div class="progress-track"><span data-progress-bar></span></div></div>
       <nav class="lesson-nav">
-        <button type="button" class="active" data-nav="lesson"><b>01</b><span data-i18n="lesson">الدرس</span></button>
+        <button type="button" class="active" data-nav="topics"><b>00</b><span data-i18n="topics">الموضوعات</span></button>
+        <button type="button" data-nav="lesson"><b>01</b><span data-i18n="lesson">الدرس</span></button>
         <button type="button" data-nav="practice"><b>02</b><span data-i18n="practice">التمرين</span></button>
         <button type="button" data-nav="result"><b>03</b><span data-i18n="result">التقدم</span></button>
       </nav>
@@ -39,7 +42,20 @@
     </aside>
 
     <main class="workspace">
-      <section class="view active" data-view="lesson">
+      <section class="view active" data-view="topics">
+        <div class="view-head"><div><span class="eyebrow">PYTHON PATH</span><h1 data-i18n="topicsTitle">اختر ملخصاً وابدأ</h1><p data-i18n="topicsCopy">كل بطاقة تلخّص موضوعاً وتوضح ما ستتعلمه قبل الدخول إلى الدرس والتطبيق.</p></div><span class="lesson-chip" data-i18n="twelveTopics">12 موضوعاً</span></div>
+        <div class="topic-grid">
+          <button type="button" class="topic-card is-ready" data-open-lesson><i>01</i><span class="topic-symbol">x=</span><strong data-i18n="variables">المتغيرات والطباعة</strong><small data-i18n="readyLesson">درس + مثال + تمرين</small></button>
+          <button type="button" class="topic-card"><i>02</i><span class="topic-symbol">if</span><strong data-i18n="conditions">الشروط واتخاذ القرار</strong><small data-i18n="summaryCard">بطاقة ملخص</small></button>
+          <button type="button" class="topic-card"><i>03</i><span class="topic-symbol">↻</span><strong data-i18n="loops">الحلقات والتكرار</strong><small data-i18n="summaryCard">بطاقة ملخص</small></button>
+          <button type="button" class="topic-card"><i>04</i><span class="topic-symbol">[ ]</span><strong data-i18n="lists">القوائم والبيانات</strong><small data-i18n="summaryCard">بطاقة ملخص</small></button>
+          <button type="button" class="topic-card"><i>05</i><span class="topic-symbol">ƒ</span><strong data-i18n="functions">الدوال</strong><small data-i18n="summaryCard">بطاقة ملخص</small></button>
+          <button type="button" class="topic-card"><i>06</i><span class="topic-symbol">{ }</span><strong data-i18n="dictionaries">القواميس</strong><small data-i18n="summaryCard">بطاقة ملخص</small></button>
+        </div>
+        <p class="topic-note" data-i18n="topicNote">هذه عينة من 12 بطاقة موضوع في المنصة الفعلية. بطاقة المتغيرات مفعّلة في هذا الـDemo.</p>
+      </section>
+
+      <section class="view" data-view="lesson">
         <div class="view-head"><div><span class="eyebrow">LESSON 01</span><h1 data-i18n="lessonTitle">المتغيرات والطباعة</h1><p data-i18n="lessonCopy">المتغير يحفظ قيمة يمكن استخدامها لاحقًا. نطبع القيمة باستخدام print.</p></div><span class="lesson-chip" data-i18n="fundamentals">الأساسيات</span></div>
         <div class="lesson-grid">
           <article class="explanation"><h2 data-i18n="idea">الفكرة</h2><p data-i18n="ideaCopy">أنشئ متغيرًا باسم name، خزّن بداخله نصًا، ثم اطبع المتغير.</p><ul><li data-i18n="point1">اسم المتغير واضح ومباشر.</li><li data-i18n="point2">النص يوضع بين علامتي اقتباس.</li><li data-i18n="point3">print تعرض القيمة في المخرجات.</li></ul><button type="button" class="primary" data-go-practice data-i18n="tryIt">جرّب بنفسك</button></article>

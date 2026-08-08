@@ -1,16 +1,1 @@
-@import url("./legacy.css");
-@import url("./theme.css");
-@import url("./typography-tuning.css");
-@import url("./responsive.css");
-@import url("./portfolio-refresh.css");
-@import url("./remaining-project-previews.css");
-@import url("./hero-profile.css");
-@import url("./project-live-previews.css");
-@import url("./project-live-preview-fixes.css");
-@import url("./hero-portrait-anchor.css");
-@import url("./final-polish.css");
-@import url("./hero-anchor-v3.css");
-@import url("./project-fidelity-v2.css");
-@import url("./project-identity-polish-v2.css");
-@import url("./scroll-atmosphere.css");
-@import url("./editorial-hero-v2.css");
+@import url("./portfolio-v2.css");
