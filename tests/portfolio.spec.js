@@ -186,7 +186,10 @@ test('refresh and browser back return every visited page to the top', async ({ p
   await page.goto('/projects/enterprise-workflow/');
   await expect(page.locator('.project-related')).toBeVisible();
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' });
+  });
   expect(await page.evaluate(() => scrollY)).toBeGreaterThan(300);
   await page.reload();
   await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
