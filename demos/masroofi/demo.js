@@ -74,8 +74,7 @@
   function t(key) { return i18n[language][key] ?? key; }
   function saveState() { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
   function money(value) {
-    const locale = language === 'ar' ? 'ar-IQ' : 'en-US';
-    return `${new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(value)} ${t('currency')}`;
+    return `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value)} ${t('currency')}`;
   }
 
   function transactionName(tx) {
@@ -97,8 +96,8 @@
   }
 
   function formatTime(at) {
-    return new Intl.DateTimeFormat(language === 'ar' ? 'ar-IQ' : 'en-US', {
-      month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false
+    return new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false
     }).format(new Date(at));
   }
 
@@ -168,7 +167,7 @@
       const icon = tx.type === 'income' ? '↗' : tx.category === 'transport' ? '🚕' : tx.category === 'shopping' ? '🛍️' : '☕';
       row.innerHTML = `
         <span class="tx-icon" aria-hidden="true">${icon}</span>
-        <div class="tx-copy"><strong>${transactionName(tx)}</strong><small>${categoryLabel(tx.category)} · ${formatTime(tx.at)}</small></div>
+        <div class="tx-copy"><strong>${transactionName(tx)}</strong><small>${categoryLabel(tx.category)} · <time dir="ltr" datetime="${new Date(tx.at).toISOString()}">${formatTime(tx.at)}</time></small></div>
         <strong class="tx-amount">${sign}${money(tx.amount)}</strong>
         <button class="delete" type="button" aria-label="${t('deleteLabel')}" data-delete="${tx.id}">×</button>`;
       row.querySelector('[data-delete]').addEventListener('click', () => deleteTransaction(tx.id));

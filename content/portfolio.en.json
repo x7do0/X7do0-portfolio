@@ -89,7 +89,8 @@
     "title": "Knowledge sharing",
     "description": "I create educational content that explains Computer Engineering Technology subjects and makes concepts easier for students to understand.",
     "pendingLabel": "Selected videos will be linked later",
-    "channelUrl": "",
+    "channelLabel": "Watch my educational content on YouTube",
+    "channelUrl": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq",
     "videos": []
   },
   "contact": {
@@ -99,7 +100,7 @@
       { "id": "email", "label": "Email me", "url": "", "kind": "primary" },
       { "id": "linkedin", "label": "Connect on LinkedIn", "url": "", "kind": "primary" },
       { "id": "github", "label": "GitHub", "url": "https://github.com/x7do0", "kind": "social" },
-      { "id": "youtube", "label": "YouTube", "url": "", "kind": "social" },
+      { "id": "youtube", "label": "YouTube", "url": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq", "kind": "social" },
       { "id": "instagram", "label": "Instagram", "url": "", "kind": "social" }
     ]
   },

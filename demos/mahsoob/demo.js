@@ -25,7 +25,7 @@
   let state = load();
   function save(){ sessionStorage.setItem(KEY, JSON.stringify(state)); }
   function t(k){ return i18n[language][k] || k; }
-  function money(v){ return `${new Intl.NumberFormat(language==='ar'?'ar-IQ':'en-US').format(v)} ${language==='ar'?'د.ع':'IQD'}`; }
+  function money(v){ return `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(v)} ${language==='ar'?'د.ع':'IQD'}`; }
   function total(){ return Object.entries(state.cart).reduce((sum,[id,qty]) => sum + (products.find(p=>p.id===id)?.price || 0)*qty,0); }
   function showToast(text){ const el=qs('[data-toast]'); el.textContent=text; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),1800); }
 
@@ -65,7 +65,7 @@
       row.querySelector('[data-minus]').addEventListener('click',()=>changeQty(id,-1)); row.querySelector('[data-plus]').addEventListener('click',()=>changeQty(id,1)); host.append(row);
     });
     const count=entries.reduce((s,[,q])=>s+q,0); const sum=total(); const cash=Number(qs('[data-cash]').value || state.cash || 0); state.cash=cash;
-    qs('[data-cart-count]').textContent=count; qs('[data-total]').textContent=money(sum); qs('[data-change]').textContent=money(Math.max(0,cash-sum)); qs('[data-checkout]').disabled=!sum || cash<sum; save();
+    qs('[data-cart-count]').textContent=String(count); qs('[data-total]').textContent=money(sum); qs('[data-change]').textContent=money(Math.max(0,cash-sum)); qs('[data-checkout]').disabled=!sum || cash<sum; save();
   }
 
   function openReceipt(){

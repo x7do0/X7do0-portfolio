@@ -89,7 +89,8 @@
     "title": "مشاركة المعرفة",
     "description": "أقدم محتوى تعليميا يشرح مواد هندسة تقنيات الحاسوب ويبسط المفاهيم للطلاب.",
     "pendingLabel": "سيتم اختيار الفيديوهات وربطها لاحقا",
-    "channelUrl": "",
+    "channelLabel": "شاهد المحتوى التعليمي على YouTube",
+    "channelUrl": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq",
     "videos": []
   },
   "contact": {
@@ -99,7 +100,7 @@
       { "id": "email", "label": "راسلني عبر البريد", "url": "", "kind": "primary" },
       { "id": "linkedin", "label": "تواصل معي على LinkedIn", "url": "", "kind": "primary" },
       { "id": "github", "label": "GitHub", "url": "https://github.com/x7do0", "kind": "social" },
-      { "id": "youtube", "label": "YouTube", "url": "", "kind": "social" },
+      { "id": "youtube", "label": "YouTube", "url": "https://youtube.com/@x7do0eng?si=bRb1wQVL0y4vTbjq", "kind": "social" },
       { "id": "instagram", "label": "Instagram", "url": "", "kind": "social" }
     ]
   },
