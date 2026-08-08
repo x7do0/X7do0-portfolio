@@ -117,11 +117,15 @@ body {
   transform: translate3d(0, var(--atmo-line-y), 0);
 }
 
-/* Keep content above the atmospheric canvas. */
+/* Keep page content above the atmospheric canvas without changing fixed UI geometry. */
 main,
-.site-footer,
-.pointer-glow {
+.site-footer {
   position: relative;
+  z-index: 1;
+}
+
+/* Pointer glow must stay fixed and out of document flow. */
+.pointer-glow {
   z-index: 1;
 }
 
