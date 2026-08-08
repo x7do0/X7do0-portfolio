@@ -52,12 +52,17 @@ test('mobile project identity appears before each live preview and remains compa
   await expectNoHorizontalOverflow(page);
 });
 
-test('Enterprise role switcher is a floating demo control, not app chrome', async ({ page }) => {
+test('Enterprise role switcher is a floating top demo control, not app chrome', async ({ page }) => {
   await page.goto('/demos/enterprise-workflow/');
 
   const control = page.locator('.role-panel--floating');
   await expect(control).toBeVisible();
   await expect(control).toHaveCSS('position', 'fixed');
+
+  const box = await control.boundingBox();
+  expect(box).not.toBeNull();
+  expect(box.y).toBeGreaterThanOrEqual(76);
+  expect(box.y).toBeLessThan(150);
 
   const employee = control.locator('[data-role-switch="employee"]');
   const manager = control.locator('[data-role-switch="manager"]');
@@ -76,7 +81,7 @@ test('Enterprise role switcher is a floating demo control, not app chrome', asyn
   await expectNoHorizontalOverflow(page);
 });
 
-test('floating role control stays usable on mobile without covering the page width', async ({ page }) => {
+test('floating role control stays at the top on mobile without covering the page width', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/demos/enterprise-workflow/');
 
@@ -89,6 +94,8 @@ test('floating role control stays usable on mobile without covering the page wid
   expect(box.width).toBeLessThanOrEqual(362);
   expect(box.x).toBeGreaterThanOrEqual(12);
   expect(box.x + box.width).toBeLessThanOrEqual(378);
+  expect(box.y).toBeGreaterThanOrEqual(72);
+  expect(box.y).toBeLessThan(145);
 
   await page.screenshot({ path: 'artifacts/enterprise-floating-role-mobile.png', fullPage: true });
   await expectNoHorizontalOverflow(page);
