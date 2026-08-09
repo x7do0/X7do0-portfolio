@@ -424,7 +424,6 @@ print(name)</code></pre>
           const cleanups = [];
           demoHostCleanup = () => cleanups.splice(0).forEach((cleanup) => cleanup());
           let fitFrameRequest = 0;
-          let frameResizeObserver = null;
           const fitFrameToContent = () => {
             cancelAnimationFrame(fitFrameRequest);
             fitFrameRequest = requestAnimationFrame(() => {
@@ -456,9 +455,6 @@ print(name)</code></pre>
             iframe.contentDocument.documentElement.classList.add("is-embedded");
             fitFrameToContent();
             requestAnimationFrame(fitFrameToContent);
-            frameResizeObserver?.disconnect();
-            frameResizeObserver = new ResizeObserver(fitFrameToContent);
-            frameResizeObserver.observe(iframe.contentDocument.body);
           };
           const onViewportResize = () => fitFrameToContent();
           iframe.addEventListener("load", onFrameLoad);
@@ -467,7 +463,6 @@ print(name)</code></pre>
             iframe.removeEventListener("load", onFrameLoad);
             removeEventListener("resize", onViewportResize);
             cancelAnimationFrame(fitFrameRequest);
-            frameResizeObserver?.disconnect();
             body.classList.remove("demo-preview-open");
           });
           const closeDemo = () => {
@@ -488,7 +483,6 @@ print(name)</code></pre>
               item.classList.toggle("is-current", status === "current");
               item.classList.toggle("is-complete", status === "complete");
             });
-            fitFrameToContent();
           };
           const send = (type, value = {}) => iframe.contentWindow?.postMessage({ source: "x7do0-portfolio", type, ...value }, location.origin);
           const onMessage = (message) => {

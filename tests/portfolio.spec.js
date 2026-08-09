@@ -342,6 +342,31 @@ test('project demos use short laptop and mobile space for a readable no-scroll p
   }
 });
 
+test('enterprise demo canvas stays stable after an employee creates a request', async ({ page }) => {
+  await page.setViewportSize({ width: 1536, height: 696 });
+  await page.goto('/projects/enterprise-workflow/');
+  await page.locator('[data-demo-link]').click();
+  const iframe = page.locator('.project-inline-demo iframe');
+  const demo = page.frameLocator('.project-inline-demo iframe');
+  await iframe.waitFor({ state: 'visible' });
+  await expect(iframe).toHaveAttribute('data-demo-fitted', 'true');
+
+  const initialCanvas = await iframe.evaluate((element) => ({
+    height: element.style.height,
+    transform: element.style.transform,
+  }));
+
+  await demo.locator('[data-create-request]').click();
+  await demo.locator('[data-request-form] button[type="submit"]').click();
+  await expect(demo.locator('[data-detail-dialog]')).toHaveAttribute('open', '');
+  await page.waitForTimeout(700);
+
+  await expect.poll(() => iframe.evaluate((element) => ({
+    height: element.style.height,
+    transform: element.style.transform,
+  }))).toEqual(initialCanvas);
+});
+
 test('project back control is prominent, fixed to the useful edge, and works in both directions', async ({ page }) => {
   for (const query of ['', '?lang=en']) {
     await page.goto(`/projects/enterprise-workflow/${query}`);
