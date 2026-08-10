@@ -42,7 +42,7 @@
   function renderCaseStudy(project, content) {
     const existing = qs(".project-case-study");
     if (existing) existing.remove();
-    if (!project.caseStudy?.sections?.length || !project.media?.length) return;
+    if (!project.caseStudy?.sections?.length || !project.media?.length) { qs(".project-future")?.remove(); return; }
 
     qs(".project-future")?.remove();
 
