@@ -1,6 +1,12 @@
 (() => {
   "use strict";
 
+  const analytics = document.createElement("script");
+  analytics.async = true;
+  analytics.src = "https://gc.zgo.at/count.js";
+  analytics.dataset.goatcounter = "https://portfolio-x7do0.goatcounter.com/count";
+  document.head.appendChild(analytics);
+
   const html = document.documentElement;
   html.style.visibility = "hidden";
   const requested = new URLSearchParams(location.search).get("lang");
