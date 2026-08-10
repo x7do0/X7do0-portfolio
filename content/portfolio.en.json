@@ -39,7 +39,7 @@
   },
   "projectsSection": {
     "title": "My projects",
-    "description": "Four projects and products across different contexts, from business systems to education, personal finance, and point of sale. Explore each idea, try the available simulation, or open its project page."
+    "description": "I present four projects and products across different contexts, from business systems to education, personal finance, and point of sale. You can explore each idea, try the available simulation, or open its project page."
   },
   "projects": [
     {
@@ -493,7 +493,7 @@
   ],
   "skillsSection": {
     "title": "Skills and technologies",
-    "description": "Connected engineering capabilities for building, verifying, and delivering systems, with a primary focus on backend engineering, C#, and .NET.",
+    "description": "I combine connected engineering capabilities to build, verify, and deliver software systems, with a primary focus on backend engineering, C#, and .NET.",
     "items": [
       {
         "title": "Backend & systems",
@@ -843,7 +843,13 @@
       "Arabic — Native",
       "English — Intermediate"
     ],
-    "viewLabel": "View full resume"
+    "viewLabel": "View full resume",
+    "focusTitle": "What I focus on",
+    "focusItems": [
+      "I focus on backend engineering with C# and .NET",
+      "I work with databases, testing, and debugging",
+      "I turn requirements into practical, usable products"
+    ]
   },
   "home": {
     "skip": "Skip to content",

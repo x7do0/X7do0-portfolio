@@ -99,6 +99,8 @@ test('Arabic home presents the professional profile, work, learning, and approve
     await expect(page.locator(`.contact-link[data-social="${id}"]`)).toHaveAttribute('href', href);
     await expect(page.locator(`.contact-link[data-social="${id}"] .contact-logo`)).toBeVisible();
   }
+  await expect(page.locator('#resume-focus li')).toHaveCount(3);
+  await expect(page.locator('#resume-focus')).toContainText('أركز على الـBackend');
   await expect(page.locator('#full-resume-link')).toHaveAttribute('href', './resume/');
   await expectApprovedPublicIdentity(page);
 
