@@ -112,7 +112,7 @@ test('English switches direction, preserves content, and can switch back to Arab
   await expect(page.locator('#knowledge-title')).toHaveText('Learning & Teaching');
   await expect(page.locator('a[href="#knowledge"]').first()).toContainText('Learning');
   await expect(page.locator('.video-card')).toHaveCount(3);
-  await expect(page.locator('[data-project="mahsoob"]')).toContainText('Offline-first');
+  await expect(page.locator('[data-project="mahsoob"]')).toContainText('In development');
   await expect(page.locator('[data-project="masroofi"]')).toContainText('IndexedDB');
   await expect(page.locator('#full-resume-link')).toHaveAttribute('href', './resume/?lang=en');
   await expectApprovedPublicIdentity(page);
@@ -163,14 +163,14 @@ test('initial language and font are ready before the page becomes visible, and t
 });
 
 test('project details use real previews, source-backed facts, and an inline demo', async ({ page }) => {
-  for (const slug of ['enterprise-workflow', 'coding-academy', 'masroofi']) {
+  for (const slug of ['enterprise-workflow', 'masroofi']) {
     await page.goto(`/projects/${slug}/`);
     await expect(page.locator('.project-source-preview img')).toBeVisible();
     await expect(page.locator('.project-source-preview figcaption')).toHaveCount(0);
     await expect(page.locator('.project-case-study')).toBeVisible();
     await expect(page.locator('.case-section')).toHaveCount(4);
     await expect(page.locator('.case-media-main img')).toHaveCount(1);
-    const expectedMediaCount = { 'enterprise-workflow': 13, 'coding-academy': 7, masroofi: 8 }[slug];
+    const expectedMediaCount = { 'enterprise-workflow': 13, masroofi: 8 }[slug];
     await expect(page.locator('.case-media-thumb')).toHaveCount(expectedMediaCount);
     await expect(page.locator('.project-future')).toHaveCount(0);
     await page.locator('[data-demo-link]').click();
@@ -198,10 +198,21 @@ test('project details use real previews, source-backed facts, and an inline demo
     await expectNoOverflow(page);
   }
 
+  await page.goto('/projects/coding-academy/');
+  await expect(page.locator('.project-source-preview img')).toBeVisible();
+  await expect(page.locator('.project-source-preview img')).toHaveAttribute('src', /coding-academy-current\.svg/);
+  await expect(page.locator('.project-source-preview figcaption')).toHaveCount(0);
+  await expect(page.locator('.project-case-study')).toHaveCount(0);
+  await expect(page.locator('[data-media-main-image]')).toHaveCount(0);
+  await expect(page.locator('.case-media-thumb')).toHaveCount(0);
+  await expect(page.locator('.project-future')).toHaveCount(0);
+  await expect(page.locator('.project-related__card')).toHaveCount(3);
+  await expectNoOverflow(page);
+
   await page.goto('/projects/mahsoob/');
   await expect(page.locator('.project-source-preview img')).toBeVisible();
-  await expect(page.locator('.project-future.has-content')).toBeVisible();
-  await expect(page.locator('.future-panel')).toHaveCount(2);
+  await expect(page.locator('.project-future')).toHaveCount(0);
+  await expect(page.locator('.future-panel')).toHaveCount(0);
   await expect(page.locator('.project-case-study')).toHaveCount(0);
   await expect(page.locator('.project-related__card')).toHaveCount(3);
   await expect(page.locator('main > .project-related')).toBeVisible();
@@ -465,10 +476,16 @@ test('public product links and media lightbox are explicit and keyboard-safe', a
     const structured = JSON.parse(await page.locator('#project-structured-data').textContent());
     expect(structured['@type']).toBe('SoftwareApplication');
     expect(structured.author.name).toBe('Haidara Muhanned');
-    await page.locator('.case-media-main__open').click();
-    await expect(page.locator('.project-lightbox')).toBeVisible();
-    await page.keyboard.press('Escape');
-    await expect(page.locator('.project-lightbox')).toHaveCount(0);
+    if (slug === 'masroofi') {
+      await page.locator('.case-media-main__open').click();
+      await expect(page.locator('.project-lightbox')).toBeVisible();
+      await page.keyboard.press('Escape');
+      await expect(page.locator('.project-lightbox')).toHaveCount(0);
+    } else {
+      await expect(page.locator('.case-media-main__open')).toHaveCount(0);
+      await expect(page.locator('.project-case-study')).toHaveCount(0);
+      await expect(page.locator('.project-future')).toHaveCount(0);
+    }
   }
 
   await page.goto('/projects/enterprise-workflow/');
@@ -485,11 +502,10 @@ test('case-study media browser is bilingual, responsive, selectable, and keyboar
     { query: '?lang=en', language: 'en', direction: 'ltr', viewport: { width: 390, height: 844 } },
   ];
 
-  for (const slug of ['enterprise-workflow', 'masroofi', 'coding-academy']) {
+  for (const slug of ['enterprise-workflow', 'masroofi']) {
     const primaryImage = {
       'enterprise-workflow': '01-employee-dashboard-light.png',
       masroofi: '01-balance-dashboard-light.png',
-      'coding-academy': '02-python-topic-cards.jpg',
     }[slug];
     for (const state of states) {
       await page.setViewportSize(state.viewport);
