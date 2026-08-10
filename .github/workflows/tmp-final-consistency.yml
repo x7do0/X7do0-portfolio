@@ -1,0 +1,109 @@
+name: Temporary Final Portfolio Consistency
+
+on:
+  push:
+    branches:
+      - polish/portfolio-final-consistency
+    paths:
+      - .github/workflows/tmp-final-consistency.yml
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: polish/portfolio-final-consistency
+      - name: Align resume and remove unfinished PDF traces
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          order = ['enterprise-workflow', 'masroofi', 'coding-academy', 'mahsoob']
+
+          for lang in ('en', 'ar'):
+              path = Path(f'content/portfolio.{lang}.json')
+              data = json.loads(path.read_text(encoding='utf-8'))
+              resume = data['resume']
+              resume['projectOrder'] = order
+              for key in ('downloadLabel', 'downloadPending', 'pdfUrl'):
+                  resume.pop(key, None)
+
+              groups = resume['skillGroups']
+              if lang == 'en':
+                  target = next((g for g in groups if 'AI' in g.get('title', '')), None)
+                  if target is None:
+                      raise SystemExit('English resume AI group not found')
+                  target['title'] = 'AI-Augmented Software Engineering'
+                  target['items'] = [
+                      'Using AI tooling for research, implementation, review, debugging, testing, and verification while architecture, technical decisions, security, and final quality remain my responsibility'
+                  ]
+              else:
+                  target = next((g for g in groups if 'الذكاء الاصطناعي' in g.get('title', '')), None)
+                  if target is None:
+                      raise SystemExit('Arabic resume AI group not found')
+                  target['title'] = 'توظيف الذكاء الاصطناعي في هندسة البرمجيات'
+                  target['items'] = [
+                      'توظيف أدوات الذكاء الاصطناعي في البحث والتنفيذ والمراجعة وتصحيح الأخطاء والاختبار والتحقق، مع بقاء تصميم الحل والقرارات التقنية والأمان والجودة النهائية ضمن مسؤوليتي'
+                  ]
+
+              path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          html_path = Path('resume/index.html')
+          html = html_path.read_text(encoding='utf-8')
+          html, count = re.subn(
+              r'\n\s*<span class="resume-download is-disabled" aria-disabled="true">.*?</span>\n',
+              '\n',
+              html,
+              count=1,
+              flags=re.S,
+          )
+          if count != 1:
+              raise SystemExit(f'Expected one resume download block, removed {count}')
+          html_path.write_text(html, encoding='utf-8')
+
+          css_path = Path('legacy-pages.css')
+          css = css_path.read_text(encoding='utf-8')
+          css, count = re.subn(
+              r'\n\.resume-download \{.*?\}\n\n\.resume-download small \{.*?\}\n',
+              '\n',
+              css,
+              count=1,
+              flags=re.S,
+          )
+          if count != 1:
+              raise SystemExit(f'Expected one resume download CSS block, removed {count}')
+          css_path.write_text(css, encoding='utf-8')
+
+          test_path = Path('tests/portfolio.spec.js')
+          tests = test_path.read_text(encoding='utf-8')
+          replacements = {
+              "    await expect(page.locator('#resume-skills')).toContainText('Backend');": "    await expect(page.locator('#resume-skills')).toContainText('Backend');\n    await expect(page.locator('#resume-skills')).toContainText(language === 'ar' ? 'توظيف الذكاء الاصطناعي في هندسة البرمجيات' : 'AI-Augmented Software Engineering');",
+              "    await expect(page.locator('.resume-download')).toBeHidden();": "    await expect(page.locator('.resume-download')).toHaveCount(0);",
+              "      ? ['Enterprise Workflow', 'محسوب', 'مصروفي', 'أكاديمية البرمجة']": "      ? ['Enterprise Workflow', 'مصروفي', 'أكاديمية البرمجة', 'محسوب']",
+              "      : ['Enterprise Workflow', 'Mahsoob', 'Masroofi', 'Coding Academy']);": "      : ['Enterprise Workflow', 'Masroofi', 'Coding Academy', 'Mahsoob']);",
+          }
+          for old, new in replacements.items():
+              if old not in tests:
+                  raise SystemExit(f'Missing expected test text: {old}')
+              tests = tests.replace(old, new, 1)
+          test_path.write_text(tests, encoding='utf-8')
+          PY
+
+          python -m json.tool content/portfolio.en.json >/dev/null
+          python -m json.tool content/portfolio.ar.json >/dev/null
+          ! grep -RInE 'resume-download|downloadPending|downloadLabel|"pdfUrl"' --exclude-dir=.git .
+          git diff --check
+      - name: Commit final consistency changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/portfolio.en.json content/portfolio.ar.json resume/index.html legacy-pages.css tests/portfolio.spec.js
+          git diff --cached --quiet && exit 0
+          git commit -m "polish: align resume with final portfolio presentation"
+          git push origin HEAD:polish/portfolio-final-consistency
