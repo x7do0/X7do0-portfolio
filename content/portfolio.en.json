@@ -39,7 +39,7 @@
   },
   "projectsSection": {
     "title": "My projects",
-    "description": "Four projects and products across different contexts, from business systems to education, personal finance, and point of sale. Explore each idea, try the available simulation, or open its project page."
+    "description": "I present four projects and products across different contexts, from business systems to education, personal finance, and point of sale. You can explore each idea, try the available simulation, or open its project page."
   },
   "projects": [
     {
@@ -493,7 +493,7 @@
   ],
   "skillsSection": {
     "title": "Skills and technologies",
-    "description": "Connected engineering capabilities for building, verifying, and delivering systems, with a primary focus on backend engineering, C#, and .NET.",
+    "description": "I combine connected engineering capabilities to build, verify, and deliver software systems, with a primary focus on backend engineering, C#, and .NET.",
     "items": [
       {
         "title": "Backend & systems",
@@ -618,7 +618,7 @@
   },
   "education": {
     "title": "Education and academic achievement",
-    "description": "Third-year Computer Engineering Techniques student, ranked first during both the first and second academic years.",
+    "description": "I am a third-year Computer Engineering Techniques student at the University of Al-Kafeel, and I ranked first during both my first and second academic years.",
     "institution": "University of Al-Kafeel — Computer Engineering Techniques",
     "stage": "Third Year",
     "achievement": "Ranked 1st in both the first and second academic years",
@@ -780,7 +780,7 @@
   "resume": {
     "title": "Resume",
     "role": "Backend-focused Software Developer",
-    "summary": "Backend-focused software developer and third-year Computer Engineering Techniques student at the University of Al-Kafeel, ranked first during both the first and second academic years. Focused on C#/.NET, backend systems, databases, testing, and learning the supporting technologies required to take a product to a usable result.",
+    "summary": "I am a backend-focused software developer and a third-year Computer Engineering Techniques student at the University of Al-Kafeel. I ranked first during both my first and second academic years, and I work primarily with C#/.NET, backend systems, databases, and testing while learning the supporting technologies each product needs to reach a usable result.",
     "contactTitle": "Contact & location",
     "educationTitle": "Education & academic achievement",
     "skillsTitle": "Core skills",
@@ -788,12 +788,6 @@
     "projectsTitle": "Selected projects",
     "learningTitle": "Learning & Teaching",
     "languagesTitle": "Languages",
-    "focusTitle": "Professional focus",
-    "focusItems": [
-      "Backend with C# and .NET",
-      "Databases and testing",
-      "Delivering practical, usable products"
-    ],
     "skillGroups": [
       {
         "title": "Backend",
@@ -849,7 +843,13 @@
       "Arabic — Native",
       "English — Intermediate"
     ],
-    "viewLabel": "View full resume"
+    "viewLabel": "View full resume",
+    "focusTitle": "What I focus on",
+    "focusItems": [
+      "I focus on backend engineering with C# and .NET",
+      "I work with databases, testing, and debugging",
+      "I turn requirements into practical, usable products"
+    ]
   },
   "home": {
     "skip": "Skip to content",

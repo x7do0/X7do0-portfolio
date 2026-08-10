@@ -43,7 +43,7 @@ test('Arabic home presents the professional profile, work, learning, and approve
   await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
   await expect(page.locator('h1')).toHaveText('حيدره مهند');
-  await expect(page.locator('[data-brand="role"]')).toHaveText('مطور برمجيات يركز على الـBackend وبناء الأنظمة');
+  await expect(page.locator('[data-brand="role"]')).toHaveText('مطور برمجيات — أركز على الـBackend وبناء الأنظمة');
   await expect(page.locator('[data-profile="location"]')).toHaveText('النجف، العراق');
   await expect(page.locator('[data-education="compactAchievement"]')).toContainText('الأولى');
 
@@ -99,6 +99,8 @@ test('Arabic home presents the professional profile, work, learning, and approve
     await expect(page.locator(`.contact-link[data-social="${id}"]`)).toHaveAttribute('href', href);
     await expect(page.locator(`.contact-link[data-social="${id}"] .contact-logo`)).toBeVisible();
   }
+  await expect(page.locator('#resume-focus li')).toHaveCount(3);
+  await expect(page.locator('#resume-focus')).toContainText('أركز على الـBackend');
   await expect(page.locator('#full-resume-link')).toHaveAttribute('href', './resume/');
   await expectApprovedPublicIdentity(page);
 
@@ -574,6 +576,8 @@ test('resume is a complete bilingual web resume with approved public data', asyn
     await expect(page.locator('.resume-location')).toBeVisible();
     await expect(page.locator('.education-entry')).toContainText(language === 'ar' ? 'جامعة الكفيل' : 'University of Al-Kafeel');
     await expect(page.locator('.education-entry')).toContainText(language === 'ar' ? 'المركز الأول' : 'Ranked 1st');
+    await expect(page.locator('[data-resume="summary"]')).toContainText(language === 'ar' ? 'أنا مطور برمجيات أركز' : 'I am a backend-focused software developer');
+    await expect(page.locator('.resume-role')).toContainText(language === 'ar' ? 'أركز على الـBackend' : 'Backend-focused Software Developer');
     await expect(page.locator('#resume-skills section')).toHaveCount(4);
     await expect(page.locator('#resume-skills')).toContainText('Backend');
     await expect(page.locator('#resume-skills')).toContainText(language === 'ar' ? 'توظيف الذكاء الاصطناعي في هندسة البرمجيات' : 'AI-Augmented Software Engineering');
@@ -584,7 +588,7 @@ test('resume is a complete bilingual web resume with approved public data', asyn
     await expect(page.locator('#resume-contact')).toContainText('x7do0eng@gmail.com');
     await expect(page.locator('body')).not.toContainText(unsuppliedExperience);
     await expect(page.locator('.resume-download')).toHaveCount(0);
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Backend|الـBackend/);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /backend|الـBackend/i);
     await expectApprovedPublicIdentity(page);
 
     const projectNames = await page.locator('#resume-projects h3').allTextContents();
