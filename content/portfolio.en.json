@@ -621,6 +621,7 @@
     "description": "I am a third-year Computer Engineering Techniques student at the University of Al-Kafeel, and I ranked first during both my first and second academic years.",
     "institution": "University of Al-Kafeel — Computer Engineering Techniques",
     "stage": "Third Year",
+    "period": "2024–Present",
     "achievement": "Ranked 1st in both the first and second academic years",
     "compactAchievement": "Third Year · Ranked 1st in years 1 and 2"
   },
@@ -841,7 +842,7 @@
     "learningText": "I create educational content around programming and Computer Engineering Techniques topics, focusing on clear, practical explanations.",
     "languages": [
       "Arabic — Native",
-      "English — Intermediate"
+      "English"
     ],
     "viewLabel": "View full resume",
     "focusTitle": "What I focus on",
