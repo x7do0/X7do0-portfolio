@@ -30,8 +30,14 @@ test('mobile puts project identity before its visual and keeps actions clear', a
     const copy = await row.locator('.project-copy').boundingBox();
     const media = await row.locator('.project-media').boundingBox();
     expect(copy.y).toBeLessThan(media.y);
-    await expect(row.locator('.demo-trigger')).toBeVisible();
     await expect(row.locator('.project-actions a')).toHaveCount(2);
+    if (['enterprise-workflow', 'mahsoob'].includes(slug)) {
+      await expect(row.locator('.demo-trigger')).toBeVisible();
+    } else {
+      await expect(row.locator('.demo-trigger')).toHaveCount(0);
+      await expect(row.locator('.button--primary')).toBeVisible();
+      await expect(row.locator('.button--primary')).toHaveAttribute('target', '_blank');
+    }
   }
   for (const logo of await page.locator('.technology-logo img').all()) {
     await logo.scrollIntoViewIfNeeded();
@@ -78,7 +84,7 @@ test('English, tablet, and resume layouts remain visually reviewable', async ({ 
   await page.goto('/resume/');
   await page.locator('[data-language="ar"]').click();
   await expect(page.locator('.education-entry')).toContainText('المركز الأول');
-  await page.screenshot({ path: 'artifacts/resume-v2-mobile-arabic.png', fullPage: true });
+  await page.screenshot({ path: 'artifacts/resume-v2-mobile-arabic.png' });
   await expectNoOverflow(page);
 });
 
