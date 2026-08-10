@@ -358,7 +358,7 @@
       "title": "Masroofi",
       "category": "Web application",
       "status": "Completed",
-      "summary": "A client-requested Arabic personal-finance product for recording income and expenses, seeing the balance immediately, and keeping private data on the device with validated backup, merge, and restore workflows.",
+      "summary": "An Arabic personal-finance product that began from a real need: record income and expenses, see the balance immediately, and keep private data on the device with validated backup, merge, and restore workflows.",
       "facts": [
         "Instant derived balance",
         "Validated backup and restore",
@@ -374,7 +374,7 @@
       "previewKind": "masroofi",
       "previewImage": "./assets/projects/masroofi/01-balance-dashboard-light.png",
       "previewAlt": "Masroofi Arabic balance dashboard with sample transactions",
-      "resumeSummary": "A client-requested Arabic income and expense tracker with local-first storage, instant balance calculation, and safe backup and restore.",
+      "resumeSummary": "An Arabic income and expense tracker that began from a real need, with local-first storage, instant balance calculation, and safe backup and restore.",
       "cta": "Explore project",
       "links": [
         {
@@ -449,10 +449,10 @@
       ],
       "caseStudy": {
         "title": "Private personal finance without account friction",
-        "intro": "Masroofi began from a client request for a direct Iraqi money-tracking experience. The product avoids account setup and remote storage: transactions stay in the browser, the balance is always calculated from the ledger, and the user controls portable backups.",
+        "intro": "Masroofi began from a real need for a direct Iraqi money-tracking experience. The product avoids account setup and remote storage: transactions stay in the browser, the balance is always calculated from the ledger, and the user controls portable backups.",
         "sections": [
           {
-            "title": "The request",
+            "title": "The need",
             "body": "The core need was simple: record money coming in and going out, understand the current balance immediately, and keep the interface familiar to an Arabic-speaking user.",
             "items": [
               "Arabic RTL from the start",
