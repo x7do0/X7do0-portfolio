@@ -521,9 +521,9 @@
         "label": "Requirements · Delivery"
       },
       {
-        "title": "AI-Augmented Engineering",
-        "description": "I use modern AI tools to accelerate research, exploration, implementation, testing, and debugging while retaining ownership of solution design, verification, code quality, and engineering decisions.",
-        "label": "Research · Implementation · Verification"
+        "title": "AI-Augmented Software Engineering",
+        "description": "Using AI tools within a deliberate engineering workflow to accelerate research, exploration, implementation, code review, debugging, and testing—while retaining full responsibility for architecture, technical decisions, security, verification, and final code quality.",
+        "label": "AI Tooling · Technical Judgment · Verification"
       }
     ]
   },
