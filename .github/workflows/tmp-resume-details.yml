@@ -1,0 +1,56 @@
+name: Temporary Resume Details Update
+
+on:
+  push:
+    branches:
+      - content/resume-education-language-details
+    paths:
+      - .github/workflows/tmp-resume-details.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: content/resume-education-language-details
+      - name: Update resume education dates and language labels
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              Path('content/portfolio.ar.json'): [
+                  ('    "stage": "المرحلة الثالثة",\n    "achievement":', '    "stage": "المرحلة الثالثة",\n    "period": "2024–الآن",\n    "achievement":'),
+                  ('      "الإنكليزية — مستوى متوسط"', '      "الإنكليزية"'),
+              ],
+              Path('content/portfolio.en.json'): [
+                  ('    "stage": "Third Year",\n    "achievement":', '    "stage": "Third Year",\n    "period": "2024–Present",\n    "achievement":'),
+                  ('      "English — Intermediate"', '      "English"'),
+              ],
+              Path('resume/index.html'): [
+                  ('          <h3 data-education="institution"></h3>\n          <p data-education="stage"></p>', '          <h3 data-education="institution"></h3>\n          <p data-education="period"></p>\n          <p data-education="stage"></p>'),
+              ],
+          }
+
+          for path, pairs in replacements.items():
+              text = path.read_text(encoding='utf-8')
+              for old, new in pairs:
+                  count = text.count(old)
+                  if count != 1:
+                      raise SystemExit(f'{path}: expected exactly one match, found {count}: {old!r}')
+                  text = text.replace(old, new, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+          git diff --check
+      - name: Commit update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/portfolio.ar.json content/portfolio.en.json resume/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "content: refine resume education dates and languages"
+          git push origin HEAD:content/resume-education-language-details
