@@ -35,8 +35,26 @@
       link.setAttribute("aria-label", `${item.label} — ${project.title}`);
       return link;
     }));
-    if (demoLink) demoLink.classList.toggle("project-demo-cta--secondary", externalLinks.some((item) => item.kind === "live"));
-    if (hint) hint.textContent = content.projectPage.demoHint;
+    const hasDemo = Boolean(project.demo?.path);
+    actions.classList.toggle("project-demo-actions--external-only", !hasDemo);
+    if (demoLink) {
+      if (hasDemo) demoLink.classList.toggle("project-demo-cta--secondary", externalLinks.some((item) => item.kind === "live"));
+      else demoLink.remove();
+    }
+    if (hint) {
+      if (hasDemo) hint.textContent = content.projectPage.demoHint;
+      else hint.remove();
+    }
+  }
+
+  function renderDevelopmentNotice(project) {
+    qs(".project-development-notice")?.remove();
+    if (!project.developmentNotice) return;
+    const notice = document.createElement("aside");
+    notice.className = "project-development-notice shell reveal";
+    notice.setAttribute("role", "status");
+    notice.innerHTML = `<span class="project-development-notice__icon" aria-hidden="true">◆</span><div><strong>${project.developmentNotice.title}</strong><p>${project.developmentNotice.body}</p></div>`;
+    qs(".project-hero").after(notice);
   }
 
   function renderCaseStudy(project, content) {
@@ -270,7 +288,7 @@
     if (kind === "masroofi") {
       return `
         <div class="page-masroofi" aria-hidden="true">
-          <div class="page-masroofi__balance"><span>الرصيد الحالي</span><strong>1,350,000 د.ع</strong><small>يتحدث فورًا</small></div>
+          <div class="page-masroofi__balance"><span>الرصيد الحالي</span><strong>1,350,000 د.ع</strong><small>يتحدث فوراً</small></div>
           <div class="page-masroofi__summary"><span><small>الدخل</small><b>1,500,000</b></span><span><small>المصروفات</small><b>150,000</b></span></div>
           <div class="page-masroofi__rows"><span>↗ <b>راتب تجريبي</b><small>+1,500,000</small></span><span>🛍️ <b>مشتريات منزلية</b><small>−150,000</small></span></div>
         </div>`;
@@ -367,6 +385,7 @@ print(name)</code></pre>
     qs("#project-preview").innerHTML = `<figure class="project-source-preview"><img src="${root}${project.previewImage.replace(/^\.\//, "")}" alt="${project.previewAlt}" width="800" height="450"></figure>`;
     qs("#project-preview").setAttribute("aria-label", content.projectPage.previewTitle);
     renderProjectLinks(project, content);
+    renderDevelopmentNotice(project);
     renderCaseStudy(project, content);
     renderRelatedProjects(project, content);
     qs("[data-brand-name]").textContent = content.brand.name;
@@ -379,10 +398,10 @@ print(name)</code></pre>
     qsa(".brand").forEach((link) => { link.href = language === "en" ? `${root}?lang=en` : root; });
 
     const demoLink = qs("[data-demo-link]");
-    if (demoLink) {
+    if (demoLink && project.demo?.path) {
       demoLink.href = language === "en"
-        ? `${root}demos/${slug}/?lang=en`
-        : `${root}demos/${slug}/`;
+        ? `${root}demos/${project.demo.path}/?lang=en`
+        : `${root}demos/${project.demo.path}/`;
       demoLink.onclick = (event) => {
         event.preventDefault();
         let stage = qs(".project-inline-demo");
@@ -429,7 +448,7 @@ print(name)</code></pre>
             fitFrameRequest = requestAnimationFrame(() => {
               const frameDocument = iframe.contentDocument;
               if (!frameDocument?.body) return;
-              const canUseCompactDesktop = innerHeight <= 760 && ["coding-academy", "masroofi"].includes(slug);
+              const canUseCompactDesktop = false;
               const canReflowMobile = frame.clientWidth < 700 && slug !== "mahsoob";
               const virtualWidth = frame.clientWidth < 700 ? canReflowMobile ? 640 : 820 : canUseCompactDesktop ? 1100 : 1200;
               iframe.style.width = `${virtualWidth}px`;

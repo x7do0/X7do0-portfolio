@@ -191,18 +191,21 @@
             ]
           }
         ]
+      },
+      "demo": {
+        "path": "enterprise-workflow"
       }
     },
     {
       "slug": "coding-academy",
       "title": "Coding Academy",
       "category": "Learning platform",
-      "status": "Live",
-      "summary": "An Arabic programming learning platform that is expanding over time. Python is available now, with C++ and C++ OOP presented as upcoming learning paths.",
+      "status": "Active",
+      "summary": "An Arabic programming-learning platform built around practical, structured learning. Python is currently available with lessons and exercises, while C++ and C++ OOP are the next planned tracks.",
       "facts": [
         "Python available now",
-        "C++ coming soon",
-        "C++ OOP coming soon"
+        "Practical Arabic lessons and exercises",
+        "C++ and C++ OOP coming next"
       ],
       "tech": [
         "HTML",
@@ -212,9 +215,9 @@
         "GitHub Pages"
       ],
       "previewKind": "academy",
-      "previewImage": "./assets/projects/coding-academy-current.svg",
-      "previewAlt": "Current Coding Academy overview showing Python as available and C++ and C++ OOP as upcoming paths",
-      "resumeSummary": "An Arabic programming learning platform expanding over time, with Python available now and C++ and C++ OOP planned next.",
+      "previewImage": "./assets/projects/coding-academy/01-home-current.png",
+      "previewAlt": "Current X7do0 Academy home page",
+      "resumeSummary": "An Arabic programming-learning platform with Python available now and C++ tracks planned next.",
       "cta": "Explore project",
       "links": [
         {
@@ -231,19 +234,93 @@
       "metrics": [
         {
           "value": "Python",
-          "label": "Available now"
+          "label": "Current available track"
         },
         {
-          "value": "C++",
-          "label": "Coming soon"
+          "value": "2",
+          "label": "Upcoming tracks: C++ and C++ OOP"
         },
         {
-          "value": "C++ OOP",
-          "label": "Coming soon"
+          "value": "RTL",
+          "label": "Arabic-first learning experience"
         }
       ],
-      "media": [],
-      "caseStudy": []
+      "media": [
+        {
+          "src": "./assets/projects/coding-academy/01-home-current.png",
+          "featured": true,
+          "alt": "Current X7do0 Academy home page",
+          "caption": "The home experience brings learning paths and personal progress into one clear Arabic-first interface."
+        },
+        {
+          "src": "./assets/projects/coding-academy/02-courses-current.png",
+          "alt": "Current X7do0 Academy courses page",
+          "caption": "The courses page clearly separates the available Python track from upcoming C++ and C++ OOP tracks."
+        },
+        {
+          "src": "./assets/projects/coding-academy/03-python-overview-current.png",
+          "alt": "Current Python track overview in X7do0 Academy",
+          "caption": "The track overview connects lessons, exercises, and progress in one place."
+        },
+        {
+          "src": "./assets/projects/coding-academy/04-python-lessons-current.png",
+          "alt": "Current Python lessons page in X7do0 Academy",
+          "caption": "Lessons are organized to move from concepts into examples and practical application."
+        },
+        {
+          "src": "./assets/projects/coding-academy/05-python-practice-current.png",
+          "alt": "Current Python practice page in X7do0 Academy",
+          "caption": "The practice area supports hands-on work, search, filtering, and progress tracking."
+        },
+        {
+          "src": "./assets/projects/coding-academy/06-home-mobile-current.png",
+          "device": "phone",
+          "alt": "X7do0 Academy on mobile",
+          "caption": "The responsive experience keeps navigation and the learning path comfortable on a phone."
+        }
+      ],
+      "caseStudy": {
+        "title": "From Python content to an extensible programming academy",
+        "intro": "The Academy started as a practical Arabic space for learning Python, then evolved into a multi-track learning platform. The goal is to keep today’s learning experience clear while allowing new courses to be added without rebuilding the site around each one.",
+        "sections": [
+          {
+            "title": "The idea",
+            "body": "Deliver Arabic programming content that connects explanations with examples, exercises, and visible learning progress.",
+            "items": [
+              "Arabic-first RTL interface",
+              "Clear lesson and exercise navigation",
+              "Desktop and mobile support"
+            ]
+          },
+          {
+            "title": "Current content",
+            "body": "Python is the active track with lessons and practical exercises. C++ and C++ OOP are presented as upcoming tracks without claiming unfinished content is already available.",
+            "items": [
+              "Python available",
+              "C++ coming soon",
+              "C++ OOP coming soon"
+            ]
+          },
+          {
+            "title": "Extensible structure",
+            "body": "The course page and shared templates were reorganized so a new track can extend the Academy rather than become a separate copy of the site.",
+            "items": [
+              "Central course directory",
+              "Shared course templates",
+              "Clear course-content boundaries"
+            ]
+          },
+          {
+            "title": "Learning experience",
+            "body": "The interface focuses on helping the learner understand where they are, what they completed, and what comes next while keeping lessons and practice central.",
+            "items": [
+              "Visible progress state",
+              "Practice search and filtering",
+              "Responsive design"
+            ]
+          }
+        ]
+      }
     },
     {
       "slug": "mahsoob",
@@ -267,7 +344,14 @@
       "cta": "Explore project",
       "media": [],
       "caseStudy": [],
-      "status": "In Development"
+      "status": "In Development",
+      "demo": {
+        "path": "mahsoob"
+      },
+      "developmentNotice": {
+        "title": "In Development",
+        "body": "Mahsoob is still in development. This page presents the product idea and current point-of-sale direction; final capabilities will be defined as the project continues to evolve."
+      }
     },
     {
       "slug": "masroofi",
@@ -668,29 +752,6 @@
           }
         ]
       },
-      "coding-academy": {
-        "mark": "CODE",
-        "title": "Complete a short learning journey",
-        "description": "Move from a topic card to the lesson, apply the idea in the Python editor, and see your progress.",
-        "steps": [
-          {
-            "id": "topics",
-            "text": "Choose the variables and printing card"
-          },
-          {
-            "id": "lesson",
-            "text": "Review the explanation and code example"
-          },
-          {
-            "id": "practice",
-            "text": "Open the exercise and write the solution"
-          },
-          {
-            "id": "result",
-            "text": "Check the solution and view your progress"
-          }
-        ]
-      },
       "mahsoob": {
         "mark": "POS",
         "title": "Explore a target sales flow",
@@ -711,25 +772,6 @@
           {
             "id": "receipt",
             "text": "Review the demo receipt"
-          }
-        ]
-      },
-      "masroofi": {
-        "mark": "IQD",
-        "title": "Watch the balance update instantly",
-        "description": "Add a demo expense, observe the totals, then delete it to restore the balance.",
-        "steps": [
-          {
-            "id": "add",
-            "text": "Add a new expense"
-          },
-          {
-            "id": "totals",
-            "text": "Observe the updated balance and total"
-          },
-          {
-            "id": "delete",
-            "text": "Delete the expense and verify the restored values"
           }
         ]
       }

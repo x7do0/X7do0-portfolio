@@ -111,6 +111,11 @@
       const article = document.createElement("article");
       article.className = "project-row reveal";
       article.dataset.project = project.slug;
+      const liveLink = (project.links || []).find((item) => item.kind === "live");
+      const primaryHref = project.demo ? localizedUrl(`./projects/${project.slug}/?demo=1#demo`) : liveLink?.url || localizedUrl(`./projects/${project.slug}/`);
+      const primaryLabel = project.demo ? content.home.tryDemo : liveLink?.label || content.home.fullDetails;
+      const primaryAttrs = !project.demo && liveLink ? ` target="_blank" rel="noopener noreferrer"` : "";
+      const primaryClass = `button button--primary${project.demo ? " demo-trigger" : ""}`;
       article.innerHTML = `
         <div class="project-index" aria-hidden="true"><span>${String(index + 1).padStart(2, "0")}</span><i>${projectIcon(project.slug)}</i></div>
         <div class="project-copy">
@@ -123,7 +128,7 @@
           <img src="${project.previewImage}" alt="${project.previewAlt}" width="800" height="450" loading="lazy" decoding="async">
         </figure>
         <div class="project-actions">
-          <a class="button button--primary demo-trigger" href="${localizedUrl(`./projects/${project.slug}/?demo=1#demo`)}">${content.home.tryDemo}<span aria-hidden="true">${state.language === "ar" ? "←" : "→"}</span></a>
+          <a class="${primaryClass}" href="${primaryHref}"${primaryAttrs}>${primaryLabel}<span aria-hidden="true">${state.language === "ar" ? "←" : "→"}</span></a>
           <a class="button button--quiet" href="${localizedUrl(`./projects/${project.slug}/`)}">${content.home.fullDetails}</a>
         </div>`;
       return article;
@@ -131,7 +136,7 @@
   }
 
   function renderSkills(content) {
-    const iconNames = ["backend", "database", "quality", "git", "projects", "ai"];
+    const iconNames = ["backend", "database", "quality", "git", "projects"];
     const skills = content.skillsSection.items;
     const showcase = qs("#capability-rail");
     showcase.className = "skills-showcase";
