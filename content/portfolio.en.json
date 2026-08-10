@@ -39,7 +39,7 @@
   },
   "projectsSection": {
     "title": "My projects",
-    "description": "Four practical products for four different contexts. Understand what each one does, try its simulation here, or open the complete project details."
+    "description": "Four projects and products across different contexts, from business systems to education, personal finance, and point of sale. Explore each idea, try the available simulation, or open its project page."
   },
   "projects": [
     {
@@ -197,23 +197,24 @@
       "slug": "coding-academy",
       "title": "Coding Academy",
       "category": "Learning platform",
-      "status": "Completed",
-      "summary": "An Arabic, practice-first Python learning experience built around visual topic cards, detailed lessons, source and challenge files, and 25 interactive exercises with progress stored on the learner's device.",
+      "status": "Live",
+      "summary": "An Arabic programming learning platform that is expanding over time. Python is available now, with C++ and C++ OOP presented as upcoming learning paths.",
       "facts": [
-        "12 topic cards",
-        "25 interactive exercises",
-        "Local progress without an account"
+        "Python available now",
+        "C++ coming soon",
+        "C++ OOP coming soon"
       ],
       "tech": [
         "HTML",
         "CSS",
         "JavaScript",
-        "Python"
+        "Python",
+        "GitHub Pages"
       ],
       "previewKind": "academy",
-      "previewImage": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
-      "previewAlt": "Arabic Python topic cards in Coding Academy",
-      "resumeSummary": "An Arabic Python learning platform combining visual topic cards, detailed lessons, source files, and interactive exercises with local progress.",
+      "previewImage": "./assets/projects/coding-academy-current.svg",
+      "previewAlt": "Current Coding Academy overview showing Python as available and C++ and C++ OOP as upcoming paths",
+      "resumeSummary": "An Arabic programming learning platform expanding over time, with Python available now and C++ and C++ OOP planned next.",
       "cta": "Explore project",
       "links": [
         {
@@ -229,119 +230,30 @@
       ],
       "metrics": [
         {
-          "value": "12",
-          "label": "Visual Python topic cards"
+          "value": "Python",
+          "label": "Available now"
         },
         {
-          "value": "25",
-          "label": "Exercises and coding challenges"
+          "value": "C++",
+          "label": "Coming soon"
         },
         {
-          "value": "RTL",
-          "label": "Arabic-first reading experience"
-        },
-        {
-          "value": "0",
-          "label": "Accounts required to save progress"
+          "value": "C++ OOP",
+          "label": "Coming soon"
         }
       ],
-      "media": [
-        {
-          "src": "./assets/projects/coding-academy/01-learning-home.jpg",
-          "order": 6,
-          "alt": "Coding Academy Arabic landing page with a Python code visual",
-          "caption": "A direct learning entry point with a clear Arabic value proposition."
-        },
-        {
-          "src": "./assets/projects/coding-academy/02-python-topic-cards.jpg",
-          "featured": true,
-          "order": 1,
-          "alt": "Python concepts organized into colorful topic cards",
-          "caption": "Twelve concept cards turn the syllabus into a visual, scannable path."
-        },
-        {
-          "src": "./assets/projects/coding-academy/03-topic-code-preview.jpg",
-          "order": 2,
-          "alt": "A Python topic card showing an on-hover code preview",
-          "caption": "Learners can inspect a concise code example without leaving the overview."
-        },
-        {
-          "src": "./assets/projects/coding-academy/04-lesson-and-source-files.jpg",
-          "order": 3,
-          "alt": "Detailed Arabic Python lesson with embedded source and challenge files",
-          "caption": "Detailed lessons connect explanation, examples, source files, and a follow-up challenge."
-        },
-        {
-          "src": "./assets/projects/coding-academy/05-practice-library.jpg",
-          "order": 4,
-          "alt": "Arabic Python exercise library grouped by topic",
-          "caption": "The exercise library groups 25 questions by concept and shows local progress."
-        },
-        {
-          "src": "./assets/projects/coding-academy/06-interactive-exercise.jpg",
-          "order": 5,
-          "alt": "Interactive Python exercise with Arabic and English prompt",
-          "caption": "Each exercise combines a bilingual prompt, steps, a coding area, and reference guidance."
-        },
-        {
-          "src": "./assets/projects/coding-academy/07-mobile-topic-path.jpg",
-          "device": "phone",
-          "order": 7,
-          "alt": "Coding Academy Python topic cards on a mobile viewport",
-          "caption": "The same topic-first path adapts to a compact mobile reading flow."
-        }
-      ],
-      "caseStudy": {
-        "title": "A visual route from concept to practice",
-        "intro": "The Academy was shaped for Arabic-speaking beginners who need to see the learning path before diving into long explanations. The overview makes each topic recognizable, then the learner can move into a full lesson or test understanding through focused exercises.",
-        "sections": [
-          {
-            "title": "The learning problem",
-            "body": "A long list of lessons can hide the relationship between concepts. The interface instead exposes the Python syllabus as visual cards that are easy to scan and revisit.",
-            "items": [
-              "Arabic-first interface and explanations",
-              "Python code kept correctly left-to-right",
-              "Concept previews available from the overview"
-            ]
-          },
-          {
-            "title": "Lesson design",
-            "body": "Each detailed lesson connects concise explanation with practical examples and two real files: a subject file for review and a challenge file for independent practice.",
-            "items": [
-              "Twelve structured lesson topics",
-              "Embedded file viewer",
-              "Readable light and dark themes"
-            ]
-          },
-          {
-            "title": "Practice system",
-            "body": "The 25-question library is grouped by topic and stores completion locally. A learner can read the task in Arabic and English, reveal steps when needed, write code, and compare behavior with the expected result.",
-            "items": [
-              "Topic filters and search",
-              "Local progress without registration",
-              "Mobile-aware exercise navigation"
-            ]
-          },
-          {
-            "title": "Scope refinement",
-            "body": "The deprecated Python final-project surface was removed from the source and navigation so the current product promise stays honest: topic cards, lessons, and exercises only.",
-            "items": [
-              "No dead project links",
-              "Updated sitemap and generated pages",
-              "Source and portfolio now describe the same product"
-            ]
-          }
-        ]
-      }
+      "media": [],
+      "caseStudy": []
     },
     {
       "slug": "mahsoob",
       "title": "Mahsoob",
       "category": "Windows application",
-      "summary": "An Arabic offline point-of-sale system for groceries, minimarkets, and small Iraqi shops, designed around cashier speed and uninterrupted daily work.",
+      "summary": "An Arabic point-of-sale project currently in development for groceries, minimarkets, and small shops in Iraq, focused on a clear cashier experience and everyday sales workflow on Windows.",
       "facts": [
-        "Offline-first",
-        "Built for Iraqi shops"
+        "In development",
+        "Designed for small Iraqi shops",
+        "Focused on cashier and point-of-sale workflow"
       ],
       "tech": [
         ".NET 10",
@@ -351,10 +263,11 @@
       "previewKind": "mahsoob",
       "previewImage": "./assets/projects/mahsoob.png",
       "previewAlt": "Mahsoob main point-of-sale checkout interface",
-      "resumeSummary": "An offline-first Arabic point-of-sale system designed around a fast, uninterrupted cashier flow.",
+      "resumeSummary": "An Arabic point-of-sale project in development for small Iraqi shops, focused on a clear and practical cashier workflow.",
       "cta": "Explore project",
       "media": [],
-      "caseStudy": []
+      "caseStudy": [],
+      "status": "In Development"
     },
     {
       "slug": "masroofi",
@@ -733,11 +646,26 @@
         "description": "Start as an employee, switch to the manager for review, then return to verify the outcome.",
         "roles": true,
         "steps": [
-          { "id": "create", "text": "Create a request in the Employee view" },
-          { "id": "submit", "text": "Submit the request for review" },
-          { "id": "switch", "text": "Switch to the Manager role" },
-          { "id": "approve", "text": "Review and approve the request" },
-          { "id": "verify", "text": "Return to Employee and verify the status" }
+          {
+            "id": "create",
+            "text": "Create a request in the Employee view"
+          },
+          {
+            "id": "submit",
+            "text": "Submit the request for review"
+          },
+          {
+            "id": "switch",
+            "text": "Switch to the Manager role"
+          },
+          {
+            "id": "approve",
+            "text": "Review and approve the request"
+          },
+          {
+            "id": "verify",
+            "text": "Return to Employee and verify the status"
+          }
         ]
       },
       "coding-academy": {
@@ -745,21 +673,45 @@
         "title": "Complete a short learning journey",
         "description": "Move from a topic card to the lesson, apply the idea in the Python editor, and see your progress.",
         "steps": [
-          { "id": "topics", "text": "Choose the variables and printing card" },
-          { "id": "lesson", "text": "Review the explanation and code example" },
-          { "id": "practice", "text": "Open the exercise and write the solution" },
-          { "id": "result", "text": "Check the solution and view your progress" }
+          {
+            "id": "topics",
+            "text": "Choose the variables and printing card"
+          },
+          {
+            "id": "lesson",
+            "text": "Review the explanation and code example"
+          },
+          {
+            "id": "practice",
+            "text": "Open the exercise and write the solution"
+          },
+          {
+            "id": "result",
+            "text": "Check the solution and view your progress"
+          }
         ]
       },
       "mahsoob": {
         "mark": "POS",
-        "title": "Complete a demo sale",
-        "description": "Try the cashier's core path from choosing a product through payment and receipt.",
+        "title": "Explore a target sales flow",
+        "description": "A simplified concept simulation of the cashier experience being developed, not a final feature list for Mahsoob.",
         "steps": [
-          { "id": "product", "text": "Add a product to the cart" },
-          { "id": "payment", "text": "Enter the received cash" },
-          { "id": "checkout", "text": "Complete the sale" },
-          { "id": "receipt", "text": "Review the demo receipt" }
+          {
+            "id": "product",
+            "text": "Add a product to the cart"
+          },
+          {
+            "id": "payment",
+            "text": "Enter the received cash"
+          },
+          {
+            "id": "checkout",
+            "text": "Complete the sale"
+          },
+          {
+            "id": "receipt",
+            "text": "Review the demo receipt"
+          }
         ]
       },
       "masroofi": {
@@ -767,9 +719,18 @@
         "title": "Watch the balance update instantly",
         "description": "Add a demo expense, observe the totals, then delete it to restore the balance.",
         "steps": [
-          { "id": "add", "text": "Add a new expense" },
-          { "id": "totals", "text": "Observe the updated balance and total" },
-          { "id": "delete", "text": "Delete the expense and verify the restored values" }
+          {
+            "id": "add",
+            "text": "Add a new expense"
+          },
+          {
+            "id": "totals",
+            "text": "Observe the updated balance and total"
+          },
+          {
+            "id": "delete",
+            "text": "Delete the expense and verify the restored values"
+          }
         ]
       }
     }
