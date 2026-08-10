@@ -49,13 +49,20 @@ test('Arabic home presents the professional profile, work, learning, and approve
 
   await expect(page.locator('.project-row')).toHaveCount(4);
   await expect(page.locator('.project-media img')).toHaveCount(4);
-  await expect(page.locator('.demo-trigger')).toHaveCount(4);
+  await expect(page.locator('.demo-trigger')).toHaveCount(2);
   await expect(page.locator('.project-actions a')).toHaveCount(8);
   await expect(page.locator('#demo-stage')).toHaveCount(0);
-  await expect(page.locator('[data-project="coding-academy"] .demo-trigger')).toHaveAttribute('href', './projects/coding-academy/?demo=1#demo');
+  await expect(page.locator('[data-project="enterprise-workflow"] .demo-trigger')).toBeVisible();
+  await expect(page.locator('[data-project="mahsoob"] .demo-trigger')).toBeVisible();
+  await expect(page.locator('[data-project="coding-academy"] .demo-trigger')).toHaveCount(0);
+  await expect(page.locator('[data-project="coding-academy"] .button--primary')).toHaveAttribute('href', 'https://x7do0.github.io/X7do0-Academy/');
+  await expect(page.locator('[data-project="coding-academy"] .button--primary')).toHaveAttribute('target', '_blank');
+  await expect(page.locator('[data-project="masroofi"] .demo-trigger')).toHaveCount(0);
+  await expect(page.locator('[data-project="masroofi"] .button--primary')).toHaveAttribute('href', 'https://x7do0.github.io/Masroofi/');
+  await expect(page.locator('[data-project="masroofi"] .button--primary')).toHaveAttribute('target', '_blank');
 
   await expect(page.locator('.skill-primary')).toHaveCount(1);
-  await expect(page.locator('.skill-item')).toHaveCount(5);
+  await expect(page.locator('.skill-item')).toHaveCount(4);
   await expect(page.locator('.technology-group')).toHaveCount(4);
   await expect(page.locator('.technology-mark')).toHaveCount(16);
   await expect(page.locator('.technology-logo img')).toHaveCount(16);
@@ -162,71 +169,60 @@ test('initial language and font are ready before the page becomes visible, and t
   await expectNoOverflow(page);
 });
 
-test('project details use real previews, source-backed facts, and an inline demo', async ({ page }) => {
-  for (const slug of ['enterprise-workflow', 'masroofi']) {
-    await page.goto(`/projects/${slug}/`);
-    await expect(page.locator('.project-source-preview img')).toBeVisible();
-    await expect(page.locator('.project-source-preview figcaption')).toHaveCount(0);
-    await expect(page.locator('.project-case-study')).toBeVisible();
-    await expect(page.locator('.case-section')).toHaveCount(4);
-    await expect(page.locator('.case-media-main img')).toHaveCount(1);
-    const expectedMediaCount = { 'enterprise-workflow': 13, masroofi: 8 }[slug];
-    await expect(page.locator('.case-media-thumb')).toHaveCount(expectedMediaCount);
-    await expect(page.locator('.project-future')).toHaveCount(0);
-    await page.locator('[data-demo-link]').click();
-    await expect(page.locator('.project-inline-demo')).toBeVisible();
-    await expect(page.locator('.project-demo-companion')).toBeVisible();
-    await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', new RegExp(`/demos/${slug}/`));
-    await expect.poll(() => page.locator('.project-inline-demo iframe').evaluate((iframe) => {
-      const frameDocument = iframe.contentDocument;
-      return Boolean(frameDocument?.body) && Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight) <= iframe.clientHeight + 2;
-    })).toBeTruthy();
-    await expectDemoFitsViewport(page);
-    await page.locator('[data-demo-close]').click();
-    await expect(page.locator('.project-inline-demo')).toHaveCount(0);
-    await expect(page.locator('.project-overview')).toHaveCount(0);
-    await expect(page.locator('.project-related__card')).toHaveCount(3);
-    expect(await page.evaluate(() => {
-      const hero = document.querySelector('.project-hero');
-      const gallery = document.querySelector('.case-gallery');
-      const intro = document.querySelector('.case-intro');
-      const story = document.querySelector('.case-story');
-      const related = document.querySelector('.project-related');
-      const follows = (first, second) => Boolean(first.compareDocumentPosition(second) & Node.DOCUMENT_POSITION_FOLLOWING);
-      return follows(hero, gallery) && follows(gallery, intro) && follows(intro, story) && follows(story, related) && related === document.querySelector('main').lastElementChild;
-    })).toBeTruthy();
-    await expectNoOverflow(page);
-  }
+test('project details use current media, real links, and demos only where appropriate', async ({ page }) => {
+  await page.goto('/projects/enterprise-workflow/');
+  await expect(page.locator('.project-source-preview img')).toBeVisible();
+  await expect(page.locator('.project-case-study')).toBeVisible();
+  await expect(page.locator('.case-section')).toHaveCount(4);
+  await expect(page.locator('.case-media-thumb')).toHaveCount(13);
+  await expect(page.locator('[data-demo-link]')).toBeVisible();
+  await page.locator('[data-demo-link]').click();
+  await expect(page.locator('.project-inline-demo')).toBeVisible();
+  await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', /\/demos\/enterprise-workflow\//);
+  await expectDemoFitsViewport(page);
+  await page.locator('[data-demo-close]').click();
+  await expect(page.locator('.project-related__card')).toHaveCount(3);
+  await expectNoOverflow(page);
 
   await page.goto('/projects/coding-academy/');
   await expect(page.locator('.project-source-preview img')).toBeVisible();
-  await expect(page.locator('.project-source-preview img')).toHaveAttribute('src', /coding-academy-current\.svg/);
-  await expect(page.locator('.project-source-preview figcaption')).toHaveCount(0);
-  await expect(page.locator('.project-case-study')).toHaveCount(0);
-  await expect(page.locator('[data-media-main-image]')).toHaveCount(0);
-  await expect(page.locator('.case-media-thumb')).toHaveCount(0);
+  await expect(page.locator('.project-source-preview img')).toHaveAttribute('src', /coding-academy\/01-home-current\.png/);
+  await expect(page.locator('.project-case-study')).toBeVisible();
+  await expect(page.locator('.case-section')).toHaveCount(4);
+  await expect(page.locator('.case-media-thumb')).toHaveCount(6);
+  await expect(page.locator('[data-demo-link]')).toHaveCount(0);
+  await expect(page.locator('.project-link--live')).toHaveAttribute('href', 'https://x7do0.github.io/X7do0-Academy/');
+  await expect(page.locator('.project-link--live')).toHaveAttribute('target', '_blank');
+  await expect(page.locator('.project-future')).toHaveCount(0);
+  await expect(page.locator('.project-related__card')).toHaveCount(3);
+  await expectNoOverflow(page);
+
+  await page.goto('/projects/masroofi/');
+  await expect(page.locator('.project-source-preview img')).toBeVisible();
+  await expect(page.locator('.project-case-study')).toBeVisible();
+  await expect(page.locator('.case-section')).toHaveCount(4);
+  await expect(page.locator('.case-media-thumb')).toHaveCount(8);
+  await expect(page.locator('[data-demo-link]')).toHaveCount(0);
+  await expect(page.locator('.project-link--live')).toHaveAttribute('href', 'https://x7do0.github.io/Masroofi/');
+  await expect(page.locator('.project-link--live')).toHaveAttribute('target', '_blank');
   await expect(page.locator('.project-future')).toHaveCount(0);
   await expect(page.locator('.project-related__card')).toHaveCount(3);
   await expectNoOverflow(page);
 
   await page.goto('/projects/mahsoob/');
   await expect(page.locator('.project-source-preview img')).toBeVisible();
-  await expect(page.locator('.project-future')).toHaveCount(0);
-  await expect(page.locator('.future-panel')).toHaveCount(0);
+  await expect(page.locator('.project-development-notice')).toBeVisible();
+  await expect(page.locator('.project-development-notice')).toContainText('قيد التطوير');
+  await expect(page.locator('.project-development-notice')).toHaveAttribute('role', 'status');
   await expect(page.locator('.project-case-study')).toHaveCount(0);
-  await expect(page.locator('.project-related__card')).toHaveCount(3);
-  await expect(page.locator('main > .project-related')).toBeVisible();
+  await expect(page.locator('.project-future')).toHaveCount(0);
+  await expect(page.locator('[data-demo-link]')).toBeVisible();
   await page.locator('[data-demo-link]').click();
-  await expect.poll(() => page.locator('.project-inline-demo iframe').evaluate((iframe) => {
-    const frameDocument = iframe.contentDocument;
-    return Boolean(frameDocument?.body) && Math.max(frameDocument.body.scrollHeight, frameDocument.documentElement.scrollHeight) <= iframe.clientHeight + 2;
-  })).toBeTruthy();
-  await expect(page.locator('.project-demo-companion')).toBeVisible();
-  await expectDemoFitsViewport(page);
-
-  await page.goto('/projects/coding-academy/?demo=1#demo');
   await expect(page.locator('.project-inline-demo')).toBeVisible();
-  await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', /\/demos\/coding-academy\//);
+  await expect(page.locator('.project-inline-demo iframe')).toHaveAttribute('src', /\/demos\/mahsoob\//);
+  await expectDemoFitsViewport(page);
+  await expect(page.locator('.project-related__card')).toHaveCount(3);
+  await expectNoOverflow(page);
 });
 
 test('embedded Enterprise demo keeps portfolio controls outside the product and enforces role permissions', async ({ page }) => {
@@ -252,30 +248,14 @@ test('embedded Enterprise demo keeps portfolio controls outside the product and 
   await expect(page.locator('[data-demo-guide-step="create"]')).toHaveClass(/is-current/);
 });
 
-test('project demos provide project-specific guided flows in one viewport', async ({ page }) => {
+test('Mahsoob demo provides its guided point-of-sale flow in one viewport', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-
-  await page.goto('/projects/coding-academy/?lang=en');
-  await page.locator('[data-demo-link]').click();
-  await expect(page.locator('[data-demo-role]')).toHaveCount(0);
-  await expect(page.locator('[data-demo-guide-step]')).toHaveCount(4);
-  await expectDemoFitsViewport(page);
-  let frame = page.frameLocator('.project-inline-demo iframe');
-  await frame.locator('[data-open-lesson]').click();
-  await expect(page.locator('[data-demo-guide-step="lesson"]')).toHaveClass(/is-current/);
-  await frame.locator('[data-go-practice]').click();
-  await expect(page.locator('[data-demo-guide-step="practice"]')).toHaveClass(/is-current/);
-  await frame.locator('[data-check]').click();
-  await expect(page.locator('[data-demo-guide-step="result"]')).toHaveClass(/is-current/, { timeout: 2000 });
-  await page.locator('[data-demo-reset]').click();
-  await expect(page.locator('[data-demo-guide-step="topics"]')).toHaveClass(/is-current/);
-
   await page.goto('/projects/mahsoob/?lang=en');
   await page.locator('[data-demo-link]').click();
   await expect(page.locator('[data-demo-role]')).toHaveCount(0);
   await expect(page.locator('[data-demo-guide-step]')).toHaveCount(4);
   await expectDemoFitsViewport(page);
-  frame = page.frameLocator('.project-inline-demo iframe');
+  const frame = page.frameLocator('.project-inline-demo iframe');
   await frame.locator('[data-product]').first().click();
   await expect(page.locator('[data-demo-guide-step="payment"]')).toHaveClass(/is-current/);
   await frame.locator('[data-cash]').fill('100000');
@@ -285,28 +265,12 @@ test('project demos provide project-specific guided flows in one viewport', asyn
   await page.locator('[data-demo-reset]').click();
   await expect(frame.locator('[data-receipt]')).not.toHaveAttribute('open', '');
   await expect(page.locator('[data-demo-guide-step="product"]')).toHaveClass(/is-current/);
-
-  await page.goto('/projects/masroofi/?lang=en');
-  await page.locator('[data-demo-link]').click();
-  await expect(page.locator('[data-demo-role]')).toHaveCount(0);
-  await expect(page.locator('[data-demo-guide-step]')).toHaveCount(3);
-  await expectDemoFitsViewport(page);
-  frame = page.frameLocator('.project-inline-demo iframe');
-  await frame.locator('[data-add-expense]').click();
-  await frame.locator('[data-form]').evaluate((form) => form.requestSubmit());
-  await expect(page.locator('[data-demo-guide-step="delete"]')).toHaveClass(/is-current/);
-  await frame.locator('[data-transaction-id^="demo-"] [data-delete]').click();
-  await expect(page.locator('[data-demo-guide-step="delete"]')).toHaveClass(/is-complete/);
-  await page.locator('[data-demo-reset]').click();
-  await expect(page.locator('[data-demo-guide-step="add"]')).toHaveClass(/is-current/);
 });
 
 test('project demos use short laptop and mobile space for a readable no-scroll presentation', async ({ page }) => {
   const minimumDesktopScale = {
     'enterprise-workflow': 0.89,
-    'coding-academy': 0.99,
     mahsoob: 0.87,
-    masroofi: 0.99,
   };
 
   await page.setViewportSize({ width: 1536, height: 696 });
@@ -315,12 +279,10 @@ test('project demos use short laptop and mobile space for a readable no-scroll p
     await page.locator('[data-demo-link]').click();
     await page.locator('iframe[data-demo-fitted="true"]').waitFor();
     await expectDemoFitsViewport(page);
-    const presentation = await page.locator('.project-inline-demo').evaluate((stage) => {
-      return {
-        scale: Number(getComputedStyle(stage).getPropertyValue('--demo-scale')),
-        guideFont: Number.parseFloat(getComputedStyle(stage.querySelector('[data-demo-guide-step] p')).fontSize),
-      };
-    });
+    const presentation = await page.locator('.project-inline-demo').evaluate((stage) => ({
+      scale: Number(getComputedStyle(stage).getPropertyValue('--demo-scale')),
+      guideFont: Number.parseFloat(getComputedStyle(stage.querySelector('[data-demo-guide-step] p')).fontSize),
+    }));
     expect(presentation.scale).toBeGreaterThanOrEqual(minimumDesktopScale[slug]);
     expect(presentation.guideFont).toBeGreaterThanOrEqual(11.5);
     await expect.poll(() => page.locator('.project-inline-demo iframe').evaluate((iframe) => (
@@ -339,9 +301,7 @@ test('project demos use short laptop and mobile space for a readable no-scroll p
   await page.setViewportSize({ width: 390, height: 844 });
   const minimumMobileScale = {
     'enterprise-workflow': 0.55,
-    'coding-academy': 0.55,
     mahsoob: 0.43,
-    masroofi: 0.55,
   };
   for (const slug of Object.keys(minimumMobileScale)) {
     await page.goto(`/projects/${slug}/`);
@@ -468,24 +428,23 @@ test('refresh and browser back return every visited page to the top', async ({ p
 });
 
 test('public product links and media lightbox are explicit and keyboard-safe', async ({ page }) => {
-  for (const slug of ['coding-academy', 'masroofi']) {
+  const liveUrls = {
+    'coding-academy': 'https://x7do0.github.io/X7do0-Academy/',
+    masroofi: 'https://x7do0.github.io/Masroofi/',
+  };
+  for (const slug of Object.keys(liveUrls)) {
     await page.goto(`/projects/${slug}/`);
+    await expect(page.locator('.project-link--live')).toHaveAttribute('href', liveUrls[slug]);
     await expect(page.locator('.project-link--live')).toHaveAttribute('target', '_blank');
     await expect(page.locator('.project-link--source')).toHaveAttribute('rel', /noopener/);
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /assets\/projects/);
     const structured = JSON.parse(await page.locator('#project-structured-data').textContent());
     expect(structured['@type']).toBe('SoftwareApplication');
     expect(structured.author.name).toBe('Haidara Muhanned');
-    if (slug === 'masroofi') {
-      await page.locator('.case-media-main__open').click();
-      await expect(page.locator('.project-lightbox')).toBeVisible();
-      await page.keyboard.press('Escape');
-      await expect(page.locator('.project-lightbox')).toHaveCount(0);
-    } else {
-      await expect(page.locator('.case-media-main__open')).toHaveCount(0);
-      await expect(page.locator('.project-case-study')).toHaveCount(0);
-      await expect(page.locator('.project-future')).toHaveCount(0);
-    }
+    await page.locator('.case-media-main__open').click();
+    await expect(page.locator('.project-lightbox')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.project-lightbox')).toHaveCount(0);
   }
 
   await page.goto('/projects/enterprise-workflow/');
@@ -635,22 +594,14 @@ test('resume is a complete bilingual web resume with approved public data', asyn
   }
 });
 
-test('Academy demo leads with topic cards and completes its practice path', async ({ page }) => {
+test('Academy project presents current screenshots and the published learning platform', async ({ page }) => {
   const errors = runtimeErrors(page);
-  await page.goto('/demos/coding-academy/');
-  await page.evaluate(() => sessionStorage.clear());
-  await page.reload();
-  await expect(page.locator('[data-view="topics"]')).toHaveClass(/active/);
-  await expect(page.locator('.topic-card')).toHaveCount(6);
-  await expect(page.locator('[data-progress-label]')).toHaveText('0%');
-  await page.locator('[data-open-lesson]').click();
-  await expect(page.locator('[data-view="lesson"]')).toHaveClass(/active/);
-  await expect(page.locator('[data-progress-label]')).toHaveText('50%');
-  await page.locator('[data-go-practice]').click();
-  await page.locator('[data-editor]').fill('name = "Magnus"\nprint(name)');
-  await page.locator('[data-check]').click();
-  await expect(page.locator('[data-feedback]')).toHaveClass(/success/);
-  await expect(page.locator('[data-progress-label]')).toHaveText('100%');
+  await page.goto('/projects/coding-academy/');
+  await expect(page.locator('.project-source-preview img')).toHaveAttribute('src', /coding-academy\/01-home-current\.png/);
+  await expect(page.locator('.project-case-study')).toBeVisible();
+  await expect(page.locator('.case-media-thumb')).toHaveCount(6);
+  await expect(page.locator('.project-link--live')).toHaveAttribute('href', 'https://x7do0.github.io/X7do0-Academy/');
+  await expect(page.locator('[data-demo-link]')).toHaveCount(0);
   await expectNoOverflow(page);
   expect(errors).toEqual([]);
 });
