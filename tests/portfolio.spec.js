@@ -588,7 +588,7 @@ test('resume is a complete bilingual web resume with approved public data', asyn
     await expect(page.locator('#resume-contact')).toContainText('x7do0eng@gmail.com');
     await expect(page.locator('body')).not.toContainText(unsuppliedExperience);
     await expect(page.locator('.resume-download')).toHaveCount(0);
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Backend|الـBackend/);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /backend|الـBackend/i);
     await expectApprovedPublicIdentity(page);
 
     const projectNames = await page.locator('#resume-projects h3').allTextContents();
