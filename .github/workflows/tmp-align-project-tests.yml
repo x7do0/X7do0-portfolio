@@ -5,7 +5,7 @@ on:
     branches:
       - polish/project-presentation-and-demos
     paths:
-      - scripts/tmp-align-project-tests.mjs
+      - scripts/tmp-align-project-tests.py
       - .github/workflows/tmp-align-project-tests.yml
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
         with:
           ref: polish/project-presentation-and-demos
       - name: Align portfolio tests
-        run: node scripts/tmp-align-project-tests.mjs
+        run: python3 scripts/tmp-align-project-tests.py
       - name: Verify removed project demos leave no project-specific references
         run: |
           ! grep -RInE 'demos/(coding-academy|masroofi)|coding-academy-demo|masroofi-demo' --exclude-dir=.git .
