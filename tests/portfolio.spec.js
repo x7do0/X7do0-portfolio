@@ -62,7 +62,8 @@ test('Arabic home presents the professional profile, work, learning, and approve
   await expect(page.locator('[data-project="masroofi"] .button--primary')).toHaveAttribute('target', '_blank');
 
   await expect(page.locator('.skill-primary')).toHaveCount(1);
-  await expect(page.locator('.skill-item')).toHaveCount(4);
+  await expect(page.locator('.skill-item')).toHaveCount(5);
+  await expect(page.locator('.skills-showcase')).toContainText('توظيف الذكاء الاصطناعي في هندسة البرمجيات');
   await expect(page.locator('.technology-group')).toHaveCount(4);
   await expect(page.locator('.technology-mark')).toHaveCount(16);
   await expect(page.locator('.technology-logo img')).toHaveCount(16);
@@ -121,6 +122,7 @@ test('English switches direction, preserves content, and can switch back to Arab
   await expect(page.locator('.video-card')).toHaveCount(3);
   await expect(page.locator('[data-project="mahsoob"]')).toContainText('In development');
   await expect(page.locator('[data-project="masroofi"]')).toContainText('IndexedDB');
+  await expect(page.locator('.skills-showcase')).toContainText('AI-Augmented Software Engineering');
   await expect(page.locator('#full-resume-link')).toHaveAttribute('href', './resume/?lang=en');
   await expectApprovedPublicIdentity(page);
   await expectNoOverflow(page);
