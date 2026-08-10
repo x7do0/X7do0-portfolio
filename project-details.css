@@ -226,3 +226,23 @@ html[dir="rtl"] .case-media-rail { direction: rtl; }
   .project-link, .case-media-main img, .case-media-thumb, .project-related__card, .project-related__image img { transition: none; }
   .case-media-rail { scroll-behavior: auto; }
 }
+
+
+/* Development-state notice */
+.project-development-notice {
+  margin: 1.25rem auto 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid rgba(245, 158, 11, .4);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, .14), rgba(251, 191, 36, .05));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .16);
+}
+.project-development-notice__icon { color: #f59e0b; font-size: 1.05rem; line-height: 1.5; }
+.project-development-notice strong { display: block; color: #fbbf24; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .35rem; }
+.project-development-notice p { margin: 0; color: var(--text-secondary, #b9c3d0); line-height: 1.8; max-width: 76ch; }
+.project-demo-actions--external-only { align-items: flex-start; }
+@media (max-width: 640px) { .project-development-notice { grid-template-columns: 1fr; gap: .55rem; padding: 1rem; } }

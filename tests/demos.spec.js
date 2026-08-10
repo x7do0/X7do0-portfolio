@@ -34,16 +34,3 @@ test('Mahsoob demo completes a cash sale', async ({ page }) => {
   await expect(page.locator('[data-receipt]')).toBeVisible();
   expect(errors).toEqual([]);
 });
-
-test('Masroofi demo adds and removes an expense without losing totals', async ({ page }) => {
-  const errors = runtimeErrors(page);
-  await page.goto('/demos/masroofi/');
-  const balance = await page.locator('[data-balance]').textContent();
-  await page.locator('[data-add-expense]').click();
-  await page.locator('[data-form] button[type="submit"]').click();
-  await expect(page.locator('[data-transaction-id^="demo-"]')).toHaveCount(1);
-  await expect(page.locator('[data-balance]')).not.toHaveText(balance || '');
-  await page.locator('[data-transaction-id^="demo-"] [data-delete]').click();
-  await expect(page.locator('[data-balance]')).toHaveText(balance || '');
-  expect(errors).toEqual([]);
-});
