@@ -618,7 +618,7 @@
   },
   "education": {
     "title": "Education and academic achievement",
-    "description": "Third-year Computer Engineering Techniques student, ranked first during both the first and second academic years.",
+    "description": "I am a third-year Computer Engineering Techniques student at the University of Al-Kafeel, and I ranked first during both my first and second academic years.",
     "institution": "University of Al-Kafeel — Computer Engineering Techniques",
     "stage": "Third Year",
     "achievement": "Ranked 1st in both the first and second academic years",
@@ -780,7 +780,7 @@
   "resume": {
     "title": "Resume",
     "role": "Backend-focused Software Developer",
-    "summary": "Backend-focused software developer and third-year Computer Engineering Techniques student at the University of Al-Kafeel, ranked first during both the first and second academic years. Focused on C#/.NET, backend systems, databases, testing, and learning the supporting technologies required to take a product to a usable result.",
+    "summary": "I am a backend-focused software developer and a third-year Computer Engineering Techniques student at the University of Al-Kafeel. I ranked first during both my first and second academic years, and I work primarily with C#/.NET, backend systems, databases, and testing while learning the supporting technologies each product needs to reach a usable result.",
     "contactTitle": "Contact & location",
     "educationTitle": "Education & academic achievement",
     "skillsTitle": "Core skills",
@@ -788,12 +788,6 @@
     "projectsTitle": "Selected projects",
     "learningTitle": "Learning & Teaching",
     "languagesTitle": "Languages",
-    "focusTitle": "Professional focus",
-    "focusItems": [
-      "Backend with C# and .NET",
-      "Databases and testing",
-      "Delivering practical, usable products"
-    ],
     "skillGroups": [
       {
         "title": "Backend",

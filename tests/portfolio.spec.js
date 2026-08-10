@@ -43,7 +43,7 @@ test('Arabic home presents the professional profile, work, learning, and approve
   await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
   await expect(page.locator('h1')).toHaveText('حيدره مهند');
-  await expect(page.locator('[data-brand="role"]')).toHaveText('مطور برمجيات يركز على الـBackend وبناء الأنظمة');
+  await expect(page.locator('[data-brand="role"]')).toHaveText('مطور برمجيات — أركز على الـBackend وبناء الأنظمة');
   await expect(page.locator('[data-profile="location"]')).toHaveText('النجف، العراق');
   await expect(page.locator('[data-education="compactAchievement"]')).toContainText('الأولى');
 
@@ -574,6 +574,8 @@ test('resume is a complete bilingual web resume with approved public data', asyn
     await expect(page.locator('.resume-location')).toBeVisible();
     await expect(page.locator('.education-entry')).toContainText(language === 'ar' ? 'جامعة الكفيل' : 'University of Al-Kafeel');
     await expect(page.locator('.education-entry')).toContainText(language === 'ar' ? 'المركز الأول' : 'Ranked 1st');
+    await expect(page.locator('[data-resume="summary"]')).toContainText(language === 'ar' ? 'أنا مطور برمجيات أركز' : 'I am a backend-focused software developer');
+    await expect(page.locator('.resume-role')).toContainText(language === 'ar' ? 'أركز على الـBackend' : 'Backend-focused Software Developer');
     await expect(page.locator('#resume-skills section')).toHaveCount(4);
     await expect(page.locator('#resume-skills')).toContainText('Backend');
     await expect(page.locator('#resume-skills')).toContainText(language === 'ar' ? 'توظيف الذكاء الاصطناعي في هندسة البرمجيات' : 'AI-Augmented Software Engineering');
