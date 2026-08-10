@@ -574,20 +574,21 @@ test('resume is a complete bilingual web resume with approved public data', asyn
     await expect(page.locator('.education-entry')).toContainText(language === 'ar' ? 'المركز الأول' : 'Ranked 1st');
     await expect(page.locator('#resume-skills section')).toHaveCount(4);
     await expect(page.locator('#resume-skills')).toContainText('Backend');
+    await expect(page.locator('#resume-skills')).toContainText(language === 'ar' ? 'توظيف الذكاء الاصطناعي في هندسة البرمجيات' : 'AI-Augmented Software Engineering');
     await expect(page.locator('#resume-technologies')).toContainText('ASP.NET Core');
     await expect(page.locator('#resume-projects > a')).toHaveCount(4);
     await expect(page.locator('.resume-teaching')).toBeVisible();
     await expect(page.locator('.resume-languages')).toBeVisible();
     await expect(page.locator('#resume-contact')).toContainText('x7do0eng@gmail.com');
     await expect(page.locator('body')).not.toContainText(unsuppliedExperience);
-    await expect(page.locator('.resume-download')).toBeHidden();
+    await expect(page.locator('.resume-download')).toHaveCount(0);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Backend|الـBackend/);
     await expectApprovedPublicIdentity(page);
 
     const projectNames = await page.locator('#resume-projects h3').allTextContents();
     expect(projectNames).toEqual(language === 'ar'
-      ? ['Enterprise Workflow', 'محسوب', 'مصروفي', 'أكاديمية البرمجة']
-      : ['Enterprise Workflow', 'Mahsoob', 'Masroofi', 'Coding Academy']);
+      ? ['Enterprise Workflow', 'مصروفي', 'أكاديمية البرمجة', 'محسوب']
+      : ['Enterprise Workflow', 'Masroofi', 'Coding Academy', 'Mahsoob']);
     for (const link of await page.locator('#resume-projects > a').all()) {
       await expect(link).toHaveAttribute('href', /\.\.\/projects\/.+\//);
     }

@@ -826,17 +826,17 @@
         ]
       },
       {
-        "title": "AI-Augmented Engineering",
+        "title": "AI-Augmented Software Engineering",
         "items": [
-          "AI-augmented research, implementation, testing, debugging, and verification workflows with engineering decisions remaining my responsibility"
+          "Using AI tooling for research, implementation, review, debugging, testing, and verification while architecture, technical decisions, security, and final quality remain my responsibility"
         ]
       }
     ],
     "projectOrder": [
       "enterprise-workflow",
-      "mahsoob",
       "masroofi",
-      "coding-academy"
+      "coding-academy",
+      "mahsoob"
     ],
     "contactIds": [
       "email",
@@ -849,10 +849,7 @@
       "Arabic — Native",
       "English — Intermediate"
     ],
-    "viewLabel": "View full resume",
-    "downloadLabel": "Download PDF",
-    "downloadPending": "The PDF will be added after the final resume is approved.",
-    "pdfUrl": ""
+    "viewLabel": "View full resume"
   },
   "home": {
     "skip": "Skip to content",
