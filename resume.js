@@ -9,6 +9,24 @@
 
   const qs = (selector, parent = document) => parent.querySelector(selector);
   const qsa = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+  const linkedinContact = {
+    id: "linkedin",
+    label: "LinkedIn",
+    value: "linkedin.com/in/x7do0",
+    url: "https://www.linkedin.com/in/x7do0",
+    kind: "social"
+  };
+
+  function resolvedContactLinks(content) {
+    const links = content.contact.links.filter((link) => link.url);
+    return links.some((link) => link.id === "linkedin") ? links : [...links, linkedinContact];
+  }
+
+  function resolvedResumeContactIds(content) {
+    const ids = [...content.resume.contactIds];
+    if (!ids.includes("linkedin")) ids.splice(Math.min(2, ids.length), 0, "linkedin");
+    return ids;
+  }
 
   async function loadContent(nextLanguage) {
     const response = await fetch(`${root}content/portfolio.${nextLanguage}.json`, { cache: "no-cache" });
@@ -57,8 +75,8 @@
     const homeUrl = language === "en" ? `${root}?lang=en` : root;
     qsa(".brand, .inner-back").forEach((link) => { link.href = homeUrl; });
 
-    const contactById = new Map(content.contact.links.map((link) => [link.id, link]));
-    qs("#resume-contact").replaceChildren(...content.resume.contactIds.map((id) => {
+    const contactById = new Map(resolvedContactLinks(content).map((link) => [link.id, link]));
+    qs("#resume-contact").replaceChildren(...resolvedResumeContactIds(content).map((id) => {
       const contact = contactById.get(id);
       const link = document.createElement("a");
       link.href = contact.url;

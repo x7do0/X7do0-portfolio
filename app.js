@@ -45,10 +45,24 @@
   const socialLogoPaths = {
     email: "./assets/technology/gmail.svg",
     telegram: "./assets/technology/telegram.svg",
+    linkedin: "./assets/technology/linkedin.svg",
     github: "./assets/technology/github-light.svg",
     youtube: "./assets/technology/youtube.svg",
     instagram: "./assets/technology/instagram.svg"
   };
+
+  const linkedinContact = {
+    id: "linkedin",
+    label: "LinkedIn",
+    value: "linkedin.com/in/x7do0",
+    url: "https://www.linkedin.com/in/x7do0",
+    kind: "social"
+  };
+
+  function resolvedContactLinks(content) {
+    const links = content.contact.links.filter((link) => link.url);
+    return links.some((link) => link.id === "linkedin") ? links : [...links, linkedinContact];
+  }
 
   function text(selector, value, root = document) {
     const node = qs(selector, root);
@@ -75,8 +89,8 @@
       profile.name = content.brand.name;
       profile.alternateName = ["x7do0", "Haidara Muhanned"];
       profile.jobTitle = "Backend-focused Software Developer";
-      profile.sameAs = content.contact.links
-        .filter((link) => ["github", "youtube", "instagram"].includes(link.id))
+      profile.sameAs = resolvedContactLinks(content)
+        .filter((link) => ["linkedin", "github", "youtube", "instagram"].includes(link.id))
         .map((link) => link.url);
       profile.address = { "@type": "PostalAddress", addressLocality: "Najaf", addressCountry: "IQ" };
       structuredData.textContent = JSON.stringify(profile);
@@ -214,7 +228,7 @@
   }
 
   function renderContact(content) {
-    const links = content.contact.links.filter((link) => link.url);
+    const links = resolvedContactLinks(content);
     qs("#contact-links").replaceChildren(...links.map((link) => {
       const anchor = document.createElement("a");
       anchor.href = link.url;
