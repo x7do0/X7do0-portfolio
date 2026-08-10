@@ -136,7 +136,7 @@
   }
 
   function renderSkills(content) {
-    const iconNames = ["backend", "database", "quality", "git", "projects"];
+    const iconNames = ["backend", "database", "quality", "git", "projects", "ai"];
     const skills = content.skillsSection.items;
     const showcase = qs("#capability-rail");
     showcase.className = "skills-showcase";
