@@ -1,0 +1,82 @@
+name: Temporary AI Skill Alignment
+
+on:
+  push:
+    branches:
+      - polish/ai-engineering-skill
+    paths:
+      - .github/workflows/tmp-ai-skill-alignment.yml
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: polish/ai-engineering-skill
+      - name: Align bilingual AI engineering skill and QA
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          def update_content(path, item, old_titles):
+              p = Path(path)
+              data = json.loads(p.read_text(encoding='utf-8'))
+              items = data['skillsSection']['items']
+              index = next((i for i, current in enumerate(items) if current.get('title') in old_titles or 'AI' in current.get('title', '') or 'الذكاء الاصطناعي' in current.get('title', '')), None)
+              if index is None:
+                  items.append(item)
+              else:
+                  items[index] = item
+              p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          update_content(
+              'content/portfolio.en.json',
+              {
+                  'title': 'AI-Augmented Software Engineering',
+                  'description': 'Using AI tools within a deliberate engineering workflow to accelerate research, exploration, implementation, code review, debugging, and testing—while retaining full responsibility for architecture, technical decisions, security, verification, and final code quality.',
+                  'label': 'AI Tooling · Technical Judgment · Verification'
+              },
+              {'AI-Augmented Engineering', 'AI-Integrated Software Engineering'}
+          )
+
+          update_content(
+              'content/portfolio.ar.json',
+              {
+                  'title': 'توظيف الذكاء الاصطناعي في هندسة البرمجيات',
+                  'description': 'أوظف أدوات الذكاء الاصطناعي ضمن سير عمل هندسي منضبط لتسريع البحث والاستكشاف والتنفيذ ومراجعة الكود وتصحيح الأخطاء والاختبار، مع بقاء تصميم الحل والقرارات التقنية والأمان والتحقق وجودة الكود النهائية مسؤوليتي بالكامل.',
+                  'label': 'AI Tooling · Technical Judgment · Verification'
+              },
+              {'هندسة برمجيات معززة بالذكاء الاصطناعي'}
+          )
+
+          test_path = Path('tests/portfolio.spec.js')
+          tests = test_path.read_text(encoding='utf-8')
+          old = "  await expect(page.locator('.skill-item')).toHaveCount(4);"
+          new = "  await expect(page.locator('.skill-item')).toHaveCount(5);\n  await expect(page.locator('.skills-showcase')).toContainText('توظيف الذكاء الاصطناعي في هندسة البرمجيات');"
+          if old not in tests:
+              raise SystemExit('Expected Arabic skill count assertion not found')
+          tests = tests.replace(old, new, 1)
+
+          english_anchor = "  await expect(page.locator('[data-project=\"masroofi\"]')).toContainText('IndexedDB');"
+          english_new = english_anchor + "\n  await expect(page.locator('.skills-showcase')).toContainText('AI-Augmented Software Engineering');"
+          if english_anchor not in tests:
+              raise SystemExit('Expected English project assertion anchor not found')
+          tests = tests.replace(english_anchor, english_new, 1)
+          test_path.write_text(tests, encoding='utf-8')
+          PY
+          python -m json.tool content/portfolio.en.json >/dev/null
+          python -m json.tool content/portfolio.ar.json >/dev/null
+          git diff --check
+      - name: Commit aligned content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/portfolio.en.json content/portfolio.ar.json tests/portfolio.spec.js
+          git diff --cached --quiet && exit 0
+          git commit -m "content: present AI as an engineering capability"
+          git push origin HEAD:polish/ai-engineering-skill
