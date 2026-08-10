@@ -1,0 +1,40 @@
+name: Temporary Resume Meta Test Fix
+
+on:
+  push:
+    branches:
+      - content/first-person-resume-audit
+    paths:
+      - .github/workflows/tmp-fix-resume-meta-test.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: content/first-person-resume-audit
+      - name: Make resume meta assertion case-insensitive
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('tests/portfolio.spec.js')
+          text = path.read_text(encoding='utf-8')
+          old = "toHaveAttribute('content', /Backend|الـBackend/);"
+          new = "toHaveAttribute('content', /backend|الـBackend/i);"
+          if old not in text:
+              raise SystemExit('Expected resume meta assertion not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+          git diff --check
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/portfolio.spec.js
+          git diff --cached --quiet && exit 0
+          git commit -m "test: accept first-person resume metadata casing"
+          git push origin HEAD:content/first-person-resume-audit
